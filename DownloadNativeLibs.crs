@@ -1,0 +1,131 @@
+#!/usr/bin/env run-cargo-script
+//! ```cargo
+//! [dependencies]
+//! colour = "0.2"
+//! libc = "0.2"
+//! reqwest = "0.8"
+//! unwrap = "1.1"
+//! zip = "0.2"
+//! ```
+
+#![allow(non_snake_case)]
+
+#[macro_use]
+extern crate colour;
+extern crate libc;
+extern crate reqwest;
+#[macro_use]
+extern crate unwrap;
+extern crate zip;
+
+use libc::{S_IFDIR, S_IFREG};
+use reqwest::header::ContentLength;
+use std::env;
+use std::fs::{self, File};
+use std::io::{self, Cursor, Read, Write};
+use std::path::Path;
+use std::process;
+use zip::ZipArchive;
+
+const ARCHIVE_NAME: &'static str = "alpha-2.zip";
+const BASE_URL: &'static str = "https://s3.eu-west-2.amazonaws.com/safe-app-csharp/";
+const ANDROID_DIR_NAME: &'static str = "SafeApp.AppBindings.Android";
+const IOS_DIR_NAME: &'static str = "SafeApp.AppBindings.iOS";
+
+fn main() {
+    let root_path = unwrap!(Path::new(&unwrap!(env::var("CARGO_SCRIPT_SCRIPT_PATH"))).parent())
+        .to_path_buf();
+    let android_root = root_path.as_path().join(ANDROID_DIR_NAME);
+    let ios_root = root_path.as_path().join(IOS_DIR_NAME);
+
+    // If either of the target 'lib' directories exist, ask the user whether to remove them or not.
+    let android_lib_dir = android_root.as_path().join("lib");
+    let ios_lib_dir = ios_root.as_path().join("lib");
+    while android_lib_dir.exists() || ios_lib_dir.exists() {
+        let mut it_or_them = "";
+        if android_lib_dir.exists() {
+            yellow!("{}", android_lib_dir.display());
+            dark_yellow_ln!(" already exists.");
+            it_or_them = "it";
+        }
+        if ios_lib_dir.exists() {
+            yellow!("{}", ios_lib_dir.display());
+            dark_yellow_ln!(" already exists.");
+            if it_or_them.is_empty() {
+                it_or_them = "it";
+            } else {
+                it_or_them = "them";
+            }
+        }
+        let mut input = String::new();
+        print!("OK to delete {}?  [y/N]: ", it_or_them);
+        unwrap!(io::stdout().flush());
+        let _ = unwrap!(io::stdin().read_line(&mut input));
+        input = input.trim_right().to_string();
+        match input.as_str() {
+            "Y" | "y" => {
+                let _ = fs::remove_dir_all(&android_lib_dir);
+                let _ = fs::remove_dir_all(&ios_lib_dir);
+            }
+            "N" | "n" | "" => {
+                yellow_ln!("Aborting.");
+                process::exit(0);
+            }
+            _ => {
+                red_ln!("Enter 'y' or 'n' only.");
+            }
+        }
+    }
+
+    // Download the zip file to an in-memory buffer.
+    let url = format!("{}{}", BASE_URL, ARCHIVE_NAME);
+    println!("Downloading {}", url);
+    let mut response = unwrap!(reqwest::get(&url));
+    if !response.status().is_success() {
+        panic!(
+            "\nFailed to download {}.\nResponse status: {}\nResponse \
+                   headers:\n{}",
+            ARCHIVE_NAME,
+            response.status(),
+            response.headers()
+        );
+    }
+    let content_length = **unwrap!(response.headers().get::<ContentLength>()) as usize;
+    let mut buffer = vec![0; content_length];
+    assert_eq!(unwrap!(response.read_to_end(&mut buffer)), content_length);
+    let cursor = Cursor::new(buffer);
+    let mut zip_archive = unwrap!(ZipArchive::new(cursor));
+
+    // Unpack the archive.
+    for i in 0..zip_archive.len() {
+        let mut entry = unwrap!(zip_archive.by_index(i));
+        // Decide which target directory the entry belongs in; android or ios.
+        let path = if entry.name().starts_with("android/") {
+            android_root.join(&entry.name()[8..])
+        } else if entry.name().starts_with("ios/") {
+            ios_root.join(&entry.name()[4..])
+        } else {
+            panic!(
+                "Zip file contains {} which isn't in 'android/' or 'ios/'",
+                entry.name()
+            );
+        };
+        // If the entry is a directory, create it, else check it's a file and uncompress it.
+        let unix_mode = unwrap!(entry.unix_mode());
+        if unix_mode & S_IFDIR as u32 > 0 {
+            unwrap!(fs::create_dir_all(&path));
+        } else if unix_mode & S_IFREG as u32 > 0 {
+            println!("Unpacking {}", path.display());
+            let mut file = unwrap!(File::create(&path));
+            let uncompressed_size = entry.size();
+            assert_eq!(unwrap!(io::copy(&mut entry, &mut file)), uncompressed_size);
+        } else {
+            panic!(
+                "Unhandled Unix mode of {:o} for {}",
+                unix_mode,
+                path.display()
+            );
+        }
+    }
+    green_ln!("Done.");
+}

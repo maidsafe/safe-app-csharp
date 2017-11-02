@@ -10,7 +10,7 @@ namespace SafeApp.Misc {
 
     public static Task FreeAsync(ulong cipherOptHandle) {
       var tcs = new TaskCompletionSource<object>();
-      CipherOptFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -26,7 +26,7 @@ namespace SafeApp.Misc {
 
     public static Task<NativeHandle> NewPlaintextAsync() {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      CipherOptNewPlaintextCb callback = (_, result, cipherOptHandle) => {
+      UlongCb callback = (_, result, cipherOptHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

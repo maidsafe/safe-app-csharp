@@ -13,7 +13,7 @@ namespace SafeApp.MData {
 
     public static Task FreeAsync(ulong entryActionsH) {
       var tcs = new TaskCompletionSource<object>();
-      MDataEntryActionsFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -30,7 +30,7 @@ namespace SafeApp.MData {
     public static Task InsertAsync(NativeHandle entryActionsH, List<byte> entKey, List<byte> entVal) {
       var tcs = new TaskCompletionSource<object>();
 
-      MDataEntryActionsInsertCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -60,7 +60,7 @@ namespace SafeApp.MData {
     public static Task<NativeHandle> NewAsync() {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      MDataEntryActionsNewCb callback = (_, result, entryActionsH) => {
+      UlongCb callback = (_, result, entryActionsH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

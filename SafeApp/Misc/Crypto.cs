@@ -14,7 +14,7 @@ namespace SafeApp.Misc {
 
     public static Task<NativeHandle> AppPubSignKeyAsync() {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      AppPubSignKeyCb callback = (_, result, appPubSignKeyH) => {
+      UlongCb callback = (_, result, appPubSignKeyH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -31,7 +31,7 @@ namespace SafeApp.Misc {
     public static Task<List<byte>> DecryptSealedBoxAsync(List<byte> cipherText, NativeHandle pkHandle, NativeHandle skHandle) {
       var tcs = new TaskCompletionSource<List<byte>>();
       var cipherPtr = cipherText.ToIntPtr();
-      DecryptSealedBoxCb callback = (_, result, dataPtr, dataLen) => {
+      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -66,7 +66,7 @@ namespace SafeApp.Misc {
 
     public static Task EncPubKeyFreeAsync(ulong encPubKeyH) {
       var tcs = new TaskCompletionSource<object>();
-      EncPubKeyFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -82,7 +82,7 @@ namespace SafeApp.Misc {
 
     public static Task<List<byte>> EncPubKeyGetAsync(NativeHandle encPubKeyH) {
       var tcs = new TaskCompletionSource<List<byte>>();
-      EncPubKeyGetCb callback = (_, result, encPubKeyPtr) => {
+      IntPtrCb callback = (_, result, encPubKeyPtr) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -99,7 +99,7 @@ namespace SafeApp.Misc {
     public static Task<NativeHandle> EncPubKeyNewAsync(List<byte> asymPublicKeyBytes) {
       var tcs = new TaskCompletionSource<NativeHandle>();
       var asymPublicKeyPtr = asymPublicKeyBytes.ToIntPtr();
-      EncPubKeyNewCb callback = (self, result, encryptPubKeyHandle) => {
+      UlongCb callback = (self, result, encryptPubKeyHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -117,7 +117,7 @@ namespace SafeApp.Misc {
     public static Task<List<byte>> EncryptSealedBoxAsync(List<byte> inputData, NativeHandle pkHandle) {
       var tcs = new TaskCompletionSource<List<byte>>();
       var inputDataPtr = inputData.ToIntPtr();
-      EncryptSealedBoxCb callback = (_, result, dataPtr, dataLen) => {
+      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -134,7 +134,7 @@ namespace SafeApp.Misc {
 
     public static Task EncSecretKeyFreeAsync(ulong encSecKeyH) {
       var tcs = new TaskCompletionSource<object>();
-      EncSecretKeyFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -150,7 +150,7 @@ namespace SafeApp.Misc {
 
     public static Task<List<byte>> EncSecretKeyGetAsync(NativeHandle encSecKeyH) {
       var tcs = new TaskCompletionSource<List<byte>>();
-      EncSecretKeyGetCb callback = (_, result, encSecKeyPtr) => {
+      IntPtrCb callback = (_, result, encSecKeyPtr) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -167,7 +167,7 @@ namespace SafeApp.Misc {
     public static Task<NativeHandle> EncSecretKeyNewAsync(List<byte> asymSecKeyBytes) {
       var tcs = new TaskCompletionSource<NativeHandle>();
       var asymSecKeyPtr = asymSecKeyBytes.ToIntPtr();
-      EncSecretKeyNewCb callback = (_, result, encSecKeyHandle) => {
+      UlongCb callback = (_, result, encSecKeyHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -183,7 +183,7 @@ namespace SafeApp.Misc {
 
     public static Task SignKeyFreeAsync(ulong signKeyHandle) {
       var tcs = new TaskCompletionSource<object>();
-      SignKeyFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

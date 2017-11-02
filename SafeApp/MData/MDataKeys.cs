@@ -18,7 +18,7 @@ namespace SafeApp.MData {
         keys.Add(key);
       };
 
-      MDataKeysForEachResCb forEachResCb = (_, result) => {
+      ResultCb forEachResCb = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -34,7 +34,7 @@ namespace SafeApp.MData {
 
     public static Task FreeAsync(ulong entKeysH) {
       var tcs = new TaskCompletionSource<object>();
-      MDataKeysFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -50,7 +50,7 @@ namespace SafeApp.MData {
 
     public static Task<IntPtr> LenAsync(NativeHandle mDataInfoH) {
       var tcs = new TaskCompletionSource<IntPtr>();
-      MDataKeysLenCb callback = (_, result, len) => {
+      IntPtrCb callback = (_, result, len) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

@@ -15,7 +15,7 @@ namespace SafeApp.IData {
 
     public static Task<List<byte>> CloseSelfEncryptorAsync(ulong seH, NativeHandle cipherOptH) {
       var tcs = new TaskCompletionSource<List<byte>>();
-      IDataCloseSelfEncryptorCb callback = (_, result, xorNamePtr) => {
+      IntPtrCb callback = (_, result, xorNamePtr) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -33,7 +33,7 @@ namespace SafeApp.IData {
     public static Task<NativeHandle> FetchSelfEncryptorAsync(List<byte> xorName) {
       var tcs = new TaskCompletionSource<NativeHandle>();
       var xorNamePtr = xorName.ToIntPtr();
-      IDataFetchSelfEncryptorCb callback = (_, result, sEReaderHandle) => {
+      UlongCb callback = (_, result, sEReaderHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -50,7 +50,7 @@ namespace SafeApp.IData {
 
     public static Task<NativeHandle> NewSelfEncryptorAsync() {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      IDataNewSelfEncryptorCb callback = (_, result, sEWriterHandle) => {
+      UlongCb callback = (_, result, sEWriterHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -66,7 +66,7 @@ namespace SafeApp.IData {
 
     public static Task<List<byte>> ReadFromSelfEncryptorAsync(NativeHandle seHandle, ulong fromPos, ulong len) {
       var tcs = new TaskCompletionSource<List<byte>>();
-      IDataReadFromSelfEncryptorCb callback = (_, result, dataPtr, dataLen) => {
+      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -82,7 +82,7 @@ namespace SafeApp.IData {
 
     public static Task SelfEncryptorReaderFreeAsync(ulong sEReaderHandle) {
       var tcs = new TaskCompletionSource<object>();
-      IDataSelfEncryptorReaderFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -98,7 +98,7 @@ namespace SafeApp.IData {
 
     public static Task SelfEncryptorWriterFreeAsync(ulong sEWriterHandle) {
       var tcs = new TaskCompletionSource<object>();
-      IDataSelfEncryptorWriterFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -114,7 +114,7 @@ namespace SafeApp.IData {
 
     public static Task<ulong> SizeAsync(NativeHandle seHandle) {
       var tcs = new TaskCompletionSource<ulong>();
-      IDataSizeCb callback = (_, result, len) => {
+      UlongCb callback = (_, result, len) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -131,7 +131,7 @@ namespace SafeApp.IData {
     public static Task<object> WriteToSelfEncryptorAsync(NativeHandle seHandle, List<byte> data) {
       var tcs = new TaskCompletionSource<object>();
       var dataPtr = data.ToIntPtr();
-      IDataWriteToSelfEncryptorCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

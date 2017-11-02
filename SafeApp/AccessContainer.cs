@@ -12,7 +12,7 @@ namespace SafeApp {
     public static Task<NativeHandle> GetMDataInfoAsync(string containerId) {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      AccessContainerGetContainerMDataInfoCb callback = (_, result, mdataInfoH) => {
+      UlongCb callback = (_, result, mdataInfoH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

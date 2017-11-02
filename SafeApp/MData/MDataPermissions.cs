@@ -10,7 +10,7 @@ namespace SafeApp.MData {
 
     public static Task FreeAsync(ulong permissionsH) {
       var tcs = new TaskCompletionSource<object>();
-      MDataPermissionsFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -27,7 +27,7 @@ namespace SafeApp.MData {
     public static Task InsertAsync(NativeHandle permissionsH, NativeHandle forUserH, NativeHandle permissionSetH) {
       var tcs = new TaskCompletionSource<object>();
 
-      MDataPermissionsInsertCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -44,7 +44,7 @@ namespace SafeApp.MData {
     public static Task<NativeHandle> NewAsync() {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      MDataPermissionsNewCb callback = (_, result, permissionsH) => {
+      UlongCb callback = (_, result, permissionsH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

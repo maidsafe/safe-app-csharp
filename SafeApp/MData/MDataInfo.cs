@@ -16,7 +16,7 @@ namespace SafeApp.MData {
       var cipherPtr = cipherText.ToIntPtr();
       var cipherLen = (IntPtr)cipherText.Count;
 
-      MDataInfoDecryptCb callback = (_, result, plainText, len) => {
+      ByteArrayCb callback = (_, result, plainText, len) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -34,7 +34,7 @@ namespace SafeApp.MData {
 
     public static Task<NativeHandle> DeserialiseAsync(List<byte> serialisedData) {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      MDataInfoDeserialiseCb callback = (_, result, mdataInfoH) => {
+      UlongCb callback = (_, result, mdataInfoH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -54,7 +54,7 @@ namespace SafeApp.MData {
     public static Task<List<byte>> EncryptEntryKeyAsync(NativeHandle infoH, List<byte> inputBytes) {
       var tcs = new TaskCompletionSource<List<byte>>();
       var inputBytesPtr = inputBytes.ToIntPtr();
-      MDataInfoEncryptEntryKeyCb callback = (_, result, dataPtr, dataLen) => {
+      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -72,7 +72,7 @@ namespace SafeApp.MData {
     public static Task<List<byte>> EncryptEntryValueAsync(NativeHandle infoH, List<byte> inputBytes) {
       var tcs = new TaskCompletionSource<List<byte>>();
       var inputBytesPtr = inputBytes.ToIntPtr();
-      MDataInfoEncryptEntryValueCb callback = (_, result, dataPtr, dataLen) => {
+      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -90,7 +90,7 @@ namespace SafeApp.MData {
     public static Task FreeAsync(ulong mDataInfoH) {
       var tcs = new TaskCompletionSource<object>();
 
-      MDataInfoFreeCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -107,7 +107,7 @@ namespace SafeApp.MData {
     public static Task<NativeHandle> NewPublicAsync(List<byte> xorName, ulong typeTag) {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      MDataInfoNewPublicCb callback = (_, result, pubMDataInfoH) => {
+      UlongCb callback = (_, result, pubMDataInfoH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -126,7 +126,7 @@ namespace SafeApp.MData {
     public static Task<NativeHandle> RandomPrivateAsync(ulong typeTag) {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      MDataInfoRandomPrivateCb callback = (_, result, privateMDataInfoH) => {
+      UlongCb callback = (_, result, privateMDataInfoH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -143,7 +143,7 @@ namespace SafeApp.MData {
     public static Task<NativeHandle> RandomPublicAsync(ulong typeTag) {
       var tcs = new TaskCompletionSource<NativeHandle>();
 
-      MDataInfoRandomPublicCb callback = (_, result, pubMDataInfoH) => {
+      UlongCb callback = (_, result, pubMDataInfoH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -159,7 +159,7 @@ namespace SafeApp.MData {
 
     public static Task<List<byte>> SerialiseAsync(NativeHandle mdataInfoH) {
       var tcs = new TaskCompletionSource<List<byte>>();
-      MDataInfoSerialiseCb callback = (_, result, bytesPtr, len) => {
+      ByteArrayCb callback = (_, result, bytesPtr, len) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

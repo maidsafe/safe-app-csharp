@@ -32,7 +32,7 @@ namespace SafeApp.MData {
 
     public static Task<NativeHandle> ListEntriesAsync(NativeHandle infoHandle) {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      MDataListEntriesCb callback = (_, result, mDataEntriesHandle) => {
+      UlongCb callback = (_, result, mDataEntriesHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -48,7 +48,7 @@ namespace SafeApp.MData {
 
     public static Task<NativeHandle> ListKeysAsync(NativeHandle mDataInfoH) {
       var tcs = new TaskCompletionSource<NativeHandle>();
-      MDataListKeysCb callback = (_, result, mDataEntKeysH) => {
+      UlongCb callback = (_, result, mDataEntKeysH) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -64,7 +64,7 @@ namespace SafeApp.MData {
 
     public static Task MutateEntriesAsync(NativeHandle mDataInfoH, NativeHandle entryActionsH) {
       var tcs = new TaskCompletionSource<object>();
-      MDataMutateEntriesCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;
@@ -80,7 +80,7 @@ namespace SafeApp.MData {
 
     public static Task PutAsync(NativeHandle mDataInfoH, NativeHandle permissionsH, NativeHandle entriesH) {
       var tcs = new TaskCompletionSource<object>();
-      MDataPutCb callback = (_, result) => {
+      ResultCb callback = (_, result) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());
           return;

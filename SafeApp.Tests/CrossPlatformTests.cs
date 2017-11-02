@@ -20,5 +20,7 @@ namespace SafeApp.Tests {
       Session.AppPtr = appPtr;
       Assert.DoesNotThrow(async () => await MDataEntryActions.NewAsync());
     }
+
+
   }
 }

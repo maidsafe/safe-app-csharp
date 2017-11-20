@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using SafeApp.AppBindings;
 using SafeApp.Utilities;
@@ -26,6 +27,10 @@ namespace SafeApp.Misc {
 
     public static Task<NativeHandle> NewAsymmetricAsync(NativeHandle encPubKeyH) {
       var tcs = new TaskCompletionSource<NativeHandle>();
+      if (encPubKeyH == null) {
+        tcs.SetException(new ArgumentNullException(nameof(encPubKeyH)));
+        return tcs.Task;
+      }
       UlongCb callback = (_, result, cipherOptHandle) => {
         if (result.ErrorCode != 0) {
           tcs.SetException(result.ToException());

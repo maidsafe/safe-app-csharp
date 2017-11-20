@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using SafeApp.Misc;
 
 namespace SafeApp.Tests {
@@ -16,11 +17,17 @@ namespace SafeApp.Tests {
     public async void NewAssymmetric() {
       Utils.InitialiseSessionForRandomTestApp();
       var encKeyPairTuple = await Crypto.EncGenerateKeyPairAsync();
-      using (var handle = await CipherOpt.NewAsymmetricAsync(encKeyPairTuple.Item1)) {
+      using (var publicEncryptKey = encKeyPairTuple.Item1)
+      using (var _ = encKeyPairTuple.Item2)
+      using (var handle = await CipherOpt.NewAsymmetricAsync(publicEncryptKey)) {
         Assert.NotNull(handle);
       }
-      await Crypto.EncPubKeyFreeAsync(encKeyPairTuple.Item1);
-      await Crypto.EncSecretKeyFreeAsync(encKeyPairTuple.Item2);
+    }
+
+    [Test]
+    public void NewAssymmetricNeg() {
+      Utils.InitialiseSessionForRandomTestApp();
+      Assert.Throws<ArgumentNullException>(async () => await CipherOpt.NewAsymmetricAsync(null));
     }
 
     [Test]

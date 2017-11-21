@@ -18,6 +18,7 @@ namespace SafeApp.Utilities {
   public delegate void EncodeAuthReqCb(IntPtr self, FfiResult result, uint requestId, string encodedReq);
 
   public delegate void EncGenerateKeyPairCb(IntPtr self, FfiResult result, ulong encPubKeyHandle, ulong encSecKeyHandle);
+
   public delegate void MDataEntriesForEachCb(
     IntPtr self,
     IntPtr entryKey,

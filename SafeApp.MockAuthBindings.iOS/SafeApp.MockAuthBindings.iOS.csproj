@@ -31,6 +31,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\netstandard1.0\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -40,8 +43,26 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SafeApp.MockAuthBindings\MockAuthBindings.cs">
-      <Link>MockAuthBindings.cs</Link>
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthBindings.cs">
+      <Link>AuthBindings.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthBindings.Manual.cs">
+      <Link>AuthBindings.Manual.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\Authenticator.cs">
+      <Link>Authenticator.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthTypes.cs">
+      <Link>AuthTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthTypes.Manual.cs">
+      <Link>AuthTypes.Manual.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\IAuthBindings.cs">
+      <Link>IAuthBindings.cs</Link>
+    </Compile>
+    <Compile Include="..\SafeApp.MockAuthBindings\IAuthBindings.Manual.cs">
+      <Link>IAuthBindings.Manual.cs</Link>
     </Compile>
     <Compile Include="..\SafeApp.MockAuthBindings\MockAuthResolver.cs">
       <Link>MockAuthResolver.cs</Link>
@@ -53,6 +74,9 @@
       <Project>{a0450f47-b05e-4c53-9845-7b89d708d3e3}</Project>
       <Name>SafeApp.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

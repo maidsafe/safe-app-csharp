@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Threading;
-using SafeApp.Utilities;
 
 namespace SafeApp.MockAuthBindings {
-  public static class MockAuthResolver {
-    private static readonly Lazy<IMockAuthBindings> Implementation =
-      new Lazy<IMockAuthBindings>(CreateBindings, LazyThreadSafetyMode.PublicationOnly);
+  internal static class MockAuthResolver {
+    private static readonly Lazy<IAuthBindings> Implementation = new Lazy<IAuthBindings>(
+      CreateBindings,
+      LazyThreadSafetyMode.PublicationOnly);
 
-    public static IMockAuthBindings Current {
+    internal static IAuthBindings Current {
       get {
         var ret = Implementation.Value;
         if (ret == null) {
           throw NotImplementedInReferenceAssembly();
         }
+
         return ret;
       }
     }
 
-    private static IMockAuthBindings CreateBindings() {
+    private static IAuthBindings CreateBindings() {
 #if NETSTANDARD1_2 && !__DESKTOP__
       return null;
 #else
-      return new MockAuthBindings();
+      return new AuthBindings();
 #endif
     }
 

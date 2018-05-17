@@ -14,6 +14,7 @@ namespace SafeApp.Utilities {
       if (freePtr) {
         cbPtr.Free();
       }
+
       return action;
     }
 
@@ -21,10 +22,6 @@ namespace SafeApp.Utilities {
       var ptr = Marshal.AllocHGlobal(Marshal.SizeOf<T>());
       Marshal.StructureToPtr(obj, ptr, false);
       return ptr;
-    }
-
-    public static Exception ToException(this FfiResult result) {
-      return new Exception($"Error Code: {result.ErrorCode}. Description: {result.Description}");
     }
 
     public static IntPtr ToHandlePtr(this object obj) {
@@ -37,6 +34,7 @@ namespace SafeApp.Utilities {
       for (var i = 0; i < list.Count; ++i) {
         Marshal.StructureToPtr(list[i], ptr + structSize * i, false);
       }
+
       return ptr;
     }
 
@@ -68,6 +66,7 @@ namespace SafeApp.Utilities {
       for (var i = 0; i < numberChars; i += 2) {
         bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
       }
+
       return bytes.ToList();
     }
 
@@ -76,6 +75,7 @@ namespace SafeApp.Utilities {
       foreach (var b in bytes) {
         sb.Append(b + ", ");
       }
+
       sb.Append("}");
       return sb.ToString();
     }

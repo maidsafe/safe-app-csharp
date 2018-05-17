@@ -15,16 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\SafeApp.Tests\AuthTests.cs" Link="Shared\AuthTests.cs" />
-    <Compile Include="..\SafeApp.Tests\CipherOptTests.cs" Link="Shared\CipherOptTests.cs" />
-    <Compile Include="..\SafeApp.Tests\CrossPlatformTests.cs" Link="Shared\CrossPlatformTests.cs" />
-    <Compile Include="..\SafeApp.Tests\CryptoTests.cs" Link="Shared\CryptoTests.cs" />
-    <Compile Include="..\SafeApp.Tests\ImmutableDataTests.cs" Link="Shared\ImmutableDataTests.cs" />
-    <Compile Include="..\SafeApp.Tests\MutableDataTests.cs" Link="Shared\MutableDataTests.cs" />
-    <Compile Include="..\SafeApp.Tests\Utils.cs" Link="Shared\Utils.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\libsafe_app.dylib" Link="libsafe_app.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -34,13 +24,16 @@
     <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\safe_app.dll" Link="safe_app.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\SafeApp.Tests\log.toml" Link="log.toml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
-    <PackageReference Include="NUnit" Version="3.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
+    <PackageReference Include="NUnit" Version="3.6.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
   </ItemGroup>
 
@@ -57,4 +50,6 @@
     <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Restore" />
     <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Build" Properties="OutputPath=..\$(MSBuildProjectName)\$(OutputPath)" />
   </Target>
+
+  <Import Project="..\SafeApp.Tests\SafeApp.Tests.projitems" Label="Shared" />
 </Project>

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
@@ -7,57 +9,42 @@ using SafeApp.Utilities;
 
 namespace SafeApp.MData {
   [PublicAPI]
-  public static class MDataPermissions {
+  public class MDataPermissions {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task FreeAsync(ulong permissionsH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.MDataPermissionsFree(Session.AppPtr, permissionsH, callback);
-
-      return tcs.Task;
+    internal MDataPermissions(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
     }
 
-    public static Task InsertAsync(NativeHandle permissionsH, NativeHandle forUserH, NativeHandle permissionSetH) {
-      var tcs = new TaskCompletionSource<object>();
-
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.MDataPermissionsInsert(Session.AppPtr, permissionsH, forUserH, permissionSetH, callback);
-
-      return tcs.Task;
+    private Task FreeAsync(ulong permissionsH) {
+      return AppBindings.MDataPermissionsFreeAsync(_appPtr, permissionsH);
     }
 
-    public static Task<NativeHandle> NewAsync() {
-      var tcs = new TaskCompletionSource<NativeHandle>();
+    public Task<PermissionSet> GetAsync(NativeHandle permissionsHandle, NativeHandle userPubSignKey) {
+      return AppBindings.MDataPermissionsGetAsync(_appPtr, permissionsHandle, userPubSignKey);
+    }
 
-      UlongCb callback = (_, result, permissionsH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public Task InsertAsync(NativeHandle permissionsH, NativeHandle forUserH, PermissionSet permissionSet) {
+      return AppBindings.MDataPermissionsInsertAsync(_appPtr, permissionsH, forUserH, ref permissionSet);
+    }
 
-        tcs.SetResult(new NativeHandle(permissionsH, FreeAsync));
-      };
+    public Task<ulong> LenAsync(NativeHandle permissionsHandle) {
+      return AppBindings.MDataPermissionsLenAsync(_appPtr, permissionsHandle);
+    }
 
-      AppBindings.MDataPermissionsNew(Session.AppPtr, callback);
+    public async Task<List<(NativeHandle, PermissionSet)>> ListAsync(NativeHandle permissionHandle) {
+      var userPermissions = await AppBindings.MDataListPermissionSetsAsync(_appPtr, permissionHandle);
+      return userPermissions.Select(
+        userPermission => {
+          var userHandle = new NativeHandle(_appPtr, userPermission.UserH, handle => AppBindings.SignPubKeyFreeAsync(_appPtr, handle));
+          return (userHandle, userPermission.PermSet);
+        }).ToList();
+    }
 
-      return tcs.Task;
+    public async Task<NativeHandle> NewAsync() {
+      var permissionsH = await AppBindings.MDataPermissionsNewAsync(_appPtr);
+      return new NativeHandle(_appPtr, permissionsH, FreeAsync);
     }
   }
 }

@@ -7,9 +7,9 @@
 safe_app CSharp Library. Currently supports
 - Xamarin.Android ( >=4.1.2. ABI: armeabi-v7a, x86)
 - Xamarin.iOS ( >= 1.0, ABI: ARM64, x64)
-- netstandard1.2 (for usage via portable libs)
+- netstandard1.3 (for usage via portable libs)
 - netcoreapp1.0 (for use via NET Core targets. Runtime support limited to x64)
-- netframework451 (for use via classic NET Framework targets. Platform support limited to x64)
+- netframework46 (for use via classic NET Framework targets. Platform support limited to x64)
 
 **Note**: Just adding a package dependency to the Portable Library will not be enough. Package also needs to be added to the corresponding app projects for platform specific Native libraries to get included.
 

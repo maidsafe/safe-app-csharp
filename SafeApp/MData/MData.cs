@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
@@ -10,90 +8,65 @@ using SafeApp.Utilities;
 
 namespace SafeApp.MData {
   [PublicAPI]
-  public static class MData {
+  public class MData {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task<(List<byte>, ulong)> GetValueAsync(NativeHandle infoHandle, List<byte> key) {
-      var tcs = new TaskCompletionSource<(List<byte>, ulong)>();
-      var keyPtr = key.ToIntPtr();
-      MDataGetValueCb callback = (_, result, dataPtr, dataLen, entryVersion) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        var data = dataPtr.ToList<byte>(dataLen);
-        tcs.SetResult((data, entryVersion));
-      };
-
-      AppBindings.MDataGetValue(Session.AppPtr, infoHandle, keyPtr, (IntPtr)key.Count, callback);
-      Marshal.FreeHGlobal(keyPtr);
-
-      return tcs.Task;
+    internal MData(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
     }
 
-    public static Task<NativeHandle> ListEntriesAsync(NativeHandle infoHandle) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      UlongCb callback = (_, result, mDataEntriesHandle) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(mDataEntriesHandle, MDataEntries.FreeAsync));
-      };
-
-      AppBindings.MDataListEntries(Session.AppPtr, infoHandle, callback);
-
-      return tcs.Task;
+    public Task DelUserPermissionsAsync(MDataInfo mDataInfo, NativeHandle userSignPubKey, ulong version) {
+      return AppBindings.MDataDelUserPermissionsAsync(_appPtr, ref mDataInfo, userSignPubKey, version);
     }
 
-    public static Task<NativeHandle> ListKeysAsync(NativeHandle mDataInfoH) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      UlongCb callback = (_, result, mDataEntKeysH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(mDataEntKeysH, MDataKeys.FreeAsync));
-      };
-
-      AppBindings.MDataListKeys(Session.AppPtr, mDataInfoH, callback);
-
-      return tcs.Task;
+    public Task<List<byte>> EncodeMetadata(MetadataResponse metadataResponse) {
+      return AppBindings.MDataEncodeMetadataAsync(ref metadataResponse);
     }
 
-    public static Task MutateEntriesAsync(NativeHandle mDataInfoH, NativeHandle entryActionsH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.MDataMutateEntries(Session.AppPtr, mDataInfoH, entryActionsH, callback);
-
-      return tcs.Task;
+    public Task<(List<byte>, ulong)> GetValueAsync(MDataInfo mDataInfo, List<byte> key) {
+      return AppBindings.MDataGetValueAsync(_appPtr, ref mDataInfo, key);
     }
 
-    public static Task PutAsync(NativeHandle mDataInfoH, NativeHandle permissionsH, NativeHandle entriesH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public Task<ulong> GetVersionAsync(MDataInfo mDataInfo) {
+      return AppBindings.MDataGetVersionAsync(_appPtr, ref mDataInfo);
+    }
 
-        tcs.SetResult(null);
-      };
+    public Task<List<MDataEntry>> ListEntriesAsync(NativeHandle entriesHandle) {
+      return AppBindings.MDataListEntriesAsync(_appPtr, entriesHandle);
+    }
 
-      AppBindings.MDataPut(Session.AppPtr, mDataInfoH, permissionsH, entriesH, callback);
+    public Task<List<MDataKey>> ListKeysAsync(MDataInfo mDataInfo) {
+      return AppBindings.MDataListKeysAsync(_appPtr, ref mDataInfo);
+    }
 
-      return tcs.Task;
+    public async Task<NativeHandle> ListPermissionsAsync(MDataInfo mDataInfo) {
+      var handle = await AppBindings.MDataListPermissionsAsync(_appPtr, ref mDataInfo);
+      return new NativeHandle(_appPtr, handle, freeHandle => AppBindings.MDataPermissionsFreeAsync(_appPtr, freeHandle));
+    }
+
+    public Task<PermissionSet> ListUserPermissionsAsync(MDataInfo mDataInfo, NativeHandle userSignPubKey) {
+      return AppBindings.MDataListUserPermissionsAsync(_appPtr, ref mDataInfo, userSignPubKey);
+    }
+
+    public Task<List<MDataValue>> ListValuesAsync(MDataInfo mDataInfo) {
+      return AppBindings.MDataListValuesAsync(_appPtr, ref mDataInfo);
+    }
+
+    public Task MutateEntriesAsync(MDataInfo mDataInfo, NativeHandle entryActionsH) {
+      return AppBindings.MDataMutateEntriesAsync(_appPtr, ref mDataInfo, entryActionsH);
+    }
+
+    public Task PutAsync(MDataInfo mDataInfo, NativeHandle permissionsH, NativeHandle entriesH) {
+      return AppBindings.MDataPutAsync(_appPtr, ref mDataInfo, permissionsH, entriesH);
+    }
+
+    public Task<ulong> SerialisedSizeAsync(MDataInfo mDataInfo) {
+      return AppBindings.MDataSerialisedSizeAsync(_appPtr, ref mDataInfo);
+    }
+
+    public Task SetUserPermissionsAsync(MDataInfo mDataInfo, NativeHandle userSignPubKey, PermissionSet permissionSet, ulong version) {
+      return AppBindings.MDataSetUserPermissionsAsync(_appPtr, ref mDataInfo, userSignPubKey, ref permissionSet, version);
     }
   }
 }

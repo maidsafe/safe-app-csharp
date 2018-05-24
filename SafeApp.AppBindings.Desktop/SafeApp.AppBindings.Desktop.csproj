@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>SafeApp.AppBindings</AssemblyName>
     <RootNamespace>SafeApp.AppBindings</RootNamespace>
     <DefineConstants>__DESKTOP__</DefineConstants>
@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Include="..\SafeApp.AppBindings\AppBindings.cs" Link="AppBindings.cs" />
+    <Compile Include="..\SafeApp.AppBindings\AppBindings.Manual.cs" Link="AppBindings.Manual.cs" />
     <Compile Include="..\SafeApp.AppBindings\AppResolver.cs" Link="AppResolver.cs" />
   </ItemGroup>
 

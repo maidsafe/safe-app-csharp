@@ -1,15 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>SafeApp.MockAuthBindings</AssemblyName>
     <RootNamespace>SafeApp.MockAuthBindings</RootNamespace>
     <DefineConstants>__DESKTOP__</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\SafeApp.MockAuthBindings\MockAuthBindings.cs" Link="MockAuthBindings.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthBindings.cs" Link="AuthBindings.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthBindings.Manual.cs" Link="AuthBindings.Manual.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\Authenticator.cs" Link="Authenticator.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthTypes.cs" Link="AuthTypes.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\AuthTypes.Manual.cs" Link="AuthTypes.Manual.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\IAuthBindings.cs" Link="IAuthBindings.cs" />
+    <Compile Include="..\SafeApp.MockAuthBindings\IAuthBindings.Manual.cs" Link="IAuthBindings.Manual.cs" />
     <Compile Include="..\SafeApp.MockAuthBindings\MockAuthResolver.cs" Link="MockAuthResolver.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>

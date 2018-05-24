@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
@@ -10,70 +8,33 @@ using SafeApp.Utilities;
 
 namespace SafeApp.MData {
   [PublicAPI]
-  public static class MDataEntryActions {
+  public class MDataEntryActions {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task FreeAsync(ulong entryActionsH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.MDataEntryActionsFree(Session.AppPtr, entryActionsH, callback);
-
-      return tcs.Task;
+    internal MDataEntryActions(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
     }
 
-    public static Task InsertAsync(NativeHandle entryActionsH, List<byte> entKey, List<byte> entVal) {
-      var tcs = new TaskCompletionSource<object>();
-
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      var entKeyPtr = entKey.ToIntPtr();
-      var entValPtr = entVal.ToIntPtr();
-
-      AppBindings.MDataEntryActionsInsert(
-        Session.AppPtr,
-        entryActionsH,
-        entKeyPtr,
-        (IntPtr)entKey.Count,
-        entValPtr,
-        (IntPtr)entVal.Count,
-        callback);
-
-      Marshal.FreeHGlobal(entKeyPtr);
-      Marshal.FreeHGlobal(entValPtr);
-
-      return tcs.Task;
+    public Task DeleteAsync(NativeHandle entryActionsH, List<byte> entKey, ulong version) {
+      return AppBindings.MDataEntryActionsDeleteAsync(_appPtr, entryActionsH, entKey, version);
     }
 
-    public static Task<NativeHandle> NewAsync() {
-      var tcs = new TaskCompletionSource<NativeHandle>();
+    private Task FreeAsync(ulong entryActionsH) {
+      return AppBindings.MDataEntryActionsFreeAsync(_appPtr, entryActionsH);
+    }
 
-      UlongCb callback = (_, result, entryActionsH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public Task InsertAsync(NativeHandle entryActionsH, List<byte> entKey, List<byte> entVal) {
+      return AppBindings.MDataEntryActionsInsertAsync(_appPtr, entryActionsH, entKey, entVal);
+    }
 
-        tcs.SetResult(new NativeHandle(entryActionsH, FreeAsync));
-      };
+    public async Task<NativeHandle> NewAsync() {
+      var entryActionsH = await AppBindings.MDataEntryActionsNewAsync(_appPtr);
+      return new NativeHandle(_appPtr, entryActionsH, FreeAsync);
+    }
 
-      AppBindings.MDataEntryActionsNew(Session.AppPtr, callback);
-
-      return tcs.Task;
+    public Task UpdateAsync(NativeHandle entryActionsH, List<byte> entKey, List<byte> entVal, ulong version) {
+      return AppBindings.MDataEntryActionsUpdateAsync(_appPtr, entryActionsH, entKey, entVal, version);
     }
   }
 }

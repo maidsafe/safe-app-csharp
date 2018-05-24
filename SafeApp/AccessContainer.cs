@@ -1,31 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
-using SafeApp.MData;
 using SafeApp.Utilities;
 
 // ReSharper disable ConvertToLocalFunction
 
 namespace SafeApp {
   [PublicAPI]
-  public static class AccessContainer {
+  public class AccessContainer {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task<NativeHandle> GetMDataInfoAsync(string containerId) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
+    internal AccessContainer(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
+    }
 
-      UlongCb callback = (_, result, mdataInfoH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public async Task<List<ContainerPermissions>> AccessContainerFetchAsync() {
+      var array = await AppBindings.AccessContainerFetchAsync(_appPtr);
+      return array.ToList();
+    }
 
-        tcs.SetResult(new NativeHandle(mdataInfoH, MDataInfo.FreeAsync));
-      };
+    public Task<MDataInfo> GetMDataInfoAsync(string containerId) {
+      return AppBindings.AccessContainerGetContainerMDataInfoAsync(_appPtr, containerId);
+    }
 
-      AppBindings.AccessContainerGetContainerMDataInfo(Session.AppPtr, containerId, callback);
-
-      return tcs.Task;
+    public Task RefreshAccessInfoAsync() {
+      return AppBindings.AccessContainerRefreshAccessInfoAsync(_appPtr);
     }
   }
 }

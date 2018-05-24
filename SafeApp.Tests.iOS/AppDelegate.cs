@@ -51,7 +51,7 @@ namespace SafeApp.Tests.iOS {
         Options = new TestOptions {
           // If True, the tests will run automatically when the app starts
           // otherwise you must run them manually.
-          AutoRun = true,
+          AutoRun = false,
 
           // If True, the application will terminate automatically after running the tests.
           //TerminateAfterExecution = true,

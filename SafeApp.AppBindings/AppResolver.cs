@@ -4,8 +4,9 @@ using SafeApp.Utilities;
 
 namespace SafeApp.AppBindings {
   public static class AppResolver {
-    private static readonly Lazy<IAppBindings> Implementation =
-      new Lazy<IAppBindings>(CreateBindings, LazyThreadSafetyMode.PublicationOnly);
+    private static readonly Lazy<IAppBindings> Implementation = new Lazy<IAppBindings>(
+      CreateBindings,
+      LazyThreadSafetyMode.PublicationOnly);
 
     public static IAppBindings Current {
       get {
@@ -13,6 +14,7 @@ namespace SafeApp.AppBindings {
         if (ret == null) {
           throw NotImplementedInReferenceAssembly();
         }
+
         return ret;
       }
     }

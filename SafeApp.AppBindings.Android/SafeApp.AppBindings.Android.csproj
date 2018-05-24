@@ -47,6 +47,9 @@
     <Compile Include="..\SafeApp.AppBindings\AppBindings.cs">
       <Link>AppBindings.cs</Link>
     </Compile>
+    <Compile Include="..\SafeApp.AppBindings\AppBindings.Manual.cs">
+      <Link>AppBindings.Manual.cs</Link>
+    </Compile>
     <Compile Include="..\SafeApp.AppBindings\AppResolver.cs">
       <Link>AppResolver.cs</Link>
     </Compile>

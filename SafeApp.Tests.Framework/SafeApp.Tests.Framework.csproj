@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SafeApp.Tests.Framework</RootNamespace>
     <AssemblyName>SafeApp.Tests.Framework</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -49,8 +49,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -58,30 +58,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SafeApp.Tests\AuthTests.cs">
-      <Link>Shared\AuthTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\CipherOptTests.cs">
-      <Link>Shared\CipherOptTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\CrossPlatformTests.cs">
-      <Link>Shared\CrossPlatformTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\CryptoTests.cs">
-      <Link>Shared\CryptoTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\ImmutableDataTests.cs">
-      <Link>Shared\ImmutableDataTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\MutableDataTests.cs">
-      <Link>Shared\MutableDataTests.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeApp.Tests\Utils.cs">
-      <Link>Shared\Utils.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\SafeApp.Tests\log.toml">
+      <Link>log.toml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +94,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <Import Project="..\SafeApp.Tests\SafeApp.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
@@ -10,193 +8,169 @@ using SafeApp.Utilities;
 
 namespace SafeApp.Misc {
   [PublicAPI]
-  public static class Crypto {
-    private const int KeyLen = 32;
+  public class Crypto {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task<NativeHandle> AppPubSignKeyAsync() {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      UlongCb callback = (_, result, appPubSignKeyH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(appPubSignKeyH, SignKeyFreeAsync));
-      };
-
-      AppBindings.AppPubSignKey(Session.AppPtr, callback);
-
-      return tcs.Task;
+    internal Crypto(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
     }
 
-    public static Task<List<byte>> DecryptSealedBoxAsync(List<byte> cipherText, NativeHandle pkHandle, NativeHandle skHandle) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      var cipherPtr = cipherText.ToIntPtr();
-      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        var data = dataPtr.ToList<byte>(dataLen);
-
-        tcs.SetResult(data);
-      };
-
-      AppBindings.DecryptSealedBox(Session.AppPtr, cipherPtr, (IntPtr)cipherText.Count, pkHandle, skHandle, callback);
-      Marshal.FreeHGlobal(cipherPtr);
-
-      return tcs.Task;
+    public static Task<byte[]> GenerateNonceAsync()
+    {
+      return AppBindings.GenerateNonceAsync();
     }
 
-    public static Task<(NativeHandle, NativeHandle)> EncGenerateKeyPairAsync() {
-      var tcs = new TaskCompletionSource<(NativeHandle, NativeHandle)>();
-      EncGenerateKeyPairCb callback = (_, result, encPubKeyH, encSecKeyH) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult((new NativeHandle(encPubKeyH, EncPubKeyFreeAsync), new NativeHandle(encSecKeyH, EncSecretKeyFreeAsync)));
-      };
-
-      AppBindings.EncGenerateKeyPair(Session.AppPtr, callback);
-
-      return tcs.Task;
+    public static Task<List<byte>> Sha3HashAsync(List<byte> source)
+    {
+      return AppBindings.Sha3HashAsync(source);
     }
 
-    public static Task EncPubKeyFreeAsync(ulong encPubKeyH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.EncPubKeyFree(Session.AppPtr, encPubKeyH, callback);
-
-      return tcs.Task;
+    /// <summary>
+    ///   Get App's Public Sign Key
+    /// </summary>
+    /// <returns>App's Public Sign Key NativeHandle</returns>
+    public async Task<NativeHandle> AppPubEncKeyAsync() {
+      var appPubSignKeyH = await AppBindings.AppPubEncKeyAsync(_appPtr);
+      return new NativeHandle(_appPtr, appPubSignKeyH, EncPubKeyFreeAsync);
     }
 
-    public static Task<List<byte>> EncPubKeyGetAsync(NativeHandle encPubKeyH) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      IntPtrCb callback = (_, result, encPubKeyPtr) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(encPubKeyPtr.ToList<byte>((IntPtr)KeyLen));
-      };
-
-      AppBindings.EncPubKeyGet(Session.AppPtr, encPubKeyH, callback);
-
-      return tcs.Task;
+    /// <summary>
+    ///   Get App's Public Sign Key
+    /// </summary>
+    /// <returns>App's Public Sign Key NativeHandle</returns>
+    public async Task<NativeHandle> AppPubSignKeyAsync() {
+      var appPubEncKeyH = await AppBindings.AppPubSignKeyAsync(_appPtr);
+      return new NativeHandle(_appPtr, appPubEncKeyH, SignPubKeyFreeAsync);
     }
 
-    public static Task<NativeHandle> EncPubKeyNewAsync(List<byte> asymPublicKeyBytes) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      var asymPublicKeyPtr = asymPublicKeyBytes.ToIntPtr();
-      UlongCb callback = (self, result, encryptPubKeyHandle) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(encryptPubKeyHandle, EncPubKeyFreeAsync));
-      };
-
-      AppBindings.EncPubKeyNew(Session.AppPtr, asymPublicKeyPtr, callback);
-      Marshal.FreeHGlobal(asymPublicKeyPtr);
-
-      return tcs.Task;
+    public Task<List<byte>> DecryptAsync(List<byte> cipherText, NativeHandle encPubKey, NativeHandle encSecKey) {
+      return AppBindings.DecryptAsync(_appPtr, cipherText, encPubKey, encSecKey);
     }
 
-    public static Task<List<byte>> EncryptSealedBoxAsync(List<byte> inputData, NativeHandle pkHandle) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      var inputDataPtr = inputData.ToIntPtr();
-      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-        var data = dataPtr.ToList<byte>(dataLen);
-        tcs.SetResult(data);
-      };
-
-      AppBindings.EncryptSealedBox(Session.AppPtr, inputDataPtr, (IntPtr)inputData.Count, pkHandle, callback);
-      Marshal.FreeHGlobal(inputDataPtr);
-
-      return tcs.Task;
+    /// <summary>
+    ///   Decrypt cipher text from a Sender
+    /// </summary>
+    /// <param name="cipherText">Cipher Text to be decrypted</param>
+    /// <param name="pkHandle">Sender's Encrypt Public Key</param>
+    /// <param name="skHandle">Receiver's Encrypt Secret Key</param>
+    /// <returns>Decrypted data</returns>
+    public Task<List<byte>> DecryptSealedBoxAsync(List<byte> cipherText, NativeHandle pkHandle, NativeHandle skHandle) {
+      return AppBindings.DecryptSealedBoxAsync(_appPtr, cipherText, pkHandle, skHandle);
     }
 
-    public static Task EncSecretKeyFreeAsync(ulong encSecKeyH) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.EncSecretKeyFree(Session.AppPtr, encSecKeyH, callback);
-
-      return tcs.Task;
+    /// <summary>
+    ///   Generate New Encrypt Key Pair
+    /// </summary>
+    /// <returns>(Encrypt Public Key, Encrypt Secret Key)</returns>
+    public async Task<(NativeHandle, NativeHandle)> EncGenerateKeyPairAsync() {
+      var (encPubKeyH, encSecKeyH) = await AppBindings.EncGenerateKeyPairAsync(_appPtr);
+      return (new NativeHandle(_appPtr, encPubKeyH, EncPubKeyFreeAsync), new NativeHandle(_appPtr, encSecKeyH, EncSecretKeyFreeAsync));
     }
 
-    public static Task<List<byte>> EncSecretKeyGetAsync(NativeHandle encSecKeyH) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      IntPtrCb callback = (_, result, encSecKeyPtr) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(encSecKeyPtr.ToList<byte>((IntPtr)KeyLen));
-      };
-
-      AppBindings.EncSecretKeyGet(Session.AppPtr, encSecKeyH, callback);
-
-      return tcs.Task;
+    /// <summary>
+    ///   Free Encrypt Public Key Handle
+    /// </summary>
+    /// <param name="encPubKeyH"></param>
+    /// <returns></returns>
+    private Task EncPubKeyFreeAsync(ulong encPubKeyH) {
+      return AppBindings.EncPubKeyFreeAsync(_appPtr, encPubKeyH);
     }
 
-    public static Task<NativeHandle> EncSecretKeyNewAsync(List<byte> asymSecKeyBytes) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      var asymSecKeyPtr = asymSecKeyBytes.ToIntPtr();
-      UlongCb callback = (_, result, encSecKeyHandle) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(encSecKeyHandle, EncSecretKeyFreeAsync));
-      };
-
-      AppBindings.EncSecretKeyNew(Session.AppPtr, asymSecKeyPtr, callback);
-
-      return tcs.Task;
+    public Task<byte[]> EncPubKeyGetAsync(NativeHandle encPubKeyH) {
+      return AppBindings.EncPubKeyGetAsync(_appPtr, encPubKeyH);
     }
 
-    public static Task SignKeyFreeAsync(ulong signKeyHandle) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public async Task<NativeHandle> EncPubKeyNewAsync(byte[] asymPublicKeyBytes) {
+      var encryptPubKeyH = await AppBindings.EncPubKeyNewAsync(_appPtr, asymPublicKeyBytes);
+      return new NativeHandle(_appPtr, encryptPubKeyH, EncPubKeyFreeAsync);
+    }
 
-        tcs.SetResult(null);
-      };
+    public Task<List<byte>> EncryptAsync(List<byte> data, NativeHandle encPubKey, NativeHandle encSecKey) {
+      return AppBindings.EncryptAsync(_appPtr, data, encPubKey, encSecKey);
+    }
 
-      AppBindings.SignKeyFree(Session.AppPtr, signKeyHandle, callback);
+    public Task<List<byte>> EncryptSealedBoxAsync(List<byte> inputData, NativeHandle pkHandle) {
+      return AppBindings.EncryptSealedBoxAsync(_appPtr, inputData, pkHandle);
+    }
 
-      return tcs.Task;
+    private Task EncSecretKeyFreeAsync(ulong encSecKeyH) {
+      return AppBindings.EncSecretKeyFreeAsync(_appPtr, encSecKeyH);
+    }
+
+    public Task<byte[]> EncSecretKeyGetAsync(NativeHandle encSecKeyH) {
+      return AppBindings.EncSecretKeyGetAsync(_appPtr, encSecKeyH);
+    }
+
+    public async Task<NativeHandle> EncSecretKeyNewAsync(byte[] asymSecKeyBytes) {
+      var encSecKeyH = await AppBindings.EncSecretKeyNewAsync(_appPtr, asymSecKeyBytes);
+      return new NativeHandle(_appPtr, encSecKeyH, EncSecretKeyFreeAsync);
+    }
+
+    public Task<List<byte>> SignAsync(List<byte> data, NativeHandle signSecKey) {
+      return AppBindings.SignAsync(_appPtr, data, signSecKey);
+    }
+
+    /// <summary>
+    ///   Generate a new Sign Key Pair
+    /// </summary>
+    /// <returns>Tuple of Sign Public Key NativeHandle and Sign Secret Key NativeHandle</returns>
+    public async Task<(NativeHandle, NativeHandle)> SignGenerateKeyPairAsync() {
+      var (publicKeyHandle, secretKeyHandle) = await AppBindings.SignGenerateKeyPairAsync(_appPtr);
+      return (new NativeHandle(_appPtr, publicKeyHandle, SignPubKeyFreeAsync), new NativeHandle(
+        _appPtr,
+        secretKeyHandle,
+        SignSecKeyFreeAsync));
+    }
+
+    private Task SignPubKeyFreeAsync(ulong pubSignKeyHandle) {
+      return AppBindings.SignPubKeyFreeAsync(_appPtr, pubSignKeyHandle);
+    }
+
+    /// <summary>
+    ///   Get raw Sign Public Key
+    /// </summary>
+    /// <param name="pubSignKey">Sign Public Key NativeHandle</param>
+    /// <returns>Raw Sign Public Key as List</returns>
+    public Task<byte[]> SignPubKeyGetAsync(NativeHandle pubSignKey) {
+      return AppBindings.SignPubKeyGetAsync(_appPtr, pubSignKey);
+    }
+
+    /// <summary>
+    ///   Get Sign Public Key Handle from a raw key
+    /// </summary>
+    /// <param name="rawPubSignKey">Raw Sign Public Key as List</param>
+    /// <returns>Public Sign Key NativeHandle</returns>
+    public async Task<NativeHandle> SignPubKeyNewAsync(byte[] rawPubSignKey) {
+      var handle = await AppBindings.SignPubKeyNewAsync(_appPtr, rawPubSignKey);
+      return new NativeHandle(_appPtr, handle, SignPubKeyFreeAsync);
+    }
+
+    private Task SignSecKeyFreeAsync(ulong secSignKeyHandle) {
+      return AppBindings.SignSecKeyFreeAsync(_appPtr, secSignKeyHandle);
+    }
+
+    /// <summary>
+    ///   Get Raw Secret Sign Key
+    /// </summary>
+    /// <param name="secSignKey">Secret Sign Key NativeHandle</param>
+    /// <returns>Raw Secret Sign Key as List</returns>
+    public Task<byte[]> SignSecKeyGetAsync(NativeHandle secSignKey) {
+      return AppBindings.SignSecKeyGetAsync(_appPtr, secSignKey);
+    }
+
+    /// <summary>
+    ///   Get New Sign Secret Key handle from a raw Sign Secret Key
+    /// </summary>
+    /// <param name="rawSecSignKey"></param>
+    /// <returns>Secret Sign Key NativeHandle</returns>
+    public async Task<NativeHandle> SignSecKeyNewAsync(byte[] rawSecSignKey) {
+      var handle = await AppBindings.SignSecKeyNewAsync(_appPtr, rawSecSignKey);
+      return new NativeHandle(_appPtr, handle, SignSecKeyFreeAsync);
+    }
+
+    public Task<List<byte>> VerifyAsync(List<byte> signedData, NativeHandle signPubKey) {
+      return AppBindings.VerifyAsync(_appPtr, signedData, signPubKey);
     }
   }
 }

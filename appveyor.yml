@@ -19,13 +19,15 @@ image: Visual Studio 2017
 
 install:
   - choco install resharper-clt.portable
+  #TODO - update the following to Cake script 
   - ps: |
         $url = "https://github.com/maidsafe/QA/raw/master/appveyor/install_rustup.ps1"
         Invoke-WebRequest $url -OutFile "install_rustup.ps1"
+        $url2 = "https://s3.eu-west-2.amazonaws.com/download-native-libs/cargo-script.exe"
+        Invoke-WebRequest $url2 -OutFile "cargo-script.exe"
         . ".\install_rustup.ps1"
-  - bash -lc "curl -sSL https://github.com/maidsafe/QA/raw/master/travis/cargo_install.sh > cargo_install.sh"
-  - bash -lc "PATH=/c/msys64/mingw64/bin:/c/msys64/usr/bin:$PATH; bash cargo_install.sh cargo-script"
-  - cargo script DownloadNativeLibs.crs
+
+  - cargo-script.exe script DownloadNativeLibs.crs
 
 platform:
   - x64

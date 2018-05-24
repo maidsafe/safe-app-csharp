@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
@@ -12,140 +10,51 @@ using SafeApp.Utilities;
 
 namespace SafeApp.IData {
   [PublicAPI]
-  public static class IData {
+  public class IData {
     private static readonly IAppBindings AppBindings = AppResolver.Current;
+    private SafeAppPtr _appPtr;
 
-    public static Task<List<byte>> CloseSelfEncryptorAsync(ulong seH, NativeHandle cipherOptH) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      IntPtrCb callback = (_, result, xorNamePtr) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        var xorNameList = xorNamePtr.ToList<byte>((IntPtr)32);
-        tcs.SetResult(xorNameList);
-      };
-
-      AppBindings.IDataCloseSelfEncryptor(Session.AppPtr, seH, cipherOptH, callback);
-
-      return tcs.Task;
+    internal IData(SafeAppPtr appPtr) {
+      _appPtr = appPtr;
     }
 
-    public static Task<NativeHandle> FetchSelfEncryptorAsync(List<byte> xorName) {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      var xorNamePtr = xorName.ToIntPtr();
-      UlongCb callback = (_, result, sEReaderHandle) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(sEReaderHandle, SelfEncryptorReaderFreeAsync));
-      };
-
-      AppBindings.IDataFetchSelfEncryptor(Session.AppPtr, xorNamePtr, callback);
-      Marshal.FreeHGlobal(xorNamePtr);
-
-      return tcs.Task;
+    public Task<byte[]> CloseSelfEncryptorAsync(ulong seH, NativeHandle cipherOptH) {
+      return AppBindings.IDataCloseSelfEncryptorAsync(_appPtr, seH, cipherOptH);
     }
 
-    public static Task<NativeHandle> NewSelfEncryptorAsync() {
-      var tcs = new TaskCompletionSource<NativeHandle>();
-      UlongCb callback = (_, result, sEWriterHandle) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(new NativeHandle(sEWriterHandle, null));
-      };
-
-      AppBindings.IDataNewSelfEncryptor(Session.AppPtr, callback);
-
-      return tcs.Task;
+    public async Task<NativeHandle> FetchSelfEncryptorAsync(byte[] xorName) {
+      var sEReaderHandle = await AppBindings.IDataFetchSelfEncryptorAsync(_appPtr, xorName);
+      return new NativeHandle(_appPtr, sEReaderHandle, SelfEncryptorReaderFreeAsync);
     }
 
-    public static Task<List<byte>> ReadFromSelfEncryptorAsync(NativeHandle seHandle, ulong fromPos, ulong len) {
-      var tcs = new TaskCompletionSource<List<byte>>();
-      ByteArrayCb callback = (_, result, dataPtr, dataLen) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-        var data = dataPtr.ToList<byte>(dataLen);
-        tcs.SetResult(data);
-      };
-
-      AppBindings.IDataReadFromSelfEncryptor(Session.AppPtr, seHandle, fromPos, len, callback);
-
-      return tcs.Task;
+    public async Task<NativeHandle> NewSelfEncryptorAsync() {
+      var sEWriterHandle = await AppBindings.IDataNewSelfEncryptorAsync(_appPtr);
+      return new NativeHandle(_appPtr, sEWriterHandle, null);
     }
 
-    public static Task SelfEncryptorReaderFreeAsync(ulong sEReaderHandle) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.IDataSelfEncryptorReaderFree(Session.AppPtr, sEReaderHandle, callback);
-
-      return tcs.Task;
+    public async Task<List<byte>> ReadFromSelfEncryptorAsync(NativeHandle seHandle, ulong fromPos, ulong len) {
+      var dataArray = await AppBindings.IDataReadFromSelfEncryptorAsync(_appPtr, seHandle, fromPos, len);
+      return new List<byte>(dataArray);
     }
 
-    public static Task SelfEncryptorWriterFreeAsync(ulong sEWriterHandle) {
-      var tcs = new TaskCompletionSource<object>();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(null);
-      };
-
-      AppBindings.IDataSelfEncryptorWriterFree(Session.AppPtr, sEWriterHandle, callback);
-
-      return tcs.Task;
+    private Task SelfEncryptorReaderFreeAsync(ulong sEReaderHandle) {
+      return AppBindings.IDataSelfEncryptorReaderFreeAsync(_appPtr, sEReaderHandle);
     }
 
-    public static Task<ulong> SizeAsync(NativeHandle seHandle) {
-      var tcs = new TaskCompletionSource<ulong>();
-      UlongCb callback = (_, result, len) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
-
-        tcs.SetResult(len);
-      };
-
-      AppBindings.IDataSize(Session.AppPtr, seHandle, callback);
-
-      return tcs.Task;
+    private Task SelfEncryptorWriterFreeAsync(ulong sEWriterHandle) {
+      return AppBindings.IDataSelfEncryptorWriterFreeAsync(_appPtr, sEWriterHandle);
     }
 
-    public static Task<object> WriteToSelfEncryptorAsync(NativeHandle seHandle, List<byte> data) {
-      var tcs = new TaskCompletionSource<object>();
-      var dataPtr = data.ToIntPtr();
-      ResultCb callback = (_, result) => {
-        if (result.ErrorCode != 0) {
-          tcs.SetException(result.ToException());
-          return;
-        }
+    public Task<ulong> SerialisedSizeAsync(byte[] xorName) {
+      return AppBindings.IDataSerialisedSizeAsync(_appPtr, xorName);
+    }
 
-        tcs.SetResult(null);
-      };
+    public Task<ulong> SizeAsync(NativeHandle seHandle) {
+      return AppBindings.IDataSizeAsync(_appPtr, seHandle);
+    }
 
-      AppBindings.IDataWriteToSelfEncryptor(Session.AppPtr, seHandle, dataPtr, (IntPtr)data.Count, callback);
-      Marshal.FreeHGlobal(dataPtr);
-
-      return tcs.Task;
+    public Task WriteToSelfEncryptorAsync(NativeHandle seHandle, List<byte> data) {
+      return AppBindings.IDataWriteToSelfEncryptorAsync(_appPtr, seHandle, data);
     }
   }
 }

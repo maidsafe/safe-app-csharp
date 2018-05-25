@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>MaidSafe.SafeApp</id>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
     <title>Safe App Library for CSharp</title>
     <authors>MaidSafe</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -99,8 +99,8 @@ Task("Nuget Package")
 });
 
 Task("Default")
-    .IsDependentOn("UnZipTask")
     .IsDependentOn("DownloadTask")
+    .IsDependentOn("UnZipTask")
     .IsDependentOn("Run unit tests")
     .IsDependentOn("Nuget Package")
     .Does(() =>

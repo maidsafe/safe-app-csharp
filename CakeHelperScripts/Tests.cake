@@ -1,4 +1,3 @@
-// #tool nuget:?package=NUnit.ConsoleRunner
 #tool "nuget:?package=JetBrains.dotCover.CommandLineTools"
 #tool "nuget:?package=NUnit.ConsoleRunner&version=3.4.0"
 #tool "nuget:?package=ReportGenerator"
@@ -32,10 +31,17 @@ Task("Run unit tests")
 {
     try
 	{
-    NUnit3("../**/bin/" + configuration + "/*.Tests.Framework.dll", new NUnit3Settings {
-        NoResults = true
-    });
-    	}
+        var resultsFile = artifactsDirectory + "/NUnitResults.xml";
+        NUnit3("../**/bin/" + configuration + "/*.Tests.Framework.dll", new NUnit3Settings {
+            Results = new[] { new NUnit3Result { FileName = resultsFile } },     
+            X86 = false
+        });
+
+        if(AppVeyor.IsRunningOnAppVeyor)
+        {
+            AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.NUnit3);
+        }
+    }
 	catch(Exception exp) {
 
         Information(exp.Message);

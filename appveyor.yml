@@ -34,7 +34,7 @@ before_build:
   - cd SafeApp.Tests.Core
 
 build_script:
-  - dotnet build --runtime win10-x64
+  - cmd: PowerShell -Version 2.0 .\build.ps1
 
 after_build:
   - nuget restore ..\SafeApp.sln

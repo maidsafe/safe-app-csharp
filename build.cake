@@ -1,6 +1,8 @@
 #addin Cake.Curl
+#addin package:?Cake.AppVeyor
+#addin package:?Refit&version=3.0.0
+#addin package:?Newtonsoft.Json&version=9.0.1
 #load "CakeHelperScripts/NativeScriptDownloader.cake"
-// #load "CakeHelperScripts/CleanBuild.cake"
 #load "CakeHelperScripts/Tests.cake"
 
 var target = Argument("target", "Default");
@@ -15,18 +17,14 @@ var solutionFile = File("SafeApp.sln");
 
 var androidProject = File("SafeApp.AppBindings.Android/SafeApp.AppBindings.Android.csproj");
 var androidBin = Directory("SafeApp.AppBindings.Android/bin") + Directory(configuration);
-// var androidBindingProject = File("SafeApp.AppBindings.Android/SafeApp.AppBindings.Android.csproj");
-// var androidBin = Directory("SafeApp.AppBindings.Android/bin") + Directory(configuration);
 
 var DesktopProject = File("SafeApp.AppBindings.Desktop/SafeApp.AppBindings.Desktop.csproj");
 var DesktopBin = Directory("SafeApp.AppBindings.Desktop/bin") + Directory(configuration);
-// var DesktopProject = File("SafeApp.AppBindings.Desktop/SafeApp.AppBindings.Desktop.csproj");
-// var DesktopBin = Directory("SafeApp.AppBindings.Desktop/bin") + Directory(configuration);
 
 var iOSProject = File("SafeApp.AppBindings.iOS/SafeApp.AppBindings.iOS.csproj");
 var iOSBin = Directory("SafeApp.AppBindings.Android/bin/iPhone") + Directory(configuration);
-// var iOSProject = File("SafeApp.AppBindings.iOS/SafeApp.AppBindings.iOS.csproj");
-// var iOSBin = Directory("SafeApp.AppBindings.Android/bin/iPhone") + Directory(configuration);
+
+
 // --------------------------------------------------------------------------------
 // PREPARATION
 // --------------------------------------------------------------------------------
@@ -101,13 +99,13 @@ Task("Nuget Package")
 });
 
 Task("Default")
-    // .IsDependentOn("UnZipTask")
-    // .IsDependentOn("DownloadTask")
-    .IsDependentOn("Build iOS")
+    .IsDependentOn("UnZipTask")
+    .IsDependentOn("DownloadTask")
+    .IsDependentOn("Run unit tests")
     .IsDependentOn("Nuget Package")
     .Does(() =>
 {
-    // Information("Downloading and Unzipping process completed");
+    
 });
 
 

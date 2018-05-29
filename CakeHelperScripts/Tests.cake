@@ -31,16 +31,16 @@ Task("Run unit tests")
 {
     try
 	{
-        var resultsFile = artifactsDirectory + "/NUnitResults.xml";
+        var resultsFile ="./TestResult.xml";
         NUnit3("../**/bin/" + configuration + "/*.Tests.Framework.dll", new NUnit3Settings {
             Results = new[] { new NUnit3Result { FileName = resultsFile } },     
             X86 = false
         });
 
-        if(AppVeyor.IsRunningOnAppVeyor)
-        {
-            AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.NUnit3);
-        }
+        // if(AppVeyor.IsRunningOnAppVeyor)
+        // {
+        //     AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.NUnit3);
+        // }
     }
 	catch(Exception exp) {
 

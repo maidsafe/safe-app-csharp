@@ -37,10 +37,10 @@ Task("Run unit tests")
             X86 = false
         });
 
-        // if(AppVeyor.IsRunningOnAppVeyor)
-        // {
-        //     AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.NUnit3);
-        // }
+        if(AppVeyor.IsRunningOnAppVeyor)
+        {
+            AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.NUnit3);
+        }
     }
 	catch(Exception exp) {
 

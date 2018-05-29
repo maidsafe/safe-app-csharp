@@ -1,7 +1,7 @@
 #addin Cake.Curl
-#addin "package:?Cake.AppVeyor"
-#addin "package:?Refit&version=3.0.0"
-#addin :package:?Newtonsoft.Json&version=9.0.1"
+// #addin "package:?Cake.AppVeyor"
+// #addin "package:?Refit&version=3.0.0"
+// #addin :package:?Newtonsoft.Json&version=9.0.1"
 #load "CakeHelperScripts/NativeScriptDownloader.cake"
 #load "CakeHelperScripts/Tests.cake"
 

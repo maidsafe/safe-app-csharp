@@ -18,9 +18,6 @@ platform:
 before_build:
   - cd SafeApp.Tests.Core
 
-build_script:
-  - cmd: PowerShell -Version 2.0 .\build.ps1
-
 after_build:
   - nuget restore ..\SafeApp.sln
   - InspectCode.exe -o=resharper-clt-output.xml ..\SafeApp.sln

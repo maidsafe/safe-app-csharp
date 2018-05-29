@@ -1,6 +1,5 @@
 cache:
   - '%temp%\nativelibs'
-  - packages -> **\packages.config, nuget.config
   - tools -> build.cake, build.ps1
 
 image: Visual Studio 2017

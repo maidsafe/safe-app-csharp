@@ -12,15 +12,12 @@
     <summary>Safe App Library.</summary>
     <tags>android, ios, csharp, netstandard, xamarin, netcoreapp, netframework</tags>
     <projectUrl>https://github.com/maidsafe/safe_app_csharp/</projectUrl>
-    <licenseUrl>https://github.com/maidsafe/safe_app_csharp/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/maidsafe/safe_app_csharp#license</licenseUrl>
     <iconUrl>https://raw.githubusercontent.com/maidsafe/safe_app_csharp/master/package_icon.png</iconUrl>
     <dependencies>
-      <group targetFramework="netstandard1.3">
-      </group>
-      <group targetFramework="MonoAndroid412">
-      </group>
-      <group targetFramework="Xamarin.iOS10">
-      </group>
+      <group targetFramework="netstandard1.3" />
+      <group targetFramework="MonoAndroid412" />
+      <group targetFramework="Xamarin.iOS10" />
       <group targetFramework="netcoreapp1.0">
         <dependency id="System.ValueTuple" version="4.4.0" />
       </group>

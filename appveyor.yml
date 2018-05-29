@@ -1,1 +1,5 @@
+cache:
+  - '%temp%\nuget'
+  - '%temp%\nativelibs'
+
 image: Visual Studio 2017

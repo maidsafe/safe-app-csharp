@@ -12,33 +12,6 @@ image: Visual Studio 2017
 install:
   - choco install resharper-clt.portable
 
-platform:
-  - x64
-
-before_build:
-  - cd SafeApp.Tests.Core
-
-after_build:
-  - nuget restore ..\SafeApp.sln
-  - InspectCode.exe -o=resharper-clt-output.xml ..\SafeApp.sln
-  - ps: |
-        $result = [xml](Get-Content .\resharper-clt-output.xml)
-        $result.Report.Issues.ChildNodes | ForEach-Object {
-          $project = $_.Name
-          $_.ChildNodes | ForEach-Object {
-            if ($_ -ne $null) {
-              Add-AppveyorCompilationMessage -Category Error -Message $_.TypeId -Details $_.Message -Line $_.Line -FileName $_.File -ProjectName $project
-              $lint_failed = $true
-            }
-          }
-        }
-        if ($lint_failed) {
-          $host.UI.WriteErrorLine("Code inspection failed. Please check the 'Messages' tab.")
-          $host.SetShouldExit(99)
-        } else {
-          Add-AppveyorCompilationMessage -Category Information -Message "No code issues."
-        }
-
 test_script:
   - dotnet test --logger="trx;LogFileName=results.xml"
 

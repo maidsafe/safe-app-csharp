@@ -1,0 +1,77 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "SafeApp/**.csproj",
+            "SafeApp.MockAuthBindings/**.csproj",
+            "SafeApp.Utilities/**.csproj"
+          ],
+          "src": "../"
+        }
+      ],
+      "dest": "api",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "CHANGELOG.md"
+        ],
+        "src": "../"
+      },
+      {
+        "files": [
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "theme/src"
+    ],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false,
+    "globalMetadata": {
+      "_appTitle": "Safe Network :: safe_app_csharp API documentation",
+      "_appLogoPath": "./images/logo.svg",
+      "_appFaviconPath": "./images/favicon.ico"
+    }
+  }
+}

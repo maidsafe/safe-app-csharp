@@ -1,9 +1,34 @@
+environment:
+  github_access_token:
+    secure: 7XRuu+gUArQP1WgU+Eg0rjurjpPvhdaA+4G1YzsjvoEkoWHaFz7ULSIoeoJzBG93
+
+init:
+  - ps: if(-not $env:APPVEYOR_PULL_REQUEST_NUMBER) { $env:is_not_pr = "true"; }
+
+branches:
+  only:
+    - generate-release-docs
+
 cache:
   - '%temp%\nativelibs'
   - '%USERPROFILE%\.nuget\packages'
   - tools -> build.cake, build.ps1, build.sh
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 image: Visual Studio 2017
 
+install:
+  - IF NOT EXIST C:\ProgramData\chocolatey\bin\docfx.exe choco install docfx
+  - npm install gh-pages -g
+
 build_script:
   - ps: ./build.ps1
+
+deploy_script:
+  - ps: if(-not $env:is_not_pr) { return }
+  - docfx ./docs/docfx.json
+  - ps: gh-pages-clean
+  - ps: gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$env:github_access_token@github.com/maidsafe/safe_app_csharp.git" --user "MaidSafe-QA <qa@maidsafe.net>"
+
+  

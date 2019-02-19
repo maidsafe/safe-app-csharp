@@ -16,7 +16,7 @@ namespace SafeApp.AppBindings
     internal partial class AppBindings : IAppBindings
     {
 #if __IOS__
-    private const string DllName = "__Internal";
+        private const string DllName = "__Internal";
 #else
         private const string DllName = "safe_app";
 #endif
@@ -1411,7 +1411,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultAccountInfoCb(IntPtr userData, IntPtr result, IntPtr accountInfo);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAccountInfoCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAccountInfoCb))]
 #endif
         private static void OnFfiResultAccountInfoCb(IntPtr userData, IntPtr result, IntPtr accountInfo)
         {
@@ -1428,7 +1428,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArrayAsymNonceLenCb(IntPtr userData, IntPtr result, IntPtr nonce);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymNonceLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymNonceLenCb))]
 #endif
         private static void OnFfiResultByteArrayAsymNonceLenCb(IntPtr userData, IntPtr result, IntPtr nonce)
         {
@@ -1444,7 +1444,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArrayAsymPublicKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubEncKey);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymPublicKeyLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymPublicKeyLenCb))]
 #endif
         private static void OnFfiResultByteArrayAsymPublicKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubEncKey)
         {
@@ -1460,7 +1460,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArrayAsymSecretKeyLenCb(IntPtr userData, IntPtr result, IntPtr secEncKey);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymSecretKeyLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArrayAsymSecretKeyLenCb))]
 #endif
         private static void OnFfiResultByteArrayAsymSecretKeyLenCb(IntPtr userData, IntPtr result, IntPtr secEncKey)
         {
@@ -1476,7 +1476,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArraySignPublicKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubSignKey);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArraySignPublicKeyLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArraySignPublicKeyLenCb))]
 #endif
         private static void OnFfiResultByteArraySignPublicKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubSignKey)
         {
@@ -1492,7 +1492,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArraySignSecretKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubSignKey);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArraySignSecretKeyLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArraySignSecretKeyLenCb))]
 #endif
         private static void OnFfiResultByteArraySignSecretKeyLenCb(IntPtr userData, IntPtr result, IntPtr pubSignKey)
         {
@@ -1508,7 +1508,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteArrayXorNameLenCb(IntPtr userData, IntPtr result, IntPtr name);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteArrayXorNameLenCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteArrayXorNameLenCb))]
 #endif
         private static void OnFfiResultByteArrayXorNameLenCb(IntPtr userData, IntPtr result, IntPtr name)
         {
@@ -1523,7 +1523,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultByteListCb(IntPtr userData, IntPtr result, IntPtr signedDataPtr, UIntPtr signedDataLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteListCb))]
 #endif
         private static void OnFfiResultByteListCb(IntPtr userData, IntPtr result, IntPtr signedDataPtr, UIntPtr signedDataLen)
         {
@@ -1543,14 +1543,14 @@ namespace SafeApp.AppBindings
             ulong version);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultByteListULongCb))]
+        [MonoPInvokeCallback(typeof(FfiResultByteListULongCb))]
 #endif
         private static void OnFfiResultByteListULongCb(
-            IntPtr userData,
-            IntPtr result,
-            IntPtr contentPtr,
-            UIntPtr contentLen,
-            ulong version)
+                IntPtr userData,
+                IntPtr result,
+                IntPtr contentPtr,
+                UIntPtr contentLen,
+                ulong version)
         {
             BindingUtils.CompleteTask(
                 userData,
@@ -1563,7 +1563,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultCb))]
+        [MonoPInvokeCallback(typeof(FfiResultCb))]
 #endif
         private static void OnFfiResultCb(IntPtr userData, IntPtr result)
         {
@@ -1579,13 +1579,13 @@ namespace SafeApp.AppBindings
             UIntPtr containerPermsLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultContainerPermissionsListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultContainerPermissionsListCb))]
 #endif
         private static void OnFfiResultContainerPermissionsListCb(
-            IntPtr userData,
-            IntPtr result,
-            IntPtr containerPermsPtr,
-            UIntPtr containerPermsLen)
+                IntPtr userData,
+                IntPtr result,
+                IntPtr containerPermsPtr,
+                UIntPtr containerPermsLen)
         {
             BindingUtils.CompleteTask(
                 userData,
@@ -1599,7 +1599,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultFileCb(IntPtr userData, IntPtr result, IntPtr file);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultFileCb))]
+        [MonoPInvokeCallback(typeof(FfiResultFileCb))]
 #endif
         private static void OnFfiResultFileCb(IntPtr userData, IntPtr result, IntPtr file)
         {
@@ -1614,7 +1614,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultFileULongCb(IntPtr userData, IntPtr result, IntPtr file, ulong version);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultFileULongCb))]
+        [MonoPInvokeCallback(typeof(FfiResultFileULongCb))]
 #endif
         private static void OnFfiResultFileULongCb(IntPtr userData, IntPtr result, IntPtr file, ulong version)
         {
@@ -1629,7 +1629,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultMDataEntryListCb(IntPtr userData, IntPtr result, IntPtr entriesPtr, UIntPtr entriesLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultMDataEntryListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultMDataEntryListCb))]
 #endif
         private static void OnFfiResultMDataEntryListCb(IntPtr userData, IntPtr result, IntPtr entriesPtr, UIntPtr entriesLen)
         {
@@ -1645,7 +1645,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultMDataInfoCb(IntPtr userData, IntPtr result, IntPtr mdataInfo);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultMDataInfoCb))]
+        [MonoPInvokeCallback(typeof(FfiResultMDataInfoCb))]
 #endif
         private static void OnFfiResultMDataInfoCb(IntPtr userData, IntPtr result, IntPtr mdataInfo)
         {
@@ -1660,7 +1660,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultMDataKeyListCb(IntPtr userData, IntPtr result, IntPtr keysPtr, UIntPtr keysLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultMDataKeyListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultMDataKeyListCb))]
 #endif
         private static void OnFfiResultMDataKeyListCb(IntPtr userData, IntPtr result, IntPtr keysPtr, UIntPtr keysLen)
         {
@@ -1675,7 +1675,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultMDataValueListCb(IntPtr userData, IntPtr result, IntPtr valuesPtr, UIntPtr valuesLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultMDataValueListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultMDataValueListCb))]
 #endif
         private static void OnFfiResultMDataValueListCb(IntPtr userData, IntPtr result, IntPtr valuesPtr, UIntPtr valuesLen)
         {
@@ -1691,7 +1691,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultPermissionSetCb(IntPtr userData, IntPtr result, IntPtr permSet);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultPermissionSetCb))]
+        [MonoPInvokeCallback(typeof(FfiResultPermissionSetCb))]
 #endif
         private static void OnFfiResultPermissionSetCb(IntPtr userData, IntPtr result, IntPtr permSet)
         {
@@ -1706,7 +1706,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultStringCb(IntPtr userData, IntPtr result, string logPath);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultStringCb))]
+        [MonoPInvokeCallback(typeof(FfiResultStringCb))]
 #endif
         private static void OnFfiResultStringCb(IntPtr userData, IntPtr result, string logPath)
         {
@@ -1720,7 +1720,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultUIntStringCb(IntPtr userData, IntPtr result, uint reqId, string encoded);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultUIntStringCb))]
+        [MonoPInvokeCallback(typeof(FfiResultUIntStringCb))]
 #endif
         private static void OnFfiResultUIntStringCb(IntPtr userData, IntPtr result, uint reqId, string encoded)
         {
@@ -1732,7 +1732,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultULongCb(IntPtr userData, IntPtr result, ulong handle);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultULongCb))]
+        [MonoPInvokeCallback(typeof(FfiResultULongCb))]
 #endif
         private static void OnFfiResultULongCb(IntPtr userData, IntPtr result, ulong handle)
         {
@@ -1744,7 +1744,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultULongFromUIntPtrCb(IntPtr userData, IntPtr result, UIntPtr len);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultULongFromUIntPtrCb))]
+        [MonoPInvokeCallback(typeof(FfiResultULongFromUIntPtrCb))]
 #endif
         private static void OnFfiResultULongFromUIntPtrCb(IntPtr userData, IntPtr result, UIntPtr len)
         {
@@ -1756,7 +1756,7 @@ namespace SafeApp.AppBindings
         private delegate void FfiResultULongULongCb(IntPtr userData, IntPtr result, ulong publicKeyH, ulong secretKeyH);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultULongULongCb))]
+        [MonoPInvokeCallback(typeof(FfiResultULongULongCb))]
 #endif
         private static void OnFfiResultULongULongCb(IntPtr userData, IntPtr result, ulong publicKeyH, ulong secretKeyH)
         {
@@ -1772,13 +1772,13 @@ namespace SafeApp.AppBindings
             UIntPtr userPermSetsLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultUserPermissionSetListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultUserPermissionSetListCb))]
 #endif
         private static void OnFfiResultUserPermissionSetListCb(
-            IntPtr userData,
-            IntPtr result,
-            IntPtr userPermSetsPtr,
-            UIntPtr userPermSetsLen)
+                IntPtr userData,
+                IntPtr result,
+                IntPtr userPermSetsPtr,
+                UIntPtr userPermSetsLen)
         {
             BindingUtils.CompleteTask(
                 userData,

@@ -15,7 +15,7 @@ namespace SafeApp.MockAuthBindings
     internal partial class AuthBindings : IAuthBindings
     {
 #if __IOS__
-    private const string DllName = "__Internal";
+        private const string DllName = "__Internal";
 #else
         private const string DllName = "safe_app";
 #endif
@@ -285,7 +285,7 @@ namespace SafeApp.MockAuthBindings
         private delegate void FfiResultAccountInfoCb(IntPtr userData, IntPtr result, IntPtr accountInfo);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAccountInfoCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAccountInfoCb))]
 #endif
         private static void OnFfiResultAccountInfoCb(IntPtr userData, IntPtr result, IntPtr accountInfo)
         {
@@ -300,7 +300,7 @@ namespace SafeApp.MockAuthBindings
         private delegate void FfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAppAccessListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAppAccessListCb))]
 #endif
         private static void OnFfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen)
         {
@@ -319,13 +319,13 @@ namespace SafeApp.MockAuthBindings
           UIntPtr appExchangeInfoLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAppExchangeInfoListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAppExchangeInfoListCb))]
 #endif
         private static void OnFfiResultAppExchangeInfoListCb(
-          IntPtr userData,
-          IntPtr result,
-          IntPtr appExchangeInfoPtr,
-          UIntPtr appExchangeInfoLen)
+              IntPtr userData,
+              IntPtr result,
+              IntPtr appExchangeInfoPtr,
+              UIntPtr appExchangeInfoLen)
         {
             BindingUtils.CompleteTask(
               userData,
@@ -340,7 +340,7 @@ namespace SafeApp.MockAuthBindings
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultCb))]
+        [MonoPInvokeCallback(typeof(FfiResultCb))]
 #endif
         private static void OnFfiResultCb(IntPtr userData, IntPtr result)
         {
@@ -352,7 +352,7 @@ namespace SafeApp.MockAuthBindings
         private delegate void FfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr, UIntPtr registeredAppLen);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultRegisteredAppListCb))]
+        [MonoPInvokeCallback(typeof(FfiResultRegisteredAppListCb))]
 #endif
         private static void OnFfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr, UIntPtr registeredAppLen)
         {
@@ -368,7 +368,7 @@ namespace SafeApp.MockAuthBindings
         private delegate void FfiResultStringCb(IntPtr userData, IntPtr result, string response);
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultStringCb))]
+        [MonoPInvokeCallback(typeof(FfiResultStringCb))]
 #endif
         private static void OnFfiResultStringCb(IntPtr userData, IntPtr result, string response)
         {

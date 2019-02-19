@@ -1,0 +1,49 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Choose>
+    <When Condition="$(DefineConstants.Contains(SAFE_APP_MOCK))">
+      <PropertyGroup>
+        <NativeLibType>mock</NativeLibType>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="SafeApp.MockAuthBindings">
+          <HintPath>$(MSBuildThisFileDirectory)SafeApp.MockAuthBindings.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NativeLibType>non-mock</NativeLibType>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <Choose>
+    <When Condition="$(RuntimeIdentifier.StartsWith('win'))">
+      <PropertyGroup>
+        <NativeLibFile>safe_app.dll</NativeLibFile>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(RuntimeIdentifier.StartsWith('osx'))">
+      <PropertyGroup>
+        <NativeLibFile>libsafe_app.dylib</NativeLibFile>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(RuntimeIdentifier)' != ''">
+      <PropertyGroup>
+        <NativeLibFile>libsafe_app.so</NativeLibFile>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NativeLibFile>*</NativeLibFile>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\$(NativeLibFile)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="CheckProjectRuntime" BeforeTargets="PrepareForBuild">
+    <Error Condition="!$(RuntimeIdentifier.Contains('x64')) AND '$(RuntimeIdentifier)' != ''" Text="SafeApp package currently only supports x64. Please use a suitable x64 runtime." />
+  </Target>
+</Project>

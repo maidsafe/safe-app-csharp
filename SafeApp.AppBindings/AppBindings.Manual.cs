@@ -42,7 +42,7 @@ namespace SafeApp.AppBindings
         }
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(NoneCb))]
+        [MonoPInvokeCallback(typeof(NoneCb))]
 #endif
         private static void OnAppDisconnectCb(IntPtr userData)
         {
@@ -54,7 +54,7 @@ namespace SafeApp.AppBindings
         private static readonly NoneCb DelegateOnAppDisconnectCb = OnAppDisconnectCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAppCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAppCb))]
 #endif
         private static void OnAppCreateCb(IntPtr userData, IntPtr result, IntPtr app)
         {
@@ -82,7 +82,7 @@ namespace SafeApp.AppBindings
         }
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntAuthGrantedCb))]
+        [MonoPInvokeCallback(typeof(UIntAuthGrantedCb))]
 #endif
         private static void OnDecodeIpcMsgAuthCb(IntPtr userData, uint reqId, IntPtr authGranted)
         {
@@ -93,7 +93,7 @@ namespace SafeApp.AppBindings
         private static readonly UIntAuthGrantedCb DelegateOnDecodeIpcMsgAuthCb = OnDecodeIpcMsgAuthCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntByteListCb))]
+        [MonoPInvokeCallback(typeof(UIntByteListCb))]
 #endif
         private static void OnDecodeIpcMsgUnregisteredCb(IntPtr userData, uint reqId, IntPtr serialisedCfgPtr, UIntPtr serialisedCfgLen)
         {
@@ -104,7 +104,7 @@ namespace SafeApp.AppBindings
         private static readonly UIntByteListCb DelegateOnDecodeIpcMsgUnregisteredCb = OnDecodeIpcMsgUnregisteredCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntCb))]
+        [MonoPInvokeCallback(typeof(UIntCb))]
 #endif
         private static void OnDecodeIpcMsgContainersCb(IntPtr userData, uint reqId)
         {
@@ -115,7 +115,7 @@ namespace SafeApp.AppBindings
         private static readonly UIntCb DelegateOnDecodeIpcMsgContainersCb = OnDecodeIpcMsgContainersCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntCb))]
+        [MonoPInvokeCallback(typeof(UIntCb))]
 #endif
         private static void OnDecodeIpcMsgShareMdataCb(IntPtr userData, uint reqId)
         {
@@ -126,7 +126,7 @@ namespace SafeApp.AppBindings
         private static readonly UIntCb DelegateOnDecodeIpcMsgShareMdataCb = OnDecodeIpcMsgShareMdataCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(NoneCb))]
+        [MonoPInvokeCallback(typeof(NoneCb))]
 #endif
         private static void OnDecodeIpcMsgRevokedCb(IntPtr userData)
         {
@@ -137,7 +137,7 @@ namespace SafeApp.AppBindings
         private static readonly NoneCb DelegateOnDecodeIpcMsgRevokedCb = OnDecodeIpcMsgRevokedCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultUIntCb))]
+        [MonoPInvokeCallback(typeof(FfiResultUIntCb))]
 #endif
         private static void OnDecodeIpcMsgErrCb(IntPtr userData, IntPtr result, uint reqId)
         {

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -154,10 +153,10 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="..\SafeApp.AppBindings.Android\lib\mock\armeabi-v7a\libsafe_app.so">
+    <AndroidNativeLibrary Include="..\SafeApp.AppBindings\libs\Android\mock\armeabi-v7a\libsafe_app.so">
       <Link>lib\armeabi-v7a\libsafe_app.so</Link>
     </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="..\SafeApp.AppBindings.Android\lib\mock\x86_64\libsafe_app.so">
+    <AndroidNativeLibrary Include="..\SafeApp.AppBindings\libs\Android\mock\x86_64\libsafe_app.so">
       <Link>lib\x86_64\libsafe_app.so</Link>
     </AndroidNativeLibrary>
     <AndroidAsset Include="..\SafeApp.Tests\log.toml">
@@ -178,13 +177,13 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeApp.AppBindings.Android\SafeApp.AppBindings.Android.csproj">
-      <Project>{f0b624ad-e426-4335-b1e0-9c952bc0a3c5}</Project>
-      <Name>SafeApp.AppBindings.Android</Name>
+    <ProjectReference Include="..\SafeApp.AppBindings\SafeApp.AppBindings.csproj">
+      <Project>{d785b126-3720-4420-8207-3bdbfabcbe05}</Project>
+      <Name>SafeApp.AppBindings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SafeApp.MockAuthBindings.Android\SafeApp.MockAuthBindings.Android.csproj">
-      <Project>{54021988-ca0a-4c25-a389-079c9c456402}</Project>
-      <Name>SafeApp.MockAuthBindings.Android</Name>
+    <ProjectReference Include="..\SafeApp.MockAuthBindings\SafeApp.MockAuthBindings.csproj">
+      <Project>{a50ad45f-a945-41af-8b22-b2dcaa266eac}</Project>
+      <Name>SafeApp.MockAuthBindings</Name>
     </ProjectReference>
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj">
       <Project>{a0450f47-b05e-4c53-9845-7b89d708d3e3}</Project>

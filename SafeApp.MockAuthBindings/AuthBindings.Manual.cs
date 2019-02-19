@@ -54,7 +54,7 @@ namespace SafeApp.MockAuthBindings
         }
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultAuthenticatorCb))]
+        [MonoPInvokeCallback(typeof(FfiResultAuthenticatorCb))]
 #endif
         private static void OnAuthenticatorCreateCb(IntPtr userData, IntPtr result, IntPtr app)
         {
@@ -66,7 +66,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly FfiResultAuthenticatorCb DelegateOnAuthenticatorCreateCb = OnAuthenticatorCreateCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(NoneCb))]
+        [MonoPInvokeCallback(typeof(NoneCb))]
 #endif
         private static void OnAuthenticatorDisconnectCb(IntPtr userData)
         {
@@ -78,7 +78,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly NoneCb DelegateOnAuthenticatorDisconnectCb = OnAuthenticatorDisconnectCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntAuthReqCb))]
+        [MonoPInvokeCallback(typeof(UIntAuthReqCb))]
 #endif
         private static void OnDecodeIpcReqAuthCb(IntPtr userData, uint reqId, IntPtr authReq)
         {
@@ -89,7 +89,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly UIntAuthReqCb DelegateOnDecodeIpcReqAuthCb = OnDecodeIpcReqAuthCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntContainersReqCb))]
+        [MonoPInvokeCallback(typeof(UIntContainersReqCb))]
 #endif
         private static void OnDecodeIpcReqContainersCb(IntPtr userData, uint reqId, IntPtr authReq)
         {
@@ -100,7 +100,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly UIntContainersReqCb DelegateOnDecodeIpcReqContainersCb = OnDecodeIpcReqContainersCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntShareMDataReqMetadataResponseListCb))]
+        [MonoPInvokeCallback(typeof(UIntShareMDataReqMetadataResponseListCb))]
 #endif
         private static void OnDecodeIpcReqShareMDataCb(IntPtr userData, uint reqId, IntPtr authReq, IntPtr metadataPtr, UIntPtr metadataLen)
         {
@@ -113,7 +113,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly UIntShareMDataReqMetadataResponseListCb DelegateOnDecodeIpcReqShareMDataCb = OnDecodeIpcReqShareMDataCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntByteListCb))]
+        [MonoPInvokeCallback(typeof(UIntByteListCb))]
 #endif
         private static void OnDecodeIpcReqUnregisteredCb(IntPtr userData, uint reqId, IntPtr extraData, UIntPtr size)
         {
@@ -124,7 +124,7 @@ namespace SafeApp.MockAuthBindings
         private static readonly UIntByteListCb DelegateOnDecodeIpcReqUnregisteredCb = OnDecodeIpcReqUnregisteredCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(FfiResultIpcReqErrorCb))]
+        [MonoPInvokeCallback(typeof(FfiResultIpcReqErrorCb))]
 #endif
         private static void OnFfiResultIpcReqErrorCb(IntPtr userData, IntPtr result, string msg)
         {

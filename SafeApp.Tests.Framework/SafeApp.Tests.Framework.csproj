@@ -71,13 +71,13 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeApp.AppBindings.Desktop\SafeApp.AppBindings.Desktop.csproj">
-      <Project>{82da9f6b-b453-4794-8fd9-370cc9cd4a0a}</Project>
-      <Name>SafeApp.AppBindings.Desktop</Name>
+    <ProjectReference Include="..\SafeApp.AppBindings\SafeApp.AppBindings.csproj">
+      <Project>{d785b126-3720-4420-8207-3bdbfabcbe05}</Project>
+      <Name>SafeApp.AppBindings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SafeApp.MockAuthBindings.Desktop\SafeApp.MockAuthBindings.Desktop.csproj">
-      <Project>{795ec379-c7c5-4890-8f55-dbe595a1a7e9}</Project>
-      <Name>SafeApp.MockAuthBindings.Desktop</Name>
+    <ProjectReference Include="..\SafeApp.MockAuthBindings\SafeApp.MockAuthBindings.csproj">
+      <Project>{a50ad45f-a945-41af-8b22-b2dcaa266eac}</Project>
+      <Name>SafeApp.MockAuthBindings</Name>
     </ProjectReference>
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj">
       <Project>{a0450f47-b05e-4c53-9845-7b89d708d3e3}</Project>
@@ -89,7 +89,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\safe_app.dll">
+    <None Include="..\SafeApp.AppBindings\libs\Desktop\mock\safe_app.dll">
       <Link>safe_app.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

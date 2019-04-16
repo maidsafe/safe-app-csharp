@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
-    <TargetFrameworks>netstandard1.3;Xamarin.iOS10;MonoAndroid80</TargetFrameworks>
-    
+    <TargetFrameworks>net46;netstandard1.3;Xamarin.iOS10;MonoAndroid44;</TargetFrameworks>
+
     <!--Don't auto add files for me, I will tell you -->
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 
@@ -15,13 +15,13 @@
     <!--Version of C# to use -->
     <LangVersion>default</LangVersion>
 
+    <Configurations>Debug;Release;</Configurations>
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
@@ -29,12 +29,40 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
+    <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <DefineConstants>$(DefineConstants);IOS1_0</DefineConstants>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid44'">
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <DebugType>full</DebugType>
+    <DefineConstants>$(DefineConstants);MONOANDROID8_0</DefineConstants>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <DefineConstants>__DESKTOP__</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <DefineConstants>__DESKTOP__</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- This None is here so the conditionally included files show up in the Solution Explorer -->
     <None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
 
     <!--NuGet that bring in good stuff -->
-    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.4.0" PrivateAssets="All" />
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.61" PrivateAssets="All" />
+
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
 
     <!-- We will compile anything ending in .shared.cs  You can change this -->
     <Compile Include="*.cs" />
@@ -43,8 +71,8 @@
   <ItemGroup>
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj" />
   </ItemGroup>
-  
+
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-  
+
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
 </Project>

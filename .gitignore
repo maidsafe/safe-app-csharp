@@ -148,6 +148,7 @@ publish/
 *.azurePubxml
 
 # NuGet Packages Directory
+*.nupkg
 NugetPackage
 packages/
 *.nuget.targets

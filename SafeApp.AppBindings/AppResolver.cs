@@ -4,6 +4,7 @@ using SafeApp.Utilities;
 
 namespace SafeApp.AppBindings
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class AppResolver
     {
         private static readonly Lazy<IAppBindings> Implementation = new Lazy<IAppBindings>(
@@ -39,4 +40,5 @@ namespace SafeApp.AppBindings
               "This functionality is not implemented in the portable version of this assembly.  You should reference the NuGet package from your main application project in order to reference the platform-specific implementation.");
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

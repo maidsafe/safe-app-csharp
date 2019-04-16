@@ -1,7 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Reference Include="SafeApp.MockAuthBindings" Condition="$(DefineConstants.Contains(SAFE_APP_MOCK))">
-      <HintPath>$(MSBuildThisFileDirectory)SafeApp.MockAuthBindings.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-</Project>

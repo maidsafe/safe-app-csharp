@@ -6,6 +6,7 @@ using SafeApp.AppBindings;
 using SafeApp.Utilities;
 
 // ReSharper disable ConvertToLocalFunction
+// ReSharper disable InconsistentNaming
 namespace SafeApp
 {
     /// <summary>

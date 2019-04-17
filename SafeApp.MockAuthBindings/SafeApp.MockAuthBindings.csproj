@@ -9,13 +9,6 @@
 
     <!-- Helper to add defines-->
     <DefineConstants>$(DefineConstants);</DefineConstants>
-
-    <!--Assembly and Namespace info -->
-
-    <!--Version of C# to use -->
-    <LangVersion>default</LangVersion>
-
-    <Configurations>Debug;Release;</Configurations>
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->
@@ -59,10 +52,10 @@
     <!-- This None is here so the conditionally included files show up in the Solution Explorer -->
     <None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
 
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+
     <!--NuGet that bring in good stuff -->
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.61" PrivateAssets="All" />
-
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
 
     <!-- We will compile anything ending in .shared.cs  You can change this -->
     <Compile Include="*.cs" />

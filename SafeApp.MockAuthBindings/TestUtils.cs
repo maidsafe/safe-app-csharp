@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace SafeApp.MockAuthBindings
 {
+    // ReSharper disable once InconsistentNaming
     [PublicAPI]
     class TestUtils
     {

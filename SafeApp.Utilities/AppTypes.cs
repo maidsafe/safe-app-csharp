@@ -229,7 +229,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Internal field used by rust memory allocator.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr ContainersCap;
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Internal field used by rust memory allocator.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr ContainersCap;
 
         /// <summary>
@@ -433,7 +433,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Capacity of MData vec.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr MDataCap;
 
         /// <summary>
@@ -557,7 +557,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Used by Rust memory allocator.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr BootstrapConfigCap;
 
         /// <summary>
@@ -691,7 +691,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Internal field used by rust memory allocator.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr ContainersCap;
 
         /// <summary>
@@ -1092,7 +1092,7 @@ namespace SafeApp.Utilities
         /// <summary>
         /// Capacity of user metadata.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr UserMetadataCap;
 
         /// <summary>

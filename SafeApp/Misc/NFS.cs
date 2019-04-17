@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using SafeApp.AppBindings;
 using SafeApp.Utilities;
 
+// ReSharper disable InconsistentNaming
 namespace SafeApp.Misc
 {
     /// <summary>

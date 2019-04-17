@@ -12,6 +12,7 @@ namespace SafeApp.MockAuthBindings
     // ReSharper disable ConvertToLocalFunction
     // ReSharper disable UnusedMember.Global
     // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable InconsistentNaming
     public class Authenticator : IDisposable
     {
         private static readonly IAuthBindings NativeBindings = MockAuthResolver.Current;

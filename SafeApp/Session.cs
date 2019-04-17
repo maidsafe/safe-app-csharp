@@ -11,7 +11,7 @@ using SafeApp.Misc;
 using SafeApp.Utilities;
 
 // ReSharper disable ConvertToLocalFunction
-
+// ReSharper disable InconsistentNaming
 namespace SafeApp
 {
     /// <summary>

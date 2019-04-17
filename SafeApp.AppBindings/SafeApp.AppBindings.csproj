@@ -9,13 +9,6 @@
 
     <!-- Helper to add defines-->
     <DefineConstants>$(DefineConstants);</DefineConstants>
-
-    <!--Assembly and Namespace info -->
-
-    <!--Version of C# to use -->
-    <LangVersion>default</LangVersion>
-    
-    <Configurations>Debug;Release;</Configurations>
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->

@@ -5,11 +5,13 @@ using SafeApp.Utilities;
 namespace SafeApp.AppBindings
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+    // ReSharper disable UnusedMember.Global
     public static class AppResolver
     {
+        // ReSharper disable once InconsistentNaming
         private static readonly Lazy<IAppBindings> Implementation = new Lazy<IAppBindings>(
-          CreateBindings,
-          LazyThreadSafetyMode.PublicationOnly);
+            CreateBindings,
+            LazyThreadSafetyMode.PublicationOnly);
 
         public static IAppBindings Current
         {

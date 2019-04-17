@@ -70,7 +70,7 @@ namespace SafeApp.MockAuthBindings
         /// <summary>
         /// Capacity of the containers array. Internal data required for the Rust allocator.
         /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
+        // ReSharper disable once NotAccessedField.Global
         public UIntPtr ContainersCap;
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Threading;
 
 namespace SafeApp.MockAuthBindings
 {
+    // ReSharper disable once InconsistentNaming
     internal static class MockAuthResolver
     {
         private static readonly Lazy<IAuthBindings> Implementation = new Lazy<IAuthBindings>(

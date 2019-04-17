@@ -43,14 +43,6 @@
     <ProjectReference Include="..\SafeApp\SafeApp.csproj" />
   </ItemGroup>
 
-  <Target Name="BaitAndSwitchTarget" AfterTargets="Build">
-    <PropertyGroup>
-      <LinkedProject>..\SafeApp.AppBindings\SafeApp.AppBindings.csproj</LinkedProject>
-    </PropertyGroup>
-    <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Restore" />
-    <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Build" Properties="OutputPath=..\$(MSBuildProjectName)\$(OutputPath)" />
-  </Target>
-
   <Import Project="..\SafeApp.Tests\SafeApp.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
 </Project>

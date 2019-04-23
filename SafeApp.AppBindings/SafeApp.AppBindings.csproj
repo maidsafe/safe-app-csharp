@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
-    <TargetFrameworks>net46;netstandard1.3;Xamarin.iOS10;MonoAndroid44;</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;Xamarin.iOS10;MonoAndroid44;</TargetFrameworks>
 
     <!--Don't auto add files for me, I will tell you -->
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -38,10 +38,6 @@
     <DefineConstants>$(DefineConstants);MONOANDROID8_0</DefineConstants>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <DefineConstants>__DESKTOP__</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using SafeApp.Utilities;
 
+// ReSharper disable RedundantTypeSpecificationInDefaultExpression
+
 namespace SafeApp.Tests
 {
     [TestFixture]

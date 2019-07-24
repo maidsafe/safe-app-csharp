@@ -18,11 +18,6 @@ namespace SafeApp
 
         public static implicit operator IntPtr(SafeAppPtr obj)
         {
-            if (obj.Value == IntPtr.Zero)
-            {
-                throw new ArgumentNullException(nameof(SafeAppPtr));
-            }
-
             return obj.Value;
         }
 

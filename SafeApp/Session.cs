@@ -39,9 +39,10 @@ namespace SafeApp
         public bool IsDisconnected { get; private set; }
 
 #if SAFE_APP_MOCK
-    public IntPtr SafeApPtr() {
-      return _appPtr;
-    }
+        public IntPtr SafeApPtr()
+        {
+            return _appPtr;
+        }
 #endif
 
         /// <summary>
@@ -323,7 +324,7 @@ namespace SafeApp
 
         /// <summary>
         /// Initialise the logging.
-        /// Pass the file name to replease default output file name i.e. client.log.
+        /// Pass the file name to replace default output file name i.e. client.log.
         /// </summary>
         /// <param name="outputLogFileName">Log output file name.</param>
         /// <returns></returns>
@@ -339,21 +340,6 @@ namespace SafeApp
         public static bool IsMockBuild()
         {
             return AppBindings.IsMockBuild();
-        }
-
-        /// <summary>
-        /// Simulate a mock network Disconnect
-        /// </summary>
-        public async Task SimulateMockNetworkDisconnectAsync()
-        {
-            if (IsMockBuild())
-            {
-                await AppBindings.TestSimulateNetworkDisconnectAsync(_appPtr);
-            }
-            else
-            {
-                throw new Exception("API available only on mock network");
-            }
         }
 
         private static void OnDisconnected(Session session)

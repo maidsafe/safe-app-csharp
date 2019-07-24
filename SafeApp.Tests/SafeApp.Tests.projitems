@@ -15,7 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MiscTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MutableDataTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NFS.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SessionTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />
   </ItemGroup>
 </Project>

@@ -1435,16 +1435,6 @@ namespace SafeApp.AppBindings
         [DllImport(DllName, EntryPoint = "file_close")]
         private static extern void FileCloseNative(IntPtr app, ulong fileH, IntPtr userData, FfiResultFileCb oCb);
 
-        public Task TestSimulateNetworkDisconnectAsync(IntPtr app)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask();
-            TestSimulateNetworkDisconnectNative(app, userData, OnFfiResultCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "test_simulate_network_disconnect")]
-        private static extern void TestSimulateNetworkDisconnectNative(IntPtr app, IntPtr userData, FfiResultCb oCb);
-
         private delegate void FfiResultAccountInfoCb(IntPtr userData, IntPtr result, IntPtr accountInfo);
 
 #if __IOS__

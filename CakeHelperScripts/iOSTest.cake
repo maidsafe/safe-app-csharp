@@ -5,7 +5,7 @@
 #addin "Cake.Powershell"
 
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
-var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.0";
+var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.1";
 var IOS_TEST_PROJ = "SafeApp.Tests.iOS/SafeApp.Tests.iOS.csproj";
 var IOS_BUNDLE_ID = "net.maidsafe.SafeApp.Tests.iOS";
 var IOS_IPA_PATH = "SafeApp.Tests.iOS/bin/iPhoneSimulator/Release/SafeApp.Tests.iOS.app";

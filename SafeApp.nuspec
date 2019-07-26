@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>MaidSafe.SafeApp</id>
-    <version>0.2.1</version>
-    <title>Safe App Library for CSharp</title>
+    <version>0.2.2</version>
+    <title>.NET library to interface with the SAFE Network</title>
     <authors>MaidSafe</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
@@ -11,8 +11,8 @@
     </description>
     <summary>Safe App Library.</summary>
     <tags>android, ios, csharp, netstandard, xamarin, netcoreapp, netframework</tags>
+    <license type="expression">BSD-3-Clause OR MIT</license>
     <projectUrl>https://github.com/maidsafe/safe_app_csharp/</projectUrl>
-    <licenseUrl>https://github.com/maidsafe/safe_app_csharp#license</licenseUrl>
     <iconUrl>https://raw.githubusercontent.com/maidsafe/safe_app_csharp/master/package_icon.png</iconUrl>
     <dependencies>
       <group targetFramework="netstandard1.3" />

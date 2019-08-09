@@ -31,53 +31,55 @@ namespace SafeApp.Tests
             var response = await Utils.AuthenticateAuthRequest(locator, secret, ipcMsg.Item2, true);
             var decodedResponse = await Session.DecodeIpcMessageAsync(response) as AuthIpcMsg;
             Assert.NotNull(decodedResponse);
-            var hostingApp = await Session.AppRegisteredAsync(authReq.App.Id, decodedResponse.AuthGranted);
-            var ipcReq = await Session.EncodeShareMDataRequestAsync(
-              new ShareMDataReq
-              {
+            if (decodedResponse != null) {
+              var hostingApp = await Session.AppRegisteredAsync(authReq.App.Id, decodedResponse.AuthGranted);
+              var ipcReq = await Session.EncodeShareMDataRequestAsync(
+                new ShareMDataReq
+                {
                   App = authReq.App,
                   MData = new List<ShareMData>
+                  {
+                    new ShareMData
                     {
-                        new ShareMData
-                        {
-                            Name = mDataInfo.Name,
-                            TypeTag = mDataInfo.TypeTag,
-                            Perms = new PermissionSet { Insert = true, Read = true }
-                        }
+                      Name = mDataInfo.Name,
+                      TypeTag = mDataInfo.TypeTag,
+                      Perms = new PermissionSet { Insert = true, Read = true }
                     }
-              });
-            await Utils.AuthenticateShareMDataRequest(locator, secret, ipcReq.Item2, true);
-            await hostingApp.AccessContainer.RefreshAccessInfoAsync();
-            using (var entryhandle = await hostingApp.MDataEntryActions.NewAsync())
-            {
+                  }
+                });
+              await Utils.AuthenticateShareMDataRequest(locator, secret, ipcReq.Item2, true);
+              await hostingApp.AccessContainer.RefreshAccessInfoAsync();
+              using (var entryhandle = await hostingApp.MDataEntryActions.NewAsync())
+              {
                 await hostingApp.MDataEntryActions.InsertAsync(
                   entryhandle,
                   Encoding.UTF8.GetBytes("default.html").ToList(),
                   Encoding.UTF8.GetBytes("<html><body>Hello Default</body></html>").ToList());
                 await hostingApp.MData.MutateEntriesAsync(mDataInfo, entryhandle);
-            }
+              }
 
-            var version = await cmsApp.MData.GetVersionAsync(mDataInfo);
-            using (var permissionHandle = await cmsApp.MData.ListPermissionsAsync(mDataInfo))
-            {
+              var version = await cmsApp.MData.GetVersionAsync(mDataInfo);
+              using (var permissionHandle = await cmsApp.MData.ListPermissionsAsync(mDataInfo))
+              {
                 var userPermissions = await cmsApp.MDataPermissions.ListAsync(permissionHandle);
                 Assert.That(await cmsApp.MDataPermissions.LenAsync(permissionHandle), Is.EqualTo(userPermissions.Count));
                 var userPermissionToDel = userPermissions.Find(userPerm => userPerm.Item2.ManagePermissions == false);
                 await cmsApp.MData.DelUserPermissionsAsync(mDataInfo, userPermissionToDel.Item1, version + 1);
                 userPermissions.ForEach(perm => perm.Item1.Dispose());
-            }
+              }
 
-            using (var entryHandle = await hostingApp.MDataEntryActions.NewAsync())
-            {
+              using (var entryHandle = await hostingApp.MDataEntryActions.NewAsync())
+              {
                 await hostingApp.MDataEntryActions.InsertAsync(
                   entryHandle,
                   Encoding.UTF8.GetBytes("home.html").ToList(),
                   Encoding.UTF8.GetBytes("<html><body>Hello Home!</body></html>").ToList());
                 Assert.That(async () => { await hostingApp.MData.MutateEntriesAsync(mDataInfo, entryHandle); }, Throws.TypeOf<FfiException>());
-            }
+              }
 
-            cmsApp.Dispose();
-            hostingApp.Dispose();
+              cmsApp.Dispose();
+              hostingApp.Dispose();
+            }
         }
 
         [Test]

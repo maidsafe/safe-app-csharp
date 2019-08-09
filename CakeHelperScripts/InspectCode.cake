@@ -1,4 +1,4 @@
-#tool nuget:?package=JetBrains.ReSharper.CommandLineTools&version=2018.3.4
+#tool nuget:?package=JetBrains.ReSharper.CommandLineTools&version=2019.2.0
 #addin nuget:?package=Cake.Issues&version=0.6.0
 #addin nuget:?package=Cake.Issues.InspectCode&version=0.6.0
 

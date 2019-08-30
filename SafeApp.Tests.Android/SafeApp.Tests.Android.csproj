@@ -91,10 +91,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeApp.AppBindings.Android\SafeApp.AppBindings.Android.csproj">
-      <Project>{f0b624ad-e426-4335-b1e0-9c952bc0a3c5}</Project>
-      <Name>SafeApp.AppBindings.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SafeApp.MockAuthBindings.Android\SafeApp.MockAuthBindings.Android.csproj">
       <Project>{54021988-ca0a-4c25-a389-079c9c456402}</Project>
       <Name>SafeApp.MockAuthBindings.Android</Name>

@@ -135,12 +135,6 @@
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeApp.AppBindings.iOS\SafeApp.AppBindings.iOS.csproj">
-      <Project>{94220c85-2874-4187-aae6-8984f4c63031}</Project>
-      <Name>SafeApp.AppBindings.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
     <ProjectReference Include="..\SafeApp.MockAuthBindings.iOS\SafeApp.MockAuthBindings.iOS.csproj">
       <Project>{6a42fbfa-03ab-453d-8a2c-7740dff75e1c}</Project>
       <Name>SafeApp.MockAuthBindings.iOS</Name>

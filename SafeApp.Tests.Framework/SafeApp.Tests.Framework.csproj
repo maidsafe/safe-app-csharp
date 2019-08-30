@@ -64,10 +64,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeApp.AppBindings.Desktop\SafeApp.AppBindings.Desktop.csproj">
-      <Project>{82da9f6b-b453-4794-8fd9-370cc9cd4a0a}</Project>
-      <Name>SafeApp.AppBindings.Desktop</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SafeApp.MockAuthBindings.Desktop\SafeApp.MockAuthBindings.Desktop.csproj">
       <Project>{795ec379-c7c5-4890-8f55-dbe595a1a7e9}</Project>
       <Name>SafeApp.MockAuthBindings.Desktop</Name>

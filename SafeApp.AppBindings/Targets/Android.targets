@@ -1,0 +1,23 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Choose>
+    <When Condition="$(DefineConstants.Contains(SAFE_APP_MOCK))">
+      <PropertyGroup>
+        <NativeLibType>mock</NativeLibType>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="SafeApp.MockAuthBindings">
+          <HintPath>$(MSBuildThisFileDirectory)SafeApp.MockAuthBindings.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NativeLibType>non-mock</NativeLibType>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\armeabi-v7a\libsafe_app.so" />
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\x86_64\libsafe_app.so" />
+  </ItemGroup>
+</Project>

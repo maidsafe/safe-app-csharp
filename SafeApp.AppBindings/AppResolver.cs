@@ -14,20 +14,18 @@ namespace SafeApp.AppBindings
         {
             get
             {
-                var ret = Implementation.Value;
-                if (ret == null)
-                {
-                    throw NotImplementedInReferenceAssembly();
-                }
-
-                return ret;
+#if NETSTANDARD
+                throw NotImplementedInReferenceAssembly();
+#else
+                return Implementation.Value;
+#endif
             }
         }
 
         private static IAppBindings CreateBindings()
         {
-#if NETSTANDARD1_2 && !__DESKTOP__
-      return null;
+#if NETSTANDARD && !__DESKTOP__
+            return null;
 #else
             return new AppBindings();
 #endif

@@ -18,10 +18,10 @@ namespace SafeApp.MockAuthBindings
           string locator,
           string secret,
           string invitation,
-          Action disconnnectedCb,
+          Action disconnectedCb,
           Action<FfiResult, IntPtr, GCHandle> cb)
         {
-            var userData = BindingUtils.ToHandlePtr((disconnnectedCb, cb));
+            var userData = BindingUtils.ToHandlePtr((disconnectedCb, cb));
             CreateAccNative(locator, secret, invitation, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
         }
 
@@ -40,9 +40,9 @@ namespace SafeApp.MockAuthBindings
             return task;
         }
 
-        public void Login(string locator, string secret, Action disconnnectedCb, Action<FfiResult, IntPtr, GCHandle> cb)
+        public void Login(string locator, string secret, Action disconnectedCb, Action<FfiResult, IntPtr, GCHandle> cb)
         {
-            var userData = BindingUtils.ToHandlePtr((disconnnectedCb, cb));
+            var userData = BindingUtils.ToHandlePtr((disconnectedCb, cb));
             LoginNative(locator, secret, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
         }
 

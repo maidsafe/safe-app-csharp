@@ -69,10 +69,10 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="..\SafeApp.AppBindings.Android\lib\mock\armeabi-v7a\libsafe_app.so">
+    <AndroidNativeLibrary Include="..\SafeApp.AppBindings\NativeLibs\Android\mock\armeabi-v7a\libsafe_app.so">
       <Link>lib\armeabi-v7a\libsafe_app.so</Link>
     </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="..\SafeApp.AppBindings.Android\lib\mock\x86_64\libsafe_app.so">
+    <AndroidNativeLibrary Include="..\SafeApp.AppBindings\NativeLibs\Android\mock\x86_64\libsafe_app.so">
       <Link>lib\x86_64\libsafe_app.so</Link>
     </AndroidNativeLibrary>
     <AndroidAsset Include="..\SafeApp.Tests\log.toml">

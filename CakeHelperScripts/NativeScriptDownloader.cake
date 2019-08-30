@@ -1,7 +1,8 @@
 var TAG = "0.9.1";
-var ANDROID_DIR_NAME = "SafeApp.AppBindings.Android";
-var IOS_DIR_NAME = "SafeApp.AppBindings.iOS";
-var DESKTOP_DIR_NAME = "SafeApp.AppBindings.Desktop";
+var LIB_DIR_NAME = "SafeApp.AppBindings/NativeLibs/";
+var ANDROID_DIR_NAME = $"{LIB_DIR_NAME}Android";
+var IOS_DIR_NAME = $"{LIB_DIR_NAME}iOS";
+var DESKTOP_DIR_NAME = $"{LIB_DIR_NAME}Desktop";
 
 var ANDROID_ARMEABI_V7A = "android-armeabiv7a";
 var ANDROID_x86_64 = "android-x86_64";
@@ -131,7 +132,6 @@ Task("UnZip-Libs")
           Information(" Unzipping : " + filename);
           var platformOutputDirectory = new StringBuilder();
           platformOutputDirectory.Append(outputDirectory);
-          platformOutputDirectory.Append("/lib");
           
           if(filename.ToString().Contains("mock")) 
           {

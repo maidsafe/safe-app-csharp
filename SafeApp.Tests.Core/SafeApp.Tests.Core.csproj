@@ -27,10 +27,10 @@
     <None Include="..\SafeApp.AppBindings\NativeLibs\Desktop\mock\libsafe_app.dylib" Link="libsafe_app.dylib" Condition=" $(IsOSX) == 'true' ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\SafeApp.AppBindings\NativeLibs\Desktop\lib\mock\libsafe_app.so" Link="libsafe_app.so" Condition=" $(IsLinux) == 'true' ">
+    <None Include="..\SafeApp.AppBindings\NativeLibs\Desktop\mock\libsafe_app.so" Link="libsafe_app.so" Condition=" $(IsLinux) == 'true' ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\SafeApp.AppBindings\NativeLibs\Desktop\lib\mock\safe_app.dll" Link="safe_app.dll" Condition=" $(IsWindows) == 'true' ">
+    <None Include="..\SafeApp.AppBindings\NativeLibs\Desktop\mock\safe_app.dll" Link="safe_app.dll" Condition=" $(IsWindows) == 'true' ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\SafeApp.Tests\log.toml" Link="log.toml">
@@ -52,14 +52,6 @@
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj" />
     <ProjectReference Include="..\SafeApp\SafeApp.csproj" />
   </ItemGroup>
-
-  <Target Name="BaitAndSwitchTarget" AfterTargets="Build">
-    <PropertyGroup>
-      <LinkedProject>..\SafeApp.AppBindings.Desktop\SafeApp.AppBindings.Desktop.csproj</LinkedProject>
-    </PropertyGroup>
-    <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Restore" />
-    <MSBuild Condition="'$(LinkedProject)' != '' " Projects="$(LinkedProject)" Targets="Build" Properties="OutputPath=..\$(MSBuildProjectName)\$(OutputPath)" />
-  </Target>
 
   <Import Project="..\SafeApp.Tests\SafeApp.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />

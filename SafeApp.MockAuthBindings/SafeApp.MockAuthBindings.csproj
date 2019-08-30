@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType Condition=" !$(TargetFramework.StartsWith('monoandroid')) ">portable</DebugType>
-    <DebugType Condition=" $(TargetFramework.StartsWith('monoandroid')) ">Full</DebugType>
+    <DebugType Condition=" !$(TargetFramework.StartsWith('MonoAndroid')) ">portable</DebugType>
+    <DebugType Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">Full</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -27,7 +27,7 @@
     <DefineConstants>__DESKTOP__</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <AndroidUseIntermediateDesignerFile>False</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
 

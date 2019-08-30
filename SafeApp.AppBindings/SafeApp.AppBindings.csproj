@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.41">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net46;netcoreapp1.0;monoandroid44;xamarin.ios10</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;net46;netcoreapp1.0;MonoAndroid44;Xamarin.iOS10</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType Condition=" !$(TargetFramework.StartsWith('monoandroid')) ">portable</DebugType>
-    <DebugType Condition=" $(TargetFramework.StartsWith('monoandroid')) ">Full</DebugType>
+    <DebugType Condition=" !$(TargetFramework.StartsWith('MonoAndroid')) ">portable</DebugType>
+    <DebugType Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">Full</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -23,7 +23,7 @@
     <DefineConstants>__DESKTOP__</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <AndroidUseIntermediateDesignerFile>False</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>
 

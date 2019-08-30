@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SafeApp.Utilities;
 
-namespace SafeApp.Utilities
+namespace SafeApp.AppBindings
 {
     // ReSharper disable InconsistentNaming
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using SafeApp.AppBindings;
-using SafeApp.Utilities;
 
 // ReSharper disable ConvertToLocalFunction
 namespace SafeApp.Misc

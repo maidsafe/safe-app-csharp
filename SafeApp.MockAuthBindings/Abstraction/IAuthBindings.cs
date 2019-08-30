@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SafeApp.Utilities;
 
+// ReSharper disable once CheckNamespace
+
 namespace SafeApp.MockAuthBindings
 {
     internal partial interface IAuthBindings

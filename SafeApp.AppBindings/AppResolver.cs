@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Threading;
-using SafeApp.Utilities;
 
 namespace SafeApp.AppBindings
 {
     public static class AppResolver
     {
+#if !NETSTANDARD
         private static readonly Lazy<IAppBindings> Implementation = new Lazy<IAppBindings>(
           CreateBindings,
-          LazyThreadSafetyMode.PublicationOnly);
+          System.Threading.LazyThreadSafetyMode.PublicationOnly);
+#endif
 
         public static IAppBindings Current
         {

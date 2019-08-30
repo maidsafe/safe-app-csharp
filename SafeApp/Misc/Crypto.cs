@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
-using SafeApp.Utilities;
 
 // ReSharper disable ConvertToLocalFunction
-
 namespace SafeApp.Misc
 {
     /// <summary>

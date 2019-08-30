@@ -22,14 +22,12 @@ namespace SafeApp.AppBindings
             }
         }
 
+#if !NETSTANDARD
         private static IAppBindings CreateBindings()
         {
-#if NETSTANDARD && !__DESKTOP__
-            return null;
-#else
             return new AppBindings();
-#endif
         }
+#endif
 
         private static Exception NotImplementedInReferenceAssembly()
         {

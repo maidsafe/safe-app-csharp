@@ -135,6 +135,14 @@
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SafeApp.AppBindings\SafeApp.AppBindings.csproj">
+      <Project>{d785b126-3720-4420-8207-3bdbfabcbe05}</Project>
+      <Name>SafeApp.AppBindings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SafeApp.MockAuthBindings\SafeApp.MockAuthBindings.csproj">
+      <Project>{a50ad45f-a945-41af-8b22-b2dcaa266eac}</Project>
+      <Name>SafeApp.MockAuthBindings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj">
       <Project>{a0450f47-b05e-4c53-9845-7b89d708d3e3}</Project>
       <Name>SafeApp.Utilities</Name>

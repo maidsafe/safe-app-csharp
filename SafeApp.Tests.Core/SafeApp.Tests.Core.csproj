@@ -14,14 +14,23 @@
     <DefineConstants>TRACE;DEBUG;__DESKTOP__</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Core'">
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+  </PropertyGroup>
+
   <ItemGroup>
-    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\libsafe_app.dylib" Link="libsafe_app.dylib">
+    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\libsafe_app.dylib" Link="libsafe_app.dylib" Condition="$(IsOSX)==true">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\libsafe_app.so" Link="libsafe_app.so">
+    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\libsafe_app.so" Link="libsafe_app.so" Condition="$(IsLinux)==true">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\safe_app.dll" Link="safe_app.dll">
+    <None Include="..\SafeApp.AppBindings.Desktop\lib\mock\safe_app.dll" Link="safe_app.dll" Condition="$(IsWindows)==true">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\SafeApp.Tests\log.toml" Link="log.toml">
@@ -38,6 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SafeApp.AppBindings\SafeApp.AppBindings.csproj" />
+    <ProjectReference Include="..\SafeApp.MockAuthBindings\SafeApp.MockAuthBindings.csproj" />
     <ProjectReference Include="..\SafeApp.Utilities\SafeApp.Utilities.csproj" />
     <ProjectReference Include="..\SafeApp\SafeApp.csproj" />
   </ItemGroup>

@@ -7,13 +7,18 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
 namespace SafeApp.Tests.iOS
 {
-    [Register("AppDelegate")]
     // ReSharper disable once UnusedMember.Global
+    [Register("AppDelegate")]
     public class AppDelegate : FormsApplicationDelegate
     {
-        private readonly string _tcpListenHost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+        private readonly string _tcpListenHost =
+            System.Net.Dns.GetHostEntry(
+                System.Net.Dns.GetHostName()).AddressList.First(
+                f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
@@ -28,7 +33,7 @@ namespace SafeApp.Tests.iOS
                     AutoRun = true,
 
                     // If True, the application will terminate automatically after running the tests.
-                    //TerminateAfterExecution = true,
+                    // TerminateAfterExecution = true,
 
                     // Information about the tcp listener host and port.
                     // For now, send result as XML to the listening server.
@@ -45,7 +50,7 @@ namespace SafeApp.Tests.iOS
             };
 
             // If you want to add tests in another assembly
-            //nunit.AddTestAssembly(typeof(MyTests).Assembly);
+            // nunit.AddTestAssembly(typeof(MyTests).Assembly);
 
             // Available options for testing
 
@@ -55,3 +60,4 @@ namespace SafeApp.Tests.iOS
         }
     }
 }
+#pragma warning restore SA1300 // Element should begin with upper-case letter

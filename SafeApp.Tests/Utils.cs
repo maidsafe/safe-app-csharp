@@ -76,7 +76,10 @@ namespace SafeApp.Tests
             {
                 App = new AppExchangeInfo
                 {
-                    Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5)
+                    Id = GetRandomString(10),
+                    Name = GetRandomString(5),
+                    Scope = null,
+                    Vendor = GetRandomString(5)
                 },
                 AppContainer = true,
                 Containers = new List<ContainerPermissions>()
@@ -123,11 +126,13 @@ namespace SafeApp.Tests
         public static async Task<string> InitRustLogging()
         {
 #if __IOS__
-      var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
-      using (var reader = new StreamReader(Path.Combine(".", "log.toml"))) {
+            var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
+            using (var reader = new StreamReader(Path.Combine(".", "log.toml")))
+            {
 #elif __ANDROID__
-      var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-      using (var reader = new StreamReader(Application.Context.Assets.Open("log.toml"))) {
+            var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            using (var reader = new StreamReader(Application.Context.Assets.Open("log.toml")))
+            {
 #else
             var configPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(configPath);

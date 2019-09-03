@@ -15,6 +15,7 @@ namespace SafeApp.Tests.Android
       Theme = "@android:style/Theme.Holo.Light",
       MainLauncher = true,
       ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
     // ReSharper disable once UnusedMember.Global
     public class MainActivity : FormsApplicationActivity
     {
@@ -34,7 +35,7 @@ namespace SafeApp.Tests.Android
                     AutoRun = true,
 
                     // If True, the application will terminate automatically after running the tests.
-                    //TerminateAfterExecution = true,
+                    // TerminateAfterExecution = true,
 
                     // Information about the tcp listener host and port.
                     // For now, send result as XML to the listening server.
@@ -49,7 +50,7 @@ namespace SafeApp.Tests.Android
             };
 
             // If you want to add tests in another assembly
-            //nunit.AddTestAssembly(typeof(MyTests).Assembly);
+            // nunit.AddTestAssembly(typeof(MyTests).Assembly);
 
             // Available options for testing
 

@@ -8,6 +8,7 @@ init:
 branches:
   only:
     - master
+    - vNext
 
 cache:
   - '%temp%\nativelibs -> .\CakeHelperScripts\NativeScriptDownloader.cake'

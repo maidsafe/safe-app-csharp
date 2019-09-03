@@ -6,10 +6,10 @@
 
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
 var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.1";
-var IOS_TEST_PROJ = "SafeApp.Tests.iOS/SafeApp.Tests.iOS.csproj";
+var IOS_TEST_PROJ = "Tests/SafeApp.Tests.iOS/SafeApp.Tests.iOS.csproj";
 var IOS_BUNDLE_ID = "net.maidsafe.SafeApp.Tests.iOS";
-var IOS_IPA_PATH = "SafeApp.Tests.iOS/bin/iPhoneSimulator/Release/SafeApp.Tests.iOS.app";
-var IOS_TESTS_RESULT_PATH = "SafeApp.Tests.iOS/iOSTestResult.xml";
+var IOS_IPA_PATH = "Tests/SafeApp.Tests.iOS/bin/iPhoneSimulator/Release/SafeApp.Tests.iOS.app";
+var IOS_TESTS_RESULT_PATH = "Tests/SafeApp.Tests.iOS/iOSTestResult.xml";
 
 var IOS_TCP_LISTEN_HOST = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
 var IOS_TCP_LISTEN_PORT = 10500;

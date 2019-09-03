@@ -7,11 +7,11 @@ using System.Linq;
 // Desktop Build and Test
 // --------------------------------------------------------------------------------
 
-var coreTestProject = File("SafeApp.Tests.Core/SafeApp.Tests.Core.csproj");
-var coreTestBin = Directory("SafeApp.Tests.Core/bin/Release");
-var codeCoverageFilePath = "SafeApp.Tests.Core/CodeCoverResult.xml";
-var Desktop_TESTS_RESULT_PATH = "SafeApp.Tests.Core/TestResults/DesktopTestResult.xml";
-var Desktop_test_result_directory = "SafeApp.Tests.Core/TestResults";
+var coreTestProject = File("Tests/SafeApp.Tests.Core/SafeApp.Tests.Core.csproj");
+var coreTestBin = Directory("Tests/SafeApp.Tests.Core/bin/Release");
+var codeCoverageFilePath = "Tests/SafeApp.Tests.Core/CodeCoverResult.xml";
+var Desktop_TESTS_RESULT_PATH = "Tests/SafeApp.Tests.Core/TestResults/DesktopTestResult.xml";
+var Desktop_test_result_directory = "Tests/SafeApp.Tests.Core/TestResults";
 var coveralls_token = EnvironmentVariable("coveralls_access_token");
 
 Task("Build-Desktop-Project")

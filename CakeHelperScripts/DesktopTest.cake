@@ -20,17 +20,18 @@ Task("Build-Desktop-Project")
     var dotnetBuildArgument = string.Empty;
     var osFamily = (int)Context.Environment.Platform.Family;
     if(osFamily == 1)
-      dotnetBuildArgument = @"--runtime win10-x64";
+      dotnetBuildArgument = @"-p:RuntimeIdentifiers=win10-x64";
     else if(osFamily == 2)
-      dotnetBuildArgument = @"--runtime linux-x64";
+      dotnetBuildArgument = @"-p:RuntimeIdentifiers=linux-x64";
     else if (osFamily == 3)
-      dotnetBuildArgument = @"--runtime win-x64";
+      dotnetBuildArgument = @"-p:RuntimeIdentifiers=win-x64";
     
-    DotNetCoreBuild(coreTestProject,
-    new DotNetCoreBuildSettings() {
-      Configuration = configuration,
-      ArgumentCustomization = args => args.Append(dotnetBuildArgument)
-      });
+	var buildSettings = new DotNetCoreMSBuildSettings()
+	{
+	  ArgumentCustomization = args => args.Append(dotnetBuildArgument)
+	};
+	buildSettings.SetConfiguration(configuration);
+    DotNetCoreMSBuild(coreTestProject, buildSettings);
   });
 
 Task("Run-Desktop-Tests")
@@ -40,6 +41,8 @@ Task("Run-Desktop-Tests")
         coreTestProject.Path.FullPath,
         new DotNetCoreTestSettings()
         {
+		  NoBuild = true,
+		  NoRestore = true,
           Configuration = configuration,
           ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
         });
@@ -53,6 +56,8 @@ Task("Run-Desktop-Tests-AppVeyor")
           coreTestProject,
           new DotNetCoreTestSettings()
           {
+			NoBuild = true,
+			NoRestore = true,
             Configuration = configuration,
             ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
           });

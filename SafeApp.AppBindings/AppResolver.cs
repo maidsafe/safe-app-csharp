@@ -1,7 +1,11 @@
 ﻿using System;
+using JetBrains.Annotations;
+
+#pragma warning disable 1591
 
 namespace SafeApp.AppBindings
 {
+    [PublicAPI]
     public static class AppResolver
     {
 #if !NETSTANDARD
@@ -10,6 +14,7 @@ namespace SafeApp.AppBindings
           System.Threading.LazyThreadSafetyMode.PublicationOnly);
 #endif
 
+        [PublicAPI]
         public static IAppBindings Current
         {
             get
@@ -36,3 +41,4 @@ namespace SafeApp.AppBindings
         }
     }
 }
+#pragma warning restore 1591

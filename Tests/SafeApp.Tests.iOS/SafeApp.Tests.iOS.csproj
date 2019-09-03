@@ -127,7 +127,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\SafeApp.AppBindings\NativeLibs\iOS\mock\libsafe_app.a">
+    <NativeReference Include="..\..\SafeApp.AppBindings\NativeLibs\iOS\mock\libsafe_app.a">
       <Kind>Static</Kind>
       <ForceLoad>True</ForceLoad>
       <LinkerFlags>-lresolv</LinkerFlags>

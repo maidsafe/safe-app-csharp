@@ -24,7 +24,7 @@ Task("Build-Desktop-Project")
     else if(osFamily == 2)
       dotnetBuildArgument = @"-p:RuntimeIdentifiers=linux-x64";
     else if (osFamily == 3)
-      dotnetBuildArgument = @"-p:RuntimeIdentifiers=win-x64";
+      dotnetBuildArgument = @"-p:RuntimeIdentifiers=osx-x64";
     
 	var buildSettings = new DotNetCoreMSBuildSettings()
 	{

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ using ObjCRuntime;
 
 namespace SafeApp.AppBindings
 {
+    [SuppressMessage("ReSharper", "All", Justification = "Pending")]
     internal partial class AppBindings
     {
         public void AppUnregistered(List<byte> bootstrapConfig, Action oDisconnectNotifierCb, Action<FfiResult, IntPtr, GCHandle> oCb)

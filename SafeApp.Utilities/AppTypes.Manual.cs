@@ -2,87 +2,218 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
 namespace SafeApp.Utilities
 {
 #pragma warning disable SA1401 // Fields should be private
 
+    /// <summary>
+    /// XorName stub.
+    /// </summary>
+    [PublicAPI]
     public struct XorName
     {
     }
 
+    /// <summary>
+    /// XorNameArray stub.
+    /// </summary>
+    [PublicAPI]
     public struct XorNameArray
     {
     }
 
+    /// <summary>
+    /// XorUrlEncoder stub.
+    /// </summary>
+    [PublicAPI]
     public struct XorUrlEncoder
     {
+        /// <summary>
+        /// Wallet, member comment stub.
+        /// </summary>
         public ulong EncodingVersion { get; set; } // currently only v1 supported
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public XorName XorName { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public ulong TypeTag { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public SafeDataType DataType { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public SafeContentType ContentType { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public string Path { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public string[] SubNames { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public ulong? ContentVersion { get; set; }
     }
 
+    /// <summary>
+    /// SafeContentType stub.
+    /// </summary>
+    [PublicAPI]
     public enum SafeContentType
     {
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         Raw = 0x0000,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         Wallet = 0x0001,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         FilesContainer = 0x0002,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         NrsMapContainer = 0x0003,
     }
 
+    /// <summary>
+    /// SafeDataType stub.
+    /// </summary>
+    [PublicAPI]
     public enum SafeDataType
     {
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         SafeKey = 0x00,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         PublishedImmutableData = 0x01,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         UnpublishedImmutableData = 0x02,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         SeqMutableData = 0x03,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         UnseqMutableData = 0x04,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         PublishedSeqAppendOnlyData = 0x05,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         PublishedUnseqAppendOnlyData = 0x06,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         UnpublishedSeqAppendOnlyData = 0x07,
+
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         UnpublishedUnseqAppendOnlyData = 0x08,
     }
 
-    // -------------
-
+    /// <summary>
+    /// NrsMap stub.
+    /// </summary>
+    [PublicAPI]
     public struct NrsMap
     {
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public string SubNamesMap { get; set; }
 
+        /// <summary>
+        /// Member comment stub.
+        /// </summary>
         public DefaultRDF Default { get; set; }
     }
 
+    /// <summary>
+    /// DefaultRDF stub.
+    /// </summary>
+    [PublicAPI]
     public enum DefaultRDF // todo: solve this (rust enum)
     {
     }
 
+    /// <summary>
+    /// SubNameRDF stub.
+    /// </summary>
+    [PublicAPI]
     public enum SubNameRDF // todo: solve this (rust enum)
     {
     }
 
+    /// <summary>
+    /// SubNamesMap stub.
+    /// </summary>
+    [PublicAPI]
     public class SubNamesMap : Dictionary<string, SubNameRDF>
     {
     }
 
+    /// <summary>
+    /// DefinitionData stub.
+    /// </summary>
+    [PublicAPI]
     public class DefinitionData : Dictionary<string, string>
     {
     }
 
+    /// <summary>
+    /// BlsKeyPair stub.
+    /// </summary>
+    [PublicAPI]
     public struct BlsKeyPair
     {
+        /// <summary>
+        /// Public key.
+        /// </summary>
         public string PK { get; set; }
 
+        /// <summary>
+        /// Secret key.
+        /// </summary>
         public string SK { get; set; }
     }
 

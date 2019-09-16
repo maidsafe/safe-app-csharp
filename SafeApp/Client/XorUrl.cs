@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using SafeApp.AppBindings;
 using SafeApp.Utilities;
 
-namespace SafeApp
+namespace SafeApp.Client
 {
+    [SuppressMessage("ReSharper", "All", Justification = "Pending")]
     public class XorUrl
     {
         static readonly IAppBindings AppBindings = AppResolver.Current;

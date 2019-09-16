@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using SafeApp.AppBindings;
 
-namespace SafeApp
+namespace SafeApp.Client
 {
+    [SuppressMessage("ReSharper", "All", Justification = "Pending")]
     public class Connect
     {
         static readonly IAppBindings AppBindings = AppResolver.Current;

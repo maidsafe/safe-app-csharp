@@ -6,6 +6,7 @@ using ObjCRuntime;
 #endif
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using SafeApp.Utilities;
 
 namespace SafeApp.AppBindings
 {
+    [SuppressMessage("ReSharper", "All", Justification = "Pending")]
     internal partial class AppBindings : IAppBindings
     {
 #if __IOS__

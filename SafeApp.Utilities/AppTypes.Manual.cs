@@ -5,6 +5,87 @@ using JetBrains.Annotations;
 namespace SafeApp.Utilities
 {
 #pragma warning disable SA1401 // Fields should be private
+
+    public struct XorName
+    {
+    }
+
+    public struct XorNameArray
+    {
+    }
+
+    public struct XorUrlEncoder
+    {
+        public ulong EncodingVersion { get; set; } // currently only v1 supported
+
+        public XorName XorName { get; set; }
+
+        public ulong TypeTag { get; set; }
+
+        public SafeDataType DataType { get; set; }
+
+        public SafeContentType ContentType { get; set; }
+
+        public string Path { get; set; }
+
+        public string[] SubNames { get; set; }
+
+        public ulong? ContentVersion { get; set; }
+    }
+
+    public enum SafeContentType
+    {
+        Raw = 0x0000,
+        Wallet = 0x0001,
+        FilesContainer = 0x0002,
+        NrsMapContainer = 0x0003,
+    }
+
+    public enum SafeDataType
+    {
+        SafeKey = 0x00,
+        PublishedImmutableData = 0x01,
+        UnpublishedImmutableData = 0x02,
+        SeqMutableData = 0x03,
+        UnseqMutableData = 0x04,
+        PublishedSeqAppendOnlyData = 0x05,
+        PublishedUnseqAppendOnlyData = 0x06,
+        UnpublishedSeqAppendOnlyData = 0x07,
+        UnpublishedUnseqAppendOnlyData = 0x08,
+    }
+
+    // -------------
+
+    public struct NrsMap
+    {
+        public string SubNamesMap { get; set; }
+
+        public DefaultRDF Default { get; set; }
+    }
+
+    public enum DefaultRDF // todo: solve this (rust enum)
+    {
+    }
+
+    public enum SubNameRDF // todo: solve this (rust enum)
+    {
+    }
+
+    public class SubNamesMap : Dictionary<string, SubNameRDF>
+    {
+    }
+
+    public class DefinitionData : Dictionary<string, string>
+    {
+    }
+
+    public struct BlsKeyPair
+    {
+        public string PK { get; set; }
+
+        public string SK { get; set; }
+    }
+
     /// <summary>
     /// Base IPC response message.
     /// </summary>

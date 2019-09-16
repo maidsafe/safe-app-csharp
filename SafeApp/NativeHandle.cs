@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
+// ReSharper disable UnusedMember.Global
+
 namespace SafeApp
 {
     /// <summary>

@@ -11,6 +11,8 @@ using SafeApp.Utilities;
 using ObjCRuntime;
 #endif
 
+// ReSharper disable UnusedMember.Global
+
 namespace SafeApp.AppBindings
 {
     internal partial class AppBindings

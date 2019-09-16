@@ -1,6 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
-
-#if !NETSTANDARD1_2 || __DESKTOP__
+﻿#if !NETSTANDARD1_2 || __DESKTOP__
 #if __IOS__
 using ObjCRuntime;
 #endif
@@ -10,6 +8,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using SafeApp.Utilities;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace SafeApp.AppBindings
 {

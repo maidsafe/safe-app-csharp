@@ -2,6 +2,8 @@
 using SafeApp.AppBindings;
 
 // ReSharper disable ConvertToLocalFunction
+// ReSharper disable UnusedMember.Global
+
 namespace SafeApp.Misc
 {
     /// <summary>

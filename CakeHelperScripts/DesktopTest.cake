@@ -100,11 +100,12 @@ Task("Run-Desktop-Tests-AppVeyor")
       throw new Exception("Test result file not found.");
     }
     
-    if(EnvironmentVariable("is_not_pr") == "true")
-    {
-      CoverallsIo(codeCoverageFilePath, new CoverallsIoSettings()
-      {
-        RepoToken = coveralls_token
-      });
-    }
+    // todo : enable after adding the new API
+    // if(EnvironmentVariable("is_not_pr") == "true")
+    // {
+    //   CoverallsIo(codeCoverageFilePath, new CoverallsIoSettings()
+    //   {
+    //     RepoToken = coveralls_token
+    //   });
+    // }
   });

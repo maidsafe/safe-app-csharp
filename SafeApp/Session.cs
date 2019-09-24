@@ -49,6 +49,7 @@ namespace SafeApp
         }
 
 #pragma warning disable IDE0060
+
         // Remove unused parameter
         /// <summary>
         /// Create a new authenticated session using the provided IPC response.
@@ -57,7 +58,6 @@ namespace SafeApp
         /// <param name="authGranted">Authentication response.</param>
         /// <returns>New session based on appid and authentication response.</returns>
         public static Session AppRegisteredAsync(string appId, AuthGranted authGranted)
-
         {
             // Todo: implement for the new API
 

@@ -17,6 +17,12 @@
     <ProjectReference Include="..\SafeApp.Core\SafeApp.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="IData\IData.cs" />
+    <Compile Remove="Misc\CipherOpt.cs" />
+    <Compile Remove="Misc\Crypto.cs" />
+    <Compile Remove="Misc\NFS.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
 
 </Project>

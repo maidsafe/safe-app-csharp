@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using SafeApp.AppBindings;
 using SafeApp.Core;
-using SafeApp.MData;
-using SafeApp.Misc;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConvertToLocalFunction
@@ -43,60 +41,6 @@ namespace SafeApp
             return _appPtr;
         }
 #endif
-
-        /// <summary>
-        /// AccessContainer API
-        /// </summary>
-        public AccessContainer AccessContainer { get; private set; }
-
-        /// <summary>
-        /// Crypto API
-        /// </summary>
-        public Crypto Crypto { get; private set; }
-
-        /// <summary>
-        /// CipherOpt API
-        /// </summary>
-        public CipherOpt CipherOpt { get; private set; }
-
-        // ReSharper disable once InconsistentNaming
-
-        /// <summary>
-        /// ImmutableData API
-        /// </summary>
-        public IData.IData IData { get; private set; }
-
-        /// <summary>
-        /// MutableData API
-        /// </summary>
-        public MData.MData MData { get; private set; }
-
-        /// <summary>
-        /// Mutable Data Entries API
-        /// </summary>
-        public MDataEntries MDataEntries { get; private set; }
-
-        /// <summary>
-        /// Mutable Data Entry Actions API
-        /// </summary>
-        public MDataEntryActions MDataEntryActions { get; private set; }
-
-        /// <summary>
-        /// MDataInfo API
-        /// </summary>
-        public MDataInfoActions MDataInfoActions { get; private set; }
-
-        /// <summary>
-        /// Mutable Data Permissions API
-        /// </summary>
-        public MDataPermissions MDataPermissions { get; private set; }
-
-        // ReSharper disable once InconsistentNaming
-
-        /// <summary>
-        /// Mutable Data Permissions API
-        /// </summary>
-        public NFS NFS { get; private set; }
 
         private Session()
         {
@@ -308,17 +252,6 @@ namespace SafeApp
             IsDisconnected = false;
             _appPtr = new SafeAppPtr(appPtr);
             _disconnectedHandle = disconnectedHandle;
-
-            AccessContainer = new AccessContainer(_appPtr);
-            Crypto = new Crypto(_appPtr);
-            CipherOpt = new CipherOpt(_appPtr);
-            IData = new IData.IData(_appPtr);
-            MData = new MData.MData(_appPtr);
-            MDataEntries = new MDataEntries(_appPtr);
-            MDataEntryActions = new MDataEntryActions(_appPtr);
-            MDataInfoActions = new MDataInfoActions();
-            MDataPermissions = new MDataPermissions(_appPtr);
-            NFS = new NFS(_appPtr);
         }
 
         /// <summary>

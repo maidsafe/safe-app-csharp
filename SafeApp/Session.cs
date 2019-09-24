@@ -48,38 +48,20 @@ namespace SafeApp
             _appPtr = new SafeAppPtr();
         }
 
+#pragma warning disable IDE0060
+        // Remove unused parameter
         /// <summary>
         /// Create a new authenticated session using the provided IPC response.
         /// </summary>
         /// <param name="appId">Application Id.</param>
         /// <param name="authGranted">Authentication response.</param>
         /// <returns>New session based on appid and authentication response.</returns>
-        public static Task<Session> AppRegisteredAsync(string appId, AuthGranted authGranted)
+        public static Session AppRegisteredAsync(string appId, AuthGranted authGranted)
+
         {
-            return Task.Run(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<Session>(TaskCreationOptions.RunContinuationsAsynchronously);
-                    var session = new Session();
-                    Action<FfiResult, IntPtr, GCHandle> acctCreatedCb = (result, ptr, disconnectedHandle) =>
-                    {
-                        if (result.ErrorCode != 0)
-                        {
-                            disconnectedHandle.Free();
+            // Todo: implement for the new API
 
-                            tcs.SetException(result.ToException());
-                            return;
-                        }
-
-                        session.Init(ptr, disconnectedHandle);
-                        tcs.SetResult(session);
-                    };
-
-                    Action disconnectedCb = () => { OnDisconnected(session); };
-
-                    AppBindings.AppRegistered(appId, ref authGranted, disconnectedCb, acctCreatedCb);
-                    return tcs.Task;
-                });
+            return new Session();
         }
 
         /// <summary>
@@ -88,33 +70,13 @@ namespace SafeApp
         /// </summary>
         /// <param name="bootstrapConfig"></param>
         /// <returns></returns>
-        public static Task<Session> AppUnregisteredAsync(byte[] bootstrapConfig)
+        public static Session AppUnregisteredAsync(byte[] bootstrapConfig)
         {
-            return Task.Run(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<Session>(TaskCreationOptions.RunContinuationsAsynchronously);
-                    var session = new Session();
-                    Action<FfiResult, IntPtr, GCHandle> acctCreatedCb = (result, ptr, disconnectedHandle) =>
-                    {
-                        if (result.ErrorCode != 0)
-                        {
-                            disconnectedHandle.Free();
+            // Todo: implement for the new API
 
-                            tcs.SetException(result.ToException());
-                            return;
-                        }
-
-                        session.Init(ptr, disconnectedHandle);
-                        tcs.SetResult(session);
-                    };
-
-                    Action disconnectedCb = () => { OnDisconnected(session); };
-
-                    AppBindings.AppUnregistered(bootstrapConfig, disconnectedCb, acctCreatedCb);
-                    return tcs.Task;
-                });
+            return new Session();
         }
+#pragma warning restore IDE0060 // Remove unused parameter
 
         /// <summary>
         /// Decode the IPC response message.
@@ -205,16 +167,6 @@ namespace SafeApp
         }
 
         /// <summary>
-        /// Invoked to fetch the app's root container name.
-        /// </summary>
-        /// <param name="appId">Application id.</param>
-        /// <returns>Application's root container name.</returns>
-        public Task<string> AppContainerNameAsync(string appId)
-        {
-            return AppBindings.AppContainerNameAsync(appId);
-        }
-
-        /// <summary>
         /// Class destructor.
         /// </summary>
         ~Session()
@@ -234,17 +186,7 @@ namespace SafeApp
                 return;
             }
 
-            AppBindings.AppFree(_appPtr);
             _appPtr.Clear();
-        }
-
-        /// <summary>
-        /// Returns the AccountInfo of the current session.
-        /// </summary>
-        /// <returns>AccountInfo object.</returns>
-        public Task<AccountInfo> GetAccountInfoAsync()
-        {
-            return AppBindings.AppAccountInfoAsync(_appPtr);
         }
 
         private void Init(IntPtr appPtr, GCHandle disconnectedHandle)
@@ -278,28 +220,6 @@ namespace SafeApp
         {
             session.IsDisconnected = true;
             Disconnected?.Invoke(session, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Invoked after Disconnect callback is fired to reconnect the session with the network.
-        /// </summary>
-        public Task ReconnectAsync()
-        {
-            return Task.Run(
-                async () =>
-                {
-                    await AppBindings.AppReconnectAsync(_appPtr);
-                    IsDisconnected = false;
-                });
-        }
-
-        /// <summary>
-        /// Resets the object cache for the session.
-        /// </summary>
-        /// <returns></returns>
-        public Task ResetObjectCacheAsync()
-        {
-            return AppBindings.AppResetObjectCacheAsync(_appPtr);
         }
     }
 }

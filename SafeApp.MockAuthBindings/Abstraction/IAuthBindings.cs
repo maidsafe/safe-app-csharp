@@ -9,8 +9,6 @@ namespace SafeApp.MockAuthBindings
 {
     internal partial interface IAuthBindings
     {
-        Task<AccountInfo> AuthAccountInfoAsync(IntPtr auth);
-
         Task<List<AppAccess>> AuthAppsAccessingMutableDataAsync(IntPtr auth, byte[] mdName, ulong mdTypeTag);
 
         Task<string> AuthExeFileStemAsync();

@@ -10,30 +10,159 @@ using JetBrains.Annotations;
 namespace SafeApp.Core
 {
     /// <summary>
-    /// Actions which can be performed on a Mutable Data.
+    /// Represents the application keys.
     /// </summary>
     [PublicAPI]
-    public enum MDataAction
+    public struct AppKeys
     {
         /// <summary>
-        /// MData insert action.
+        /// Owner signing public key.
         /// </summary>
-        Insert,
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
+        public byte[] OwnerKey;
 
         /// <summary>
-        /// MData update action.
+        /// Data symmetric Encryption Key.
         /// </summary>
-        Update,
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
+        public byte[] EncKey;
 
         /// <summary>
-        /// MData delete action.
+        /// Asymmetric sign public key.
+        /// This is the identity of the App in the network.
         /// </summary>
-        Delete,
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
+        public byte[] SignPk;
 
         /// <summary>
-        /// MData manage permissions action.
+        /// Asymmetric sign Private Key.
         /// </summary>
-        ManagePermissions
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignSecretKeyLen)]
+        public byte[] SignSk;
+
+        /// <summary>
+        /// Asymmetric encryption public key.
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymPublicKeyLen)]
+        public byte[] EncPk;
+
+        /// <summary>
+        /// Asymmetric encryption Private Key.
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymSecretKeyLen)]
+        public byte[] EncSk;
+    }
+
+    /// <summary>
+    /// Represents access container information.
+    /// </summary>
+    [PublicAPI]
+    public struct AccessContInfo
+    {
+        /// <summary>
+        /// Container Id.
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
+        public byte[] Id;
+
+        /// <summary>
+        /// tagType.
+        /// </summary>
+        public ulong Tag;
+
+        /// <summary>
+        /// Nonce
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymNonceLen)]
+        public byte[] Nonce;
+    }
+
+    /// <summary>
+    /// Represents access container entry for a single app.
+    /// </summary>
+    [PublicAPI]
+    public struct AccessContainerEntry
+    {
+        /// <summary>
+        /// List of containers (name, 'MDataInfo' and permissions).
+        /// </summary>
+        public List<ContainerInfo> Containers;
+
+        /// <summary>
+        /// Initialise a new access container entry object from native access container entry
+        /// </summary>
+        /// <param name="native"></param>
+        internal AccessContainerEntry(AccessContainerEntryNative native)
+        {
+            Containers = BindingUtils.CopyToObjectList<ContainerInfo>(native.ContainersPtr, (int)native.ContainersLen);
+        }
+
+        /// <summary>
+        /// Returns native access container entry.
+        /// </summary>
+        /// <returns></returns>
+        internal AccessContainerEntryNative ToNative()
+        {
+            return new AccessContainerEntryNative
+            {
+                ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
+                ContainersCap = UIntPtr.Zero
+            };
+        }
+    }
+
+    /// <summary>
+    /// Represents native access container entry for a single app.
+    /// </summary>
+    internal struct AccessContainerEntryNative
+    {
+        /// <summary>
+        /// Pointer to the array of 'ContainerInfo'.
+        /// </summary>
+        public IntPtr ContainersPtr;
+
+        /// <summary>
+        /// Size of the array.
+        /// </summary>
+        public UIntPtr ContainersLen;
+
+        /// <summary>
+        /// Internal field used by rust memory allocator.
+        /// </summary>
+        // ReSharper disable once NotAccessedField.Compiler
+        public UIntPtr ContainersCap;
+
+        /// <summary>
+        /// Free the container pointer.
+        /// </summary>
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref ContainersPtr, ref ContainersLen);
+        }
+    }
+
+    /// <summary>
+    /// Container information with permission set.
+    /// </summary>
+    [PublicAPI]
+    public struct ContainerInfo
+    {
+        /// <summary>
+        /// Container name.
+        /// </summary>
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Name;
+
+        /// <summary>
+        /// Container's MDataInfo.
+        /// </summary>
+        public MDataInfo MDataInfo;
+
+        /// <summary>
+        /// App's permissions in the container.
+        /// </summary>
+        public PermissionSet Permissions;
     }
 
     /// <summary>
@@ -571,162 +700,6 @@ namespace SafeApp.Core
     }
 
     /// <summary>
-    /// Represents the application keys.
-    /// </summary>
-    [PublicAPI]
-    public struct AppKeys
-    {
-        /// <summary>
-        /// Owner signing public key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
-        public byte[] OwnerKey;
-
-        /// <summary>
-        /// Data symmetric Encryption Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
-        public byte[] EncKey;
-
-        /// <summary>
-        /// Asymmetric sign public key.
-        /// This is the identity of the App in the network.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
-        public byte[] SignPk;
-
-        /// <summary>
-        /// Asymmetric sign Private Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignSecretKeyLen)]
-        public byte[] SignSk;
-
-        /// <summary>
-        /// Asymmetric encryption public key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymPublicKeyLen)]
-        public byte[] EncPk;
-
-        /// <summary>
-        /// Asymmetric encryption Private Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymSecretKeyLen)]
-        public byte[] EncSk;
-    }
-
-    /// <summary>
-    /// Represents access container information.
-    /// </summary>
-    [PublicAPI]
-    public struct AccessContInfo
-    {
-        /// <summary>
-        /// Container Id.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
-        public byte[] Id;
-
-        /// <summary>
-        /// tagType.
-        /// </summary>
-        public ulong Tag;
-
-        /// <summary>
-        /// Nonce
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymNonceLen)]
-        public byte[] Nonce;
-    }
-
-    /// <summary>
-    /// Represents access container entry for a single app.
-    /// </summary>
-    [PublicAPI]
-    public struct AccessContainerEntry
-    {
-        /// <summary>
-        /// List of containers (name, 'MDataInfo' and permissions).
-        /// </summary>
-        public List<ContainerInfo> Containers;
-
-        /// <summary>
-        /// Initialise a new access container entry object from native access container entry
-        /// </summary>
-        /// <param name="native"></param>
-        internal AccessContainerEntry(AccessContainerEntryNative native)
-        {
-            Containers = BindingUtils.CopyToObjectList<ContainerInfo>(native.ContainersPtr, (int)native.ContainersLen);
-        }
-
-        /// <summary>
-        /// Returns native access container entry.
-        /// </summary>
-        /// <returns></returns>
-        internal AccessContainerEntryNative ToNative()
-        {
-            return new AccessContainerEntryNative
-            {
-                ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
-            };
-        }
-    }
-
-    /// <summary>
-    /// Represents native access container entry for a single app.
-    /// </summary>
-    internal struct AccessContainerEntryNative
-    {
-        /// <summary>
-        /// Pointer to the array of 'ContainerInfo'.
-        /// </summary>
-        public IntPtr ContainersPtr;
-
-        /// <summary>
-        /// Size of the array.
-        /// </summary>
-        public UIntPtr ContainersLen;
-
-        /// <summary>
-        /// Internal field used by rust memory allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr ContainersCap;
-
-        /// <summary>
-        /// Free the container pointer.
-        /// </summary>
-        internal void Free()
-        {
-            BindingUtils.FreeList(ref ContainersPtr, ref ContainersLen);
-        }
-    }
-
-    /// <summary>
-    /// Container information with permission set.
-    /// </summary>
-    [PublicAPI]
-    public struct ContainerInfo
-    {
-        /// <summary>
-        /// Container name.
-        /// </summary>
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string Name;
-
-        /// <summary>
-        /// Container's MDataInfo.
-        /// </summary>
-        public MDataInfo MDataInfo;
-
-        /// <summary>
-        /// App's permissions in the container.
-        /// </summary>
-        public PermissionSet Permissions;
-    }
-
-    /// <summary>
     /// Information about an application that has access to a Mutable Data.
     /// </summary>
     [PublicAPI]
@@ -784,346 +757,5 @@ namespace SafeApp.Core
         /// Type tag of this struct's corresponding Mutable Data.
         /// </summary>
         public ulong TypeTag;
-    }
-
-    /// <summary>
-    /// Represents a Mutable Data key.
-    /// </summary>
-    [PublicAPI]
-    public struct MDataKey
-    {
-        /// <summary>
-        /// Key value in byte array format.
-        /// </summary>
-        public byte[] Key;
-
-        /// <summary>
-        /// Initialise new Mutable Data key from native key.
-        /// </summary>
-        /// <param name="native"></param>
-        internal MDataKey(MDataKeyNative native)
-        {
-            Key = BindingUtils.CopyToByteList(native.KeyPtr, (int)native.KeyLen);
-        }
-
-        /// <summary>
-        /// Returns a native Mutable Data key.
-        /// </summary>
-        /// <returns></returns>
-        internal MDataKeyNative ToNative()
-        {
-            return new MDataKeyNative { KeyPtr = BindingUtils.CopyFromByteList(Key), KeyLen = (UIntPtr)(Key?.Length ?? 0) };
-        }
-    }
-
-    /// <summary>
-    /// Represents a native Mutable Data key.
-    /// </summary>
-    internal struct MDataKeyNative
-    {
-        /// <summary>
-        /// key value pointer.
-        /// </summary>
-        public IntPtr KeyPtr;
-
-        /// <summary>
-        /// key length.
-        /// </summary>
-        public UIntPtr KeyLen;
-
-        /// <summary>
-        /// Free the pointer to Mutable Data key.
-        /// </summary>
-        internal void Free()
-        {
-            BindingUtils.FreeList(ref KeyPtr, ref KeyLen);
-        }
-    }
-
-    /// <summary>
-    /// Represents the Mutable Data value.
-    /// </summary>
-    [PublicAPI]
-    public struct MDataValue
-    {
-        /// <summary>
-        /// Value content in byte list format.
-        /// </summary>
-        public byte[] Content;
-
-        /// <summary>
-        /// Entry version.
-        /// </summary>
-        public ulong EntryVersion;
-
-        /// <summary>
-        /// Initialise new Mutable Data value
-        /// </summary>
-        /// <param name="native"></param>
-        internal MDataValue(MDataValueNative native)
-        {
-            Content = BindingUtils.CopyToByteList(native.ContentPtr, (int)native.ContentLen);
-            EntryVersion = native.EntryVersion;
-        }
-
-        /// <summary>
-        /// Returns the native Mutable Data value.
-        /// </summary>
-        /// <returns></returns>
-        internal MDataValueNative ToNative()
-        {
-            return new MDataValueNative
-            {
-                ContentPtr = BindingUtils.CopyFromByteList(Content),
-                ContentLen = (UIntPtr)(Content?.Length ?? 0),
-                EntryVersion = EntryVersion
-            };
-        }
-    }
-
-    /// <summary>
-    /// Represents the native Mutable Data value.
-    /// </summary>
-    internal struct MDataValueNative
-    {
-        /// <summary>
-        /// Content pointer.
-        /// </summary>
-        public IntPtr ContentPtr;
-
-        /// <summary>
-        /// Content length.
-        /// </summary>
-        public UIntPtr ContentLen;
-
-        /// <summary>
-        /// Entry version.
-        /// </summary>
-        public ulong EntryVersion;
-
-        /// <summary>
-        /// Free Mutable Data value (content) pointer.
-        /// </summary>
-        internal void Free()
-        {
-            BindingUtils.FreeList(ref ContentPtr, ref ContentLen);
-        }
-    }
-
-    /// <summary>
-    /// Represents the Mutable Data entry (key, value).
-    /// </summary>
-    [PublicAPI]
-    public struct MDataEntry
-    {
-        /// <summary>
-        /// Mutable Data key.
-        /// </summary>
-        public MDataKey Key;
-
-        /// <summary>
-        /// Mutable Data value.
-        /// </summary>
-        public MDataValue Value;
-
-        /// <summary>
-        /// Initialise new Mutable Data entry from native entry
-        /// </summary>
-        /// <param name="native"></param>
-        internal MDataEntry(MDataEntryNative native)
-        {
-            Key = new MDataKey(native.Key);
-            Value = new MDataValue(native.Value);
-        }
-
-        /// <summary>
-        /// Returns native Mutable Data entry.
-        /// </summary>
-        /// <returns></returns>
-        internal MDataEntryNative ToNative()
-        {
-            return new MDataEntryNative { Key = Key.ToNative(), Value = Value.ToNative() };
-        }
-    }
-
-    /// <summary>
-    /// Represents the native Mutable Data entry (key, value).
-    /// </summary>
-    internal struct MDataEntryNative
-    {
-        /// <summary>
-        /// Native Mutable Data key.
-        /// </summary>
-        public MDataKeyNative Key;
-
-        /// <summary>
-        /// Native Mutable Data value.
-        /// </summary>
-        public MDataValueNative Value;
-
-        /// <summary>
-        /// Free the Mutable Data key and value pointers.
-        /// </summary>
-        // ReSharper disable once UnusedMember.Global
-        internal void Free()
-        {
-            Key.Free();
-            Value.Free();
-        }
-    }
-
-    /// <summary>
-    /// Represents a wrapper for NFS file.
-    /// </summary>
-    [PublicAPI]
-    public struct File
-    {
-        /// <summary>
-        /// File size in bytes.
-        /// </summary>
-        public ulong Size;
-
-        /// <summary>
-        /// Creation time (seconds part).
-        /// </summary>
-        public long CreatedSec;
-
-        /// <summary>
-        /// Creation time (nanoseconds part).
-        /// </summary>
-        public uint CreatedNsec;
-
-        /// <summary>
-        /// Modification time (seconds part).
-        /// </summary>
-        public long ModifiedSec;
-
-        /// <summary>
-        /// Modification time (nanoseconds part).
-        /// </summary>
-        public uint ModifiedNsec;
-
-        /// <summary>
-        /// Pointer to user metadata.
-        /// </summary>
-        public byte[] UserMetadata;
-
-        /// <summary>
-        /// Name of ImmutableData containing the content of the file.
-        /// </summary>
-        public byte[] DataMapName;
-
-        /// <summary>
-        /// Initialise a new file object from native NFS file.
-        /// </summary>
-        /// <param name="native"></param>
-        internal File(FileNative native)
-        {
-            Size = native.Size;
-            CreatedSec = native.CreatedSec;
-            CreatedNsec = native.CreatedNsec;
-            ModifiedSec = native.ModifiedSec;
-            ModifiedNsec = native.ModifiedNsec;
-            UserMetadata = BindingUtils.CopyToByteList(native.UserMetadataPtr, (int)native.UserMetadataLen);
-            DataMapName = native.DataMapName;
-        }
-
-        /// <summary>
-        /// Returns native NFS File.
-        /// </summary>
-        /// <returns></returns>
-        internal FileNative ToNative()
-        {
-            return new FileNative
-            {
-                Size = Size,
-                CreatedSec = CreatedSec,
-                CreatedNsec = CreatedNsec,
-                ModifiedSec = ModifiedSec,
-                ModifiedNsec = ModifiedNsec,
-                UserMetadataPtr = BindingUtils.CopyFromByteList(UserMetadata),
-                UserMetadataLen = (UIntPtr)(UserMetadata?.Length ?? 0),
-                UserMetadataCap = UIntPtr.Zero,
-                DataMapName = DataMapName
-            };
-        }
-    }
-
-    /// <summary>
-    /// Represents native for File.
-    /// </summary>
-    internal struct FileNative
-    {
-        /// <summary>
-        /// File size in bytes.
-        /// </summary>
-        public ulong Size;
-
-        /// <summary>
-        /// Creation time (seconds part).
-        /// </summary>
-        public long CreatedSec;
-
-        /// <summary>
-        /// Creation time (nanoseconds part).
-        /// </summary>
-        public uint CreatedNsec;
-
-        /// <summary>
-        /// Modification time (seconds part).
-        /// </summary>
-        public long ModifiedSec;
-
-        /// <summary>
-        /// Modification time (nanoseconds part).
-        /// </summary>
-        public uint ModifiedNsec;
-
-        /// <summary>
-        /// Pointer to user metadata.
-        /// </summary>
-        public IntPtr UserMetadataPtr;
-
-        /// <summary>
-        /// Size of user metadata.
-        /// </summary>
-        public UIntPtr UserMetadataLen;
-
-        /// <summary>
-        /// Capacity of user metadata.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr UserMetadataCap;
-
-        /// <summary>
-        /// Name of ImmutableData containing the content of the file.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
-        public byte[] DataMapName;
-
-        /// <summary>
-        /// Free user metadata pointer.
-        /// </summary>
-        internal void Free()
-        {
-            BindingUtils.FreeList(ref UserMetadataPtr, ref UserMetadataLen);
-        }
-    }
-
-    /// <summary>
-    /// Represents the User Permission (key, PermissionSet).
-    /// </summary>
-    [PublicAPI]
-    public struct UserPermissionSet
-    {
-        /// <summary>
-        /// User's public signing key.
-        /// </summary>
-        public ulong UserH;
-
-        /// <summary>
-        /// User's permission set.
-        /// </summary>
-        public PermissionSet PermSet;
     }
 }

@@ -165,15 +165,6 @@ namespace SafeApp.MockAuthBindings
         }
 
         /// <summary>
-        /// Returns account information.
-        /// </summary>
-        /// <returns>New AccountInfo instance.</returns>
-        public Task<AccountInfo> AuthAccountInfoAsync()
-        {
-            return NativeBindings.AuthAccountInfoAsync(_authPtr);
-        }
-
-        /// <summary>
         /// Return a list of apps having access to an arbitrary Mutable Data object.
         /// name and typeTag together correspond to a single Mutable Data.
         /// </summary>

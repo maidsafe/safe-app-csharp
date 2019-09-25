@@ -18,7 +18,7 @@ namespace SafeApp.Core
         /// <summary>
         /// Owner signing public key.
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.BlsPublicKeyLen)]
         public byte[] OwnerKey;
 
         /// <summary>
@@ -166,29 +166,18 @@ namespace SafeApp.Core
     }
 
     /// <summary>
-    /// Holds the information about the account.
-    /// </summary>
-    [PublicAPI]
-    public struct AccountInfo
-    {
-        /// <summary>
-        /// Number of mutations performed.
-        /// </summary>
-        public ulong MutationsDone;
-
-        /// <summary>
-        /// Number of remaining mutations.
-        /// </summary>
-        public ulong MutationsAvailable;
-    }
-
-    /// <summary>
     /// Mutable Data shell.
     /// Information allowing to locate and access Mutable Data on the network.
     /// </summary>
     [PublicAPI]
     public struct MDataInfo
     {
+        /// <summary>
+        /// Flag indicating whether the MDataInfo is sequenced.
+        /// </summary>
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Seq;
+
         /// <summary>
         /// Name of the Mutable Data.
         /// </summary>
@@ -296,6 +285,11 @@ namespace SafeApp.Core
         public bool AppContainer;
 
         /// <summary>
+        /// True if the app wants to transfer coins.
+        /// </summary>
+        public bool AppPermissionTransferCoins;
+
+        /// <summary>
         /// The list of containers requesting access for.
         /// </summary>
         public List<ContainerPermissions> Containers;
@@ -308,6 +302,7 @@ namespace SafeApp.Core
         {
             App = native.App;
             AppContainer = native.AppContainer;
+            AppPermissionTransferCoins = native.AppPermissionTransferCoins;
             Containers = BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
         }
 
@@ -321,6 +316,7 @@ namespace SafeApp.Core
             {
                 App = App,
                 AppContainer = AppContainer,
+                AppPermissionTransferCoins = AppPermissionTransferCoins,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
                 ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = UIntPtr.Zero
@@ -344,6 +340,12 @@ namespace SafeApp.Core
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public bool AppContainer;
+
+        /// <summary>
+        /// true if the app wants to transfer coins.
+        /// </summary>
+        [MarshalAs(UnmanagedType.U1)]
+        public bool AppPermissionTransferCoins;
 
         /// <summary>
         /// Pointer to containers.
@@ -708,7 +710,7 @@ namespace SafeApp.Core
         /// <summary>
         /// App's or user's public key.
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.BlsPublicKeyLen)]
         public byte[] SignKey;
 
         /// <summary>
@@ -759,3 +761,4 @@ namespace SafeApp.Core
         public ulong TypeTag;
     }
 }
+

@@ -72,5 +72,10 @@ namespace SafeApp.Core
         /// Constant byte length of `XorName`
         /// </summary>
         public const ulong XorNameLen = 32;
+
+        /// <summary>
+        /// Constant byte length of `BlsPublicKey`
+        /// </summary>
+        public const ulong BlsPublicKeyLen = 48;
     }
 }

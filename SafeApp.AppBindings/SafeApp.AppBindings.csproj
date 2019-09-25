@@ -41,11 +41,6 @@
       <DownloadNativeLibs Condition=" $(AndroidLibsExists) == 'true' Or $(iOSLibsExists) == true Or $(DesktopLibsExists) == true">true</DownloadNativeLibs>
     </PropertyGroup>
 
-    <Message Importance="high" Text="$(AndroidLibsExists)" />
-    <Message Importance="high" Text="$(iOSLibsExists)" />
-    <Message Importance="high" Text="$(DesktopLibsExists)" />
-    <Message Importance="high" Text="$(DownloadNativeLibs)" />
-
     <Exec ConsoleToMSBuild="true" Condition=" $(DownloadNativeLibs) == 'true' AND '$(OS)' == 'Windows_NT'" Command="cd.. &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 -Configuration Release -target=UnZip-Libs --settings_skipverification=true">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>

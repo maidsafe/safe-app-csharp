@@ -51,6 +51,7 @@ namespace SafeApp
 #pragma warning disable IDE0060
 
         // Remove unused parameter
+
         /// <summary>
         /// Create a new authenticated session using the provided IPC response.
         /// </summary>

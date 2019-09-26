@@ -761,4 +761,3 @@ namespace SafeApp.Core
         public ulong TypeTag;
     }
 }
-

@@ -17,12 +17,11 @@ namespace SafeApp.MockAuthBindings
         public void CreateAccount(
           string locator,
           string secret,
-          string invitation,
           Action disconnectedCb,
           Action<FfiResult, IntPtr, GCHandle> cb)
         {
             var userData = BindingUtils.ToHandlePtr((disconnectedCb, cb));
-            CreateAccNative(locator, secret, invitation, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
+            CreateAccNative(locator, secret, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
         }
 
         public Task<IpcReq> DecodeIpcMessage(IntPtr authPtr, string msg)

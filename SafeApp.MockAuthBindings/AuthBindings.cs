@@ -32,7 +32,6 @@ namespace SafeApp.MockAuthBindings
         private static extern void CreateAccNative(
             [MarshalAs(UnmanagedType.LPStr)] string accountLocator,
             [MarshalAs(UnmanagedType.LPStr)] string accountPassword,
-            [MarshalAs(UnmanagedType.LPStr)] string invitation,
             IntPtr userData,
             NoneCb oDisconnectNotifierCb,
             FfiResultAuthenticatorCb oCb);

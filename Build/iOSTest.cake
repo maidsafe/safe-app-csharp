@@ -32,11 +32,16 @@ Task("Build-iOS-Test-Project")
 Task("Run-iOS-Tests")
     .IsDependentOn("Build-iOS-Test-Project")
     .Does(() => {
+    
+    var sims = ListAppleSimulators();
+
+    foreach (var s in sims)
+    {
+        Information("Info: {0} ({1} - {2} - {3})", s.Name, s.Runtime, s.UDID, s.Availability);
+    }
+
     // Look for a matching simulator on the system
-    var sim = ListAppleSimulators()
-        .First(s => (s.Availability.Contains("available") || s.Availability.Contains("booted")) &&
-           !s.Availability.Contains("unavailable") &&
-           s.Name == IOS_SIM_NAME && s.Runtime == IOS_SIM_RUNTIME);
+    var sim = sims.First (s => s.Name == IOS_SIM_NAME && s.Runtime == IOS_SIM_RUNTIME);
 
     // Boot the simulator
     Information("Booting: {0} ({1} - {2})", sim.Name, sim.Runtime, sim.UDID);

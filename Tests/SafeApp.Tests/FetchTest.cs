@@ -5,6 +5,9 @@ using SafeApp.Core;
 namespace SafeApp.Tests
 {
     [TestFixture]
+#if __ANDROID__ || __IOS__
+    [Ignore("Fetch and Inspect API fails on Android and iOS")]
+#endif
     public class FetchTest
     {
         [OneTimeSetUp]

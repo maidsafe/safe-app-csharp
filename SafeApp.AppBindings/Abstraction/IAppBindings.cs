@@ -21,6 +21,8 @@ namespace SafeApp.AppBindings
 
         Task AppSetAdditionalSearchPathAsync(string newPath);
 
+        Task AppSetConfigDirPathAsync(string newPath);
+
         Task<(uint, string)> EncodeAuthReqAsync(ref AuthReq req);
 
         Task<(uint, string)> EncodeContainersReqAsync(ref ContainersReq req);

@@ -43,6 +43,19 @@ namespace SafeApp.AppBindings
         [DllImport(DllName, EntryPoint = "app_exe_file_stem")]
         private static extern void AppExeFileStemNative(IntPtr userData, FfiResultStringCb oCb);
 
+        public Task AppSetConfigDirPathAsync(string newPath)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask();
+            AppSetConfigDirPathNative(newPath, userData, DelegateOnFfiResultCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "app_set_config_dir_path")]
+        private static extern void AppSetConfigDirPathNative(
+            [MarshalAs(UnmanagedType.LPStr)] string newPath,
+            IntPtr userData,
+            FfiResultCb oCb);
+
         public Task AppSetAdditionalSearchPathAsync(string newPath)
         {
             var (ret, userData) = BindingUtils.PrepareTask();

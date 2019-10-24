@@ -201,6 +201,16 @@ namespace SafeApp
         }
 
         /// <summary>
+        /// Sets path to search configuration files.
+        /// </summary>
+        /// <param name="path">Configuration file path.</param>
+        /// <returns></returns>
+        public static Task SetConfigurationFilePathAsync(string path)
+        {
+            return AppBindings.AppSetConfigDirPathAsync(path);
+        }
+
+        /// <summary>
         /// Get the output log file path.
         /// </summary>
         /// <param name="outputFileName">File name.</param>

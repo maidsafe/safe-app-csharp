@@ -6,7 +6,7 @@
 
 var IOS_TEST_PROJ_DIR = "../Tests/SafeApp.Tests.iOS/";
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
-var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.4";
+var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "com.apple.CoreSimulator.SimRuntime.iOS-12-4";
 var IOS_TEST_PROJ = $"{IOS_TEST_PROJ_DIR}SafeApp.Tests.iOS.csproj";
 var IOS_BUNDLE_ID = "net.maidsafe.SafeApp.Tests.iOS";
 var IOS_IPA_PATH = $"{IOS_TEST_PROJ_DIR}bin/iPhoneSimulator/Release/SafeApp.Tests.iOS.app";

@@ -31,11 +31,11 @@ namespace SafeApp.Tests
         public static void EnsureNullNrsContainerInfo(NrsMapContainerInfo info)
         {
             Assert.AreEqual(DataType.SafeKey, info.DataType); // since 0 is actually a data type
-            Assert.IsNull(info.NrsMap);
-            Assert.IsNull(info.PublicName);
+            Assert.IsEmpty(info.NrsMap);
+            Assert.IsEmpty(info.PublicName);
             Assert.Zero(info.TypeTag);
             Assert.Zero(info.Version); // since v 0 is actually the first version
-            Assert.IsNull(info.XorUrl);
+            Assert.IsEmpty(info.XorUrl);
             Assert.IsTrue(Enumerable.SequenceEqual(new byte[32], info.XorName));
         }
 

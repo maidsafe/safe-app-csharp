@@ -32,13 +32,12 @@ namespace SafeApp.Tests
             Assert.AreEqual(DataType.SafeKey, xorUrlEncoder.DataType);
             Assert.AreEqual(1, xorUrlEncoder.EncodingVersion);
             Assert.AreEqual(string.Empty, xorUrlEncoder.Path);
-            Assert.AreEqual("[]", xorUrlEncoder.SubNames);
+            Assert.IsEmpty(xorUrlEncoder.SubNames);
             Assert.AreEqual(0, xorUrlEncoder.TypeTag);
             Validate.XorName(xorUrlEncoder.XorName);
         }
 
         [Test]
-        [Ignore("Needs to be fixed. Ignoring to test the Android and iOS libs on CI.")]
         public async Task ParseAndResolveUrlTest()
         {
             var session = await TestUtils.CreateTestApp();

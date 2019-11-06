@@ -17,7 +17,7 @@ file_timestamp = false
 level = "error"
 appenders = ["async_file"] 
 
-[loggers."crust"]
+[loggers."quic-p2p"]
 level = "debug"
 
 [loggers."routing"]
@@ -37,3 +37,9 @@ level = "trace"
 
 [loggers."ffi_utils"]
 level = "trace"
+
+[loggers."safe-api"]
+level = "debug"
+
+[loggers."safe-ffi"]
+level = "debug"

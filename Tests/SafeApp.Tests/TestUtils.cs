@@ -7,6 +7,10 @@ using NUnit.Framework;
 using SafeApp.Core;
 using SafeApp.MockAuthBindings;
 
+#if __ANDROID__
+using Android.App;
+#endif
+
 namespace SafeApp.Tests
 {
     public static class TestUtils
@@ -86,6 +90,37 @@ namespace SafeApp.Tests
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[Random.Next(s.Length)]).ToArray());
+        }
+
+        public static async Task<string> InitRustLogging()
+        {
+#if __IOS__
+            var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
+            using (var reader = new StreamReader(Path.Combine(".", "log.toml")))
+            {
+#elif __ANDROID__
+            var configPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            using (var reader = new StreamReader(Application.Context.Assets.Open("log.toml")))
+            {
+#else
+            var configPath = Path.Combine(Path.GetTempPath(), GetRandomString(8));
+            Directory.CreateDirectory(configPath);
+            var srcPath = Path.Combine(Directory.GetParent(typeof(MiscTest).Assembly.Location).FullName, "log.toml");
+            using (var reader = new StreamReader(srcPath))
+            {
+#endif
+                using (var writer = new StreamWriter(Path.Combine(configPath, "log.toml")))
+                {
+                    writer.Write(reader.ReadToEnd());
+                    writer.Close();
+                }
+
+                reader.Close();
+            }
+
+            await Session.SetAdditionalSearchPathAsync(configPath);
+            await Session.InitLoggingAsync();
+            return configPath;
         }
 
         public static void PrepareTestData()

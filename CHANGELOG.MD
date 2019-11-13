@@ -1,5 +1,24 @@
 # safe_app_csharp Change Log
 
+## [0.3.0] - RC 1
+
+### Changes
+
+- Added new simplied APIs for pWeb and test SafeCoins from `[safe-api](https://github.com/maidsafe/safe-api/tree/master/safe-ffi)`.
+  - Connect API: add binding and implementation for the connect APIs.
+  - Fetch API: add binding and implementation for the Fetch and Inspect APIs.
+  - Files API: add binding and implementation for the Files APIs.
+  - Keys API: add binding and implementation for the keys APIs.
+  - NRS API: add binding and implementation for the NRS APIs.
+  - Wallet API: add binding and implementation for the Wallet APIs.
+  - XorUrl API: add binding and implementation for the XorUrlEncoder APIs.
+  - Added `SetConfigurationFilePathAsync` API to set the config location path for the local vault connection.
+- Removed LL `safe_app` API.
+- Updated `MockAuthBindings` and mock authenticator bindings to latest `safe_authenticator`.
+- Updated `AppBindings` and `MockAuthBindings` project to use multi-target style project.
+- Renamed `SafeApp.Utilites` project to `SafeApp.Core`.
+- Updated Tests to verify the working of all the new APIs.
+
 ## [0.2.3]
 
 ### Changed

@@ -74,7 +74,7 @@ namespace SafeApp.Tests
                 SetDefault);
 
             Assert.IsNotNull(processedEntries);
-            await Validate.RawNrsMapAsync(nrsMapRaw);
+            Validate.RawNrsMap(nrsMapRaw);
             await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
         }
 
@@ -95,7 +95,7 @@ namespace SafeApp.Tests
                 DryRun);
 
             Assert.AreEqual(1, version);
-            await Validate.RawNrsMapAsync(nrsMapRaw);
+            Validate.RawNrsMap(nrsMapRaw);
             await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
         }
 
@@ -124,7 +124,7 @@ namespace SafeApp.Tests
             var (nrsMapRaw, version) = await api.GetNrsMapContainerAsync(xorUrl);
 
             Assert.AreEqual(0, version);
-            await Validate.RawNrsMapAsync(nrsMapRaw);
+            Validate.RawNrsMap(nrsMapRaw);
             await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
         }
 

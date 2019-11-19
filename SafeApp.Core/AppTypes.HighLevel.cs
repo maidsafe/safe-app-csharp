@@ -273,7 +273,7 @@ namespace SafeApp.Core
         /// <summary>
         /// FilesMap in JSON format.
         /// </summary>
-        public string FilesMap;
+        public FilesMap FilesMap;
 
         /// <summary>
         /// FilesContainer data type identifier.
@@ -291,7 +291,7 @@ namespace SafeApp.Core
             XorName = native.XorName;
             TypeTag = native.TypeTag;
             Version = native.Version;
-            FilesMap = native.FilesMap;
+            FilesMap = new FilesMap(native.FilesMap);
             DataType = (DataType)native.DataType;
             ResolvedFrom = new NrsMapContainerInfo(native.ResolvedFrom);
         }
@@ -304,7 +304,7 @@ namespace SafeApp.Core
                 XorName = XorName,
                 TypeTag = TypeTag,
                 Version = Version,
-                FilesMap = FilesMap,
+                FilesMap = FilesMap.ToNative(),
                 DataType = (ulong)DataType,
                 ResolvedFrom = ResolvedFrom.ToNative(),
             };
@@ -319,10 +319,14 @@ namespace SafeApp.Core
         public byte[] XorName;
         public ulong TypeTag;
         public ulong Version;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string FilesMap;
+        public FilesMapNative FilesMap;
         public ulong DataType;
         public NrsMapContainerInfoNative ResolvedFrom;
+
+        internal void Free()
+        {
+            FilesMap.Free();
+        }
     }
 
     /// <summary>
@@ -422,6 +426,112 @@ namespace SafeApp.Core
         {
             Code = code;
             Description = description;
+        }
+    }
+
+    /// <summary>
+    /// File metadata entry.
+    /// </summary>
+    [PublicAPI]
+    public struct FileMetaDataItem
+    {
+        /// <summary>
+        /// File metadata entry key.
+        /// </summary>
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string MetaDataKey;
+
+        /// <summary>
+        /// File metadata entry value.
+        /// </summary>
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string MetaDataValue;
+    }
+
+    /// <summary>
+    /// File information contains filename and metadata.
+    /// </summary>
+    [PublicAPI]
+    public struct FileInfo
+    {
+        /// <summary>
+        /// File name.
+        /// </summary>
+        public string FileName;
+
+        /// <summary>
+        /// File metadata entries.
+        /// </summary>
+        public List<FileMetaDataItem> FileMetaData;
+
+        internal FileInfo(FileInfoNative native)
+        {
+            FileName = native.FileName;
+            FileMetaData = BindingUtils.CopyToObjectList<FileMetaDataItem>(native.FileMetaDataPtr, (int)native.FileMetaDataLen);
+        }
+
+        internal FileInfoNative ToNative()
+        {
+            return new FileInfoNative
+            {
+                FileName = FileName,
+                FileMetaDataPtr = BindingUtils.CopyFromObjectList(FileMetaData),
+                FileMetaDataLen = (UIntPtr)(FileMetaData?.Count ?? 0)
+            };
+        }
+    }
+
+    internal struct FileInfoNative
+    {
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string FileName;
+        public IntPtr FileMetaDataPtr;
+        public UIntPtr FileMetaDataLen;
+
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref FileMetaDataPtr, ref FileMetaDataLen);
+        }
+    }
+
+    /// <summary>
+    /// Files Containet file map.
+    /// </summary>
+    [PublicAPI]
+    public struct FilesMap
+    {
+        /// <summary>
+        /// Files exists in files container.
+        /// </summary>
+        public List<FileInfo> Files;
+
+        internal FilesMap(FilesMapNative native)
+        {
+            var nativeFiles = new List<FileInfoNative>();
+            nativeFiles = BindingUtils.CopyToObjectList<FileInfoNative>(native.FilesPtr, (int)native.FilesLen);
+            Files = new List<FileInfo>();
+            foreach (var item in nativeFiles)
+                Files.Add(new FileInfo(item));
+        }
+
+        internal FilesMapNative ToNative()
+        {
+            return new FilesMapNative
+            {
+                FilesPtr = BindingUtils.CopyFromObjectList(Files),
+                FilesLen = (UIntPtr)(Files?.Count ?? 0)
+            };
+        }
+    }
+
+    internal struct FilesMapNative
+    {
+        public IntPtr FilesPtr;
+        public UIntPtr FilesLen;
+
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref FilesPtr, ref FilesLen);
         }
     }
 

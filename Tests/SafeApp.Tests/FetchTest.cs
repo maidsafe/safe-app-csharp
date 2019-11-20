@@ -90,6 +90,12 @@ namespace SafeApp.Tests
                         break;
                     case FilesContainer filesContainer:
                         Validate.XorName(filesContainer.XorName);
+                        Assert.NotNull(filesContainer.FilesMap);
+                        Assert.NotZero(filesContainer.FilesMap.Files.Count);
+                        Assert.NotNull(filesContainer.FilesMap.Files[0].FileMetaData);
+                        Assert.NotZero(filesContainer.FilesMap.Files[0].FileMetaData.Count);
+                        Assert.IsNotNull(filesContainer.FilesMap.Files[0].FileName);
+                        Assert.IsNotEmpty(filesContainer.FilesMap.Files[0].FileName);
                         if (expectNrs)
                             Validate.NrsContainerInfo(filesContainer.ResolvedFrom);
                         else

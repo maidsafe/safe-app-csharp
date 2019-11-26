@@ -20,7 +20,6 @@
 2. [Supported Platforms](#Supported-Platforms)
 3. [API Usage](#API-Usage)
 4. [Documentation](#Documentation)
-    * [Tutorials & example applications](#Tutorials-and-example-applications)
 5. [Development](#Development)
     * [Project Structure](#Project-structure)
     * [Platform Invoke](#Interoperability-between-C-managed-and-unmanaged-code)
@@ -79,14 +78,6 @@ To generate a local copy of the API docs, [install DocFX](https://dotnet.github.
 docfx .\docs\docfx.json
 ```
 
-### Tutorials and example applications
-
-The following tutorials and examples will help you get started with development of desktop and mobile applications for the SAFE network.
-
-* [Building a SAFE CLI application using .NET Framework](https://hub.safedev.org/platform/dotnet/) - Desktop CLI application for Windows
-* [Building a cross platform mobile application for SAFE](https://hub.safedev.org/platform/xamarin/) - Cross platform mobile application using Xamarin.Forms
-* [safe-email-app-csharp](https://github.com/maidsafe/safe-email-app-csharp) * Example email application build using Xamarin.Forms
-
 ## Development
 
 ### Project structure
@@ -99,7 +90,7 @@ The following tutorials and examples will help you get started with development 
 * **SafeApp.MockAuthBindings:**
   * Mock Safe authentication C# API
   * mock safe_authenticator bindings generated from safe_client_libs
-  * Classes required for mock auth funtionality
+  * Classes required for mock auth functionality
 * **SafeApp.Core:** Contains
   * Constants used in SafeApp
   * Binding utilities and helper functions
@@ -136,55 +127,7 @@ https://github.com/maidsafe/safe_app_csharp/blob/master/PackageInstructions.txt)
 
 As an open source project we're excited to accept contributions to the code from outside of MaidSafe, and are striving to make that as easy and clean as possible.
 
-With enforced linting and commit style clearly layed out, as well as a list of more accessible issues for any project labeled with Help Wanted.
-
-### Project board
-
-GitHub project boards are used by the maintainers of this repository to keep track and organise development priorities.
-
-There could be one or more active project boards for a repository. One main project will be used to manage all tasks corresponding to the main development stream (master branch). A separate project may be used to manage each PoC and/or prototyping development, and each of them will track a dedicated development branch.
-
-New features which imply big number of changes will be developed in a separate branch but tracked in the same main project board, re-basing it with master branch regularly, and fully testing the feature on its branch before it's merged onto the master branch after it was fully approved.
-
-The main project contains the following Kanban columns to track the status of each development task:
-
-* `Triage`: New issues which need to be reviewed and evaluated before taking the decision to implement it.
-* `Low Priority`: Issues that will be picked up in the current milestone.
-* `In Progress`: Task is assigned to a person and it's in progress.
-* `Needs Review`: A Pull Request which completes the task has been sent and it needs to be reviewed.
-* `Reviewer approved`: The PR sent was approved by reviewer/s and it's ready for merge.
-* `Ready for QA`: The fix for the issue has been merged into master and is ready for final QA testing.
-* `Done`: QA has verified that the fix is complete and does not affect anything else.
-
-### Issues
-
-Issues should clearly lay out the problem, platforms experienced on, as well as steps to reproduce the issue.
-
-This aids in fixing the issues but also quality assurance, to check that the issue has indeed been fixed.
-
-Issues are labeled in the following way depending on its type:
-
-* `bug`: The issue is a bug in the product.
-* `feature`: The issue is a new and inexistent feature to be implemented.
-* `enhancement`: The issue is an enhancement to either an existing feature in the product, or to the infrastructure around the development process.
-* `blocked`: The issue cannot be resolved as it is blocked by another task. In this case the task that it is blocked by should be referenced.
-* `documentation`: A documentation-related task.
-* `e/__` : Specifies the effort required for the task.
-* `p/__` : Specifies the priority of the task.
-
-### Commits and Pull Requests
-
-Commit message should follow [these guidelines](https://github.com/autumnai/leaf/blob/master/CONTRIBUTING.md#git-commit-guidelines) and should therefore strive to tackle one issue/feature, and code should be pre-linted before commit.
-
-PRs should clearly link to an issue to be tracked on the project board. A PR that implements/fixes an issue is linked using one of the [GitHub keywords](https://help.github.com/articles/closing-issues-using-keywords). Although these type of PRs will not be added themselves to a project board (just to avoid redundancy with the linked issue). However, PRs which were sent spontaneously and not linked to any existing issue will be added to the project and should go through the same process as any other tasks/issues.
-
-Where appropriate, commits should _always_ contain tests for the code in question.
-
-### Changelog and releases
-
-The change log is currently maintained manually, each PR sent is expected to have the corresponding modification in the CHANGELOG file, under the 'Not released' section.
-
-The release process is triggered by the maintainers of the package once it is merged to master.
+With enforced linting and commit style clearly laid out, as well as a list of more accessible issues for any project labeled with Help Wanted.
 
 ## Useful resources
 

@@ -11,15 +11,11 @@ namespace SafeApp.MockAuthBindings
     {
         Task<List<AppAccess>> AuthAppsAccessingMutableDataAsync(IntPtr auth, byte[] mdName, ulong mdTypeTag);
 
-        Task<string> AuthExeFileStemAsync();
-
         Task AuthFlushAppRevocationQueueAsync(IntPtr auth);
 
         void AuthFree(IntPtr auth);
 
         Task AuthInitLoggingAsync(string outputFileNameOverride);
-
-        Task<string> AuthOutputLogPathAsync(string outputFileName);
 
         Task AuthReconnectAsync(IntPtr auth);
 
@@ -30,8 +26,6 @@ namespace SafeApp.MockAuthBindings
         Task<List<AppExchangeInfo>> AuthRevokedAppsAsync(IntPtr auth);
 
         Task AuthRmRevokedAppAsync(IntPtr auth, string appId);
-
-        Task AuthSetAdditionalSearchPathAsync(string newPath);
 
         Task<string> EncodeAuthRespAsync(IntPtr auth, ref AuthReq req, uint reqId, bool isGranted);
 

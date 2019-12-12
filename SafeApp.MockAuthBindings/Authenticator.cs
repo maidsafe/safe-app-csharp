@@ -43,15 +43,6 @@ namespace SafeApp.MockAuthBindings
         }
 
         /// <summary>
-        /// Returns the expected name for the authenticator executable without an extension.
-        /// </summary>
-        /// <returns>Authenticator executable name.</returns>
-        public static Task<string> AuthExeFileStemAsync()
-        {
-            return NativeBindings.AuthExeFileStemAsync();
-        }
-
-        /// <summary>
         /// Creates the output log file in default config path.
         /// Returns the path of where the safe_core log file is created.
         /// </summary>
@@ -60,17 +51,6 @@ namespace SafeApp.MockAuthBindings
         public static Task AuthInitLoggingAsync(string outputFileName)
         {
             return NativeBindings.AuthInitLoggingAsync(outputFileName);
-        }
-
-        /// <summary>
-        /// Generate the log path for the provided filename.
-        /// If the filename provided is null, then it returns the path of where the safe_core log file is located.
-        /// </summary>
-        /// <param name="outputFileName">Log file name.</param>
-        /// <returns></returns>
-        public static Task AuthOutputLogPathAsync(string outputFileName)
-        {
-            return NativeBindings.AuthOutputLogPathAsync(outputFileName);
         }
 
         /// <summary>
@@ -127,16 +107,6 @@ namespace SafeApp.MockAuthBindings
         public static Task<string> EncodeUnregisteredRespAsync(uint reqId, bool allow)
         {
             return NativeBindings.EncodeUnregisteredRespAsync(reqId, allow);
-        }
-
-        /// <summary>
-        /// Sets the additional path in `config_file_handler` to search configuration files.
-        /// </summary>
-        /// <param name="newPath">Configuration file path.</param>
-        /// <returns></returns>
-        public static Task AuthSetAdditionalSearchPathAsync(string newPath)
-        {
-            return NativeBindings.AuthSetAdditionalSearchPathAsync(newPath);
         }
 
         /// <summary>

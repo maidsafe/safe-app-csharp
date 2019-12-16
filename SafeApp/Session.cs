@@ -182,25 +182,6 @@ namespace SafeApp
         }
 
         /// <summary>
-        /// Returns the expected name for the application executable without an extension.
-        /// </summary>
-        /// <returns>Application executable name.</returns>
-        public static Task<string> GetExeFileStemAsync()
-        {
-            return AppBindings.AppExeFileStemAsync();
-        }
-
-        /// <summary>
-        /// Sets the additional path in `config_file_handler` to search configuration files.
-        /// </summary>
-        /// <param name="path">Configuration file path.</param>
-        /// <returns></returns>
-        public static Task SetAdditionalSearchPathAsync(string path)
-        {
-            return AppBindings.AppSetAdditionalSearchPathAsync(path);
-        }
-
-        /// <summary>
         /// Sets path to search configuration files.
         /// </summary>
         /// <param name="path">Configuration file path.</param>
@@ -208,16 +189,6 @@ namespace SafeApp
         public static Task SetConfigurationFilePathAsync(string path)
         {
             return AppBindings.AppSetConfigDirPathAsync(path);
-        }
-
-        /// <summary>
-        /// Get the output log file path.
-        /// </summary>
-        /// <param name="outputFileName">File name.</param>
-        /// <returns>Log output file path along with file name.</returns>
-        public static Task<string> GetLogOutputPathAsync([Optional] string outputFileName)
-        {
-            return AppBindings.AppOutputLogPathAsync(outputFileName);
         }
 
         /// <summary>

@@ -118,7 +118,6 @@ namespace SafeApp.Tests
                 reader.Close();
             }
 
-            await Session.SetAdditionalSearchPathAsync(configPath);
             await Session.InitLoggingAsync();
             return configPath;
         }

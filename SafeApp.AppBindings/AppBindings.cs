@@ -33,16 +33,6 @@ namespace SafeApp.AppBindings
         [DllImport(DllName, EntryPoint = "app_is_mock")]
         private static extern bool AppIsMockNative();
 
-        public Task<string> AppExeFileStemAsync()
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<string>();
-            AppExeFileStemNative(userData, DelegateOnFfiResultStringCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "app_exe_file_stem")]
-        private static extern void AppExeFileStemNative(IntPtr userData, FfiResultStringCb oCb);
-
         public Task AppSetConfigDirPathAsync(string newPath)
         {
             var (ret, userData) = BindingUtils.PrepareTask();
@@ -52,19 +42,6 @@ namespace SafeApp.AppBindings
 
         [DllImport(DllName, EntryPoint = "app_set_config_dir_path")]
         private static extern void AppSetConfigDirPathNative(
-            [MarshalAs(UnmanagedType.LPStr)] string newPath,
-            IntPtr userData,
-            FfiResultCb oCb);
-
-        public Task AppSetAdditionalSearchPathAsync(string newPath)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask();
-            AppSetAdditionalSearchPathNative(newPath, userData, DelegateOnFfiResultCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "app_set_additional_search_path")]
-        private static extern void AppSetAdditionalSearchPathNative(
             [MarshalAs(UnmanagedType.LPStr)] string newPath,
             IntPtr userData,
             FfiResultCb oCb);
@@ -143,19 +120,6 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string outputFileNameOverride,
             IntPtr userData,
             FfiResultCb oCb);
-
-        public Task<string> AppOutputLogPathAsync(string outputFileName)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<string>();
-            AppOutputLogPathNative(outputFileName, userData, DelegateOnFfiResultStringCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "app_output_log_path")]
-        private static extern void AppOutputLogPathNative(
-            [MarshalAs(UnmanagedType.LPStr)] string outputFileName,
-            IntPtr userData,
-            FfiResultStringCb oCb);
 
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);
 

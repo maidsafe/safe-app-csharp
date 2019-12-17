@@ -11,18 +11,42 @@ namespace SafeApp.AppBindings
 {
     internal partial class AppBindings : IAppBindings
     {
+        #region Authenticate
+
+        public Task<string> AuthAppAsync(
+            string appId,
+            string appName,
+            string appVendor,
+            string endpoint)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            AuthAppNative(appId, appName, appVendor, endpoint, userData, DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "auth_app")]
+        private static extern void AuthAppNative(
+            [MarshalAs(UnmanagedType.LPStr)] string appId,
+            [MarshalAs(UnmanagedType.LPStr)] string appName,
+            [MarshalAs(UnmanagedType.LPStr)] string appVendor,
+            [MarshalAs(UnmanagedType.LPStr)] string endpoint,
+            IntPtr userData,
+            FfiResultStringCb oCb);
+
+        #endregion
+
         #region Connect
-        public void Connect(
+        public void ConnectApp(
             string appId,
             string authCredentials,
             Action<FfiResult, IntPtr, GCHandle> oCb)
         {
             var userData = BindingUtils.ToHandlePtr(oCb);
-            ConnectNative(appId, authCredentials, userData, DelegateOnFfiResultSafeCb);
+            ConnectAppNative(appId, authCredentials, userData, DelegateOnFfiResultSafeCb);
         }
 
-        [DllImport(DllName, EntryPoint = "connect")]
-        private static extern void ConnectNative(
+        [DllImport(DllName, EntryPoint = "connect_app")]
+        private static extern void ConnectAppNative(
             [MarshalAs(UnmanagedType.LPStr)] string appId,
             [MarshalAs(UnmanagedType.LPStr)] string authCredentials,
             IntPtr userData,

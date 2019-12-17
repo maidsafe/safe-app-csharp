@@ -75,6 +75,17 @@ namespace SafeApp
         }
 
         /// <summary>
+        /// Authenticate app with running auth deamon
+        /// </summary>
+        /// <param name="appInfo">App exchange info used for authentication.</param>
+        /// <param name="endPoint">Authentication deamons endpoint.</param>
+        /// <returns>Encoded authentication response.</returns>
+        public static Task<string> AuthenticateAppAsync(AppExchangeInfo appInfo, string endPoint)
+        {
+            return AppBindings.AuthAppAsync(appInfo.Id, appInfo.Name, appInfo.Vendor, endPoint);
+        }
+
+        /// <summary>
         /// Create a new authenticated session using the provided IPC response.
         /// </summary>
         /// <param name="appId">Application Id.</param>
@@ -98,7 +109,7 @@ namespace SafeApp
                     tcs.SetResult(session);
                 };
 
-                AppBindings.Connect(appId, authResponse, acctConnectedCb);
+                AppBindings.ConnectApp(appId, authResponse, acctConnectedCb);
                 return tcs.Task;
             });
         }
@@ -126,7 +137,7 @@ namespace SafeApp
                     tcs.SetResult(session);
                 };
 
-                AppBindings.Connect(appId, null, acctConnectedCb);
+                AppBindings.ConnectApp(appId, null, acctConnectedCb);
                 return tcs.Task;
             });
         }

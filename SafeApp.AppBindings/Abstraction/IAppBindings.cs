@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using SafeApp.Core;
@@ -13,7 +12,6 @@ namespace SafeApp.AppBindings
     public partial interface IAppBindings
     {
         #region Low Level
-
         Task AppInitLoggingAsync(string outputFileNameOverride);
 
         Task AppSetConfigDirPathAsync(string newPath);
@@ -31,7 +29,9 @@ namespace SafeApp.AppBindings
         #endregion
 
         #region High Level
-        void Connect(
+        Task<string> AuthAppAsync(string appId, string appName, string appVendor, string endpoint);
+
+        void ConnectApp(
             string appId,
             string authCredentials,
             Action<FfiResult, IntPtr, GCHandle> oCb);

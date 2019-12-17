@@ -118,6 +118,7 @@ namespace SafeApp.Tests
                 reader.Close();
             }
 
+            await Session.SetConfigurationFilePathAsync(configPath);
             await Session.InitLoggingAsync();
             return configPath;
         }

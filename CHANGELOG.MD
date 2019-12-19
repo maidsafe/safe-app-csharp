@@ -1,5 +1,16 @@
 # safe_app_csharp Change Log
 
+## [0.3.0] - RC 2
+
+### Changes
+
+- Added new AuthApp API to use cli service for app authentication on desktop.
+- Updated APIs to use FilesMap structure instead of JSON strings.
+- Fixed iOS native library loading issue.
+- Fixes NuGet package generation issue.
+- Refactored solution to remove `Newtonsoft.Json` dependency.
+- Updated the `safe-api` native libs to master branch commit [#43c371](https://github.com/maidsafe/safe-api/tree/43c3712712fa2094cedf4078c6cac0e223843fbe).
+
 ## [0.3.0] - RC 1
 
 ### Changes

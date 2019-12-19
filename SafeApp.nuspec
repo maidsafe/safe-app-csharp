@@ -51,15 +51,15 @@
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.dll" target="lib\MonoAndroid50\SafeApp.dll" />
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.pdb" target="lib\MonoAndroid50\SafeApp.pdb" />
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.xml" target="lib\MonoAndroid50\SafeApp.xml" />
-    <file src="SafeApp.AppBindings\bin\Release\MonoAndroid50\50\SafeApp.AppBindings.dll"
+    <file src="SafeApp.AppBindings\bin\Release\MonoAndroid50\SafeApp.AppBindings.dll"
           target="lib\MonoAndroid50\SafeApp.AppBindings.dll" />
-    <file src="SafeApp.AppBindings\bin\Release\MonoAndroid50\50\SafeApp.AppBindings.pdb"
+    <file src="SafeApp.AppBindings\bin\Release\MonoAndroid50\SafeApp.AppBindings.pdb"
           target="lib\MonoAndroid50\SafeApp.AppBindings.pdb" />
-    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\50\SafeApp.MockAuthBindings.dll"
+    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\SafeApp.MockAuthBindings.dll"
           target="build\MonoAndroid50\SafeApp.MockAuthBindings.dll" />
-    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\50\SafeApp.MockAuthBindings.pdb"
+    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\SafeApp.MockAuthBindings.pdb"
           target="build\MonoAndroid50\SafeApp.MockAuthBindings.pdb" />
-    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\50\SafeApp.MockAuthBindings.xml"
+    <file src="SafeApp.MockAuthBindings\bin\Release\MonoAndroid50\SafeApp.MockAuthBindings.xml"
           target="build\MonoAndroid50\SafeApp.MockAuthBindings.xml" />
     <file src="SafeApp.Core\bin\Release\netstandard2.0\SafeApp.Core.dll"
           target="lib\MonoAndroid50\SafeApp.Core.dll" />

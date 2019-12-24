@@ -15,42 +15,50 @@ namespace SafeApp.Core
     [PublicAPI]
     public struct AppKeys
     {
-        /// <summary>
-        /// Owner signing public key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.BlsPublicKeyLen)]
-        public byte[] OwnerKey;
+        public List<byte> FullId;
 
-        /// <summary>
-        /// Data symmetric Encryption Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
         public byte[] EncKey;
+        public byte[] EncPublicKey;
+        public List<byte> EncSecretKey;
 
-        /// <summary>
-        /// Asymmetric sign public key.
-        /// This is the identity of the App in the network.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
-        public byte[] SignPk;
+        internal AppKeys(AppKeysNative native)
+        {
+            FullId = BindingUtils.CopyToByteList(native.FullIdPtr, (int)native.FullIdLen);
+            EncKey = native.EncKey;
+            EncPublicKey = native.EncPublicKey;
+            EncSecretKey = BindingUtils.CopyToByteList(native.EncSecretKeyPtr, (int)native.EncSecretKeyLen);
+        }
 
-        /// <summary>
-        /// Asymmetric sign Private Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignSecretKeyLen)]
-        public byte[] SignSk;
+        internal AppKeysNative ToNative()
+        {
+            return new AppKeysNative
+            {
+                FullIdPtr = BindingUtils.CopyFromByteList(FullId),
+                FullIdLen = (UIntPtr)(FullId?.Count ?? 0),
+                EncKey = EncKey,
+                EncPublicKey = EncPublicKey,
+                EncSecretKeyPtr = BindingUtils.CopyFromByteList(EncSecretKey),
+                EncSecretKeyLen = (UIntPtr)(EncSecretKey?.Count ?? 0)
+            };
+        }
+    }
 
-        /// <summary>
-        /// Asymmetric encryption public key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymPublicKeyLen)]
-        public byte[] EncPk;
+    internal struct AppKeysNative
+    {
+        public IntPtr FullIdPtr;
+        public UIntPtr FullIdLen;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymEncKeyLen)]
+        public byte[] EncKey;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.BlsPublicKeyLen)]
+        public byte[] EncPublicKey;
+        public IntPtr EncSecretKeyPtr;
+        public UIntPtr EncSecretKeyLen;
 
-        /// <summary>
-        /// Asymmetric encryption Private Key.
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymSecretKeyLen)]
-        public byte[] EncSk;
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref FullIdPtr, ref FullIdLen);
+            BindingUtils.FreeList(ref EncSecretKeyPtr, ref EncSecretKeyLen);
+        }
     }
 
     /// <summary>
@@ -106,8 +114,7 @@ namespace SafeApp.Core
             return new AccessContainerEntryNative
             {
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -126,12 +133,6 @@ namespace SafeApp.Core
         /// Size of the array.
         /// </summary>
         public UIntPtr ContainersLen;
-
-        /// <summary>
-        /// Internal field used by rust memory allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr ContainersCap;
 
         /// <summary>
         /// Free the container pointer.
@@ -332,8 +333,7 @@ namespace SafeApp.Core
                 AppPermissionPerformMutations = AppPermissionPerformMutations,
                 AppPermissionGetBalance = AppPermissionGetBalance,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -384,12 +384,6 @@ namespace SafeApp.Core
         public UIntPtr ContainersLen;
 
         /// <summary>
-        /// Internal field used by rust memory allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr ContainersCap;
-
-        /// <summary>
         /// Free the container pointer.
         /// </summary>
         internal void Free()
@@ -434,8 +428,7 @@ namespace SafeApp.Core
             {
                 App = App,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -459,12 +452,6 @@ namespace SafeApp.Core
         /// Length of containers.
         /// </summary>
         public UIntPtr ContainersLen;
-
-        /// <summary>
-        /// Internal field used by rust memory allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr ContainersCap;
 
         /// <summary>
         /// Free the container pointer.
@@ -561,8 +548,7 @@ namespace SafeApp.Core
             {
                 App = App,
                 MDataPtr = BindingUtils.CopyFromObjectList(MData),
-                MDataLen = (UIntPtr)(MData?.Count ?? 0),
-                MDataCap = UIntPtr.Zero
+                MDataLen = (UIntPtr)(MData?.Count ?? 0)
             };
         }
     }
@@ -586,12 +572,6 @@ namespace SafeApp.Core
         /// Length of MData array.
         /// </summary>
         public UIntPtr MDataLen;
-
-        /// <summary>
-        /// Capacity of MData vec.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr MDataCap;
 
         /// <summary>
         /// Free Mutable Data pointer.
@@ -657,7 +637,7 @@ namespace SafeApp.Core
         /// <param name="native"></param>
         internal AuthGranted(AuthGrantedNative native)
         {
-            AppKeys = native.AppKeys;
+            AppKeys = new AppKeys(native.AppKeys);
             AccessContainerInfo = native.AccessContainerInfo;
             AccessContainerEntry = new AccessContainerEntry(native.AccessContainerEntry);
             BootstrapConfig = BindingUtils.CopyToByteArray(native.BootstrapConfigPtr, (int)native.BootstrapConfigLen);
@@ -671,12 +651,11 @@ namespace SafeApp.Core
         {
             return new AuthGrantedNative
             {
-                AppKeys = AppKeys,
+                AppKeys = AppKeys.ToNative(),
                 AccessContainerInfo = AccessContainerInfo,
                 AccessContainerEntry = AccessContainerEntry.ToNative(),
                 BootstrapConfigPtr = BindingUtils.CopyFromByteArray(BootstrapConfig),
-                BootstrapConfigLen = (UIntPtr)(BootstrapConfig?.Length ?? 0),
-                BootstrapConfigCap = UIntPtr.Zero
+                BootstrapConfigLen = (UIntPtr)(BootstrapConfig?.Length ?? 0)
             };
         }
     }
@@ -689,7 +668,7 @@ namespace SafeApp.Core
         /// <summary>
         /// The access keys.
         /// </summary>
-        public AppKeys AppKeys;
+        public AppKeysNative AppKeys;
 
         /// <summary>
         /// Access container info.
@@ -712,16 +691,11 @@ namespace SafeApp.Core
         public UIntPtr BootstrapConfigLen;
 
         /// <summary>
-        /// Used by Rust memory allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr BootstrapConfigCap;
-
-        /// <summary>
         /// Free bootstrap config pointer.
         /// </summary>
         internal void Free()
         {
+            AppKeys.Free();
             AccessContainerEntry.Free();
             BindingUtils.FreeList(ref BootstrapConfigPtr, ref BootstrapConfigLen);
         }

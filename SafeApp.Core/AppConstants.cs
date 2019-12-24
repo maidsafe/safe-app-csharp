@@ -9,6 +9,11 @@ namespace SafeApp.Core
     public static class AppConstants
     {
         /// <summary>
+        /// Length of Symmetric Encryption key
+        /// </summary>
+        public const ulong SymEncKeyLen = 32;
+
+        /// <summary>
         /// Length of Asymmetric key nonce
         /// </summary>
         public const ulong AsymNonceLen = 24;

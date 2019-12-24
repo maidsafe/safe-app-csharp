@@ -41,8 +41,7 @@ namespace SafeApp.MockAuthBindings
             {
                 AppInfo = AppInfo,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -66,12 +65,6 @@ namespace SafeApp.MockAuthBindings
         /// Length of containers array.
         /// </summary>
         public UIntPtr ContainersLen;
-
-        /// <summary>
-        /// Capacity of the containers array. Internal data required for the Rust allocator.
-        /// </summary>
-        // ReSharper disable once NotAccessedField.Compiler
-        public UIntPtr ContainersCap;
 
         /// <summary>
         /// Used to free the pointers to array.

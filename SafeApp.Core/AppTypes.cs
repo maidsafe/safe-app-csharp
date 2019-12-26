@@ -15,30 +15,44 @@ namespace SafeApp.Core
     [PublicAPI]
     public struct AppKeys
     {
-        public List<byte> FullId;
+        /// <summary>
+        /// Client/App Id on the network.
+        /// </summary>
+        public byte[] FullId;
 
+        /// <summary>
+        /// Encryption key.
+        /// </summary>
         public byte[] EncKey;
+
+        /// <summary>
+        /// Public Key.
+        /// </summary>
         public byte[] EncPublicKey;
-        public List<byte> EncSecretKey;
+
+        /// <summary>
+        /// Secret Key
+        /// </summary>
+        public byte[] EncSecretKey;
 
         internal AppKeys(AppKeysNative native)
         {
-            FullId = BindingUtils.CopyToByteList(native.FullIdPtr, (int)native.FullIdLen);
+            FullId = BindingUtils.CopyToByteArray(native.FullIdPtr, (int)native.FullIdLen);
             EncKey = native.EncKey;
             EncPublicKey = native.EncPublicKey;
-            EncSecretKey = BindingUtils.CopyToByteList(native.EncSecretKeyPtr, (int)native.EncSecretKeyLen);
+            EncSecretKey = BindingUtils.CopyToByteArray(native.EncSecretKeyPtr, (int)native.EncSecretKeyLen);
         }
 
         internal AppKeysNative ToNative()
         {
             return new AppKeysNative
             {
-                FullIdPtr = BindingUtils.CopyFromByteList(FullId),
-                FullIdLen = (UIntPtr)(FullId?.Count ?? 0),
+                FullIdPtr = BindingUtils.CopyFromByteArray(FullId),
+                FullIdLen = (UIntPtr)(FullId?.Length ?? 0),
                 EncKey = EncKey,
                 EncPublicKey = EncPublicKey,
-                EncSecretKeyPtr = BindingUtils.CopyFromByteList(EncSecretKey),
-                EncSecretKeyLen = (UIntPtr)(EncSecretKey?.Count ?? 0)
+                EncSecretKeyPtr = BindingUtils.CopyFromByteArray(EncSecretKey),
+                EncSecretKeyLen = (UIntPtr)(EncSecretKey?.Length ?? 0)
             };
         }
     }

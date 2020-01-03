@@ -16,22 +16,22 @@ namespace SafeApp.Core
     public struct AppKeys
     {
         /// <summary>
-        /// Client/App Id on the network.
+        /// Application identity on the network.
         /// </summary>
         public byte[] FullId;
 
         /// <summary>
-        /// Encryption key.
+        /// Symmetric data encryption key.
         /// </summary>
         public byte[] EncKey;
 
         /// <summary>
-        /// Public Key.
+        /// Asymmetric public encryption key.
         /// </summary>
         public byte[] EncPublicKey;
 
         /// <summary>
-        /// Secret Key
+        /// Asymmetric private encryption key.
         /// </summary>
         public byte[] EncSecretKey;
 

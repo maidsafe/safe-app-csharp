@@ -120,6 +120,7 @@ namespace SafeApp.API
         /// </summary>
         /// <param name="data">Raw data in byte[] format.</param>
         /// <param name="mediaType">Content's MIME type.</param>
+        /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
         /// <returns>XorUrl for the published data</returns>
         public Task<string> FilesPutPublishedImmutableAsync(
             byte[] data,

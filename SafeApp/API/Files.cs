@@ -123,8 +123,9 @@ namespace SafeApp.API
         /// <returns>XorUrl for the published data</returns>
         public Task<string> FilesPutPublishedImmutableAsync(
             byte[] data,
-            string mediaType)
-            => AppBindings.FilesPutPublishedImmutableAsync(_appPtr, data, mediaType);
+            string mediaType,
+            bool dryRun)
+            => AppBindings.FilesPutPublishedImmutableAsync(_appPtr, data, mediaType, dryRun);
 
         /// <summary>
         /// Get Published ImmutableData from the network.

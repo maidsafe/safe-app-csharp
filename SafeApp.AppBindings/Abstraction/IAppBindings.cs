@@ -106,7 +106,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun);
 
-        Task<string> FilesPutPublishedImmutableAsync(IntPtr app, byte[] data, string mediaType);
+        Task<string> FilesPutPublishedImmutableAsync(IntPtr app, byte[] data, string mediaType, bool dryRun);
 
         Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url);
 

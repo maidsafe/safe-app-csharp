@@ -63,7 +63,7 @@ namespace SafeApp.Tests
         {
             var session = await TestUtils.CreateTestApp();
             var data = TestUtils.GetRandomString(20).ToUtfBytes();
-            var xorUrl = await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain");
+            var xorUrl = await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain", false);
             var newData = await session.Files.FilesGetPublishedImmutableAsync(xorUrl);
             Assert.AreEqual(data, newData);
         }

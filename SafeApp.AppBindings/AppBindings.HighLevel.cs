@@ -812,7 +812,8 @@ namespace SafeApp.AppBindings
         public Task<string> FilesPutPublishedImmutableAsync(
             IntPtr app,
             byte[] data,
-            string mediaType)
+            string mediaType,
+            bool dryRun)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
             FilesPutPublishedImmutableNative(
@@ -820,6 +821,7 @@ namespace SafeApp.AppBindings
                 data,
                 (UIntPtr)data.Length,
                 mediaType,
+                dryRun,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
@@ -831,6 +833,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] data,
             UIntPtr dataLen,
             [MarshalAs(UnmanagedType.LPStr)] string mediaType,
+            [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
             FfiResultStringCb oCb);
 

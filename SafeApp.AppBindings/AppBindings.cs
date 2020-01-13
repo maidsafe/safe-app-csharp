@@ -121,6 +121,16 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultCb oCb);
 
+        public Task<string> AppConfigDirPathAsync()
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            AppConfigDirPathNative(userData, DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "app_config_dir_path")]
+        private static extern void AppConfigDirPathNative(IntPtr userData, FfiResultStringCb oCb);
+
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);
 
 #if __IOS__

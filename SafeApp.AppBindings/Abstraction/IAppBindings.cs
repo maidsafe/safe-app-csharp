@@ -12,7 +12,10 @@ namespace SafeApp.AppBindings
     public partial interface IAppBindings
     {
         #region Low Level
+
         Task AppInitLoggingAsync(string outputFileNameOverride);
+
+        Task<string> AppConfigDirPathAsync();
 
         Task AppSetConfigDirPathAsync(string newPath);
 

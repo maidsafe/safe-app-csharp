@@ -21,7 +21,7 @@ namespace SafeApp.Tests
 
         [Test]
         public async Task SetConfigFileDirPathTest()
-            => await Session.SetConfigurationFilePathAsync(
+            => await Session.SetAppConfigurationDirectoryPathAsync(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 #if WIN64 && NETCOREAPP

@@ -197,9 +197,18 @@ namespace SafeApp
         /// </summary>
         /// <param name="path">Configuration file path.</param>
         /// <returns></returns>
-        public static Task SetConfigurationFilePathAsync(string path)
+        public static Task SetAppConfigurationDirectoryPathAsync(string path)
         {
             return AppBindings.AppSetConfigDirPathAsync(path);
+        }
+
+        /// <summary>
+        /// Get configuration files path.
+        /// </summary>
+        /// <returns>Path set for the configuration files.</returns>
+        public static Task<string> AppConfigurationDirectoryPathAsync()
+        {
+            return AppBindings.AppConfigDirPathAsync();
         }
 
         /// <summary>

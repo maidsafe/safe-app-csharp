@@ -50,7 +50,6 @@ namespace SafeApp.Core
         }
     }
 
-    // ReSharper disable once ClassNeverInstantiated.Global
     internal class BindingUtils
     {
         private static void CompleteTask<T>(TaskCompletionSource<T> tcs, FfiResult result, Func<T> argFunc)
@@ -148,8 +147,7 @@ namespace SafeApp.Core
 
             return list;
         }
-
-        // ReSharper disable once RedundantAssignment
+        
         public static void FreeList(ref IntPtr ptr, ref UIntPtr len)
         {
             if (ptr != IntPtr.Zero)

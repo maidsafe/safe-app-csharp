@@ -16,7 +16,6 @@ namespace SafeApp.Tests.Android
       MainLauncher = true,
       ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
-    // ReSharper disable once UnusedMember.Global
     public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

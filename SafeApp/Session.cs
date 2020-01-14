@@ -2,13 +2,9 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using SafeApp.API;
 using SafeApp.AppBindings;
 using SafeApp.Core;
-
-// ReSharper disable UnusedMember.Global
-// ReSharper disable ConvertToLocalFunction
 
 namespace SafeApp
 {
@@ -17,7 +13,6 @@ namespace SafeApp
     /// to interact with the network.
     /// As such it also provides all API-Providers connected through this session.
     /// </summary>
-    [PublicAPI]
     public sealed class Session : IDisposable
     {
         private static readonly IAppBindings AppBindings = AppResolver.Current;

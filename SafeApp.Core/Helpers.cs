@@ -67,7 +67,6 @@ namespace SafeApp.Core
             var ptr = Marshal.AllocHGlobal(structSize * list.Count);
             for (var i = 0; i < list.Count; ++i)
             {
-                // ReSharper disable once ArrangeRedundantParentheses
                 Marshal.StructureToPtr(list[i], ptr + (structSize * i), false);
             }
 

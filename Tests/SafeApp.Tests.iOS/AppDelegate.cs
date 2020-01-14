@@ -11,7 +11,6 @@ using Xamarin.Forms.Platform.iOS;
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 namespace SafeApp.Tests.iOS
 {
-    // ReSharper disable once UnusedMember.Global
     [Register("AppDelegate")]
     public class AppDelegate : FormsApplicationDelegate
     {

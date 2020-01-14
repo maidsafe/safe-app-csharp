@@ -134,7 +134,6 @@ namespace SafeApp.MockAuthBindings
 
         private static readonly FfiResultStringCb DelegateOnFfiResultIpcReqErrorCb = OnFfiResultIpcReqErrorCb;
 
-        // ReSharper disable once UnusedMember.Local
         private delegate void FfiResultIpcReqErrorCb(IntPtr userData, IntPtr result, string msg);
     }
 }

@@ -67,7 +67,6 @@ namespace SafeApp.MockAuthBindings
         /// <summary>
         /// Used to free the pointers to array.
         /// </summary>
-        // ReSharper disable once UnusedMember.Global
         internal void Free()
         {
             BindingUtils.FreeList(ref ContainersPtr, ref ContainersLen);

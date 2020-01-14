@@ -9,14 +9,9 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// The Authenticator contains all authentication related functionality for the mock network.
     /// </summary>
-    // ReSharper disable ConvertToLocalFunction
-    // ReSharper disable UnusedMember.Global
-    // ReSharper disable MemberCanBePrivate.Global
     public class Authenticator : IDisposable
     {
         private static readonly IAuthBindings NativeBindings = MockAuthResolver.Current;
-
-        // ReSharper disable once UnassignedField.Global
 
         /// <summary>
         /// Event triggered if session is disconnected from network.
@@ -30,7 +25,6 @@ namespace SafeApp.MockAuthBindings
         /// <summary>
         /// Returns true if current network connection state is DISCONNECTED.
         /// </summary>
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public bool IsDisconnected { get; private set; }
 
         /// <summary>

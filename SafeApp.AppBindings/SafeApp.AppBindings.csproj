@@ -48,7 +48,4 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
-
-  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
-
 </Project>

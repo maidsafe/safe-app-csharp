@@ -7,11 +7,4 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard1.3\SafeApp.Core.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
-
-  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
-
 </Project>

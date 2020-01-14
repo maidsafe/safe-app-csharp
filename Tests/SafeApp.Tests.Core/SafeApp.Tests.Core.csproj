@@ -49,5 +49,4 @@
   </ItemGroup>
 
   <Import Project="..\SafeApp.Tests\SafeApp.Tests.projitems" Label="Shared" />
-  <Import Project="$(MSBuildThisFileDirectory)..\..\CodeStyles.targets" />
 </Project>

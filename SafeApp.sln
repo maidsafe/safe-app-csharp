@@ -12,7 +12,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeApp", "SafeApp\SafeApp.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{630CCCA1-0ED8-4690-A72E-57F353FC9A57}"
 	ProjectSection(SolutionItems) = preProject
-		CodeStyles.targets = CodeStyles.targets
 		Directory.Build.props = Directory.Build.props
 		PackageInstructions.txt = PackageInstructions.txt
 		SafeApp.nuspec = SafeApp.nuspec

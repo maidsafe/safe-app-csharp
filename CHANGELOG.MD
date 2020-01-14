@@ -1,5 +1,15 @@
 # safe_app_csharp Change Log
 
+## [0.3.0] - RC 3
+
+### Changes
+
+- Updated `FilesPutPublishedImmutableAsync` API to support `DryRun` feature.
+- Added `AppConfigDirPathAsync` API to get the current app configuration directoruy path.
+- Removed `JetBrains.Annotations` package and related code.
+- Updated `AppKeys` bindings to the latest `safe_client_libs`.
+- Updated the `safe-api` native libs to master branch commit [#9a41307](https://github.com/maidsafe/safe-api/commit/9a41307efb5d8989386f227a9a1e3ec819c12054).
+
 ## [0.3.0] - RC 2
 
 ### Changes

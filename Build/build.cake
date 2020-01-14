@@ -1,5 +1,4 @@
 #load "NativeScriptDownloader.cake"
-#load "InspectCode.cake"
 #load "DesktopTest.cake"
 #load "AndroidTest.cake"
 #load "iOSTest.cake"
@@ -33,14 +32,12 @@ Task("Analyse-Test-Result-Files")
 
 Task("Run-AppVeyor-Build")
   .IsDependentOn("UnZip-Libs")
-  // .IsDependentOn("Analyze-Project-Report")
   .IsDependentOn("Run-Desktop-Tests-AppVeyor")
   .Does(() => {
   });
 
 Task("Default")
   .IsDependentOn("UnZip-Libs")
-  // .IsDependentOn("Analyze-Project-Report")
   .IsDependentOn("Run-Desktop-Tests")
   .IsDependentOn("Run-Android-Tests")
   .IsDependentOn("Run-iOS-Tests")

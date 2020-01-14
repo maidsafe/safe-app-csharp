@@ -38,15 +38,14 @@ Task("Build-Desktop-Project")
 Task("Run-Desktop-Tests")
   .IsDependentOn("Build-Desktop-Project")
   .Does(() => {
-      DotNetCoreTest(
-        coreTestProject.Path.FullPath,
-        new DotNetCoreTestSettings()
-        {
-		  NoBuild = true,
-		  NoRestore = true,
-          Configuration = configuration,
-          ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
-        });
+    DotNetCoreTest(
+      coreTestProject.Path.FullPath,
+      new DotNetCoreTestSettings() {
+		    NoBuild = true,
+		    NoRestore = true,
+        Configuration = configuration,
+        ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
+      });
   });
 
 Task("Run-Desktop-Tests-AppVeyor")
@@ -54,14 +53,14 @@ Task("Run-Desktop-Tests-AppVeyor")
   .Does(() => {
     OpenCover(tool => {
       tool.DotNetCoreTest(
-          coreTestProject,
-          new DotNetCoreTestSettings()
-          {
-			NoBuild = true,
-			NoRestore = true,
-            Configuration = configuration,
-            ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
-          });
+        coreTestProject,
+        new DotNetCoreTestSettings()
+        {
+          NoBuild = true,
+          NoRestore = true,
+          Configuration = configuration,
+          ArgumentCustomization = args => args.Append("--logger \"trx;LogFileName=DesktopTestResult.xml\"")
+        });
     },
     new FilePath(codeCoverageFilePath),
     new OpenCoverSettings()
@@ -101,12 +100,11 @@ Task("Run-Desktop-Tests-AppVeyor")
       throw new Exception("Test result file not found.");
     }
     
-    // todo : enable after adding the new API
-    // if(EnvironmentVariable("is_not_pr") == "true")
-    // {
-    //   CoverallsIo(codeCoverageFilePath, new CoverallsIoSettings()
-    //   {
-    //     RepoToken = coveralls_token
-    //   });
-    // }
+    if(EnvironmentVariable("is_not_pr") == "true")
+    {
+      CoverallsIo(codeCoverageFilePath, new CoverallsIoSettings()
+      {
+        RepoToken = coveralls_token
+      });
+    }
   });

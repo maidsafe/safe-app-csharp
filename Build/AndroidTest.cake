@@ -41,6 +41,7 @@ Task("Run-Android-Tests")
         if (!AndroidAvdListAvds(avdSettings).Any(a => a.Name == ANDROID_AVD))
             AndroidAvdCreate(ANDROID_AVD, ANDROID_EMU_TARGET, ANDROID_EMU_DEVICE, force: true, settings: avdSettings);
     }
+    
     // We need to find `emulator` and the best way is to try within a specified ANDROID_HOME
     var emulatorExt = IsRunningOnWindows() ? ".exe" : "";
     string emulatorPath = "emulator" + emulatorExt;

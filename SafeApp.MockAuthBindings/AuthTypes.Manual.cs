@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using SafeApp.Core;
 
 #pragma warning disable SA1401 // Fields should be private
@@ -16,7 +15,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// Authentication IPC Request
     /// </summary>
-    [PublicAPI]
     public class AuthIpcReq : IpcReq
     {
         /// <summary>
@@ -44,7 +42,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// Unregistered IPC request.
     /// </summary>
-    [PublicAPI]
     public class UnregisteredIpcReq : IpcReq
     {
         /// <summary>
@@ -73,7 +70,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// Containers IPC request.
     /// </summary>
-    [PublicAPI]
     public class ContainersIpcReq : IpcReq
     {
         /// <summary>
@@ -101,7 +97,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// Share Mutable Data IPC request.
     /// </summary>
-    [PublicAPI]
     public class ShareMDataIpcReq : IpcReq
     {
         /// <summary>
@@ -136,7 +131,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// IPC request rejected.
     /// </summary>
-    [PublicAPI]
     public class IpcReqRejected : IpcReq
     {
         /// <summary>
@@ -157,7 +151,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// IPC Request Error.
     /// </summary>
-    [PublicAPI]
     public class IpcReqError : IpcReq
     {
         /// <summary>

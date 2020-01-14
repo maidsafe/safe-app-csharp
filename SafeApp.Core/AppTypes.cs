@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 
 [assembly: InternalsVisibleTo("SafeApp.AppBindings")]
 [assembly: InternalsVisibleTo("SafeApp.MockAuthBindings")]
@@ -12,7 +11,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents the application keys.
     /// </summary>
-    [PublicAPI]
     public struct AppKeys
     {
         /// <summary>
@@ -78,7 +76,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents access container information.
     /// </summary>
-    [PublicAPI]
     public struct AccessContInfo
     {
         /// <summary>
@@ -102,7 +99,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents access container entry for a single app.
     /// </summary>
-    [PublicAPI]
     public struct AccessContainerEntry
     {
         /// <summary>
@@ -160,7 +156,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Container information with permission set.
     /// </summary>
-    [PublicAPI]
     public struct ContainerInfo
     {
         /// <summary>
@@ -184,7 +179,6 @@ namespace SafeApp.Core
     /// Mutable Data shell.
     /// Information allowing to locate and access Mutable Data on the network.
     /// </summary>
-    [PublicAPI]
     public struct MDataInfo
     {
         /// <summary>
@@ -248,7 +242,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents a requested set of changes to permissions of a Mutable Data.
     /// </summary>
-    [PublicAPI]
     public struct PermissionSet
     {
         /// <summary>
@@ -285,7 +278,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents an wrapper for authorisation request.
     /// </summary>
-    [PublicAPI]
     public struct AuthReq
     {
         /// <summary>
@@ -409,7 +401,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents a containers request.
     /// </summary>
-    [PublicAPI]
     public struct ContainersReq
     {
         /// <summary>
@@ -479,7 +470,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents an application information.
     /// </summary>
-    [PublicAPI]
     public struct AppExchangeInfo
     {
         /// <summary>
@@ -510,7 +500,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents the set of permissions for a given container.
     /// </summary>
-    [PublicAPI]
     public struct ContainerPermissions
     {
         /// <summary>
@@ -528,7 +517,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents a request to share Mutable Data.
     /// </summary>
-    [PublicAPI]
     public struct ShareMDataReq
     {
         /// <summary>
@@ -599,7 +587,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Holds a Mutable Data information and requested permission set.
     /// </summary>
-    [PublicAPI]
     public struct ShareMData
     {
         /// <summary>
@@ -622,7 +609,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents the authentication response.
     /// </summary>
-    [PublicAPI]
     public struct AuthGranted
     {
         /// <summary>
@@ -718,7 +704,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Information about an application that has access to a Mutable Data.
     /// </summary>
-    [PublicAPI]
     public struct AppAccess
     {
         /// <summary>
@@ -748,7 +733,6 @@ namespace SafeApp.Core
     /// <summary>
     /// User metadata response for Mutable Data.
     /// </summary>
-    [PublicAPI]
     public struct MetadataResponse
     {
         /// <summary>

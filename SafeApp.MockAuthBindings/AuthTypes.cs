@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using SafeApp.Core;
 
 namespace SafeApp.MockAuthBindings
@@ -8,7 +7,6 @@ namespace SafeApp.MockAuthBindings
     /// <summary>
     /// Represents an application registered with the authenticator.
     /// </summary>
-    [PublicAPI]
     public struct RegisteredApp
     {
         /// <summary>

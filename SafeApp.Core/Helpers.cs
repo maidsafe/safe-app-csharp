@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using JetBrains.Annotations;
 
 namespace SafeApp.Core
 {
     /// <summary>
     /// Containers SafeApp helper functions.
     /// </summary>
-    [PublicAPI]
     public static class Helpers
     {
         /// <summary>

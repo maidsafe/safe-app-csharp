@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 
 namespace SafeApp.Core
 {
@@ -11,7 +10,6 @@ namespace SafeApp.Core
     /// <summary>
     /// FFI exception
     /// </summary>
-    [PublicAPI]
     public class FfiException : Exception
     {
         /// <summary>
@@ -29,7 +27,6 @@ namespace SafeApp.Core
     /// <summary>
     /// FFI result wrapper.
     /// </summary>
-    [PublicAPI]
     public struct FfiResult
     {
         /// <summary>

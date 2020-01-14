@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 
 namespace SafeApp.Core
 {
@@ -8,7 +7,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Base IPC response message.
     /// </summary>
-    [PublicAPI]
     public abstract class IpcMsg
     {
     }
@@ -16,7 +14,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Authentication IPC response message.
     /// </summary>
-    [PublicAPI]
     public class AuthIpcMsg : IpcMsg
     {
         /// <summary>
@@ -44,7 +41,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Unregistered access IPC response message.
     /// </summary>
-    [PublicAPI]
     public class UnregisteredIpcMsg : IpcMsg
     {
         /// <summary>
@@ -73,7 +69,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Containers permission IPC response message.
     /// </summary>
-    [PublicAPI]
     public class ContainersIpcMsg : IpcMsg
     {
         /// <summary>
@@ -94,7 +89,6 @@ namespace SafeApp.Core
     /// <summary>
     /// MData share IPC response message.
     /// </summary>
-    [PublicAPI]
     public class ShareMDataIpcMsg : IpcMsg
     {
         /// <summary>
@@ -115,7 +109,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Revoke IPC response message.
     /// </summary>
-    [PublicAPI]
     public class RevokedIpcMsg : IpcMsg
     {
     }
@@ -123,7 +116,6 @@ namespace SafeApp.Core
     /// <summary>
     /// IPC response message exception
     /// </summary>
-    [PublicAPI]
     public class IpcMsgException : FfiException
     {
         /// <summary>

@@ -1,11 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace SafeApp.Core
+﻿namespace SafeApp.Core
 {
     /// <summary>
     /// Constants used in SafeApp
     /// </summary>
-    [PublicAPI]
     public static class AppConstants
     {
         /// <summary>

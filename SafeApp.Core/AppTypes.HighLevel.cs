@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 
 namespace SafeApp.Core
 {
@@ -26,7 +25,6 @@ namespace SafeApp.Core
     /// <summary>
     /// XorUrl Encoder
     /// </summary>
-    [PublicAPI]
     public struct XorUrlEncoder
     {
         /// <summary>
@@ -122,7 +120,6 @@ namespace SafeApp.Core
     /// <summary>
     /// SafeKey data type.
     /// </summary>
-    [PublicAPI]
     public struct SafeKey : ISafeData
     {
         /// <summary>
@@ -170,7 +167,6 @@ namespace SafeApp.Core
     /// <summary>
     /// SafeWallet data type.
     /// </summary>
-    [PublicAPI]
     public struct Wallet : ISafeData
     {
         /// <summary>
@@ -247,7 +243,6 @@ namespace SafeApp.Core
     /// <summary>
     /// FilesContainer data type.
     /// </summary>
-    [PublicAPI]
     public struct FilesContainer : ISafeData
     {
         /// <summary>
@@ -332,7 +327,6 @@ namespace SafeApp.Core
     /// <summary>
     /// PublishedImmutableData data type.
     /// </summary>
-    [PublicAPI]
     public struct PublishedImmutableData : ISafeData
     {
         /// <summary>
@@ -404,7 +398,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Data type used to indicate fetch failure.
     /// </summary>
-    [PublicAPI]
     public struct SafeDataFetchFailed : ISafeData
     {
         /// <summary>
@@ -432,7 +425,6 @@ namespace SafeApp.Core
     /// <summary>
     /// File metadata entry.
     /// </summary>
-    [PublicAPI]
     public struct FileMetaDataItem
     {
         /// <summary>
@@ -451,7 +443,6 @@ namespace SafeApp.Core
     /// <summary>
     /// File information contains filename and metadata.
     /// </summary>
-    [PublicAPI]
     public struct FileInfo
     {
         /// <summary>
@@ -497,7 +488,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Files Containet file map.
     /// </summary>
-    [PublicAPI]
     public struct FilesMap
     {
         /// <summary>
@@ -537,8 +527,7 @@ namespace SafeApp.Core
 
     /// <summary>
     /// Wallet Spendable balance.
-    /// </summary>"
-    [PublicAPI]
+    /// </summary>
     public struct WalletSpendableBalance
     {
         /// <summary>
@@ -557,7 +546,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Spendable Wallet balance.
     /// </summary>
-    [PublicAPI]
     public struct WalletSpendableBalanceInfo
     {
         /// <summary>
@@ -581,7 +569,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Wallet spendable balances.
     /// </summary>
-    [PublicAPI]
     public struct WalletSpendableBalances
     {
         /// <summary>
@@ -641,7 +628,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents the processed file.
     /// </summary>
-    [PublicAPI]
     public struct ProcessedFile
     {
         /// <summary>
@@ -666,7 +652,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Processed files.
     /// </summary>
-    [PublicAPI]
     public struct ProcessedFiles
     {
         /// <summary>
@@ -726,7 +711,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Contains the information required to work with NRS.
     /// </summary>
-    [PublicAPI]
     public struct NrsMapContainerInfo
     {
         /// <summary>
@@ -808,7 +792,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Represents metadata and operation info for a processed public name entry.
     /// </summary>
-    [PublicAPI]
     public struct ProcessedEntry
     {
         /// <summary>
@@ -833,7 +816,6 @@ namespace SafeApp.Core
     /// <summary>
     /// Holds list of all the processed public name entries.
     /// </summary>
-    [PublicAPI]
     public struct ProcessedEntries
     {
         /// <summary>
@@ -868,14 +850,12 @@ namespace SafeApp.Core
     }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    [PublicAPI]
     public struct NrsMap
     {
         public Dictionary<string, SubNamesMapEntry> SubNamesMap;
         public Dictionary<string, Rdf> Default;
     }
 
-    [PublicAPI]
     public struct Rdf
     {
         public DateTime Created;

@@ -12,10 +12,6 @@
     <Content Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-  </ItemGroup>
-
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
 
 </Project>

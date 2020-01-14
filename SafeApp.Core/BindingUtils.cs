@@ -147,7 +147,7 @@ namespace SafeApp.Core
 
             return list;
         }
-        
+
         public static void FreeList(ref IntPtr ptr, ref UIntPtr len)
         {
             if (ptr != IntPtr.Zero)

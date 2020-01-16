@@ -1,0 +1,249 @@
+variables:
+  NugetPackageVersion: '$(CurrentSemanticVersion)'
+  MONO_VERSION: 6_4_0
+  XCODE_VERSION: 11.1
+  NETCORE_VERSION: '3.0.x'
+  NETCORE_TEST_VERSION: '2.2.x'
+  IOS_SIM_NAME: 'iPhone 11'
+  IOS_SIM_RUNTIME: 'com.apple.CoreSimulator.SimRuntime.iOS-13-2'
+  ANDROID_EMU_TARGET: 'system-images;android-28;google_apis;x86_64'
+  ANDROID_EMU_DEVICE: 'Nexus 6P'
+  CAKE_SETTINGS_SKIPVERIFICATION: true
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+
+jobs:
+  - job: ios_tests
+    displayName: Run Tests - iOS
+    pool:
+      vmImage: 'macOS-latest'
+      demands: xcode
+    steps:
+      # Set active mono version
+      - bash: |
+          sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
+          mono --version
+          /usr/bin/xcodebuild -version
+        displayName: 'Set Xcode version'
+      - task: UseDotNet@2
+        displayName: 'Use .Net Core sdk $(NETCORE_TEST_VERSION)'
+        inputs:
+          version: $(NETCORE_TEST_VERSION)
+      - task: InstallAppleCertificate@2
+        displayName: 'Install an Apple certificate'
+        inputs:
+          certSecureFile: 'c0149354-c607-4f1f-ae9c-a9915366104c'
+          certPwd: '$(P12password)'
+      - task: InstallAppleProvisioningProfile@1
+        displayName: 'Install an Apple provisioning profile'
+        inputs:
+          provProfileSecureFile: '07785afd-443a-45d0-8654-e1bfc73aa0b7'
+      - bash: |
+          #Run cake script
+          #chmod +x build.sh
+          ./build.sh --target=UnZip-Libs
+          ./build.sh --target=Restore-NuGet
+          ./build.sh --target=Run-iOS-Tests
+        displayName: 'Run Tests'
+        workingDirectory: Build
+      - task: PublishTestResults@2
+        displayName: 'Publish Test Results'
+        inputs:
+            testResultsFormat: NUnit
+            testResultsFiles: '**/*.TestResult.xml'
+            failTaskOnFailedTests: true
+            testRunTitle: 'iOS Tests'
+        condition: succeededOrFailed()
+
+  - job: android_tests
+    displayName: Run Tests - Android
+    pool:
+      vmImage: 'macOS-latest'
+    steps:
+    # Setup and run Android and desktop tests
+    - bash: |
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
+        mono --version
+        /usr/bin/xcodebuild -version
+
+        #Create Android AVD
+        export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
+        $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-28;google_apis;x86_64" --no_https > nul
+
+        #Run cake script
+        chmod +x build.sh
+        ./build.sh --target=UnZip-Libs
+        ./build.sh --target=Run-Android-Tests
+        ./build.sh --target=Run-Desktop-Tests
+        displayName: 'Build Solution and Run Tests'
+      workingDirectory: Build
+    - task: PublishTestResults@2
+      displayName: 'Publish .NET Core Test MacOS Results'
+      inputs:
+        testResultsFormat: VSTest
+        testResultsFiles: '**/DesktopTestResult.xml'
+        failTaskOnFailedTests: true
+        testRunTitle: '.NET Core Tests'
+      condition: succeededOrFailed()
+    - task: PublishTestResults@2
+      displayName: 'Publish Android Test Results'
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: '**/AndroidTestResult.xml'
+        failTaskOnFailedTests: true
+        testRunTitle: 'Android Tests'
+      condition: succeededOrFailed()
+
+  - job: linux_tests
+    displayName: Run Tests - Linux
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: |
+        chmod +x build.sh
+        ./build.sh --target=UnZip-Libs
+        ./build.sh --target=Run-Desktop-Tests
+      displayName: 'Build Solution and Run Tests'
+      workingDirectory: Build
+    - task: PublishTestResults@2
+      displayName: 'Publish .NET Core Test Linux Results'
+      inputs:
+        testResultsFormat: VSTest
+        testResultsFiles: '**/DesktopTestResult.xml'
+        failTaskOnFailedTests: true
+        testRunTitle: '.NET Core Tests'
+      condition: succeededOrFailed()
+
+  - job: windows_tests
+    displayName: Test and Nuget Release - Windows
+    pool:
+      vmImage: 'windows-latest'
+      demands:
+      - msbuild
+      - visualstudio
+    dependsOn: [ ios_tests, android_tests, linux_tests ]
+    steps:
+    - powershell: |
+        powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=UnZip-Libs
+        powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=Run-Desktop-Tests
+      displayName: 'Build and Run .NET Core Tests'
+      workingDirectory: Build
+    - task: PublishTestResults@2
+      displayName: 'Publish .NET Core Test Windows Results'
+      inputs:
+        testResultsFormat: VSTest
+        testResultsFiles: '**/DesktopTestResult.xml'
+        failTaskOnFailedTests: true
+        testRunTitle: '.NET Core Tests'
+      condition: succeededOrFailed()
+    - task: VSBuild@1
+      displayName: 'Build solution **\*.sln'
+      inputs:
+        platform: 'any cpu'
+        configuration: release
+    - bash: |
+        export commitMessage=$(git log --format=%B -n 1)
+        echo "##vso[task.setvariable variable=commit_message]$commitMessage"
+        
+        if [[ $commitMessage == [Vv]ersion[[:space:]]change* ]]; then
+            echo '##vso[task.setvariable variable=isVersionChange]true'
+        fi
+        
+        version=$(perl -pe '($_)=/((<version>)[0-9]+([.][0-9]+)+([-][Rr][Cc][0-9]+)?(<\/version>))/', SafeApp.nuspec)
+        version="${version/<\/version>/}"
+        version="${version/<version>/}"
+        
+        #if [ "$(isVersionChange)" = false ] ; then
+        #  version="${version}-$(Build.BuildNumber)"
+        #fi
+        
+        echo $version
+        echo "##vso[task.setvariable variable=new_version]$version"
+      displayName: 'Check version change and generate package version'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    - task: NuGetCommand@2
+      displayName: 'NuGet pack'
+      inputs:
+        command: pack
+        packagesToPack: '**/SafeApp.nuspec'
+        versioningScheme: byEnvVar
+        versionEnvVar: 'new_version'
+        includeSymbols: true
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: package'
+      inputs:
+        ArtifactName: package
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        nuGetFeedType: external
+        publishFeedCredentials: 'NuGet package release'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['isVersionChange'], 'true'))
+
+  - job: github_release
+    displayName: 'Create GitHub release'
+    pool:
+      vmImage: 'latest-macos'
+    dependsOn: windows_tests
+    steps:
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Pipeline Artifact'
+      inputs:
+        itemPattern: '**/*.nupkg'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(Build.SourcesDirectory)'
+      inputs:
+        SourceFolder: '$(Build.ArtifactStagingDirectory)'
+        Contents: '**/*.nupkg'
+        TargetFolder: '$(Build.SourcesDirectory)'
+        flattenFolders: true
+    - bash: |
+        export commitMessage=$(git log --format=%B -n 1)
+        
+        if [[ $commitMessage == [Vv]ersion[[:space:]]change* ]]; then
+            echo '##vso[task.setvariable variable=isVersionChange]true'
+            echo "##vso[task.setvariable variable=commit_message]$commitMessage"
+        fi
+        
+        if $isVersionChange; then
+            version=$(perl -pe '($_)=/([0-9]+([.][0-9]+)+([-][Rr][Cc][0-9]+)?)/' <<< $commitMessage)
+            echo "##vso[task.setvariable variable=new_version]$version"
+        fi
+      displayName: 'Check version change'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    - bash: |
+        brew install coreutils
+        bash get_release_description.sh
+      displayName: 'Generate Release Notes File'
+      workingDirectory: Build
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['isVersionChange'], 'true'))
+    - task: GitHubRelease@1
+      displayName: 'GitHub release (create)'
+      inputs:
+        gitHubConnection: 'MaidSafe-QA'
+        tagSource: userSpecifiedTag
+        tag: '$(new_version)'
+        title: '$(new_version)'
+        releaseNotesFilePath: 'Build/release_description.txt'
+        assets: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+        isDraft: true
+        addChangeLog: false
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['isVersionChange'], 'true'))

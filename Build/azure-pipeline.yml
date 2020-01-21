@@ -45,15 +45,15 @@ jobs:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate'
         inputs:
-          certSecureFile: 'c0149354-c607-4f1f-ae9c-a9915366104c'
+          certSecureFile: 'dev certificate.p12'
           certPwd: '$(P12password)'
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile'
         inputs:
-          provProfileSecureFile: '07785afd-443a-45d0-8654-e1bfc73aa0b7'
+          provProfileSecureFile: 'dev profile.mobileprovision'
       - bash: |
           #Run cake script
-          #chmod +x build.sh
+          chmod +x build.sh
           ./build.sh --target=UnZip-Libs
           ./build.sh --target=Restore-NuGet
           ./build.sh --target=Run-iOS-Tests
@@ -63,7 +63,7 @@ jobs:
         displayName: 'Publish Test Results'
         inputs:
             testResultsFormat: NUnit
-            testResultsFiles: '**/*.TestResult.xml'
+            testResultsFiles: '**/*TestResult.xml'
             failTaskOnFailedTests: true
             testRunTitle: 'iOS Tests'
         condition: succeededOrFailed()
@@ -75,7 +75,7 @@ jobs:
     steps:
     # Setup and run Android and desktop tests
     - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
         mono --version
         /usr/bin/xcodebuild -version
 
@@ -88,7 +88,7 @@ jobs:
         ./build.sh --target=UnZip-Libs
         ./build.sh --target=Run-Android-Tests
         ./build.sh --target=Run-Desktop-Tests
-        displayName: 'Build Solution and Run Tests'
+      displayName: 'Build Solution and Run Tests'
       workingDirectory: Build
     - task: PublishTestResults@2
       displayName: 'Publish .NET Core Test MacOS Results'

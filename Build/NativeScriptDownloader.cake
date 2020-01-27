@@ -1,4 +1,4 @@
-var TAG = "9a41307";
+var TAG = "0.7.0";
 
 var S3_DOWNLOAD_BASE_URL = "https://safe-api.s3.amazonaws.com/";
 var LIB_DIR_NAME = "../SafeApp.AppBindings/NativeLibs/";
@@ -19,7 +19,7 @@ var IOS_ARCHITECTURES = new string[] {
 var DESKTOP_ARCHITECTURES = new string[] {
   "x86_64-unknown-linux-gnu",
   "x86_64-apple-darwin",
-  "x86_64-pc-windows-gnu"
+  "x86_64-pc-windows-msvc"
 };
 var All_ARCHITECTURES = new string[][] {
   ANDROID_ARCHITECTURES,

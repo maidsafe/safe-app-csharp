@@ -41,7 +41,7 @@ jobs:
         sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
         mono --version
       displayName: 'Set mono version'
-      condition: and(succeeded(), eq(variables['imageName'], 'macOS-latest'))
+      condition: and(succeeded(), in(variables['imageName'], 'macOS-latest', 'ubuntu-18.04'))
     - task: UseDotNet@2
       displayName: 'Use .Net Core sdk $(NETCORE_TEST_VERSION)'
       inputs:

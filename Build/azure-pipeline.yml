@@ -1,6 +1,6 @@
 variables:
   MONO_VERSION: 6_4_0
-  XCODE_VERSION: 11.1
+  XCODE_VERSION: 11.2
   NETCORE_TEST_VERSION: '2.2.x'
   IOS_SIM_NAME: 'iPhone 11'
   IOS_SIM_RUNTIME: 'com.apple.CoreSimulator.SimRuntime.iOS-13-2'

@@ -1,5 +1,36 @@
 # safe_app_csharp Change Log
 
+## [0.3.0]
+
+### Changes
+
+- Updated minimum supported version for the desktop and mobile platforms. 
+- Added new simplied APIs for pWeb and test SafeCoins using `[safe-api](https://github.com/maidsafe/safe-api/tree/master/safe-ffi)`.
+  - Connect API: add binding and implementation for the connect APIs.
+  - Fetch API: add binding and implementation for the Fetch and Inspect APIs.
+  - Files API: add binding and implementation for the Files APIs.
+  - Keys API: add binding and implementation for the keys APIs.
+  - NRS API: add binding and implementation for the NRS APIs.
+  - Wallet API: add binding and implementation for the Wallet APIs.
+  - XorUrl API: add binding and implementation for the XorUrlEncoder APIs.
+  - Added `SetConfigurationFilePathAsync` API to set the config location path for the local vault connection.
+  - Added `AppConfigDirPathAsync` API to get the current app configuration directory path.
+  - Added `AuthApp` API to use cli service for app authentication on desktop.
+- Renamed `SafeApp.Utilites` project to `SafeApp.Core`.
+- Updated `MockAuthBindings` and mock authenticator bindings to latest `safe_authenticator`.
+- Updated `AppKeys` bindings to the latest `safe_client_libs`.
+- Updated `AppBindings` and `MockAuthBindings` project to use multi-target style project.
+- Updated Tests to verify the working of all the new APIs.
+- Removed `safe_app` bindings and wrapper APIs.
+- Removed `JetBrains.Annotations` package and related code.
+- Refactored solution to remove `Newtonsoft.Json` dependency.
+- Refactored solution to use solution level pros and code analyzer.
+- Updated solution to use C# 7.3.
+- Fixed iOS native library loading issue.
+- Fixes NuGet package generation issue.
+- Moved Azure DevOps CI setup to the repo.
+- Updated the `safe-api` native libs to master branch commit [#6cf0aa6](https://github.com/maidsafe/safe-api/commit/6cf0aa67879b1398c2365c07d8cc4f1e54cfe2de).
+
 ## [0.3.0] - RC 3
 
 ### Changes

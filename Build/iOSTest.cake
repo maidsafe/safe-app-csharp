@@ -1,7 +1,6 @@
 #load "Utility.cake"
 
-#addin nuget:?package=Cake.AppleSimulator&Version=0.1.0
-#addin nuget:?package=Cake.FileHelpers
+#addin nuget:?package=Cake.AppleSimulator&Version=0.2.0
 
 var IOS_TEST_PROJ_DIR = "../Tests/SafeApp.Tests.iOS/";
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";

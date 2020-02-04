@@ -1,8 +1,7 @@
 #load "Utility.cake"
 
-#addin nuget:?package=Cake.Android.Adb&version=3.0.0
-#addin nuget:?package=Cake.Android.AvdManager&version=1.0.3
-#addin nuget:?package=Cake.FileHelpers
+#addin nuget:?package=Cake.Android.Adb
+#addin nuget:?package=Cake.Android.AvdManager
 
 var ANDROID_TEST_PROJ_DIR = "../Tests/SafeApp.Tests.Android/";
 var ANDROID_TEST_PROJ = $"{ANDROID_TEST_PROJ_DIR}SafeApp.Tests.Android.csproj";

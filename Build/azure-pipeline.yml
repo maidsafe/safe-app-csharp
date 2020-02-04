@@ -3,7 +3,7 @@ variables:
   XCODE_VERSION: 11.2
   NETCORE_TEST_VERSION: '2.2.x'
   IOS_SIM_NAME: 'iPhone 11'
-  IOS_SIM_RUNTIME: 'com.apple.CoreSimulator.SimRuntime.iOS-13-2'
+  IOS_SIM_RUNTIME: 'com.apple.CoreSimulator.SimRuntime.iOS-13-3'
   ANDROID_EMU_TARGET: 'system-images;android-28;google_apis;x86_64'
   ANDROID_EMU_DEVICE: 'Nexus 6P'
   CAKE_SETTINGS_SKIPVERIFICATION: true

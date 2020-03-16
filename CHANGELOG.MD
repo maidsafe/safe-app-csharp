@@ -1,5 +1,12 @@
 # safe_app_csharp Change Log
 
+## [0.3.1] - RC 1
+
+### Changes
+
+- Updated native libs to support baby fleming network.
+- Updated the `safe-api` native libs to baby-fleming-mobile branch commit [#b3862a1](https://github.com/maidsafe/safe-api/commit/b3862a13efb100de8977da2a87cb28ad5288e2b0).
+
 ## [0.3.0]
 
 ### Changes

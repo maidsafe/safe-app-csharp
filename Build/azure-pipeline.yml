@@ -128,7 +128,7 @@ jobs:
     steps:
     # Setup and run Android and desktop tests
     - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
         mono --version
         /usr/bin/xcodebuild -version
 

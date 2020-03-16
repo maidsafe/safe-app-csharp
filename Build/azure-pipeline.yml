@@ -31,7 +31,7 @@ jobs:
         linux:
           imageName: 'ubuntu-18.04'
         mac:
-          imageName: 'macOS-latest'
+          imageName: 'macos-10.14'
         windows:
           imageName: 'windows-latest'
     pool:
@@ -41,7 +41,7 @@ jobs:
         sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
         mono --version
       displayName: 'Set mono version'
-      condition: and(succeeded(), eq(variables['imageName'], 'macOS-latest'))
+      condition: and(succeeded(), eq(variables['imageName'], 'macos-10.14'))
     - task: UseDotNet@2
       displayName: 'Use .Net Core sdk $(NETCORE_TEST_VERSION)'
       inputs:
@@ -64,7 +64,7 @@ jobs:
         ./build.sh --target=Run-Desktop-Tests
       workingDirectory: Build
       displayName: 'Build Solution and Run Tests'
-      condition: and(succeeded(), in(variables['imageName'], 'macOS-latest', 'ubuntu-18.04'))
+      condition: and(succeeded(), in(variables['imageName'], 'macos-10.14', 'ubuntu-18.04'))
     - task: PublishTestResults@2
       displayName: 'Publish .NET Core Test Linux Results'
       inputs:
@@ -77,7 +77,7 @@ jobs:
   - job: ios_tests
     displayName: Run Tests - iOS
     pool:
-      vmImage: 'macOS-latest'
+      vmImage: 'macos-10.14'
       demands: xcode
     steps:
       # Set active mono version
@@ -124,7 +124,7 @@ jobs:
   - job: android_tests
     displayName: Run Tests - Android
     pool:
-      vmImage: 'macOS-latest'
+      vmImage: 'macos-10.14'
     steps:
     # Setup and run Android and desktop tests
     - bash: |
@@ -214,7 +214,7 @@ jobs:
   - job: releases
     displayName: 'GitHub Release & NuGet Push'
     pool:
-      vmImage: 'macOS-latest'
+      vmImage: 'macos-10.14'
     dependsOn: [ nuget_create ]
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:

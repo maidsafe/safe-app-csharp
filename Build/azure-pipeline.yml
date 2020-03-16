@@ -128,10 +128,15 @@ jobs:
     steps:
     # Setup and run Android and desktop tests
     - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
         mono --version
         /usr/bin/xcodebuild -version
-
+      displayName: 'Set mono version'
+    - task: UseDotNet@2
+      displayName: 'Use .Net Core sdk $(NETCORE_TEST_VERSION)'
+      inputs:
+        version: $(NETCORE_TEST_VERSION)
+    - bash: |
         #Create Android AVD
         export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
         $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-28;google_apis;x86_64" --no_https > nul

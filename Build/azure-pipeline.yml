@@ -38,7 +38,7 @@ jobs:
       vmImage: $(imageName)
     steps:
     - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
         mono --version
       displayName: 'Set mono version'
       condition: and(succeeded(), eq(variables['imageName'], 'macOS-latest'))
@@ -128,7 +128,7 @@ jobs:
     steps:
     # Setup and run Android and desktop tests
     - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_18_1
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
         mono --version
         /usr/bin/xcodebuild -version
 

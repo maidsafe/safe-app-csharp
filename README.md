@@ -27,11 +27,11 @@
     * [Tests](#Tests)
     * [Packaging](#Packaging)
     * [Tools required](#Tools-required)
-6. [Contributing](#Contributing)
-7. [Useful resources](#Useful-resources)
-8. [Copyrights](#Copyrights)
-9. [Further Help](#Further-Help)
-10. [License](#License)
+6. [Useful resources](#Useful-resources)
+7. [Copyrights](#Copyrights)
+8. [Further Help](#Further-Help)
+9. [License](#License)
+10. [Contributing](#Contributing)
 
 This project contains the C# bindings and API wrappers for the [safe_app](https://github.com/maidsafe/safe-api/) and mock [safe_authenticator](https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator). The native libraries, bindings and API wrapper are built and published as a NuGet package. The latest version can be fetched from the [MaidSafe.SafeApp NuGet package](https://www.nuget.org/packages/MaidSafe.SafeApp/).
 
@@ -123,12 +123,6 @@ https://github.com/maidsafe/safe_app_csharp/blob/master/PackageInstructions.txt)
 * [Docfx](https://github.com/dotnet/docfx) - to generate the API documentation
 * [Cake](https://cakebuild.net/) - Cross-platform build script tool used to build the projects and run the tests.
 
-## Contributing
-
-As an open source project we're excited to accept contributions to the code from outside of MaidSafe, and are striving to make that as easy and clean as possible.
-
-With enforced linting and commit style clearly laid out, as well as a list of more accessible issues for any project labeled with Help Wanted.
-
 ## Useful resources
 
 * [Using High-Performance C++ Libraries in Cross-Platform Xamarin.Forms Applications](https://devblogs.microsoft.com/xamarin/using-c-libraries-xamarin-forms-apps/)
@@ -148,3 +142,11 @@ Get your developer related questions clarified on [SAFE Dev Forum](https://forum
 ## License
 
 This SAFE Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
+
+## Contributing
+
+Want to contribute? Great :tada:
+
+There are many ways to give back to the project, whether it be writing new code, fixing bugs, or just reporting errors. All forms of contributions are encouraged!
+
+For instructions on how to contribute, see our [Guide to contributing](https://github.com/maidsafe/QA/blob/master/CONTRIBUTING.md).

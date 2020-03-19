@@ -42,7 +42,7 @@ Task("Run-iOS-Tests")
 
     foreach (var s in sims)
     {
-        Information("Info: {0} ({1} - {2} - {3})", s.Name, s.Runtime, s.UDID, s.Availability);
+        Information("Info: {0} ({1} - {2} - {3})", s.Name, s.Runtime, s.UDID, s.IsAvailable);
     }
 
     // Look for a matching simulator on the system

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8.3">
     <id>MaidSafe.SafeApp</id>
-    <version>0.3.1-rc1</version>
+    <version>0.3.1-rc2</version>
     <title>.NET library to interface with the SAFE Network</title>
     <authors>MaidSafe</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

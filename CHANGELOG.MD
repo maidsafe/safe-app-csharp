@@ -1,5 +1,13 @@
 # safe_app_csharp Change Log
 
+## [0.3.1] - RC 2
+
+### Changes
+
+- Added range (start, end) support in fetch and get_immutable_data API.
+- Updated native libs to support baby fleming network.
+- Updated the `safe-api` native libs to baby-fleming-mobile branch commit [#2d13e18](https://github.com/maidsafe/safe-api/commit/2d13e1844bb4bbf119035c162046341a769e2de5).
+
 ## [0.3.1] - RC 1
 
 ### Changes

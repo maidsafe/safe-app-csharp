@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SafeApp.Core;
@@ -66,6 +67,18 @@ namespace SafeApp.Tests
             var xorUrl = await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain", false);
             var newData = await session.Files.FilesGetPublishedImmutableAsync(xorUrl);
             Assert.AreEqual(data, newData);
+        }
+
+        [Test]
+        public async Task FilesPutAndGetPublishedImmutableRangeTest()
+        {
+            var session = await TestUtils.CreateTestApp();
+            var data = TestUtils.GetRandomString(20).ToUtfBytes();
+            var xorUrl = await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain", false);
+            var firstHalf = await session.Files.FilesGetPublishedImmutableAsync(xorUrl, 0, (ulong)(data.Length / 2));
+            var secondHalf = await session.Files.FilesGetPublishedImmutableAsync(xorUrl, (ulong)(data.Length / 2), (ulong)data.Length);
+            Assert.AreEqual(data.Take(data.Length / 2), firstHalf);
+            Assert.AreEqual(data.Skip(data.Length / 2), secondHalf);
         }
 
         async Task RunSyncTest(bool dryRun)

@@ -173,13 +173,15 @@ namespace SafeApp.AppBindings
 
         #region Fetch
 
-        public Task<ISafeData> FetchAsync(IntPtr app, string url)
+        public Task<ISafeData> FetchAsync(IntPtr app, string url, ulong start, ulong end)
         {
             var (task, userData) = BindingUtils.PrepareTask<ISafeData>();
             FetchNative(
               app,
               url,
               userData,
+              start,
+              end,
               DelegateOnFfiResultPublishedImmutableDataCb,
               DelegateOnFfiResultWalletCb,
               DelegateOnFfiResultSafeKeyCb,
@@ -193,6 +195,8 @@ namespace SafeApp.AppBindings
             IntPtr app,
             [MarshalAs(UnmanagedType.LPStr)] string url,
             IntPtr userData,
+            ulong start,
+            ulong end,
             FfiResultPublishedImmutableDataCb oPublished,
             FfiResultWalletCb oWallet,
             FfiResultSafeKeyCb oKeys,
@@ -837,12 +841,14 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        public Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url)
+        public Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end)
         {
             var (ret, userData) = BindingUtils.PrepareTask<byte[]>();
             FilesGetPublishedImmutableNative(
                 app,
                 url,
+                start,
+                end,
                 userData,
                 DelegateOnFfiResultByteListCb);
             return ret;
@@ -852,6 +858,8 @@ namespace SafeApp.AppBindings
         private static extern void FilesGetPublishedImmutableNative(
             IntPtr app,
             [MarshalAs(UnmanagedType.LPStr)] string url,
+            ulong start,
+            ulong end,
             IntPtr userData,
             FfiResultByteListCb oCb);
 

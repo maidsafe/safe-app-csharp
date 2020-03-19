@@ -132,9 +132,13 @@ namespace SafeApp.API
         /// Get Published ImmutableData from the network.
         /// </summary>
         /// <param name="url">XorUrl to fetch the content.</param>
+        /// <param name="start">Start index to fetch the content.</param>
+        /// <param name="end">End index to fetch the content.</param>
         /// <returns>Raw data from the network in byte[] format.</returns>
         public Task<byte[]> FilesGetPublishedImmutableAsync(
-            string url)
-            => AppBindings.FilesGetPublishedImmutableAsync(_appPtr, url);
+            string url,
+            ulong start = 0,
+            ulong end = 0)
+            => AppBindings.FilesGetPublishedImmutableAsync(_appPtr, url, start, end);
     }
 }

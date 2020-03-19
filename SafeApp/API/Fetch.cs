@@ -24,9 +24,11 @@ namespace SafeApp.API
         /// Fetch content from the SAFE Network.
         /// </summary>
         /// <param name="url">safe:// url to fetch the content.</param>
+        /// <param name="start">Start index to fetch the content.</param>
+        /// <param name="end">End index to fetch the content.</param>
         /// <returns>New ISafeData instance based on the content type</returns>
-        public Task<ISafeData> FetchAsync(string url)
-            => AppBindings.FetchAsync(_appPtr, url);
+        public Task<ISafeData> FetchAsync(string url, ulong start = 0, ulong end = 0)
+            => AppBindings.FetchAsync(_appPtr, url, start, end);
 
         /// <summary>
         /// Inspect the content from the SAFE Network.

@@ -64,7 +64,7 @@ namespace SafeApp.AppBindings
 
         #region Fetch
 
-        Task<ISafeData> FetchAsync(IntPtr app, string uri);
+        Task<ISafeData> FetchAsync(IntPtr app, string url, ulong start, ulong end);
 
         Task<ISafeData> InspectAsync(IntPtr app, string uri);
 
@@ -108,7 +108,7 @@ namespace SafeApp.AppBindings
 
         Task<string> FilesPutPublishedImmutableAsync(IntPtr app, byte[] data, string mediaType, bool dryRun);
 
-        Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url);
+        Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end);
 
         #endregion Files
 

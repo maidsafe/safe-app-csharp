@@ -869,6 +869,35 @@ namespace SafeApp.AppBindings
             IntPtr imDataPtr,
             UIntPtr imDataLen);
 
+        public Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(
+            IntPtr app,
+            string url,
+            bool recursive,
+            bool updateNrs,
+            bool dryRun)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, string)>();
+            FilesContainerRemovePathNative(
+                app,
+                url,
+                recursive,
+                updateNrs,
+                dryRun,
+                userData,
+                DelegateOnFfiResultULongProcessedFilesStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "files_container_remove_path")]
+        private static extern void FilesContainerRemovePathNative(
+            IntPtr app,
+            [MarshalAs(UnmanagedType.LPStr)] string url,
+            [MarshalAs(UnmanagedType.U1)] bool recursive,
+            [MarshalAs(UnmanagedType.U1)] bool updateNrs,
+            [MarshalAs(UnmanagedType.U1)] bool dryRun,
+            IntPtr userData,
+            FfiResultULongProcessedFilesStringCb oCb);
+
 #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultByteListCb))]
 #endif

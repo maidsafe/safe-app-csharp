@@ -95,6 +95,25 @@ namespace SafeApp.API
             => AppBindings.FilesContainerAddAsync(_appPtr, sourceFile, url, force, updateNrs, dryRun);
 
         /// <summary>
+        /// Remove a file from an existing FilesContainer..
+        /// </summary>
+        /// <param name="url">XorUrl to remove the FiledContainer.</param>
+        /// <param name="recursive">Flag denoting if the sub-folders should be removed.</param>
+        /// <param name="updateNrs">Flag denoting if the NRS maps should be updated.</param>
+        /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
+        /// <returns>
+        /// FilesContainer's version,
+        /// new instance of ProcessedFiles containing the list of processed files,
+        /// FilesMap JSON string.
+        /// </returns>
+        public Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(
+            string url,
+            bool recursive,
+            bool updateNrs,
+            bool dryRun)
+            => AppBindings.FilesContainerRemovePathAsync(_appPtr, url, recursive, updateNrs, dryRun);
+
+        /// <summary>
         /// Add a file, from raw bytes, on an existing FilesContainer.
         /// </summary>
         /// <param name="data">Raw data in byte[] format.</param>

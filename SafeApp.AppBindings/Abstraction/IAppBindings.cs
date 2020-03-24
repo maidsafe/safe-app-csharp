@@ -110,6 +110,8 @@ namespace SafeApp.AppBindings
 
         Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end);
 
+        Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(IntPtr app, string url, bool recursive, bool updateNrs, bool dryRun);
+
         #endregion Files
 
         #region Keys

@@ -1,4 +1,4 @@
-var TAG = "2d13e18";
+var TAG = "4b62cb8";
 
 var S3_DOWNLOAD_BASE_URL = "https://safe-api.s3.amazonaws.com/";
 var LIB_DIR_NAME = "../SafeApp.AppBindings/NativeLibs/";
@@ -43,7 +43,7 @@ Task("Download-Libs")
     foreach(var item in Enum.GetValues(typeof (Environment)))
     {
       string[] targets = null;
-      Information($"\n {item} ");
+      Information($"\n{item} ");
       switch (item) 
       {
       case Environment.Android:

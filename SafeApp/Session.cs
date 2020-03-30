@@ -266,9 +266,9 @@ namespace SafeApp
         /// Check if the native library was compiled with mock-routing feature.
         /// </summary>
         /// <returns>True if native library was compiled with mock-routing feature otherwise false.</returns>
-        public static bool IsMockBuild()
+        public static bool AppIsMock()
         {
-            return AppBindings.IsMockBuild();
+            return AppBindings.AppIsMock();
         }
 
         private static void OnDisconnected(Session session)

@@ -17,7 +17,7 @@ namespace SafeApp.Tests
 
         [Test]
         public void IsMockSafeAppBuildTest()
-            => Assert.That(Session.IsMockBuild(), Is.True);
+            => Assert.That(Session.AppIsMock(), Is.True);
 
         [Test]
         public async Task SetConfigFileDirPathTest()

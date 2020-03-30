@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD1_2 || __DESKTOP__
+﻿#if !NETSTANDARD || __DESKTOP__
 
 using System;
 using System.Runtime.InteropServices;

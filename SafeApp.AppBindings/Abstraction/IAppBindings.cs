@@ -8,13 +8,22 @@ namespace SafeApp.AppBindings
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial interface IAppBindings
     {
-        #region Low Level
+        #region App Level
+        bool AppIsMock();
+
+        Task AppSetConfigDirPathAsync(string newPath);
+
+        #endregion
+
+        #region Logging
 
         Task AppInitLoggingAsync(string outputFileNameOverride);
 
         Task<string> AppConfigDirPathAsync();
 
-        Task AppSetConfigDirPathAsync(string newPath);
+        #endregion
+
+        #region IPC
 
         Task<(uint, string)> EncodeAuthReqAsync(ref AuthReq req);
 
@@ -24,11 +33,12 @@ namespace SafeApp.AppBindings
 
         Task<(uint, string)> EncodeUnregisteredReqAsync(byte[] extraData);
 
-        bool IsMockBuild();
+        Task<IpcMsg> DecodeIpcMsgAsync(string msg);
 
         #endregion
 
         #region High Level
+
         Task<string> AuthAppAsync(string appId, string appName, string appVendor, string endpoint);
 
         void ConnectApp(

@@ -1,4 +1,4 @@
-var TAG = "a7d7f65";
+var TAG = "64a5f70";
 
 var S3_DOWNLOAD_BASE_URL = "https://safe-api.s3.amazonaws.com/";
 var LIB_DIR_NAME = "../SafeApp.AppBindings/NativeLibs/";

@@ -33,8 +33,6 @@ namespace SafeApp.MockAuthBindings
 
         Task<string> EncodeUnregisteredRespAsync(uint reqId, bool isGranted);
 
-        Task TestSimulateNetworkDisconnectAsync(IntPtr authPtr);
-
         bool IsMockBuild();
     }
 }

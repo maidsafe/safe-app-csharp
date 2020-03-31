@@ -103,15 +103,6 @@ namespace SafeApp.MockAuthBindings
             return NativeBindings.EncodeUnregisteredRespAsync(reqId, allow);
         }
 
-        /// <summary>
-        /// Simulate a network Disconnect.
-        /// </summary>
-        /// <returns></returns>
-        public async Task SimulateNetworkDisconnectAsync()
-        {
-            await NativeBindings.TestSimulateNetworkDisconnectAsync(_authPtr);
-        }
-
         private Authenticator()
         {
             IsDisconnected = true;

@@ -323,16 +323,6 @@ namespace SafeApp.MockAuthBindings
 
         private static readonly FfiResultStringCb DelegateOnFfiResultStringCb = OnFfiResultStringCb;
 
-        public Task TestSimulateNetworkDisconnectAsync(IntPtr authPtr)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask();
-            TestSimulateNetworkDisconnectNative(authPtr, userData, OnFfiResultCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "test_simulate_network_disconnect")]
-        private static extern void TestSimulateNetworkDisconnectNative(IntPtr app, IntPtr userData, FfiResultCb oCb);
-
         private delegate void NoneCb(IntPtr userData);
 
         private delegate void UIntAuthReqCb(IntPtr userData, uint reqId, IntPtr req);

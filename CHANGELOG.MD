@@ -1,5 +1,16 @@
 # safe_app_csharp Change Log
 
+## [0.3.1]
+
+### Changes
+
+- Added range (start, end) support in fetch and get_immutable_data API.
+- Added support to create empty files container.
+- Updated native libs to support single section network.
+- Removed `SimulateNetworkDisconnectAsync` function from the mock authenticator APIs.
+- Update bindings to use updated FFI setup from safe-api and remove direct safe_app dependency.
+- Updated the `safe-api` native libs to master branch commit [#64a5f70](https://github.com/maidsafe/safe-api/commit/64a5f70ffab4519c81771a6cd61b445d504a061e).
+
 ## [0.3.1] - RC 2
 
 ### Changes

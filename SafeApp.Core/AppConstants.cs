@@ -48,7 +48,7 @@
         /// <summary>
         /// Length of Symmetric key nonce
         /// </summary>
-        public const ulong SymNonceLen = 24;
+        public const ulong SymNonceLen = 16;
 
         /// <summary>
         /// `MutableData` type tag for a directory.

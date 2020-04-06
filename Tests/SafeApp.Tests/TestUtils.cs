@@ -83,6 +83,7 @@ namespace SafeApp.Tests
             Assert.That(ipcReq, Is.TypeOf<AuthIpcReq>());
             var authIpcReq = ipcReq as AuthIpcReq;
             var resMsg = await authenticator.EncodeAuthRespAsync(authIpcReq, true);
+            var resp = await Session.DecodeIpcMessageAsync(resMsg);
             return await Session.AppConnectAsync(authReq.App.Id, resMsg);
         }
 

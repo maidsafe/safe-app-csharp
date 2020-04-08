@@ -34,12 +34,6 @@ Task("Analyse-Test-Result-Files")
     Information("All Test Results Analysed successfully.");
 });
 
-Task("Run-AppVeyor-Build")
-  .IsDependentOn("UnZip-Libs")
-  .IsDependentOn("Run-Desktop-Tests-AppVeyor")
-  .Does(() => {
-  });
-
 Task("Default")
   .IsDependentOn("UnZip-Libs")
   .IsDependentOn("Run-Desktop-Tests")

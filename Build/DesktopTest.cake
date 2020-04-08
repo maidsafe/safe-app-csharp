@@ -48,7 +48,7 @@ Task("Run-Desktop-Tests")
       });
   });
 
-Task("Run-Desktop-Tests-AppVeyor")
+Task("Run-Desktop-Tests-With-Coverage")
   .IsDependentOn("Build-Desktop-Project")
   .Does(() => {
     OpenCover(tool => {
@@ -72,39 +72,17 @@ Task("Run-Desktop-Tests-AppVeyor")
     .WithFilter("+[*]*")
     .WithFilter("-[SafeApp.Tests*]*")
     .WithFilter("-[NUnit3.*]*"));
-  })
-  .Finally(() =>
-  {
-    var resultFile = string.Empty; 
-    if (FileExists(Desktop_TESTS_RESULT_PATH))
-    {
-      resultFile = File(Desktop_TESTS_RESULT_PATH);
-    }
-    else
-    {
-      resultFile = GetFiles(Desktop_test_result_directory + "/DesktopTestResult*.xml").LastOrDefault().FullPath;
-    }
+  });
 
-    if (!string.IsNullOrEmpty(resultFile))
-    {
-      Information($"Test result file found: {resultFile}");
-      Desktop_TESTS_RESULT_PATH = resultFile;
-
-      if(AppVeyor.IsRunningOnAppVeyor)
-      {
-        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.MSTest);
-      }
-    }
-    else
-    {
-      throw new Exception("Test result file not found.");
-    }
-    
-    if(EnvironmentVariable("is_not_pr") == "true")
-    {
+Task("Upload-Test-Coverage")
+  .IsDependentOn("Run-Desktop-Tests-With-Coverage")
+  .Does(() => {
+    var resultFile = string.Empty;
+    if (FileExists(codeCoverageFilePath))
       CoverallsIo(codeCoverageFilePath, new CoverallsIoSettings()
       {
         RepoToken = coveralls_token
       });
-    }
+    else
+      throw new Exception("Test coverage file not found.");
   });

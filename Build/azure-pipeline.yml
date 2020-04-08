@@ -54,10 +54,15 @@ jobs:
       displayName: 'NuGet restore'
     - powershell: |
         powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=UnZip-Libs
-        powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=Run-Desktop-Tests
+        powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=Run-Desktop-Tests-With-Coverage
       displayName: 'Build and Run .NET Core Tests'
       workingDirectory: Build
       condition: and(succeeded(), eq(variables['imageName'], 'windows-latest'))
+    - powershell: |
+        powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=Upload-Test-Coverage
+      displayName: 'Upload test coverage'
+      workingDirectory: Build
+      condition: and(succeeded(), eq(variables['imageName'], 'windows-latest'), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     - bash: |
         chmod +x build.sh
         ./build.sh --target=UnZip-Libs
@@ -215,6 +220,22 @@ jobs:
       inputs:
         ArtifactName: package
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - job: publish_docs
+    displayName: 'Publish API docs'
+    pool:
+      vmImage: 'macos-10.14'
+    dependsOn: [ nuget_create ]
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    steps:
+    - bash: |
+        choco install docfx
+        npm install gh-pages -g
+      displayName: 'Install docfx and gh-page'
+    - bash: |
+        gh-pages-clean
+        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_PUSH_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
+      displayName: 'Upload gh-pages'      
 
   - job: releases
     displayName: 'GitHub Release & NuGet Push'

@@ -4,9 +4,7 @@
       "src": [
         {
           "files": [
-            "SafeApp/**.csproj",
-            "SafeApp.MockAuthBindings/**.csproj",
-            "SafeApp.Core/**.csproj"
+            "SafeApp/**.csproj"
           ],
           "src": "../"
         }

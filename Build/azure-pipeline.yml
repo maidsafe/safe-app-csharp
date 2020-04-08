@@ -229,7 +229,7 @@ jobs:
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
     - bash: |
-        choco install docfx
+        brew install docfx
         npm install gh-pages -g
       displayName: 'Install docfx and gh-page'
     - bash: |

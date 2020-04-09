@@ -1,6 +1,7 @@
 ﻿#if !NETSTANDARD || __DESKTOP__
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -248,7 +249,7 @@ namespace SafeApp.AppBindings
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion,
             string baseEncoding)
         {
@@ -259,7 +260,8 @@ namespace SafeApp.AppBindings
                 (ulong)dataType,
                 (ushort)contentType,
                 path,
-                subNames,
+                subNames?.ToArray(),
+                (UIntPtr)(subNames?.Count ?? 0),
                 contentVersion,
                 baseEncoding,
                 userData,
@@ -274,7 +276,8 @@ namespace SafeApp.AppBindings
             ulong dataType,
             ushort contentType,
             [MarshalAs(UnmanagedType.LPStr)] string path,
-            [MarshalAs(UnmanagedType.LPStr)] string subNames,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
+            UIntPtr subNamesLen,
             ulong contentVersion,
             [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
             IntPtr userData,
@@ -286,7 +289,7 @@ namespace SafeApp.AppBindings
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion)
         {
             var (ret, userData) = BindingUtils.PrepareTask<XorUrlEncoder>();
@@ -296,7 +299,8 @@ namespace SafeApp.AppBindings
                 (ulong)dataType,
                 (ushort)contentType,
                 path,
-                subNames,
+                subNames?.ToArray(),
+                (UIntPtr)(subNames?.Count ?? 0),
                 contentVersion,
                 userData,
                 DelegateOnFfiResultXorUrlEncoderCb);
@@ -310,7 +314,8 @@ namespace SafeApp.AppBindings
             ulong dataType,
             ushort contentType,
             [MarshalAs(UnmanagedType.LPStr)] string path,
-            [MarshalAs(UnmanagedType.LPStr)] string subNames,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
+            UIntPtr subNamesLen,
             ulong contentVersion,
             IntPtr userData,
             FfiResultXorUrlEncoderCb oCb);

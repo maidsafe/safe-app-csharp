@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SafeApp.AppBindings;
 using SafeApp.Core;
 
@@ -29,7 +30,7 @@ namespace SafeApp.API
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion,
             string baseEncoding)
             => AppBindings.XorurlEncodeAsync(xorName, typeTag, dataType, contentType, path, subNames, contentVersion, baseEncoding);
@@ -52,7 +53,7 @@ namespace SafeApp.API
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion)
             => AppBindings.XorurlEncoderAsync(xorName, typeTag, dataType, contentType, path, subNames, contentVersion);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using SafeApp.Core;
@@ -55,7 +56,7 @@ namespace SafeApp.AppBindings
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion,
             string baseEncoding);
 
@@ -65,7 +66,7 @@ namespace SafeApp.AppBindings
             DataType dataType,
             ContentType contentType,
             string path,
-            string subNames,
+            List<string> subNames,
             ulong contentVersion);
 
         Task<XorUrlEncoder> XorurlEncoderFromUrlAsync(string xorUrl);

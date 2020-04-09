@@ -32,7 +32,7 @@ namespace SafeApp.Tests
             Assert.AreEqual(DataType.SafeKey, xorUrlEncoder.DataType);
             Assert.AreEqual(1, xorUrlEncoder.EncodingVersion);
             Assert.AreEqual(string.Empty, xorUrlEncoder.Path);
-            Assert.IsEmpty(xorUrlEncoder.SubNames);
+            Assert.IsNull(xorUrlEncoder.SubNames);
             Assert.AreEqual(0, xorUrlEncoder.TypeTag);
             Validate.XorName(xorUrlEncoder.XorName);
         }

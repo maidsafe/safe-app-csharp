@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace SafeApp.Core
@@ -60,7 +61,7 @@ namespace SafeApp.Core
         /// <summary>
         /// XorUrl sub names for the data.
         /// </summary>
-        public string SubNames;
+        public List<string> SubNames;
 
         /// <summary>
         /// Content version on the network.
@@ -75,7 +76,7 @@ namespace SafeApp.Core
             DataType = (DataType)native.DataType;
             ContentType = (ContentType)native.ContentType;
             Path = native.Path;
-            SubNames = native.SubNames;
+            SubNames = BindingUtils.CopyToStringList(native.SubNamesPtr, (int)native.SubNamesLen);
             ContentVersion = native.ContentVersion;
         }
 
@@ -89,7 +90,8 @@ namespace SafeApp.Core
                 DataType = (ulong)DataType,
                 ContentType = (ushort)ContentType,
                 Path = Path,
-                SubNames = SubNames,
+                SubNamesPtr = BindingUtils.CopyFromStringList(SubNames),
+                SubNamesLen = (UIntPtr)(SubNames?.Count ?? 0),
                 ContentVersion = ContentVersion,
             };
         }
@@ -105,9 +107,14 @@ namespace SafeApp.Core
         public ushort ContentType;
         [MarshalAs(UnmanagedType.LPStr)]
         public string Path;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string SubNames;
+        public IntPtr SubNamesPtr;
+        public UIntPtr SubNamesLen;
         public ulong ContentVersion;
+
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref SubNamesPtr, ref SubNamesLen);
+        }
     }
 
     /// <summary>

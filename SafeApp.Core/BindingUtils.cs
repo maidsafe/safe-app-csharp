@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SafeApp.Core
@@ -146,6 +147,70 @@ namespace SafeApp.Core
             }
 
             return list;
+        }
+
+        public static List<string> CopyToStringList(IntPtr ptr, int len)
+        {
+            if (ptr == IntPtr.Zero || len <= 0)
+                return null;
+
+            var list = new List<string>();
+
+            for (int count = 0; count < len && Marshal.ReadIntPtr(ptr, count * IntPtr.Size) != IntPtr.Zero; ++count)
+            {
+                list.Add(PtrToString(Marshal.ReadIntPtr(ptr, count * IntPtr.Size)));
+            }
+            return list;
+        }
+
+        internal static string PtrToString(IntPtr handle)
+        {
+            if (handle == IntPtr.Zero)
+                return string.Empty;
+
+            var data = new List<byte>();
+            var offset = 0;
+
+            while (true)
+            {
+                var ch = Marshal.ReadByte(handle, offset++);
+
+                if (ch == 0)
+                    break;
+
+                data.Add(ch);
+            }
+
+            return Encoding.UTF8.GetString(data.ToArray());
+        }
+
+        public static IntPtr CopyFromStringList(List<string> str)
+        {
+            var unmanagedPointer = Marshal.AllocHGlobal(str.Count * IntPtr.Size);
+            var ptrList = StringArrayToIntPtrArray(str.ToArray());
+            Marshal.Copy(ptrList, 0, unmanagedPointer, str.Count);
+            return unmanagedPointer;
+        }
+
+        public static IntPtr[] StringArrayToIntPtrArray(string[] str)
+        {
+            int length = str.Length;
+            IntPtr[] arr = new IntPtr[length];
+            for (int i = 0; i < length; i++)
+            {
+                arr[i] = Utf8StringToIntPtr(str[i]);
+            }
+            return arr;
+        }
+
+        public static IntPtr Utf8StringToIntPtr(string str)
+        {
+            var len = Encoding.UTF8.GetByteCount(str);
+            var buffer = new byte[len + 1];
+            Encoding.UTF8.GetBytes(str, 0, str.Length, buffer, 0);
+            var nativeUtf8 = Marshal.AllocHGlobal(buffer.Length);
+            Marshal.Copy(buffer, 0, nativeUtf8, buffer.Length);
+            return nativeUtf8;
         }
 
         public static void FreeList(ref IntPtr ptr, ref UIntPtr len)

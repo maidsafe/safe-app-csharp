@@ -98,8 +98,9 @@ namespace SafeApp.Tests
 
         public static async Task PersistedKeyPair(string xorUrl, BlsKeyPair keyPair, Keys api)
         {
-            Validate.TransientKeyPair(keyPair);
-            await Validate.XorUrlAsync(xorUrl, DataType.SafeKey, ContentType.Raw, 0);
+            TransientKeyPair(keyPair);
+
+            // await XorUrlAsync(xorUrl, DataType.SafeKey, ContentType.Raw, 0);
             var publicKey = await api.ValidateSkForUrlAsync(keyPair.SK, xorUrl);
             Assert.AreEqual(keyPair.PK, publicKey);
         }

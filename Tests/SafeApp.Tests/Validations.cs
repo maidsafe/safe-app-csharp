@@ -100,7 +100,7 @@ namespace SafeApp.Tests
         {
             TransientKeyPair(keyPair);
 
-            // await XorUrlAsync(xorUrl, DataType.SafeKey, ContentType.Raw, 0);
+            await XorUrlAsync(xorUrl, DataType.SafeKey, ContentType.Raw, 0);
             var publicKey = await api.ValidateSkForUrlAsync(keyPair.SK, xorUrl);
             Assert.AreEqual(keyPair.PK, publicKey);
         }

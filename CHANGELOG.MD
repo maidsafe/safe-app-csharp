@@ -1,5 +1,14 @@
 # safe_app_csharp Change Log
 
+## [0.3.2]
+
+### Changes
+
+- Fixed authentication response decode issue in `DecodeIpcMessageAsync` API.
+- Updated `XorUrlEncoder` to return correct value for SubNames field.
+- Update `BindingsUtils` to support `List<string>` types from bindgen.
+- Updated the `safe-api` native libs to master branch commit [#087c763](https://github.com/maidsafe/safe-api/commit/087c763fc4576fd3458e6123cde8ad83895e0f2e).
+
 ## [0.3.1]
 
 ### Changes

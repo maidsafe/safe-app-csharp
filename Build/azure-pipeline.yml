@@ -232,6 +232,9 @@ jobs:
         npm install gh-pages -g
       displayName: 'Install docfx and gh-page'
     - bash: |
+        docfx ./docs/docfx.json
+      displayName: 'Generate API docs'
+    - bash: |
         gh-pages-clean
         gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_PUSH_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
       displayName: 'Upload gh-pages'      

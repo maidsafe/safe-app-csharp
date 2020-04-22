@@ -4,7 +4,7 @@
       "src": [
         {
           "files": [
-            "SafeApp/**.csproj"
+            "SafeApp.Core/**.csproj"
           ],
           "src": "../"
         }

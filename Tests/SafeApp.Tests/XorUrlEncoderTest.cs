@@ -31,8 +31,8 @@ namespace SafeApp.Tests
                 "base32z");
             Assert.IsNotNull(encodedString);
             Assert.IsTrue(encodedString.StartsWith("safe://", StringComparison.Ordinal));
-            Assert.IsTrue(encodedString.Contains("subname1", StringComparison.Ordinal));
-            Assert.IsTrue(encodedString.Contains("subname2", StringComparison.Ordinal));
+            Assert.IsTrue(encodedString.Contains("subname1"));
+            Assert.IsTrue(encodedString.Contains("subname2"));
 
             var xorUrlEncoder = await XorEncoder.EncodeAsync(
                 xorName,

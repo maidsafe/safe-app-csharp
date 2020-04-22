@@ -169,7 +169,6 @@ jobs:
       - msbuild
       - visualstudio
     dependsOn: [ ios_tests, android_tests, desktop_tests ]
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
     - task: NuGetToolInstaller@1
       displayName: 'Use NuGet 5.x'

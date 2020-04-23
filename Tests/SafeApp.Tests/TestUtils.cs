@@ -87,6 +87,13 @@ namespace SafeApp.Tests
             return await Session.AppConnectAsync(authReq.App.Id, resMsg);
         }
 
+        public static byte[] GenerateRandomXorName()
+        {
+            var xorName = new byte[AppConstants.XorNameLen];
+            Random.NextBytes(xorName);
+            return xorName;
+        }
+
         public static string GetRandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

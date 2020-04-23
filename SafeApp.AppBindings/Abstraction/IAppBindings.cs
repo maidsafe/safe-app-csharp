@@ -58,6 +58,8 @@ namespace SafeApp.AppBindings
             string path,
             List<string> subNames,
             ulong contentVersion,
+            string queryParams,
+            string fragment,
             string baseEncoding);
 
         Task<XorUrlEncoder> XorurlEncoderAsync(
@@ -67,9 +69,30 @@ namespace SafeApp.AppBindings
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion);
+            ulong contentVersion,
+            string queryParams,
+            string fragment);
 
         Task<XorUrlEncoder> XorurlEncoderFromUrlAsync(string xorUrl);
+
+        Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding);
+
+        Task<string> EncodeImmutableDataAsync(
+            byte[] name,
+            ContentType contentType,
+            string baseEncoding);
+
+        Task<string> EncodeMutableDataAsync(
+            byte[] name,
+            ulong typeTag,
+            ContentType contentType,
+            string baseEncoding);
+
+        Task<string> EncodeAppendOnlyDataAsync(
+            byte[] name,
+            ulong typeTag,
+            ContentType contentType,
+            string baseEncoding);
 
         #endregion
 

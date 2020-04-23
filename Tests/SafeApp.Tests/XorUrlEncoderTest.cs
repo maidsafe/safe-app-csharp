@@ -11,12 +11,10 @@ namespace SafeApp.Tests
     public class XorUrlEncoderTest
     {
         [Test]
-        public async Task EncodeStringTestAsync()
+        public async Task XorUrlEncoderTestAsync()
         {
             var subNames = new List<string>() { "subname1", "subname2" };
-            var rnd = new Random();
-            var xorName = new byte[32];
-            rnd.NextBytes(xorName);
+            var xorName = TestUtils.GenerateRandomXorName();
             var typeTag = 16000UL;
             var contentType = ContentType.Wallet;
             var dataType = DataType.UnpublishedImmutableData;
@@ -28,6 +26,8 @@ namespace SafeApp.Tests
                 null,
                 subNames,
                 0,
+                null,
+                null,
                 "base32z");
             Assert.IsNotNull(encodedString);
             Assert.IsTrue(encodedString.StartsWith("safe://", StringComparison.Ordinal));
@@ -41,7 +41,9 @@ namespace SafeApp.Tests
                 contentType,
                 null,
                 subNames,
-                0);
+                0,
+                null,
+                null);
             Assert.AreEqual(xorName, xorUrlEncoder.XorName);
             Assert.AreEqual(subNames, xorUrlEncoder.SubNames);
             Validate.Encoder(xorUrlEncoder, dataType, contentType, typeTag);
@@ -53,6 +55,40 @@ namespace SafeApp.Tests
             Assert.AreEqual(typeTag, parsedEncoder.TypeTag);
             Assert.AreEqual(contentType, parsedEncoder.ContentType);
             Assert.AreEqual(0, parsedEncoder.ContentVersion);
+        }
+
+        [Test]
+        public async Task EncodeDataTypesTestAsync()
+        {
+            var safeKeyXorName = TestUtils.GenerateRandomXorName();
+            var encodedSafeKeyXorUrl = await XorEncoder.EncodeSafeKeyAsync(safeKeyXorName, "base32z");
+            Assert.IsNotNull(encodedSafeKeyXorUrl);
+
+            var iDataXorName = TestUtils.GenerateRandomXorName();
+            var encodedIDataXorUrl = await XorEncoder.EncodeImmutableDataAsync(
+                iDataXorName,
+                ContentType.Raw,
+                "base32z");
+            Assert.IsNotNull(encodedIDataXorUrl);
+
+            var typeTag = 16000UL;
+            var mDataXorName = TestUtils.GenerateRandomXorName();
+            var encodedMDataXorUrl = await XorEncoder.EncodeMutableDataAsync(
+                mDataXorName,
+                typeTag,
+                ContentType.Raw,
+                "base32z");
+            Assert.IsNotNull(encodedMDataXorUrl);
+            await Validate.XorUrlAsync(encodedMDataXorUrl, mDataXorName, ContentType.Raw, typeTag);
+
+            var aDataXorName = TestUtils.GenerateRandomXorName();
+            var encodedADataXorUrl = await XorEncoder.EncodeAppendOnlyDataAsync(
+                aDataXorName,
+                typeTag,
+                ContentType.FilesContainer,
+                "base32z");
+            Assert.IsNotNull(encodedADataXorUrl);
+            await Validate.XorUrlAsync(encodedADataXorUrl, aDataXorName, ContentType.FilesContainer, typeTag);
         }
     }
 }

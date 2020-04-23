@@ -68,6 +68,16 @@ namespace SafeApp.Core
         /// </summary>
         public ulong ContentVersion;
 
+        /// <summary>
+        /// XorUrl query.
+        /// </summary>
+        public string QueryParams;
+
+        /// <summary>
+        /// XorUrl fragment.
+        /// </summary>
+        public string Fragment;
+
         internal XorUrlEncoder(XorUrlEncoderNative native)
         {
             EncodingVersion = native.EncodingVersion;
@@ -78,6 +88,8 @@ namespace SafeApp.Core
             Path = native.Path;
             SubNames = BindingUtils.CopyToStringList(native.SubNamesPtr, (int)native.SubNamesLen);
             ContentVersion = native.ContentVersion;
+            QueryParams = native.QueryParams;
+            Fragment = native.Fragment;
         }
 
         internal XorUrlEncoderNative ToNative()
@@ -93,6 +105,8 @@ namespace SafeApp.Core
                 SubNamesPtr = BindingUtils.CopyFromStringList(SubNames),
                 SubNamesLen = (UIntPtr)(SubNames?.Count ?? 0),
                 ContentVersion = ContentVersion,
+                QueryParams = QueryParams,
+                Fragment = Fragment
             };
         }
     }
@@ -110,6 +124,10 @@ namespace SafeApp.Core
         public IntPtr SubNamesPtr;
         public UIntPtr SubNamesLen;
         public ulong ContentVersion;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string QueryParams;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Fragment;
 
         internal void Free()
         {

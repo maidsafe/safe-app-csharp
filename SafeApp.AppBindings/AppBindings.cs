@@ -251,6 +251,8 @@ namespace SafeApp.AppBindings
             string path,
             List<string> subNames,
             ulong contentVersion,
+            string queryParams,
+            string fragment,
             string baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
@@ -263,6 +265,8 @@ namespace SafeApp.AppBindings
                 subNames?.ToArray(),
                 (UIntPtr)(subNames?.Count ?? 0),
                 contentVersion,
+                queryParams,
+                fragment,
                 baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
@@ -279,6 +283,8 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
             UIntPtr subNamesLen,
             ulong contentVersion,
+            [MarshalAs(UnmanagedType.LPStr)] string queryParams,
+            [MarshalAs(UnmanagedType.LPStr)] string fragment,
             [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
@@ -290,7 +296,9 @@ namespace SafeApp.AppBindings
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion)
+            ulong contentVersion,
+            string queryParams,
+            string fragment)
         {
             var (ret, userData) = BindingUtils.PrepareTask<XorUrlEncoder>();
             XorurlEncoderNative(
@@ -302,6 +310,8 @@ namespace SafeApp.AppBindings
                 subNames?.ToArray(),
                 (UIntPtr)(subNames?.Count ?? 0),
                 contentVersion,
+                queryParams,
+                fragment,
                 userData,
                 DelegateOnFfiResultXorUrlEncoderCb);
             return ret;
@@ -317,6 +327,8 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
             UIntPtr subNamesLen,
             ulong contentVersion,
+            [MarshalAs(UnmanagedType.LPStr)] string queryParams,
+            [MarshalAs(UnmanagedType.LPStr)] string fragment,
             IntPtr userData,
             FfiResultXorUrlEncoderCb oCb);
 
@@ -332,6 +344,95 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string xorUrl,
             IntPtr userData,
             FfiResultXorUrlEncoderCb oCb);
+
+        public Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            EncodeSafekeyNative(name, baseEncoding, userData, DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "encode_safekey")]
+        private static extern void EncodeSafekeyNative(
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            IntPtr userData,
+            FfiResultStringCb oCb);
+
+        public Task<string> EncodeImmutableDataAsync(
+            byte[] name,
+            ContentType contentType,
+            string baseEncoding)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            EncodeImmutableDataNative(
+                name,
+                (ushort)contentType,
+                baseEncoding,
+                userData,
+                DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "encode_immutable_data")]
+        private static extern void EncodeImmutableDataNative(
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            ushort contentType,
+            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            IntPtr userData,
+            FfiResultStringCb oCb);
+
+        public Task<string> EncodeMutableDataAsync(
+            byte[] name,
+            ulong typeTag,
+            ContentType contentType,
+            string baseEncoding)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            EncodeMutableDataNative(
+                name,
+                typeTag,
+                (ushort)contentType,
+                baseEncoding,
+                userData,
+                DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "encode_mutable_data")]
+        private static extern void EncodeMutableDataNative(
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            ulong typeTag,
+            ushort contentType,
+            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            IntPtr userData,
+            FfiResultStringCb oCb);
+
+        public Task<string> EncodeAppendOnlyDataAsync(
+            byte[] name,
+            ulong typeTag,
+            ContentType contentType,
+            string baseEncoding)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            EncodeAppendOnlyDataNative(
+                name,
+                typeTag,
+                (ushort)contentType,
+                baseEncoding,
+                userData,
+                DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "encode_append_only_data")]
+        private static extern void EncodeAppendOnlyDataNative(
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            ulong typeTag,
+            ushort contentType,
+            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            IntPtr userData,
+            FfiResultStringCb oCb);
 
         private delegate void FfiResultXorUrlEncoderCb(IntPtr userData, IntPtr result, IntPtr xorurlEncoder);
 

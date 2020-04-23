@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -25,7 +24,7 @@ namespace SafeApp.Tests
             Assert.NotZero(info.TypeTag);
             Assert.IsNotNull(info.Version);
             Assert.IsNotNull(info.XorUrl);
-            Validate.XorName(info.XorName);
+            XorName(info.XorName);
         }
 
         public static void EnsureNullNrsContainerInfo(NrsMapContainerInfo info)
@@ -45,6 +44,14 @@ namespace SafeApp.Tests
             Encoder(encoder, expectedDataType, expectedContentType, expectedTypeTag);
         }
 
+        public static async Task XorUrlAsync(string xorUrl, byte[] expectedXorName, ContentType expectedContentType, ulong expectedTypeTag)
+        {
+            var encoder = await XorEncoder.XorUrlEncoderFromUrl(xorUrl);
+            Assert.AreEqual(expectedXorName, encoder.XorName);
+            Assert.AreEqual(expectedTypeTag, encoder.TypeTag);
+            Assert.AreEqual(expectedContentType, encoder.ContentType);
+        }
+
         public static void Encoder(XorUrlEncoder encoder, DataType expectedDataType, ContentType expectedContentType, ulong expectedTypeTag)
         {
             Assert.AreEqual(expectedContentType, encoder.ContentType);
@@ -59,7 +66,7 @@ namespace SafeApp.Tests
             Assert.AreEqual(string.Empty, encoder.SubNames);
             **/
             Assert.AreEqual(expectedTypeTag, encoder.TypeTag);
-            Validate.XorName(encoder.XorName);
+            XorName(encoder.XorName);
         }
 
         public static void RawNrsMap(string nrsMapRaw)

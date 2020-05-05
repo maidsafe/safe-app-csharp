@@ -224,8 +224,8 @@ jobs:
     displayName: 'Publish API docs'
     pool:
       vmImage: 'windows-latest'
-    # dependsOn: [ nuget_create ]
-    # condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    dependsOn: [ nuget_create ]
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
     - powershell: |
         choco install docfx

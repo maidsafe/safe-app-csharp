@@ -8,11 +8,9 @@
 
 ## Build Status
 
-| CI service | Platform | Status |
+| CI service | Status |
 |---|---|---|
-| Azure DevOps | .NET Core MacOS, Android x86_64, iOS | [![Build status](https://dev.azure.com/maidsafe/SafeApp/_apis/build/status/SafeApp-Mobile-CI?branchName=master)](https://dev.azure.com/maidsafe/SafeApp/_build/latest?definitionId=7&branchName=master) |
-| Azure DevOps | .NET Core Linux | [![Build Status](https://dev.azure.com/maidsafe/SafeApp/_apis/build/status/SafeApp-Linux-CI?branchName=master)](https://dev.azure.com/maidsafe/SafeApp/_build/latest?definitionId=12&branchName=master) |
-| AppVeyor | .NET Core Windows | [![Build status](https://ci.appveyor.com/api/projects/status/x3m722rvosw2coao/branch/master?svg=true)](https://ci.appveyor.com/project/MaidSafe-QA/safe-app-csharp/branch/master) [![Coverage Status](https://coveralls.io/repos/github/maidsafe/safe_app_csharp/badge.svg?branch=master)](https://coveralls.io/github/maidsafe/safe_app_csharp?branch=master)| |
+| Azure DevOps | [![Build Status](https://dev.azure.com/maidsafe/SafeApp/_apis/build/status/Test%20%26%20Release%20CI?branchName=master)](https://dev.azure.com/maidsafe/SafeApp/_build/latest?definitionId=21&branchName=master) | |
 
 ## Table of Contents
 
@@ -68,7 +66,7 @@ This package provides support for mock and non-mock network. By default, non-moc
 
 ## Documentation
 
-The documentation for the latest `safe_app_csharp` API is available at [docs.maidsafe.net/safe_app_csharp](http://docs.maidsafe.net/safe_app_csharp/).
+The documentation for the latest `safe_app_csharp` API is available at [https://maidsafe.github.io/safe_app_csharp/](https://maidsafe.github.io/safe_app_csharp/).
 
 We use [DocFX](https://github.com/dotnet/docfx) to generate static HTML API documentation pages from XML code comments. The API docs are generated and published automatically during the CI build.
 

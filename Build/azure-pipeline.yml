@@ -236,7 +236,7 @@ jobs:
       displayName: 'Generate API docs'
     - powershell: |
         gh-pages-clean
-        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
+        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$env:GITHUB_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
       env:
         GITHUB_TOKEN: $(GITHUB_PUSH_TOKEN)
       displayName: 'Upload gh-pages'

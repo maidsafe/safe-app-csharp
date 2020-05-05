@@ -9,7 +9,7 @@
 ## Build Status
 
 | CI service | Status |
-|---|---|---|
+|---|---|
 | Azure DevOps | [![Build Status](https://dev.azure.com/maidsafe/SafeApp/_apis/build/status/Test%20%26%20Release%20CI?branchName=master)](https://dev.azure.com/maidsafe/SafeApp/_build/latest?definitionId=21&branchName=master) | |
 
 ## Table of Contents

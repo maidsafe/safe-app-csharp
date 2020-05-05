@@ -4,14 +4,19 @@
       "src": [
         {
           "files": [
-            "SafeApp.Core/**.csproj"
+            "SafeApp/*.csproj",
+            "SafeApp.Core/*.csproj"
           ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../"
         }
       ],
       "dest": "api",
       "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "disableDefaultFilter": false,
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      }
     }
   ],
   "build": {

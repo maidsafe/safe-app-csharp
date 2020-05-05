@@ -223,27 +223,23 @@ jobs:
   - job: publish_docs
     displayName: 'Publish API docs'
     pool:
-      vmImage: 'macos-10.14'
-    dependsOn: [ nuget_create ]
+      vmImage: 'windows-latest'
+    # dependsOn: [ nuget_create ]
     # condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
-    - bash: |
-        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
-        mono --version
-      displayName: 'Set mono version'
-    - bash: |
-        brew install docfx
+    - powershell: |
+        choco install docfx
         npm install gh-pages -g
       displayName: 'Install docfx and gh-page'
-    - bash: |
+    - powershell: |
         docfx ./docs/docfx.json
       displayName: 'Generate API docs'
-    - bash: |
+    - powershell: |
         gh-pages-clean
         gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
       env:
         GITHUB_TOKEN: $(GITHUB_PUSH_TOKEN)
-      displayName: 'Upload gh-pages'      
+      displayName: 'Upload gh-pages'
 
   - job: releases
     displayName: 'GitHub Release & NuGet Push'

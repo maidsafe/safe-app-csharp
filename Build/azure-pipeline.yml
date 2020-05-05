@@ -228,6 +228,10 @@ jobs:
     # condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
     - bash: |
+        sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
+        mono --version
+      displayName: 'Set mono version'
+    - bash: |
         brew install docfx
         npm install gh-pages -g
       displayName: 'Install docfx and gh-page'

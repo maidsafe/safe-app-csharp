@@ -225,7 +225,7 @@ jobs:
     pool:
       vmImage: 'macos-10.14'
     dependsOn: [ nuget_create ]
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    # condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     steps:
     - bash: |
         brew install docfx
@@ -236,7 +236,9 @@ jobs:
       displayName: 'Generate API docs'
     - bash: |
         gh-pages-clean
-        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_PUSH_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
+        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$GITHUB_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
+      env:
+        GITHUB_TOKEN: $(GITHUB_PUSH_TOKEN)
       displayName: 'Upload gh-pages'      
 
   - job: releases

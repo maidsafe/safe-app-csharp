@@ -1,6 +1,4 @@
-﻿#if !NETSTANDARD || __DESKTOP__
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -240,110 +238,116 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultSafeCb DelegateOnFfiResultSafeCb = OnFfiResultSafeCb;
 
-#endregion
+        #endregion
 
-#region XorUrl
-        public Task<string> XorurlEncodeAsync(
+        #region SafeUrl
+        public Task<string> SafeUrlEncodeAsync(
             byte[] name,
+            string nrsName,
             ulong typeTag,
             DataType dataType,
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion,
-            string queryParams,
+            string queryString,
             string fragment,
+            ulong contentVersion,
             string baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
-            XorurlEncodeNative(
+            SafeUrlEncodeNative(
                 name,
+                nrsName,
                 typeTag,
-                (ulong)dataType,
+                (ushort)dataType,
                 (ushort)contentType,
                 path,
                 subNames?.ToArray(),
                 (UIntPtr)(subNames?.Count ?? 0),
-                contentVersion,
-                queryParams,
+                queryString,
                 fragment,
+                contentVersion,
                 baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "xorurl_encode")]
-        private static extern void XorurlEncodeNative(
+        [DllImport(DllName, EntryPoint = "safe_url_encode")]
+        private static extern void SafeUrlEncodeNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            [MarshalAs(UnmanagedType.LPStr)] string nrsName,
             ulong typeTag,
             ulong dataType,
             ushort contentType,
             [MarshalAs(UnmanagedType.LPStr)] string path,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 7)] string[] subNames,
             UIntPtr subNamesLen,
-            ulong contentVersion,
-            [MarshalAs(UnmanagedType.LPStr)] string queryParams,
+            [MarshalAs(UnmanagedType.LPStr)] string queryString,
             [MarshalAs(UnmanagedType.LPStr)] string fragment,
+            ulong contentVersion,
             [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        public Task<XorUrlEncoder> XorurlEncoderAsync(
+        public Task<SafeUrl> SafeUrlAsync(
             byte[] name,
+            string nrsName,
             ulong typeTag,
             DataType dataType,
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion,
-            string queryParams,
-            string fragment)
+            string queryString,
+            string fragment,
+            ulong contentVersion)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<XorUrlEncoder>();
-            XorurlEncoderNative(
+            var (ret, userData) = BindingUtils.PrepareTask<SafeUrl>();
+            SafeUrlNative(
                 name,
+                nrsName,
                 typeTag,
                 (ulong)dataType,
                 (ushort)contentType,
                 path,
                 subNames?.ToArray(),
                 (UIntPtr)(subNames?.Count ?? 0),
-                contentVersion,
-                queryParams,
+                queryString,
                 fragment,
+                contentVersion,
                 userData,
-                DelegateOnFfiResultXorUrlEncoderCb);
+                DelegateOnFfiResultSafeUrlCb);
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "xorurl_encoder")]
-        private static extern void XorurlEncoderNative(
+        [DllImport(DllName, EntryPoint = "safe_url")]
+        private static extern void SafeUrlNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            [MarshalAs(UnmanagedType.LPStr)] string nrsName,
             ulong typeTag,
             ulong dataType,
             ushort contentType,
             [MarshalAs(UnmanagedType.LPStr)] string path,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 6)] string[] subNames,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 7)] string[] subNames,
             UIntPtr subNamesLen,
-            ulong contentVersion,
-            [MarshalAs(UnmanagedType.LPStr)] string queryParams,
+            [MarshalAs(UnmanagedType.LPStr)] string queryString,
             [MarshalAs(UnmanagedType.LPStr)] string fragment,
+            ulong contentVersion,
             IntPtr userData,
-            FfiResultXorUrlEncoderCb oCb);
+            FfiResultSafeUrlCb oCb);
 
-        public Task<XorUrlEncoder> XorurlEncoderFromUrlAsync(string xorUrl)
+        public Task<SafeUrl> SafeUrlFromUrlAsync(string safeUrl)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<XorUrlEncoder>();
-            XorurlEncoderFromUrlNative(xorUrl, userData, DelegateOnFfiResultXorUrlEncoderCb);
+            var (ret, userData) = BindingUtils.PrepareTask<SafeUrl>();
+            SafeUrlFromUrlNative(safeUrl, userData, DelegateOnFfiResultSafeUrlCb);
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "xorurl_encoder_from_url")]
-        private static extern void XorurlEncoderFromUrlNative(
-            [MarshalAs(UnmanagedType.LPStr)] string xorUrl,
+        [DllImport(DllName, EntryPoint = "safe_url_from_url")]
+        private static extern void SafeUrlFromUrlNative(
+            [MarshalAs(UnmanagedType.LPStr)] string safeUrl,
             IntPtr userData,
-            FfiResultXorUrlEncoderCb oCb);
+            FfiResultSafeUrlCb oCb);
 
         public Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding)
         {
@@ -434,24 +438,21 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        private delegate void FfiResultXorUrlEncoderCb(IntPtr userData, IntPtr result, IntPtr xorurlEncoder);
+        private delegate void FfiResultSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl);
 
 #if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultXorUrlEncoderCb))]
+        [MonoPInvokeCallback(typeof(FfiResultSafeUrlCb))]
 #endif
-        private static void OnFfiResultXorUrlEncoderCb(IntPtr userData, IntPtr result, IntPtr xorurlEncoder)
+        private static void OnFfiResultSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl)
         {
-            BindingUtils.CompleteTask(
-                userData,
-                Marshal.PtrToStructure<FfiResult>(result),
-                () => new XorUrlEncoder(Marshal.PtrToStructure<XorUrlEncoderNative>(xorurlEncoder)));
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)));
         }
 
-        private static readonly FfiResultXorUrlEncoderCb DelegateOnFfiResultXorUrlEncoderCb = OnFfiResultXorUrlEncoderCb;
+        private static readonly FfiResultSafeUrlCb DelegateOnFfiResultSafeUrlCb = OnFfiResultSafeUrlCb;
 
-#endregion
+        #endregion
 
-#region Keys
+        #region Keys
 
         public Task<BlsKeyPair> GenerateKeyPairAsync(IntPtr app)
         {
@@ -1068,62 +1069,41 @@ namespace SafeApp.AppBindings
         private static readonly FfiResultByteListCb DelegateOnFfiResultByteListCb =
                                                                    OnFfiResultByteListCb;
 
-#endregion Files
+        #endregion Files
 
-#region NRS
+        #region NRS
 
-        public Task<XorUrlEncoder> ParseUrlAsync(string url)
+        public Task<SafeUrl> ParseUrlAsync(string url)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<XorUrlEncoder>();
-            ParseUrlNative(url, userData, DelegateOnFfiResultXorUrlEncoderCb);
+            var (ret, userData) = BindingUtils.PrepareTask<SafeUrl>();
+            ParseUrlNative(url, userData, DelegateOnFfiResultSafeUrlCb);
             return ret;
         }
 
         [DllImport(DllName, EntryPoint = "parse_url")]
-        private static extern void ParseUrlNative(
-            [MarshalAs(UnmanagedType.LPStr)] string url,
-            IntPtr userData,
-            FfiResultXorUrlEncoderCb oCb);
+        private static extern void ParseUrlNative([MarshalAs(UnmanagedType.LPStr)] string url, IntPtr userData, FfiResultSafeUrlCb oCb);
 
-        public Task<(XorUrlEncoder, XorUrlEncoder)> ParseAndResolveUrlAsync(IntPtr app, string url)
+        public Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(IntPtr app, string url)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(XorUrlEncoder, XorUrlEncoder)>();
-            ParseAndResolveUrlNative(app, url, userData, DelegateOnFfiResultXorUrlEncoderXorUrlEncoderCb);
+            var (ret, userData) = BindingUtils.PrepareTask<(SafeUrl, SafeUrl)>();
+            ParseAndResolveUrlNative(app, url, userData, DelegateOnFfiResultSafeUrlSafeUrlCb);
             return ret;
         }
 
         [DllImport(DllName, EntryPoint = "parse_and_resolve_url")]
-        private static extern void ParseAndResolveUrlNative(
-            IntPtr app,
-            [MarshalAs(UnmanagedType.LPStr)] string url,
-            IntPtr userData,
-            FfiResultXorUrlEncoderXorUrlEncoderCb oCb);
+        private static extern void ParseAndResolveUrlNative(IntPtr app, [MarshalAs(UnmanagedType.LPStr)] string url, IntPtr userData, FfiResultSafeUrlSafeUrlCb oCb);
 
-        private delegate void FfiResultXorUrlEncoderXorUrlEncoderCb(
-            IntPtr userData,
-            IntPtr result,
-            IntPtr xorUrlEncoder,
-            IntPtr resolvedFrom);
+        private delegate void FfiResultSafeUrlSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl, IntPtr resolvedFrom);
 
 #if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultXorUrlEncoderXorUrlEncoderCb))]
+        [MonoPInvokeCallback(typeof(FfiResultSafeUrlSafeUrlCb))]
 #endif
-        private static void OnFfiResultXorUrlEncoderXorUrlEncoderCb(IntPtr userData, IntPtr result, IntPtr xorUrlEncoder, IntPtr resolvedFrom)
+        private static void OnFfiResultSafeUrlSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl, IntPtr resolvedFrom)
         {
-            var resolved = resolvedFrom == IntPtr.Zero ?
-                default :
-                new XorUrlEncoder(Marshal.PtrToStructure<XorUrlEncoderNative>(resolvedFrom));
-
-            BindingUtils.CompleteTask(
-                userData,
-                Marshal.PtrToStructure<FfiResult>(result),
-                () => (
-                    new XorUrlEncoder(Marshal.PtrToStructure<XorUrlEncoderNative>(xorUrlEncoder)),
-                    resolved));
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)), new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(resolvedFrom))));
         }
 
-        private static readonly FfiResultXorUrlEncoderXorUrlEncoderCb DelegateOnFfiResultXorUrlEncoderXorUrlEncoderCb =
-            OnFfiResultXorUrlEncoderXorUrlEncoderCb;
+        private static readonly FfiResultSafeUrlSafeUrlCb DelegateOnFfiResultSafeUrlSafeUrlCb = OnFfiResultSafeUrlSafeUrlCb;
 
         public Task<(string, ProcessedEntries, string)> CreateNrsMapContainerAsync(
             IntPtr app,
@@ -1301,4 +1281,3 @@ namespace SafeApp.AppBindings
 #endregion NRS
     }
 }
-#endif

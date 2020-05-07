@@ -24,9 +24,9 @@ namespace SafeApp.Core
     }
 
     /// <summary>
-    /// XorUrl Encoder
+    /// Safe url
     /// </summary>
-    public struct XorUrlEncoder
+    public struct SafeUrl
     {
         /// <summary>
         /// Encoding version.
@@ -39,7 +39,27 @@ namespace SafeApp.Core
         public byte[] XorName;
 
         /// <summary>
-        /// TypeTag for the mutable data type.
+        /// SafeUrl's public name for the data.
+        /// </summary>
+        public string PublicName;
+
+        /// <summary>
+        /// SafeUrl's top name for the data.
+        /// </summary>
+        public string TopName;
+
+        /// <summary>
+        /// SafeUrl's subname string for the data.
+        /// </summary>
+        public string SubNames;
+
+        /// <summary>
+        /// SafeUrl's subname for the data.
+        /// </summary>
+        public List<string> SubNamesList;
+
+        /// <summary>
+        /// TypeTag for the data type.
         /// </summary>
         public ulong TypeTag;
 
@@ -54,14 +74,19 @@ namespace SafeApp.Core
         public ContentType ContentType;
 
         /// <summary>
-        /// XorUrl path for the data.
+        /// SafeUrl's path for the data.
         /// </summary>
         public string Path;
 
         /// <summary>
-        /// XorUrl sub names for the data.
+        /// SafeUrl's query string.
         /// </summary>
-        public List<string> SubNames;
+        public string QueryString;
+
+        /// <summary>
+        /// SafeUrl's fragement.
+        /// </summary>
+        public string Fragment;
 
         /// <summary>
         /// Content version on the network.
@@ -69,69 +94,80 @@ namespace SafeApp.Core
         public ulong ContentVersion;
 
         /// <summary>
-        /// XorUrl query.
+        /// SafeUrl type.
         /// </summary>
-        public string QueryParams;
+        public SafeUrlType Type;
 
-        /// <summary>
-        /// XorUrl fragment.
-        /// </summary>
-        public string Fragment;
-
-        internal XorUrlEncoder(XorUrlEncoderNative native)
+        internal SafeUrl(SafeUrlNative native)
         {
             EncodingVersion = native.EncodingVersion;
             XorName = native.XorName;
+            PublicName = native.PublicName;
+            TopName = native.TopName;
+            SubNames = native.SubNames;
+            SubNamesList = BindingUtils.CopyToStringList(native.SubNamesListPtr, (int)native.SubNamesListLen);
             TypeTag = native.TypeTag;
             DataType = (DataType)native.DataType;
             ContentType = (ContentType)native.ContentType;
             Path = native.Path;
-            SubNames = BindingUtils.CopyToStringList(native.SubNamesPtr, (int)native.SubNamesLen);
             ContentVersion = native.ContentVersion;
-            QueryParams = native.QueryParams;
+            QueryString = native.QueryString;
             Fragment = native.Fragment;
+            ContentVersion = native.ContentVersion;
+            Type = (SafeUrlType)native.SafeurlType;
         }
 
-        internal XorUrlEncoderNative ToNative()
+        internal SafeUrlNative ToNative()
         {
-            return new XorUrlEncoderNative
+            return new SafeUrlNative
             {
                 EncodingVersion = EncodingVersion,
                 XorName = XorName,
+                PublicName = PublicName,
+                TopName = TopName,
+                SubNames = SubNames,
+                SubNamesListPtr = BindingUtils.CopyFromStringList(SubNamesList),
+                SubNamesListLen = (UIntPtr)(SubNamesList?.Count ?? 0),
                 TypeTag = TypeTag,
-                DataType = (ulong)DataType,
+                DataType = (ushort)DataType,
                 ContentType = (ushort)ContentType,
                 Path = Path,
-                SubNamesPtr = BindingUtils.CopyFromStringList(SubNames),
-                SubNamesLen = (UIntPtr)(SubNames?.Count ?? 0),
+                QueryString = QueryString,
+                Fragment = Fragment,
                 ContentVersion = ContentVersion,
-                QueryParams = QueryParams,
-                Fragment = Fragment
+                SafeurlType = (ushort)Type
             };
         }
     }
 
-    internal struct XorUrlEncoderNative
+    internal struct SafeUrlNative
     {
         public ulong EncodingVersion;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] XorName;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string PublicName;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string TopName;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string SubNames;
+        public IntPtr SubNamesListPtr;
+        public UIntPtr SubNamesListLen;
         public ulong TypeTag;
         public ulong DataType;
         public ushort ContentType;
         [MarshalAs(UnmanagedType.LPStr)]
         public string Path;
-        public IntPtr SubNamesPtr;
-        public UIntPtr SubNamesLen;
-        public ulong ContentVersion;
         [MarshalAs(UnmanagedType.LPStr)]
-        public string QueryParams;
+        public string QueryString;
         [MarshalAs(UnmanagedType.LPStr)]
         public string Fragment;
+        public ulong ContentVersion;
+        public ushort SafeurlType;
 
         internal void Free()
         {
-            BindingUtils.FreeList(ref SubNamesPtr, ref SubNamesLen);
+            BindingUtils.FreeList(ref SubNamesListPtr, ref SubNamesListLen);
         }
     }
 
@@ -150,43 +186,20 @@ namespace SafeApp.Core
         /// <summary>
         /// SafeKey's XorUrl.
         /// </summary>
+        [MarshalAs(UnmanagedType.LPStr)]
         public string XorUrl;
 
         /// <summary>
         /// SafeKey's XorName.
         /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] XorName;
 
         /// <summary>
         /// NrsMapContainerInfo for the SafeKey stored on the network.
         /// </summary>
-        public NrsMapContainerInfo ResolvedFrom;
-
-        internal SafeKey(SafeKeyNative native)
-        {
-            XorUrl = native.XorUrl;
-            XorName = native.XorName;
-            ResolvedFrom = new NrsMapContainerInfo(native.ResolvedFrom);
-        }
-
-        internal SafeKeyNative ToNative()
-        {
-            return new SafeKeyNative
-            {
-                XorUrl = XorUrl,
-                XorName = XorName,
-                ResolvedFrom = ResolvedFrom.ToNative(),
-            };
-        }
-    }
-
-    internal struct SafeKeyNative : ISafeData
-    {
         [MarshalAs(UnmanagedType.LPStr)]
-        public string XorUrl;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
-        public byte[] XorName;
-        public NrsMapContainerInfoNative ResolvedFrom;
+        public string ResolvedFrom;
     }
 
     /// <summary>
@@ -222,7 +235,7 @@ namespace SafeApp.Core
         /// <summary>
         /// NrsMapContainerInfo for the wallet stored on the network.
         /// </summary>
-        public NrsMapContainerInfo ResolvedFrom;
+        public string ResolvedFrom;
 
         internal Wallet(WalletNative native)
         {
@@ -231,7 +244,7 @@ namespace SafeApp.Core
             TypeTag = native.TypeTag;
             Balances = new WalletSpendableBalances(native.Balances);
             DataType = (DataType)native.DataType;
-            ResolvedFrom = new NrsMapContainerInfo(native.ResolvedFrom);
+            ResolvedFrom = native.ResolvedFrom;
         }
 
         internal WalletNative ToNative()
@@ -243,7 +256,7 @@ namespace SafeApp.Core
                 TypeTag = TypeTag,
                 Balances = Balances.ToNative(),
                 DataType = (ulong)DataType,
-                ResolvedFrom = ResolvedFrom.ToNative(),
+                ResolvedFrom = ResolvedFrom
             };
         }
     }
@@ -257,7 +270,8 @@ namespace SafeApp.Core
         public ulong TypeTag;
         public WalletSpendableBalancesNative Balances;
         public ulong DataType;
-        public NrsMapContainerInfoNative ResolvedFrom;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
 
         internal void Free()
         {
@@ -303,7 +317,7 @@ namespace SafeApp.Core
         /// <summary>
         /// NrsMapContainerInfo for the FilesContainer.
         /// </summary>
-        public NrsMapContainerInfo ResolvedFrom;
+        public string ResolvedFrom;
 
         internal FilesContainer(FilesContainerNative native)
         {
@@ -313,7 +327,7 @@ namespace SafeApp.Core
             Version = native.Version;
             FilesMap = new FilesMap(native.FilesMap);
             DataType = (DataType)native.DataType;
-            ResolvedFrom = new NrsMapContainerInfo(native.ResolvedFrom);
+            ResolvedFrom = native.ResolvedFrom;
         }
 
         internal FilesContainerNative ToNative()
@@ -326,7 +340,7 @@ namespace SafeApp.Core
                 Version = Version,
                 FilesMap = FilesMap.ToNative(),
                 DataType = (ulong)DataType,
-                ResolvedFrom = ResolvedFrom.ToNative(),
+                ResolvedFrom = ResolvedFrom
             };
         }
     }
@@ -341,7 +355,8 @@ namespace SafeApp.Core
         public ulong Version;
         public FilesMapNative FilesMap;
         public ulong DataType;
-        public NrsMapContainerInfoNative ResolvedFrom;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
 
         internal void Free()
         {
@@ -370,22 +385,22 @@ namespace SafeApp.Core
         public byte[] Data;
 
         /// <summary>
-        /// NrsMapContainerInfo for the PublishedImmutableData.
-        /// </summary>
-        public NrsMapContainerInfo ResolvedFrom;
-
-        /// <summary>
         /// MIME type for the stored data/file.
         /// </summary>
         public string MediaType;
+
+        /// <summary>
+        /// NrsMapContainerInfo for the PublishedImmutableData.
+        /// </summary>
+        public string ResolvedFrom;
 
         internal PublishedImmutableData(PublishedImmutableDataNative native)
         {
             XorUrl = native.XorUrl;
             XorName = native.XorName;
             Data = BindingUtils.CopyToByteArray(native.DataPtr, (int)native.DataLen);
-            ResolvedFrom = new NrsMapContainerInfo(native.ResolvedFrom);
             MediaType = native.MediaType;
+            ResolvedFrom = native.ResolvedFrom;
         }
 
         internal PublishedImmutableDataNative ToNative()
@@ -396,8 +411,8 @@ namespace SafeApp.Core
                 XorName = XorName,
                 DataPtr = BindingUtils.CopyFromByteArray(Data),
                 DataLen = (UIntPtr)(Data?.Length ?? 0),
-                ResolvedFrom = ResolvedFrom.ToNative(),
-                MediaType = MediaType
+                MediaType = MediaType,
+                ResolvedFrom = ResolvedFrom
             };
         }
     }
@@ -410,9 +425,10 @@ namespace SafeApp.Core
         public byte[] XorName;
         public IntPtr DataPtr;
         public UIntPtr DataLen;
-        public NrsMapContainerInfoNative ResolvedFrom;
         [MarshalAs(UnmanagedType.LPStr)]
         public string MediaType;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
 
         internal void Free()
         {
@@ -736,7 +752,7 @@ namespace SafeApp.Core
     /// <summary>
     /// Contains the information required to work with NRS.
     /// </summary>
-    public struct NrsMapContainerInfo
+    public struct NrsMapContainer
     {
         /// <summary>
         /// Public name for the container.
@@ -773,7 +789,12 @@ namespace SafeApp.Core
         /// </summary>
         public DataType DataType;
 
-        internal NrsMapContainerInfo(NrsMapContainerInfoNative native)
+        /// <summary>
+        /// Nrs
+        /// </summary>
+        public string ResolvedFrom;
+
+        internal NrsMapContainer(NrsMapContainerNative native)
         {
             PublicName = native.PublicName;
             XorUrl = native.XorUrl;
@@ -782,11 +803,12 @@ namespace SafeApp.Core
             Version = native.Version;
             NrsMap = native.NrsMap;
             DataType = (DataType)native.DataType;
+            ResolvedFrom = native.ResolvedFrom;
         }
 
-        internal NrsMapContainerInfoNative ToNative()
+        internal NrsMapContainerNative ToNative()
         {
-            return new NrsMapContainerInfoNative
+            return new NrsMapContainerNative
             {
                 PublicName = PublicName,
                 XorUrl = XorUrl,
@@ -795,11 +817,12 @@ namespace SafeApp.Core
                 Version = Version,
                 NrsMap = NrsMap,
                 DataType = (ulong)DataType,
+                ResolvedFrom = ResolvedFrom,
             };
         }
     }
 
-    internal struct NrsMapContainerInfoNative
+    internal struct NrsMapContainerNative
     {
         [MarshalAs(UnmanagedType.LPStr)]
         public string PublicName;
@@ -812,6 +835,8 @@ namespace SafeApp.Core
         [MarshalAs(UnmanagedType.LPStr)]
         public string NrsMap;
         public ulong DataType;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
     }
 
     /// <summary>
@@ -914,6 +939,12 @@ namespace SafeApp.Core
         FilesContainer,
         NrsMapContainer,
         MediaType, // nb: we're missing the variant value of the rust enum here (the actual media type)
+    }
+
+    public enum SafeUrlType
+    {
+        XorUrl,
+        NrsUrl,
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

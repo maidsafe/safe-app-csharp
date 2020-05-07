@@ -48,32 +48,34 @@ namespace SafeApp.AppBindings
             Action<FfiResult, IntPtr, GCHandle> oCb);
         #endregion
 
-        #region XorEncoder
+        #region SafeUrl
 
-        Task<string> XorurlEncodeAsync(
+        Task<string> SafeUrlEncodeAsync(
             byte[] name,
+            string nrsName,
             ulong typeTag,
             DataType dataType,
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion,
-            string queryParams,
+            string queryString,
             string fragment,
+            ulong contentVersion,
             string baseEncoding);
 
-        Task<XorUrlEncoder> XorurlEncoderAsync(
+        Task<SafeUrl> SafeUrlAsync(
             byte[] name,
+            string nrsName,
             ulong typeTag,
             DataType dataType,
             ContentType contentType,
             string path,
             List<string> subNames,
-            ulong contentVersion,
-            string queryParams,
-            string fragment);
+            string queryString,
+            string fragment,
+            ulong contentVersion);
 
-        Task<XorUrlEncoder> XorurlEncoderFromUrlAsync(string xorUrl);
+        Task<SafeUrl> SafeUrlFromUrlAsync(string safeUrl);
 
         Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding);
 
@@ -184,9 +186,9 @@ namespace SafeApp.AppBindings
 
         #region NRS
 
-        Task<XorUrlEncoder> ParseUrlAsync(string url);
+        Task<SafeUrl> ParseUrlAsync(string url);
 
-        Task<(XorUrlEncoder, XorUrlEncoder)> ParseAndResolveUrlAsync(IntPtr app, string url);
+        Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(IntPtr app, string url);
 
         Task<(string, ProcessedEntries, string)> CreateNrsMapContainerAsync(
             IntPtr app,

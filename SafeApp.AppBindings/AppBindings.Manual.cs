@@ -1,9 +1,6 @@
-﻿#if !NETSTANDARD || __DESKTOP__
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
 using SafeApp.Core;
 
 #if __IOS__
@@ -192,7 +189,7 @@ namespace SafeApp.AppBindings
         private static void OnFfiResultSafeKeyCb(IntPtr userData, IntPtr safeKey)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
-            tcs.SetResult(new SafeKey(Marshal.PtrToStructure<SafeKeyNative>(safeKey)));
+            tcs.SetResult(Marshal.PtrToStructure<SafeKey>(safeKey));
         }
 
         private static readonly FfiResultSafeKeyCb DelegateOnFfiResultSafeKeyCb = OnFfiResultSafeKeyCb;
@@ -228,4 +225,3 @@ namespace SafeApp.AppBindings
 
     }
 }
-#endif

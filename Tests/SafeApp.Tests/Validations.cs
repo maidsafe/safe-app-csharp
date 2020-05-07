@@ -16,7 +16,7 @@ namespace SafeApp.Tests
             Assert.IsFalse(Enumerable.SequenceEqual(new byte[32], xorName));
         }
 
-        public static void NrsContainerInfo(NrsMapContainerInfo info)
+        public static void NrsContainerInfo(NrsMapContainer info)
         {
             Assert.AreNotEqual(DataType.SafeKey, info.DataType);
             Assert.IsNotNull(info.NrsMap);
@@ -27,7 +27,7 @@ namespace SafeApp.Tests
             XorName(info.XorName);
         }
 
-        public static void EnsureNullNrsContainerInfo(NrsMapContainerInfo info)
+        public static void EnsureNullNrsContainerInfo(NrsMapContainer info)
         {
             Assert.AreEqual(DataType.SafeKey, info.DataType); // since 0 is actually a data type
             Assert.IsEmpty(info.NrsMap);
@@ -40,19 +40,19 @@ namespace SafeApp.Tests
 
         public static async Task XorUrlAsync(string xorUrl, DataType expectedDataType, ContentType expectedContentType, ulong expectedTypeTag)
         {
-            var encoder = await XorEncoder.XorUrlEncoderFromUrl(xorUrl);
+            var encoder = await XorEncoder.SafeUrlFromUrl(xorUrl);
             Encoder(encoder, expectedDataType, expectedContentType, expectedTypeTag);
         }
 
         public static async Task XorUrlAsync(string xorUrl, byte[] expectedXorName, ContentType expectedContentType, ulong expectedTypeTag)
         {
-            var encoder = await XorEncoder.XorUrlEncoderFromUrl(xorUrl);
+            var encoder = await XorEncoder.SafeUrlFromUrl(xorUrl);
             Assert.AreEqual(expectedXorName, encoder.XorName);
             Assert.AreEqual(expectedTypeTag, encoder.TypeTag);
             Assert.AreEqual(expectedContentType, encoder.ContentType);
         }
 
-        public static void Encoder(XorUrlEncoder encoder, DataType expectedDataType, ContentType expectedContentType, ulong expectedTypeTag)
+        public static void Encoder(SafeUrl encoder, DataType expectedDataType, ContentType expectedContentType, ulong expectedTypeTag)
         {
             Assert.AreEqual(expectedContentType, encoder.ContentType);
             Assert.Zero(encoder.ContentVersion);

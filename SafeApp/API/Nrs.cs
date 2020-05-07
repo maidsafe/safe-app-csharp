@@ -24,8 +24,8 @@ namespace SafeApp.API
         /// Parses a XorURl string into a XorUrlEncoder.
         /// </summary>
         /// <param name="url">XorURl string to parse.</param>
-        /// <returns>New XorUrlEncoder instance.</returns>
-        public static Task<XorUrlEncoder> ParseUrlAsync(string url)
+        /// <returns>New SafeUrl instance.</returns>
+        public static Task<SafeUrl> ParseUrlAsync(string url)
             => AppBindings.ParseUrlAsync(url);
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace SafeApp.API
         /// </summary>
         /// <param name="url">XorUrl string to parse.</param>
         /// <returns>
-        /// New XorUrlEncoder containing all safe:// url info,
-        /// New XorUrlEncoder containing the information of the parsed NRS-URL.</returns>
-        public Task<(XorUrlEncoder, XorUrlEncoder)> ParseAndResolveUrlAsync(string url)
+        /// New SafeUrl containing all safe:// url info,
+        /// New SafeUrl containing the information of the parsed NRS-URL.</returns>
+        public Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(string url)
             => AppBindings.ParseAndResolveUrlAsync(_appPtr, url);
 
         /// <summary>

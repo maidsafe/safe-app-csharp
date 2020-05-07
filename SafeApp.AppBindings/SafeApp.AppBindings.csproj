@@ -13,11 +13,7 @@
     <DebugType Condition=" !$(TargetFramework.StartsWith('MonoAndroid')) ">portable</DebugType>
     <DebugType Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">Full</DebugType>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'netcoreapp2.2' ">
-    <DefineConstants>__DESKTOP__</DefineConstants>
-  </PropertyGroup>
-
+  
   <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <AndroidUseIntermediateDesignerFile>False</AndroidUseIntermediateDesignerFile>
   </PropertyGroup>

@@ -20,35 +20,37 @@ namespace SafeApp.Tests
             var dataType = DataType.UnpublishedImmutableData;
             var encodedString = await XorEncoder.EncodeAsync(
                 xorName,
+                null,
                 typeTag,
                 dataType,
                 contentType,
                 null,
                 subNames,
+                null,
+                null,
                 0,
-                null,
-                null,
                 "base32z");
             Assert.IsNotNull(encodedString);
             Assert.IsTrue(encodedString.StartsWith("safe://", StringComparison.Ordinal));
             Assert.IsTrue(encodedString.Contains("subname1"));
             Assert.IsTrue(encodedString.Contains("subname2"));
 
-            var xorUrlEncoder = await XorEncoder.EncodeAsync(
+            var safeUrl = await XorEncoder.SafeUrlAsync(
                 xorName,
+                null,
                 typeTag,
                 dataType,
                 contentType,
                 null,
                 subNames,
-                0,
                 null,
-                null);
-            Assert.AreEqual(xorName, xorUrlEncoder.XorName);
-            Assert.AreEqual(subNames, xorUrlEncoder.SubNames);
-            Validate.Encoder(xorUrlEncoder, dataType, contentType, typeTag);
+                null,
+                0);
+            Assert.AreEqual(xorName, safeUrl.XorName);
+            Assert.AreEqual(subNames, safeUrl.SubNamesList);
+            Validate.Encoder(safeUrl, dataType, contentType, typeTag);
 
-            var parsedEncoder = await XorEncoder.XorUrlEncoderFromUrl(encodedString);
+            var parsedEncoder = await XorEncoder.SafeUrlFromUrl(encodedString);
             Assert.AreEqual(xorName, parsedEncoder.XorName);
             Validate.Encoder(parsedEncoder, dataType, contentType, typeTag);
             Assert.AreEqual(subNames, parsedEncoder.SubNames);

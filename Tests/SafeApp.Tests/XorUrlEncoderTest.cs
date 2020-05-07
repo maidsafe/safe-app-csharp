@@ -35,7 +35,7 @@ namespace SafeApp.Tests
             Assert.IsTrue(encodedString.Contains("subname1"));
             Assert.IsTrue(encodedString.Contains("subname2"));
 
-            var safeUrl = await XorEncoder.SafeUrlAsync(
+            var safeUrl = await XorEncoder.NewSafeUrlAsync(
                 xorName,
                 null,
                 typeTag,
@@ -48,12 +48,13 @@ namespace SafeApp.Tests
                 0);
             Assert.AreEqual(xorName, safeUrl.XorName);
             Assert.AreEqual(subNames, safeUrl.SubNamesList);
+            Assert.AreEqual("subname1.subname2", safeUrl.SubNames);
             Validate.Encoder(safeUrl, dataType, contentType, typeTag);
 
             var parsedEncoder = await XorEncoder.SafeUrlFromUrl(encodedString);
             Assert.AreEqual(xorName, parsedEncoder.XorName);
             Validate.Encoder(parsedEncoder, dataType, contentType, typeTag);
-            Assert.AreEqual(subNames, parsedEncoder.SubNames);
+            Assert.AreEqual(subNames, parsedEncoder.SubNamesList);
             Assert.AreEqual(typeTag, parsedEncoder.TypeTag);
             Assert.AreEqual(contentType, parsedEncoder.ContentType);
             Assert.AreEqual(0, parsedEncoder.ContentVersion);

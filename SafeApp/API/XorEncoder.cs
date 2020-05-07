@@ -55,7 +55,7 @@ namespace SafeApp.API
         /// <param name="queryParams">query.</param>
         /// <param name="fragment">fragment.</param>
         /// <returns>New SafeUrl instance.</returns>
-        public static Task<SafeUrl> SafeUrlAsync(
+        public static Task<SafeUrl> NewSafeUrlAsync(
             byte[] xorName,
             string nrsName,
             ulong typeTag,
@@ -66,7 +66,7 @@ namespace SafeApp.API
             string queryString,
             string fragment,
             ulong contentVersion)
-            => AppBindings.SafeUrlAsync(xorName, nrsName, typeTag, dataType, contentType, path, subNames, queryString, fragment, contentVersion);
+            => AppBindings.NewSafeUrlAsync(xorName, nrsName, typeTag, dataType, contentType, path, subNames, queryString, fragment, contentVersion);
 
         /// <summary>
         /// Returns an SafeUrl instance from a XorUrl string.
@@ -74,8 +74,8 @@ namespace SafeApp.API
         /// </summary>
         /// <param name="xorUrl">XorUrl string for which encoder is required.</param>
         /// <returns>New SafeUrl instance.</returns>
-        public static Task<SafeUrl> SafeUrlFromUrl(string xorUrl)
-            => AppBindings.SafeUrlFromUrlAsync(xorUrl);
+        public static Task<SafeUrl> SafeUrlFromUrl(string safeUrl)
+            => AppBindings.SafeUrlFromUrlAsync(safeUrl);
 
         /// <summary>
         /// Returns an encoded SafeUrl string based on the parameters.

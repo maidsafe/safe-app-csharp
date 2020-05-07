@@ -24,17 +24,17 @@ namespace SafeApp.Tests
             var session = await TestUtils.CreateTestApp();
             var (xorUrl, _) = await session.Keys.KeysCreatePreloadTestCoinsAsync("1");
 
-            var xorUrlEncoder = await Nrs.ParseUrlAsync(xorUrl);
+            var safeUrl = await Nrs.ParseUrlAsync(xorUrl);
 
             // todo: verify that these are actually the expected values
-            Assert.AreEqual(ContentType.Raw, xorUrlEncoder.ContentType);
-            Assert.AreEqual(0, xorUrlEncoder.ContentVersion);
-            Assert.AreEqual(DataType.SafeKey, xorUrlEncoder.DataType);
-            Assert.AreEqual(1, xorUrlEncoder.EncodingVersion);
-            Assert.AreEqual(string.Empty, xorUrlEncoder.Path);
-            Assert.IsNull(xorUrlEncoder.SubNames);
-            Assert.AreEqual(0, xorUrlEncoder.TypeTag);
-            Validate.XorName(xorUrlEncoder.XorName);
+            Assert.AreEqual(ContentType.Raw, safeUrl.ContentType);
+            Assert.AreEqual(0, safeUrl.ContentVersion);
+            Assert.AreEqual(DataType.SafeKey, safeUrl.DataType);
+            Assert.AreEqual(1, safeUrl.EncodingVersion);
+            Assert.AreEqual(string.Empty, safeUrl.Path);
+            Assert.IsEmpty(safeUrl.SubNames);
+            Assert.AreEqual(0, safeUrl.TypeTag);
+            Validate.XorName(safeUrl.XorName);
         }
 
         [Test]

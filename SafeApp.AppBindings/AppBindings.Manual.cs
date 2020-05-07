@@ -129,19 +129,11 @@ namespace SafeApp.AppBindings
             FfiResultFilesContainerCb oContainer,
             FfiFetchFailedCb oErr);
 
-        public Task<ISafeData> InspectAsync(IntPtr app, string url)
+        public Task<string> InspectAsync(IntPtr app, string url)
         {
-            var (task, userData) = BindingUtils.PrepareTask<ISafeData>();
-            InspectNative(
-                app,
-                url,
-                userData,
-                DelegateOnFfiResultPublishedImmutableDataCb,
-                DelegateOnFfiResultWalletCb,
-                DelegateOnFfiResultSafeKeyCb,
-                DelegateOnFfiResultFilesContainerCb,
-                DelegateOnFfiFetchFailedCb);
-            return task;
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            InspectNative(app, url, userData, DelegateOnFfiResultStringCb);
+            return ret;
         }
 
         [DllImport(DllName, EntryPoint = "inspect")]
@@ -149,11 +141,7 @@ namespace SafeApp.AppBindings
             IntPtr app,
             [MarshalAs(UnmanagedType.LPStr)] string url,
             IntPtr userData,
-            FfiResultPublishedImmutableDataCb oPublished,
-            FfiResultWalletCb oWallet,
-            FfiResultSafeKeyCb oKeys,
-            FfiResultFilesContainerCb oContainer,
-            FfiFetchFailedCb oErr);
+            FfiResultStringCb oCb);
 
         private delegate void FfiResultPublishedImmutableDataCb(IntPtr userData, IntPtr publishedImmutableData);
 

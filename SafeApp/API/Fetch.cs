@@ -36,7 +36,7 @@ namespace SafeApp.API
         /// </summary>
         /// <param name="url">safe:// url to inspect.</param>
         /// <returns>New ISafeData instance based on the content type</returns>
-        public Task<ISafeData> InspectAsync(string url)
+        public Task<string> InspectAsync(string url)
             => AppBindings.InspectAsync(_appPtr, url);
     }
 }

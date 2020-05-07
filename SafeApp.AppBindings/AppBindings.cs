@@ -290,7 +290,7 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        public Task<SafeUrl> SafeUrlAsync(
+        public Task<SafeUrl> NewSafeUrlAsync(
             byte[] name,
             string nrsName,
             ulong typeTag,
@@ -303,7 +303,7 @@ namespace SafeApp.AppBindings
             ulong contentVersion)
         {
             var (ret, userData) = BindingUtils.PrepareTask<SafeUrl>();
-            SafeUrlNative(
+            NewSafeUrlNative(
                 name,
                 nrsName,
                 typeTag,
@@ -320,8 +320,8 @@ namespace SafeApp.AppBindings
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "safe_url")]
-        private static extern void SafeUrlNative(
+        [DllImport(DllName, EntryPoint = "new_safe_url")]
+        private static extern void NewSafeUrlNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
             [MarshalAs(UnmanagedType.LPStr)] string nrsName,
             ulong typeTag,
@@ -1100,7 +1100,11 @@ namespace SafeApp.AppBindings
 #endif
         private static void OnFfiResultSafeUrlSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl, IntPtr resolvedFrom)
         {
-            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)), new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(resolvedFrom))));
+            var resolved = resolvedFrom == IntPtr.Zero ?
+               default :
+               new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(resolvedFrom));
+
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)), resolved));
         }
 
         private static readonly FfiResultSafeUrlSafeUrlCb DelegateOnFfiResultSafeUrlSafeUrlCb = OnFfiResultSafeUrlSafeUrlCb;

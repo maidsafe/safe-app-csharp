@@ -63,7 +63,7 @@ namespace SafeApp.AppBindings
             ulong contentVersion,
             string baseEncoding);
 
-        Task<SafeUrl> SafeUrlAsync(
+        Task<SafeUrl> NewSafeUrlAsync(
             byte[] name,
             string nrsName,
             ulong typeTag,
@@ -102,7 +102,7 @@ namespace SafeApp.AppBindings
 
         Task<ISafeData> FetchAsync(IntPtr app, string url, ulong start, ulong end);
 
-        Task<ISafeData> InspectAsync(IntPtr app, string uri);
+        Task<string> InspectAsync(IntPtr app, string uri);
 
         #endregion
 

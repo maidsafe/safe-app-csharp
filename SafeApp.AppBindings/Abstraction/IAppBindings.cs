@@ -61,7 +61,7 @@ namespace SafeApp.AppBindings
             string queryString,
             string fragment,
             ulong contentVersion,
-            string baseEncoding);
+            SafeUrlBase baseEncoding);
 
         Task<SafeUrl> NewSafeUrlAsync(
             byte[] name,
@@ -77,24 +77,24 @@ namespace SafeApp.AppBindings
 
         Task<SafeUrl> SafeUrlFromUrlAsync(string safeUrl);
 
-        Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding);
+        Task<string> EncodeSafekeyAsync(byte[] name, SafeUrlBase baseEncoding);
 
         Task<string> EncodeImmutableDataAsync(
             byte[] name,
             ContentType contentType,
-            string baseEncoding);
+            SafeUrlBase baseEncoding);
 
         Task<string> EncodeMutableDataAsync(
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding);
+            SafeUrlBase baseEncoding);
 
         Task<string> EncodeAppendOnlyDataAsync(
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding);
+            SafeUrlBase baseEncoding);
 
         #endregion
 

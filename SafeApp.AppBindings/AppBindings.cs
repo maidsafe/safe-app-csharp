@@ -252,7 +252,7 @@ namespace SafeApp.AppBindings
             string queryString,
             string fragment,
             ulong contentVersion,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
             SafeUrlEncodeNative(
@@ -267,7 +267,7 @@ namespace SafeApp.AppBindings
                 queryString,
                 fragment,
                 contentVersion,
-                baseEncoding,
+                (ushort)baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
@@ -286,7 +286,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string queryString,
             [MarshalAs(UnmanagedType.LPStr)] string fragment,
             ulong contentVersion,
-            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            ushort baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 
@@ -349,30 +349,30 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultSafeUrlCb oCb);
 
-        public Task<string> EncodeSafekeyAsync(byte[] name, string baseEncoding)
+        public Task<string> EncodeSafekeyAsync(byte[] name, SafeUrlBase baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
-            EncodeSafekeyNative(name, baseEncoding, userData, DelegateOnFfiResultStringCb);
+            EncodeSafekeyNative(name, (ushort)baseEncoding, userData, DelegateOnFfiResultStringCb);
             return ret;
         }
 
         [DllImport(DllName, EntryPoint = "encode_safekey")]
         private static extern void EncodeSafekeyNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
-            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            ushort baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 
         public Task<string> EncodeImmutableDataAsync(
             byte[] name,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
             EncodeImmutableDataNative(
                 name,
                 (ushort)contentType,
-                baseEncoding,
+                (ushort)baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
@@ -382,7 +382,7 @@ namespace SafeApp.AppBindings
         private static extern void EncodeImmutableDataNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
             ushort contentType,
-            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            ushort baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 
@@ -390,14 +390,14 @@ namespace SafeApp.AppBindings
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
             EncodeMutableDataNative(
                 name,
                 typeTag,
                 (ushort)contentType,
-                baseEncoding,
+                (ushort)baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
@@ -408,7 +408,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
             ulong typeTag,
             ushort contentType,
-            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            ushort baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 
@@ -416,14 +416,14 @@ namespace SafeApp.AppBindings
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
             EncodeAppendOnlyDataNative(
                 name,
                 typeTag,
                 (ushort)contentType,
-                baseEncoding,
+                (ushort)baseEncoding,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
@@ -434,7 +434,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
             ulong typeTag,
             ushort contentType,
-            [MarshalAs(UnmanagedType.LPStr)] string baseEncoding,
+            ushort baseEncoding,
             IntPtr userData,
             FfiResultStringCb oCb);
 

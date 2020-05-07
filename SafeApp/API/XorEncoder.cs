@@ -38,7 +38,7 @@ namespace SafeApp.API
             string queryString,
             string fragment,
             ulong contentVersion,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
             => AppBindings.SafeUrlEncodeAsync(xorName, nrsName, typeTag, dataType, contentType, path, subNames, queryString, fragment, contentVersion, baseEncoding);
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace SafeApp.API
         /// <returns>Encoded SafeUrl string.</returns>
         public static Task<string> EncodeSafeKeyAsync(
             byte[] xorName,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
             => AppBindings.EncodeSafekeyAsync(xorName, baseEncoding);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace SafeApp.API
         public static Task<string> EncodeImmutableDataAsync(
             byte[] xorName,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
             => AppBindings.EncodeImmutableDataAsync(xorName, contentType, baseEncoding);
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace SafeApp.API
             byte[] xorName,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
             => AppBindings.EncodeMutableDataAsync(xorName, typeTag, contentType, baseEncoding);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace SafeApp.API
             byte[] xorName,
             ulong typeTag,
             ContentType contentType,
-            string baseEncoding)
+            SafeUrlBase baseEncoding)
             => AppBindings.EncodeAppendOnlyDataAsync(xorName, typeTag, contentType, baseEncoding);
     }
 }

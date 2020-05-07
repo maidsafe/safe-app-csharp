@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace SafeApp.Core
@@ -945,6 +944,13 @@ namespace SafeApp.Core
     {
         XorUrl,
         NrsUrl,
+    }
+
+    public enum SafeUrlBase
+    {
+        Base32z,
+        Base32,
+        Base64,
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

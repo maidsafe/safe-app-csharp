@@ -38,6 +38,7 @@ namespace SafeApp.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test. The API and the test will be removed in the next release.")]
         public async Task ParseAndResolveUrlTest()
         {
             var session = await TestUtils.CreateTestApp();

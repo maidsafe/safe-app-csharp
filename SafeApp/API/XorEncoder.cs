@@ -46,15 +46,16 @@ namespace SafeApp.API
         /// Default base encoding (base32x) is used.
         /// </summary>
         /// <param name="xorName">Content XorName on the Network.</param>
+        /// <param name="nrsName">Content's nrs name on the Network.</param>
         /// <param name="typeTag">TypeTag (if content is Mutable Data).</param>
         /// <param name="dataType">Data type.</param>
         /// <param name="contentType">Content type.</param>
         /// <param name="path">Content path.</param>
         /// <param name="subNames">Url sub name.s</param>
-        /// <param name="contentVersion">Current content version.</param>
-        /// <param name="queryParams">query.</param>
+        /// <param name="queryString">query.</param>
         /// <param name="fragment">fragment.</param>
         /// <returns>New SafeUrl instance.</returns>
+        /// <param name="contentVersion">Current content version.</param>
         public static Task<SafeUrl> NewSafeUrlAsync(
             byte[] xorName,
             string nrsName,
@@ -69,10 +70,10 @@ namespace SafeApp.API
             => AppBindings.NewSafeUrlAsync(xorName, nrsName, typeTag, dataType, contentType, path, subNames, queryString, fragment, contentVersion);
 
         /// <summary>
-        /// Returns an SafeUrl instance from a XorUrl string.
+        /// Returns an SafeUrl instance from a SafeUrl string.
         /// Default base encoding (base32x) is used.
         /// </summary>
-        /// <param name="xorUrl">XorUrl string for which encoder is required.</param>
+        /// <param name="safeUrl">safeUrl string for which encoder is required.</param>
         /// <returns>New SafeUrl instance.</returns>
         public static Task<SafeUrl> SafeUrlFromUrl(string safeUrl)
             => AppBindings.SafeUrlFromUrlAsync(safeUrl);

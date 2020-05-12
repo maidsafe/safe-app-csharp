@@ -122,7 +122,7 @@ namespace SafeApp.Tests
                             Assert.NotZero(immutableData.Data.Length);
                         else
                             Assert.Zero(immutableData.Data.Length);
-                        Assert.IsNotNull(immutableData.ResolvedFrom);
+                        Assert.IsNull(immutableData.ResolvedFrom);
                         break;
                     case SafeDataFetchFailed dataFetchOrInspectFailed:
                         Assert.IsNotNull(dataFetchOrInspectFailed.Description);

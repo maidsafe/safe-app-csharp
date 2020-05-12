@@ -38,27 +38,6 @@ namespace SafeApp.Tests
         }
 
         [Test]
-        [Ignore("Skipping this test. The API and the test will be removed in the next release.")]
-        public async Task ParseAndResolveUrlTest()
-        {
-            var session = await TestUtils.CreateTestApp();
-
-            var xorUrl = await CreateFilesContainerAsync(session);
-
-            var api = session.Nrs;
-            var (_, _, nrsMapXorUrl) = await api.CreateNrsMapContainerAsync(
-                TestUtils.GetRandomString(5),
-                $"{xorUrl}?v=0",
-                false,
-                DryRun,
-                SetDefault);
-            var (xorUrlEncoder, resolvedFrom) = await api.ParseAndResolveUrlAsync(nrsMapXorUrl);
-
-            Validate.Encoder(xorUrlEncoder, DataType.PublishedSeqAppendOnlyData, ContentType.FilesContainer, 1100);
-            Validate.Encoder(resolvedFrom, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
-        }
-
-        [Test]
         public async Task CreateNrsMapContainerTest()
         {
             var session = await TestUtils.CreateTestApp();

@@ -1083,32 +1083,6 @@ namespace SafeApp.AppBindings
         [DllImport(DllName, EntryPoint = "parse_url")]
         private static extern void ParseUrlNative([MarshalAs(UnmanagedType.LPStr)] string url, IntPtr userData, FfiResultSafeUrlCb oCb);
 
-        public Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(IntPtr app, string url)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<(SafeUrl, SafeUrl)>();
-            ParseAndResolveUrlNative(app, url, userData, DelegateOnFfiResultSafeUrlSafeUrlCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "parse_and_resolve_url")]
-        private static extern void ParseAndResolveUrlNative(IntPtr app, [MarshalAs(UnmanagedType.LPStr)] string url, IntPtr userData, FfiResultSafeUrlSafeUrlCb oCb);
-
-        private delegate void FfiResultSafeUrlSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl, IntPtr resolvedFrom);
-
-#if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultSafeUrlSafeUrlCb))]
-#endif
-        private static void OnFfiResultSafeUrlSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl, IntPtr resolvedFrom)
-        {
-            var resolved = resolvedFrom == IntPtr.Zero ?
-               default :
-               new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(resolvedFrom));
-
-            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)), resolved));
-        }
-
-        private static readonly FfiResultSafeUrlSafeUrlCb DelegateOnFfiResultSafeUrlSafeUrlCb = OnFfiResultSafeUrlSafeUrlCb;
-
         public Task<(string, ProcessedEntries, string)> CreateNrsMapContainerAsync(
             IntPtr app,
             string name,

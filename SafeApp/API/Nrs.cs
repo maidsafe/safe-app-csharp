@@ -29,17 +29,6 @@ namespace SafeApp.API
             => AppBindings.ParseUrlAsync(url);
 
         /// <summary>
-        /// Parses a safe:// URL and returns all the info in a XorUrlEncoder instance.
-        /// It also returns a second XorUrlEncoder if the URL was resolved as NRS-URL.
-        /// </summary>
-        /// <param name="url">XorUrl string to parse.</param>
-        /// <returns>
-        /// New SafeUrl containing all safe:// url info,
-        /// New SafeUrl containing the information of the parsed NRS-URL.</returns>
-        public Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(string url)
-            => AppBindings.ParseAndResolveUrlAsync(_appPtr, url);
-
-        /// <summary>
         /// Create a new NrsMapContainer.
         /// </summary>
         /// <param name="name">NrsMapContainer name, create fails if is already exists.</param>

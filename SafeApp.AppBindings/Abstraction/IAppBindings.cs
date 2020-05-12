@@ -188,8 +188,6 @@ namespace SafeApp.AppBindings
 
         Task<SafeUrl> ParseUrlAsync(string url);
 
-        Task<(SafeUrl, SafeUrl)> ParseAndResolveUrlAsync(IntPtr app, string url);
-
         Task<(string, ProcessedEntries, string)> CreateNrsMapContainerAsync(
             IntPtr app,
             string name,

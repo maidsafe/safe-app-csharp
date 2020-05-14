@@ -1,5 +1,20 @@
 # safe_app_csharp Change Log
 
+## [0.3.3]
+
+### Changes
+
+- Fixed API documentation generation and publish to gh-pages.
+- Update Fetch API to support NrsContainer.
+- Update Inspect API to return complete resolution chain as JSON string.
+- Renames XorUrlEncoder to SafeUrl.
+- Added query string and fragment support in the SafeUrl APIs.
+- Exposed SafeUrl APIs for keys, mutable data, appendable data and immutable data.
+- Added SafeUrlBase encoding enum.
+- Removed `ParseAndResolveUrlAsync` API.
+- Updated Unit tests for changes.
+- Updated the `safe-api` native libs to master branch commit [#2fa8305](https://github.com/maidsafe/safe-api/commit/2fa830521dcf54e9f9cfcba44838ac08099233ca).
+
 ## [0.3.2]
 
 ### Changes

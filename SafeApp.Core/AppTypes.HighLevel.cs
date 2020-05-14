@@ -195,7 +195,7 @@ namespace SafeApp.Core
         public byte[] XorName;
 
         /// <summary>
-        /// NrsMapContainerInfo for the SafeKey stored on the network.
+        /// SafeKey url on the network.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public string ResolvedFrom;
@@ -232,7 +232,7 @@ namespace SafeApp.Core
         public DataType DataType;
 
         /// <summary>
-        /// NrsMapContainerInfo for the wallet stored on the network.
+        /// Wallet url on the network.
         /// </summary>
         public string ResolvedFrom;
 
@@ -314,7 +314,7 @@ namespace SafeApp.Core
         public DataType DataType;
 
         /// <summary>
-        /// NrsMapContainerInfo for the FilesContainer.
+        /// FilesContainer url on the network.
         /// </summary>
         public string ResolvedFrom;
 
@@ -389,7 +389,7 @@ namespace SafeApp.Core
         public string MediaType;
 
         /// <summary>
-        /// NrsMapContainerInfo for the PublishedImmutableData.
+        /// Published ImmutableData url on the network.
         /// </summary>
         public string ResolvedFrom;
 
@@ -433,6 +433,96 @@ namespace SafeApp.Core
         {
             BindingUtils.FreeList(ref DataPtr, ref DataLen);
         }
+    }
+
+    /// <summary>
+    /// Contains the information required to work with NRS.
+    /// </summary>
+    public struct NrsMapContainer : ISafeData
+    {
+        /// <summary>
+        /// Public name for the container.
+        /// </summary>
+        public string PublicName;
+
+        /// <summary>
+        /// Container's XorUrl.
+        /// </summary>
+        public string XorUrl;
+
+        /// <summary>
+        /// Container's XorName.
+        /// </summary>
+        public byte[] XorName;
+
+        /// <summary>
+        /// TypeTag used when storing on the network.
+        /// </summary>
+        public ulong TypeTag;
+
+        /// <summary>
+        /// Current version.
+        /// </summary>
+        public ulong Version;
+
+        /// <summary>
+        /// NrsMap in JSON format.
+        /// </summary>
+        public string NrsMap;
+
+        /// <summary>
+        /// DataType identifier for the NrsMapContainer.
+        /// </summary>
+        public DataType DataType;
+
+        /// <summary>
+        /// Nrs container url on the network.
+        /// </summary>
+        public string ResolvedFrom;
+
+        internal NrsMapContainer(NrsMapContainerNative native)
+        {
+            PublicName = native.PublicName;
+            XorUrl = native.XorUrl;
+            XorName = native.XorName;
+            TypeTag = native.TypeTag;
+            Version = native.Version;
+            NrsMap = native.NrsMap;
+            DataType = (DataType)native.DataType;
+            ResolvedFrom = native.ResolvedFrom;
+        }
+
+        internal NrsMapContainerNative ToNative()
+        {
+            return new NrsMapContainerNative
+            {
+                PublicName = PublicName,
+                XorUrl = XorUrl,
+                XorName = XorName,
+                TypeTag = TypeTag,
+                Version = Version,
+                NrsMap = NrsMap,
+                DataType = (ulong)DataType,
+                ResolvedFrom = ResolvedFrom,
+            };
+        }
+    }
+
+    internal struct NrsMapContainerNative
+    {
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string PublicName;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string XorUrl;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
+        public byte[] XorName;
+        public ulong TypeTag;
+        public ulong Version;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string NrsMap;
+        public ulong DataType;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
     }
 
     /// <summary>
@@ -746,96 +836,6 @@ namespace SafeApp.Core
         {
             BindingUtils.FreeList(ref ProcessedFilesPtr, ref ProcessedFilesLen);
         }
-    }
-
-    /// <summary>
-    /// Contains the information required to work with NRS.
-    /// </summary>
-    public struct NrsMapContainer
-    {
-        /// <summary>
-        /// Public name for the container.
-        /// </summary>
-        public string PublicName;
-
-        /// <summary>
-        /// Container's XorUrl.
-        /// </summary>
-        public string XorUrl;
-
-        /// <summary>
-        /// Container's XorName.
-        /// </summary>
-        public byte[] XorName;
-
-        /// <summary>
-        /// TypeTag used when storing on the network.
-        /// </summary>
-        public ulong TypeTag;
-
-        /// <summary>
-        /// Current version.
-        /// </summary>
-        public ulong Version;
-
-        /// <summary>
-        /// NrsMap in JSON format.
-        /// </summary>
-        public string NrsMap;
-
-        /// <summary>
-        /// DataType identifier for the NrsMapContainer.
-        /// </summary>
-        public DataType DataType;
-
-        /// <summary>
-        /// Nrs
-        /// </summary>
-        public string ResolvedFrom;
-
-        internal NrsMapContainer(NrsMapContainerNative native)
-        {
-            PublicName = native.PublicName;
-            XorUrl = native.XorUrl;
-            XorName = native.XorName;
-            TypeTag = native.TypeTag;
-            Version = native.Version;
-            NrsMap = native.NrsMap;
-            DataType = (DataType)native.DataType;
-            ResolvedFrom = native.ResolvedFrom;
-        }
-
-        internal NrsMapContainerNative ToNative()
-        {
-            return new NrsMapContainerNative
-            {
-                PublicName = PublicName,
-                XorUrl = XorUrl,
-                XorName = XorName,
-                TypeTag = TypeTag,
-                Version = Version,
-                NrsMap = NrsMap,
-                DataType = (ulong)DataType,
-                ResolvedFrom = ResolvedFrom,
-            };
-        }
-    }
-
-    internal struct NrsMapContainerNative
-    {
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string PublicName;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string XorUrl;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
-        public byte[] XorName;
-        public ulong TypeTag;
-        public ulong Version;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string NrsMap;
-        public ulong DataType;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string ResolvedFrom;
     }
 
     /// <summary>

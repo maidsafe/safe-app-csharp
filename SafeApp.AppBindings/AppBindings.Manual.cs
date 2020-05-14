@@ -112,6 +112,7 @@ namespace SafeApp.AppBindings
               DelegateOnFfiResultWalletCb,
               DelegateOnFfiResultSafeKeyCb,
               DelegateOnFfiResultFilesContainerCb,
+              DelegateOnFfiResultNrsContainerCb,
               DelegateOnFfiFetchFailedCb);
             return task;
         }
@@ -127,6 +128,7 @@ namespace SafeApp.AppBindings
             FfiResultWalletCb oWallet,
             FfiResultSafeKeyCb oKeys,
             FfiResultFilesContainerCb oContainer,
+            FfiResultNrsContainerCb nNrsContainer,
             FfiFetchFailedCb oErr);
 
         public Task<string> InspectAsync(IntPtr app, string url)
@@ -194,6 +196,19 @@ namespace SafeApp.AppBindings
         }
 
         private static readonly FfiResultFilesContainerCb DelegateOnFfiResultFilesContainerCb = OnFfiResultFilesContainerCb;
+
+        private delegate void FfiResultNrsContainerCb(IntPtr userData, IntPtr nrsContainer);
+
+#if __IOS__
+        [MonoPInvokeCallback(typeof(FfiResultNrsContainerCb))]
+#endif
+        private static void OnFfiResultNrsContainerCb(IntPtr userData, IntPtr nrsContainer)
+        {
+            var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
+            tcs.SetResult(new NrsMapContainer(Marshal.PtrToStructure<NrsMapContainerNative>(nrsContainer)));
+        }
+
+        private static readonly FfiResultNrsContainerCb DelegateOnFfiResultNrsContainerCb = OnFfiResultNrsContainerCb;
 
         private delegate void FfiFetchFailedCb(IntPtr userData, IntPtr result);
 

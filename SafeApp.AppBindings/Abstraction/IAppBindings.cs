@@ -108,16 +108,16 @@ namespace SafeApp.AppBindings
 
         #region Files
 
-        Task<(string, ProcessedFiles, string)> FilesContainerCreateAsync(
+        Task<(string, ProcessedFiles, FilesMap)> FilesContainerCreateAsync(
             IntPtr app,
             string location,
             string dest,
             bool recursive,
             bool dryRun);
 
-        Task<(ulong, string)> FilesContainerGetAsync(IntPtr app, string url);
+        Task<(ulong, FilesMap)> FilesContainerGetAsync(IntPtr app, string url);
 
-        Task<(ulong, ProcessedFiles, string)> FilesContainerSyncAsync(
+        Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerSyncAsync(
             IntPtr app,
             string location,
             string url,
@@ -126,7 +126,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun);
 
-        Task<(ulong, ProcessedFiles, string)> FilesContainerAddAsync(
+        Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddAsync(
             IntPtr app,
             string sourceFile,
             string url,
@@ -134,7 +134,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun);
 
-        Task<(ulong, ProcessedFiles, string)> FilesContainerAddFromRawAsync(
+        Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddFromRawAsync(
             IntPtr app,
             byte[] data,
             string url,
@@ -146,7 +146,7 @@ namespace SafeApp.AppBindings
 
         Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end);
 
-        Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(IntPtr app, string url, bool recursive, bool updateNrs, bool dryRun);
+        Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerRemovePathAsync(IntPtr app, string url, bool recursive, bool updateNrs, bool dryRun);
 
         #endregion Files
 

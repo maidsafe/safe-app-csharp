@@ -166,16 +166,19 @@ namespace SafeApp.Tests
             ulong actualVersion,
             ProcessedFiles originalProcessedFiles,
             ProcessedFiles newProcessedFiles,
-            string originalFilesMap,
-            string newFilesMap)
+            FilesMap originalFilesMap,
+            FilesMap newFilesMap)
         {
             Assert.AreEqual(expectedVersion, actualVersion);
             Assert.NotNull(newProcessedFiles.Files.Find(q => q.FileName.Equals("hello.html")));
 
-            // TODO: fix this; incorrect way of testing equality of this struct
-            Assert.AreNotEqual(originalProcessedFiles, newProcessedFiles);
+            Assert.IsNotNull(originalProcessedFiles.Files);
+            Assert.IsNotNull(newProcessedFiles.Files);
+            Assert.AreNotEqual(originalProcessedFiles.Files, newProcessedFiles.Files);
 
-            Assert.AreNotEqual(originalFilesMap, newFilesMap);
+            Assert.IsNotNull(originalFilesMap.Files);
+            Assert.IsNotNull(newFilesMap.Files);
+            Assert.AreNotEqual(originalFilesMap.Files, newFilesMap.Files);
         }
     }
 }

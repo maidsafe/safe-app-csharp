@@ -32,9 +32,9 @@ namespace SafeApp.API
         /// <returns>
         /// FilesContainer's XorUrl,
         /// new instance of ProcessedFiles containing the list of processed files,
-        /// FilesMap JSON string.
+        /// FilesMap instance.
         /// </returns>
-        public Task<(string, ProcessedFiles, string)> FilesContainerCreateAsync(
+        public Task<(string, ProcessedFiles, FilesMap)> FilesContainerCreateAsync(
             string location,
             string dest,
             bool recursive,
@@ -45,8 +45,8 @@ namespace SafeApp.API
         /// Fetch an existing FilesContainer from the network.
         /// </summary>
         /// <param name="url">FilesContainer's XorUrl.</param>
-        /// <returns>FilesContainer's version, FilesMap JSON string.</returns>
-        public Task<(ulong, string)> FilesContainerGetAsync(
+        /// <returns>FilesContainer's version, FilesMap instance.</returns>
+        public Task<(ulong, FilesMap)> FilesContainerGetAsync(
             string url)
             => AppBindings.FilesContainerGetAsync(_appPtr, url);
 
@@ -62,9 +62,9 @@ namespace SafeApp.API
         /// <returns>
         /// FilesContainer's version,
         /// new instance of ProcessedFiles containing the list of processed files,
-        /// FilesMap JSON string.
+        /// FilesMap instance.
         /// </returns>
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerSyncAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerSyncAsync(
             string location,
             string url,
             bool recursive,
@@ -84,9 +84,9 @@ namespace SafeApp.API
         /// <returns>
         /// FilesContainer's version,
         /// new instance of ProcessedFiles containing the list of processed files,
-        /// FilesMap JSON string.
+        /// FilesMap instance.
         /// </returns>
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerAddAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddAsync(
             string sourceFile,
             string url,
             bool force,
@@ -104,9 +104,9 @@ namespace SafeApp.API
         /// <returns>
         /// FilesContainer's version,
         /// new instance of ProcessedFiles containing the list of processed files,
-        /// FilesMap JSON string.
+        /// FilesMap instance.
         /// </returns>
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerRemovePathAsync(
             string url,
             bool recursive,
             bool updateNrs,
@@ -124,9 +124,9 @@ namespace SafeApp.API
         /// <returns>
         /// FilesContainer's version,
         /// new instance of ProcessedFiles containing the list of processed files,
-        /// FilesMap JSON string.
+        /// FilesMap instance.
         /// </returns>
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerAddFromRawAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddFromRawAsync(
             byte[] data,
             string url,
             bool force,

@@ -240,7 +240,7 @@ namespace SafeApp.AppBindings
 
         #endregion
 
-        #region SafeUrl
+#region SafeUrl
         public Task<string> SafeUrlEncodeAsync(
             byte[] name,
             string nrsName,
@@ -450,9 +450,9 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultSafeUrlCb DelegateOnFfiResultSafeUrlCb = OnFfiResultSafeUrlCb;
 
-        #endregion
+#endregion
 
-        #region Keys
+#region Keys
 
         public Task<BlsKeyPair> GenerateKeyPairAsync(IntPtr app)
         {
@@ -745,14 +745,14 @@ namespace SafeApp.AppBindings
 
 #region Files
 
-        public Task<(string, ProcessedFiles, string)> FilesContainerCreateAsync(
+        public Task<(string, ProcessedFiles, FilesMap)> FilesContainerCreateAsync(
             IntPtr app,
             string location,
             string dest,
             bool recursive,
             bool dryRun)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(string, ProcessedFiles, string)>();
+            var (ret, userData) = BindingUtils.PrepareTask<(string, ProcessedFiles, FilesMap)>();
             FilesContainerCreateNative(
                 app,
                 location,
@@ -760,7 +760,7 @@ namespace SafeApp.AppBindings
                 recursive,
                 dryRun,
                 userData,
-                DelegateOnFfiResultStringProcessedFilesStringCb);
+                DelegateOnFfiResultStringProcessedFilesFilesMapCb);
             return ret;
         }
 
@@ -772,40 +772,12 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.U1)] bool recursive,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
-            FfiResultStringProcessedFilesStringCb oCb);
+            FfiResultStringProcessedFilesFilesMapCb oCb);
 
-        private delegate void FfiResultStringProcessedFilesStringCb(
-            IntPtr userData,
-            IntPtr result,
-            string xorurl,
-            IntPtr processFiles,
-            string filesMap);
-
-#if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultStringProcessedFilesStringCb))]
-#endif
-        private static void OnFfiResultStringProcessedFilesStringCb(
-            IntPtr userData,
-            IntPtr result,
-            string xorurl,
-            IntPtr processFiles,
-            string filesMap)
-            => BindingUtils.CompleteTask(
-                userData,
-                Marshal.PtrToStructure<FfiResult>(result),
-                () => (
-                xorurl,
-                new ProcessedFiles(
-                    Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), filesMap));
-
-        private static readonly FfiResultStringProcessedFilesStringCb
-                                      DelegateOnFfiResultStringProcessedFilesStringCb =
-                                                    OnFfiResultStringProcessedFilesStringCb;
-
-        public Task<(ulong, string)> FilesContainerGetAsync(IntPtr app, string url)
+        public Task<(ulong, FilesMap)> FilesContainerGetAsync(IntPtr app, string url)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(ulong, string)>();
-            FilesContainerGetNative(app, url, userData, DelegateOnFfiResultULongStringCb);
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, FilesMap)>();
+            FilesContainerGetNative(app, url, userData, DelegateOnFfiResultULongFilesMapCb);
             return ret;
         }
 
@@ -814,32 +786,21 @@ namespace SafeApp.AppBindings
             IntPtr app,
             [MarshalAs(UnmanagedType.LPStr)] string url,
             IntPtr userData,
-            FfiResultULongStringCb oCb);
+            FfiResultULongFilesMapCb oCb);
 
-        private delegate void FfiResultULongStringCb(
-            IntPtr userData,
-            IntPtr result,
-            ulong version,
-            string filesMap);
+        private delegate void FfiResultULongFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr filesMap);
 
 #if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultULongStringCb))]
+        [MonoPInvokeCallback(typeof(FfiResultULongFilesMapCb))]
 #endif
-        private static void OnFfiResultULongStringCb(
-            IntPtr userData,
-            IntPtr result,
-            ulong version,
-            string filesMap)
-            => BindingUtils.CompleteTask(
-                userData,
-                Marshal.PtrToStructure<FfiResult>(result),
-                () => (version, filesMap));
+        private static void OnFfiResultULongFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr filesMap)
+        {
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (version, new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
+        }
 
-        private static readonly FfiResultULongStringCb
-                                          DelegateOnFfiResultULongStringCb =
-                                                                 OnFfiResultULongStringCb;
+        private static readonly FfiResultULongFilesMapCb DelegateOnFfiResultULongFilesMapCb = OnFfiResultULongFilesMapCb;
 
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerSyncAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerSyncAsync(
             IntPtr app,
             string location,
             string url,
@@ -848,7 +809,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, string)>();
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, FilesMap)>();
             FilesContainerSyncNative(
                 app,
                 location,
@@ -858,7 +819,7 @@ namespace SafeApp.AppBindings
                 updateNrs,
                 dryRun,
                 userData,
-                DelegateOnFfiResultULongProcessedFilesStringCb);
+                DelegateOnFfiResultULongProcessedFilesFilesMapCb);
             return ret;
         }
 
@@ -872,37 +833,9 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.U1)] bool updateNrs,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
-            FfiResultULongProcessedFilesStringCb oCb);
+            FfiResultULongProcessedFilesFilesMapCb oCb);
 
-        private delegate void FfiResultULongProcessedFilesStringCb(
-            IntPtr userData,
-            IntPtr result,
-            ulong version,
-            IntPtr processFiles,
-            string filesMap);
-
-#if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultULongProcessedFilesStringCb))]
-#endif
-        private static void OnFfiResultULongProcessedFilesStringCb(
-            IntPtr userData,
-            IntPtr result,
-            ulong version,
-            IntPtr processFiles,
-            string filesMap)
-            => BindingUtils.CompleteTask(
-                userData,
-                Marshal.PtrToStructure<FfiResult>(result),
-                () => (
-                version,
-                new ProcessedFiles(
-                    Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), filesMap));
-
-        private static readonly FfiResultULongProcessedFilesStringCb
-                                     DelegateOnFfiResultULongProcessedFilesStringCb =
-                                                         OnFfiResultULongProcessedFilesStringCb;
-
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerAddAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddAsync(
             IntPtr app,
             string sourceFile,
             string url,
@@ -910,7 +843,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, string)>();
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, FilesMap)>();
             FilesContainerAddNative(
                 app,
                 sourceFile,
@@ -919,7 +852,7 @@ namespace SafeApp.AppBindings
                 updateNrs,
                 dryRun,
                 userData,
-                DelegateOnFfiResultULongProcessedFilesStringCb);
+                DelegateOnFfiResultULongProcessedFilesFilesMapCb);
             return ret;
         }
 
@@ -932,9 +865,9 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.U1)] bool updateNrs,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
-            FfiResultULongProcessedFilesStringCb oCb);
+            FfiResultULongProcessedFilesFilesMapCb oCb);
 
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerAddFromRawAsync(
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddFromRawAsync(
             IntPtr app,
             byte[] data,
             string url,
@@ -942,7 +875,7 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun)
         {
-            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, string)>();
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, FilesMap)>();
             FilesContainerAddFromRawNative(
                 app,
                 data,
@@ -952,7 +885,7 @@ namespace SafeApp.AppBindings
                 updateNrs,
                 dryRun,
                 userData,
-                DelegateOnFfiResultULongProcessedFilesStringCb);
+                DelegateOnFfiResultULongProcessedFilesFilesMapCb);
             return ret;
         }
 
@@ -966,7 +899,60 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.U1)] bool updateNrs,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
-            FfiResultULongProcessedFilesStringCb oCb);
+            FfiResultULongProcessedFilesFilesMapCb oCb);
+
+        public Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerRemovePathAsync(
+            IntPtr app,
+            string url,
+            bool recursive,
+            bool updateNrs,
+            bool dryRun)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, FilesMap)>();
+            FilesContainerRemovePathNative(
+                app,
+                url,
+                recursive,
+                updateNrs,
+                dryRun,
+                userData,
+                DelegateOnFfiResultULongProcessedFilesFilesMapCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "files_container_remove_path")]
+        private static extern void FilesContainerRemovePathNative(
+            IntPtr app,
+            [MarshalAs(UnmanagedType.LPStr)] string url,
+            [MarshalAs(UnmanagedType.U1)] bool recursive,
+            [MarshalAs(UnmanagedType.U1)] bool updateNrs,
+            [MarshalAs(UnmanagedType.U1)] bool dryRun,
+            IntPtr userData,
+            FfiResultULongProcessedFilesFilesMapCb oCb);
+
+        private delegate void FfiResultULongProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr processFiles, IntPtr filesMap);
+
+#if __IOS__
+        [MonoPInvokeCallback(typeof(FfiResultULongProcessedFilesFilesMapCb))]
+#endif
+        private static void OnFfiResultULongProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr processFiles, IntPtr filesMap)
+        {
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (version, new ProcessedFiles(Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
+        }
+
+        private static readonly FfiResultULongProcessedFilesFilesMapCb DelegateOnFfiResultULongProcessedFilesFilesMapCb = OnFfiResultULongProcessedFilesFilesMapCb;
+
+        private delegate void FfiResultStringProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, string xorurl, IntPtr processFiles, IntPtr filesMap);
+
+#if __IOS__
+        [MonoPInvokeCallback(typeof(FfiResultStringProcessedFilesFilesMapCb))]
+#endif
+        private static void OnFfiResultStringProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, string xorurl, IntPtr processFiles, IntPtr filesMap)
+        {
+            BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (xorurl, new ProcessedFiles(Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
+        }
+
+        private static readonly FfiResultStringProcessedFilesFilesMapCb DelegateOnFfiResultStringProcessedFilesFilesMapCb = OnFfiResultStringProcessedFilesFilesMapCb;
 
         public Task<string> FilesPutPublishedImmutableAsync(
             IntPtr app,
@@ -1024,35 +1010,6 @@ namespace SafeApp.AppBindings
             IntPtr imDataPtr,
             UIntPtr imDataLen);
 
-        public Task<(ulong, ProcessedFiles, string)> FilesContainerRemovePathAsync(
-            IntPtr app,
-            string url,
-            bool recursive,
-            bool updateNrs,
-            bool dryRun)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, string)>();
-            FilesContainerRemovePathNative(
-                app,
-                url,
-                recursive,
-                updateNrs,
-                dryRun,
-                userData,
-                DelegateOnFfiResultULongProcessedFilesStringCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "files_container_remove_path")]
-        private static extern void FilesContainerRemovePathNative(
-            IntPtr app,
-            [MarshalAs(UnmanagedType.LPStr)] string url,
-            [MarshalAs(UnmanagedType.U1)] bool recursive,
-            [MarshalAs(UnmanagedType.U1)] bool updateNrs,
-            [MarshalAs(UnmanagedType.U1)] bool dryRun,
-            IntPtr userData,
-            FfiResultULongProcessedFilesStringCb oCb);
-
 #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultByteListCb))]
 #endif
@@ -1071,7 +1028,7 @@ namespace SafeApp.AppBindings
 
         #endregion Files
 
-        #region NRS
+#region NRS
 
         public Task<SafeUrl> ParseUrlAsync(string url)
         {

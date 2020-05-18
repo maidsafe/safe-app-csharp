@@ -31,7 +31,7 @@ namespace SafeApp.Tests
                 true,
                 false);
             ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(filesXorUrl), isFetch: true);
-            ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(processedFiles.Files[0].FileXorUrl), isFetch: true);
+            ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(processedFiles.Files[1].FileXorUrl), isFetch: true);
 
             var (_, _, nrsXorUrl) = await session.Nrs.CreateNrsMapContainerAsync(
                 TestUtils.GetRandomString(5),
@@ -70,7 +70,7 @@ namespace SafeApp.Tests
             // ValidateFetchOrInspectDataTypes(filesInspectResult);
             Assert.IsNotNull(filesInspectResult);
 
-            var fileInspectResult = await session.Fetch.InspectAsync(processedFiles.Files[0].FileXorUrl);
+            var fileInspectResult = await session.Fetch.InspectAsync(processedFiles.Files[1].FileXorUrl);
 
             // ValidateFetchOrInspectDataTypes(fileInspectResult;
             Assert.IsNotNull(fileInspectResult);

@@ -28,7 +28,7 @@ namespace SafeApp.MockAuthBindings
         [DllImport(DllName, EntryPoint = "auth_is_mock")]
         private static extern bool AuthIsMockNative();
 
-        [DllImport(DllName, EntryPoint = "create_acc")]
+        [DllImport(DllName, EntryPoint = "create_client_with_acc")]
         private static extern void CreateAccNative(
             [MarshalAs(UnmanagedType.LPStr)] string accountLocator,
             [MarshalAs(UnmanagedType.LPStr)] string accountPassword,

@@ -1,5 +1,5 @@
 variables:
-  MONO_VERSION: 6_4_0
+  MONO_VERSION: 6_8_0
   XCODE_VERSION: 11.2
   NETCORE_TEST_VERSION: '2.2.x'
   IOS_SIM_NAME: 'iPhone 11'
@@ -64,6 +64,11 @@ jobs:
       workingDirectory: Build
       condition: and(succeeded(), eq(variables['imageName'], 'windows-latest'), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     - bash: |
+        bash host_fix.sh
+      displayName: 'Fix host issue'
+      workingDirectory: Build
+      condition: and(succeeded(), in(variables['imageName'], 'macos-10.14'))
+    - bash: |
         chmod +x build.sh
         ./build.sh --target=UnZip-Libs
         ./build.sh --target=Run-Desktop-Tests
@@ -111,6 +116,10 @@ jobs:
       - task: NuGetCommand@2
         displayName: 'NuGet restore'
       - bash: |
+          bash host_fix.sh
+        displayName: 'Fix host issue'
+        workingDirectory: Build
+      - bash: |
           #Run cake script
           chmod +x build.sh
           ./build.sh --target=UnZip-Libs
@@ -141,6 +150,10 @@ jobs:
       displayName: 'Use .Net Core sdk $(NETCORE_TEST_VERSION)'
       inputs:
         version: $(NETCORE_TEST_VERSION)
+    - bash: |
+        bash host_fix.sh
+      displayName: 'Fix host issue'
+      workingDirectory: Build
     - bash: |
         #Create Android AVD
         export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk

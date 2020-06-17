@@ -1,5 +1,13 @@
 # safe_app_csharp Change Log
 
+## [0.3.4] - RC 1
+
+### Changes
+
+- Updated Files APIs to use `FilesMap` object instead of JSON strings.
+- Updated the `safe-api` native libs to v0.14.0, commit [#6dc9ec0
+](https://github.com/maidsafe/safe-api/commit/6dc9ec05634e377fc4fbac2d090ced0bee60cf5c).
+
 ## [0.3.3]
 
 ### Changes

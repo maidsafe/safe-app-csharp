@@ -124,12 +124,14 @@ namespace SafeApp.API
         /// <param name="typeTag">TypeTag (if content is Mutable Data).</param>
         /// <param name="contentType">Content type.</param>
         /// <param name="baseEncoding">Base encoding (base32z, base32, base64).</param>
+        /// <param name="isPrivate">If the encoded sequence data private or public.</param>
         /// <returns>Encoded SafeUrl string.</returns>
-        public static Task<string> EncodeAppendOnlyDataAsync(
+        public static Task<string> EncodeSequenceDataAsync(
             byte[] xorName,
             ulong typeTag,
             ContentType contentType,
-            SafeUrlBase baseEncoding)
-            => AppBindings.EncodeAppendOnlyDataAsync(xorName, typeTag, contentType, baseEncoding);
+            SafeUrlBase baseEncoding,
+            bool isPrivate)
+            => AppBindings.EncodeSequenceDataAsync(xorName, typeTag, contentType, baseEncoding, isPrivate);
     }
 }

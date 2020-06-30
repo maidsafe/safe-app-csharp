@@ -29,6 +29,7 @@ namespace SafeApp.Tests
                 TestUtils.TestDataDir,
                 null,
                 true,
+                false,
                 false);
             ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(filesXorUrl), isFetch: true);
             ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(processedFiles.Files[1].FileXorUrl), isFetch: true);
@@ -64,6 +65,7 @@ namespace SafeApp.Tests
                 TestUtils.TestDataDir,
                 null,
                 true,
+                false,
                 false);
             var filesInspectResult = await session.Fetch.InspectAsync(filesXorUrl);
 
@@ -115,7 +117,7 @@ namespace SafeApp.Tests
                         Assert.IsNotEmpty(filesContainer.FilesMap.Files[0].FileName);
                         Assert.IsNotNull(filesContainer.ResolvedFrom);
                         break;
-                    case PublishedImmutableData immutableData:
+                    case PublicImmutableData immutableData:
                         Assert.IsNotNull(immutableData.Data);
                         Validate.XorName(immutableData.XorName);
                         if (isFetch)

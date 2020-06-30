@@ -19,11 +19,7 @@ namespace SafeApp.Tests
         public async Task FilesContainerCreateAndGetTest()
         {
             var session = await TestUtils.CreateTestApp();
-            var (xorUrl, processedFiles, filesMap1) = await session.Files.FilesContainerCreateAsync(
-                TestUtils.TestDataDir,
-                null,
-                true,
-                false);
+            var (xorUrl, processedFiles, filesMap1) = await CreateTestFilesContainerAsync(session);
             await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.FilesContainer, 1100);
             Assert.NotNull(processedFiles.Files.Find(q => q.FileName.Equals("index.html")));
             Assert.NotNull(processedFiles);
@@ -59,8 +55,7 @@ namespace SafeApp.Tests
         public async Task FilesContainerAddFromRawTest()
         {
             var session = await TestUtils.CreateTestApp();
-            var (xorUrl, processedFiles, filesMap) =
-                await session.Files.FilesContainerCreateAsync(TestUtils.TestDataDir, null, false, false);
+            var (xorUrl, processedFiles, filesMap) = await CreateTestFilesContainerAsync(session);
             var newFileName = $"{xorUrl}/hello.html";
             var (version, newProcessedFiles, newFilesMap) =
                 await session.Files.FilesContainerAddFromRawAsync(
@@ -77,8 +72,8 @@ namespace SafeApp.Tests
         {
             var session = await TestUtils.CreateTestApp();
             var data = TestUtils.GetRandomString(20).ToUtfBytes();
-            var xorUrl = await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain", false);
-            var newData = await session.Files.FilesGetPublishedImmutableAsync(xorUrl);
+            var xorUrl = await session.Files.FilesPutPublicImmutableAsync(data, "text/plain", false);
+            var newData = await session.Files.FilesGetPublicImmutableAsync(xorUrl);
             Assert.AreEqual(data, newData);
         }
 
@@ -88,11 +83,11 @@ namespace SafeApp.Tests
             var session = await TestUtils.CreateTestApp();
             var data = TestUtils.GetRandomString(20).ToUtfBytes();
             var xorUrl =
-                await session.Files.FilesPutPublishedImmutableAsync(data, "text/plain", false);
+                await session.Files.FilesPutPublicImmutableAsync(data, "text/plain", false);
             var firstHalf =
-                await session.Files.FilesGetPublishedImmutableAsync(xorUrl, 0, (ulong)(data.Length / 2));
+                await session.Files.FilesGetPublicImmutableAsync(xorUrl, 0, (ulong)(data.Length / 2));
             var secondHalf =
-                await session.Files.FilesGetPublishedImmutableAsync(xorUrl, (ulong)(data.Length / 2), (ulong)data.Length);
+                await session.Files.FilesGetPublicImmutableAsync(xorUrl, (ulong)(data.Length / 2), (ulong)data.Length);
             Assert.AreEqual(data.Take(data.Length / 2), firstHalf);
             Assert.AreEqual(data.Skip(data.Length / 2), secondHalf);
         }
@@ -100,8 +95,7 @@ namespace SafeApp.Tests
         async Task RunSyncTest(bool dryRun)
         {
             var session = await TestUtils.CreateTestApp();
-            var (xorUrl, processedFiles, filesMap) =
-                await session.Files.FilesContainerCreateAsync(TestUtils.TestDataDir, null, true, false);
+            var (xorUrl, processedFiles, filesMap) = await CreateTestFilesContainerAsync(session);
             Directory.CreateDirectory($"{TestUtils.TestDataDir}/newDir");
             var testFilePath = Path.Combine($"{TestUtils.TestDataDir}/newDir", "hello.html");
             File.WriteAllText(testFilePath, TestUtils.GetRandomString(20));
@@ -111,6 +105,7 @@ namespace SafeApp.Tests
                 recursive: true,
                 delete: false,
                 updateNrs: false,
+                followLinks: false,
                 dryRun: dryRun);
 
             ValidateFiles(1, version, processedFiles, newProcessedFiles, filesMap, newFilesMap);
@@ -119,14 +114,14 @@ namespace SafeApp.Tests
         async Task RunAddTest(bool dryRun)
         {
             var session = await TestUtils.CreateTestApp();
-            var (xorUrl, processedFiles, filesMap) =
-                await session.Files.FilesContainerCreateAsync(TestUtils.TestDataDir, null, false, false);
+            var (xorUrl, processedFiles, filesMap) = await CreateTestFilesContainerAsync(session);
             var testFilePath = Path.Combine(TestUtils.TestDataDir, "hello.html");
             File.WriteAllText(testFilePath, TestUtils.GetRandomString(20));
             var newFileName = $"{xorUrl}/hello.html";
             var (version, newProcessedFiles, newFilesMap) = await session.Files.FilesContainerAddAsync(
                 $"{TestUtils.TestDataDir}/hello.html",
                 newFileName,
+                false,
                 false,
                 false,
                 dryRun);
@@ -137,14 +132,14 @@ namespace SafeApp.Tests
         async Task RunRemoveTest(bool dryRun)
         {
             var session = await TestUtils.CreateTestApp();
-            var (xorUrl, processedFiles, filesMap) =
-                await session.Files.FilesContainerCreateAsync(TestUtils.TestDataDir, null, false, false);
+            var (xorUrl, processedFiles, filesMap) = await CreateTestFilesContainerAsync(session);
             var testFilePath = Path.Combine(TestUtils.TestDataDir, "hello.html");
             File.WriteAllText(testFilePath, TestUtils.GetRandomString(20));
             var newFileName = $"{xorUrl}/hello.html";
             var (version, newProcessedFiles, newFilesMap) = await session.Files.FilesContainerAddAsync(
                 $"{TestUtils.TestDataDir}/hello.html",
                 newFileName,
+                false,
                 false,
                 false,
                 dryRun);
@@ -179,6 +174,16 @@ namespace SafeApp.Tests
             Assert.IsNotNull(originalFilesMap.Files);
             Assert.IsNotNull(newFilesMap.Files);
             Assert.AreNotEqual(originalFilesMap.Files, newFilesMap.Files);
+        }
+
+        public static Task<(string, ProcessedFiles, FilesMap)> CreateTestFilesContainerAsync(Session session)
+        {
+            return session.Files.FilesContainerCreateAsync(
+                TestUtils.TestDataDir,
+                null,
+                true,
+                false,
+                false);
         }
     }
 }

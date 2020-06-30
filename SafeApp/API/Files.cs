@@ -28,6 +28,9 @@ namespace SafeApp.API
         /// The XorUrl to put the data on the network.If null, then a random address will be used.
         /// </param>
         /// <param name="recursive">Flag denoting if the sub-folders should be added.</param>
+        /// <param name="followLinks">If True, API will resolve the symlink before uploading,
+        /// and will be stored as a file or directory on the network.
+        /// When false, no path resolution is performed and the file will be stored as a symlink.</param>
         /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
         /// <returns>
         /// FilesContainer's XorUrl,
@@ -38,8 +41,9 @@ namespace SafeApp.API
             string location,
             string dest,
             bool recursive,
+            bool followLinks,
             bool dryRun)
-            => AppBindings.FilesContainerCreateAsync(_appPtr, location, dest, recursive, dryRun);
+            => AppBindings.FilesContainerCreateAsync(_appPtr, location, dest, recursive, followLinks, dryRun);
 
         /// <summary>
         /// Fetch an existing FilesContainer from the network.
@@ -56,6 +60,9 @@ namespace SafeApp.API
         /// <param name="location">Location of the local data to sync with the network.</param>
         /// <param name="url">The XorUrl to sync the data on the network.</param>
         /// <param name="recursive">Flag denoting if the sub-folders should be added.</param>
+        /// <param name="followLinks">If True, API will resolve the symlink before uploading,
+        /// and will be stored as a file or directory on the network.
+        /// When false, no path resolution is performed and the file will be stored as a symlink.</param>
         /// <param name="delete">Flag denoting if the local files can be deleting during sync operation.</param>
         /// <param name="updateNrs">Flag denoting if the NRS maps should be updated.</param>
         /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
@@ -68,10 +75,11 @@ namespace SafeApp.API
             string location,
             string url,
             bool recursive,
+            bool followLinks,
             bool delete,
             bool updateNrs,
             bool dryRun)
-            => AppBindings.FilesContainerSyncAsync(_appPtr, location, url, recursive, delete, updateNrs, dryRun);
+            => AppBindings.FilesContainerSyncAsync(_appPtr, location, url, recursive, followLinks, delete, updateNrs, dryRun);
 
         /// <summary>
         /// Add a file, either a local path or a published file, to an existing FilesContainer.
@@ -80,6 +88,9 @@ namespace SafeApp.API
         /// <param name="url">XorUrl to add the FiledContainer.</param>
         /// <param name="force">Flag denoting to force update the FilesContainer.</param>
         /// <param name="updateNrs">Flag denoting if the NRS maps should be updated.</param>
+        /// <param name="followLinks">If True, API will resolve the symlink before uploading,
+        /// and will be stored as a file or directory on the network.
+        /// When false, no path resolution is performed and the file will be stored as a symlink.</param>
         /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
         /// <returns>
         /// FilesContainer's version,
@@ -91,8 +102,9 @@ namespace SafeApp.API
             string url,
             bool force,
             bool updateNrs,
+            bool followLinks,
             bool dryRun)
-            => AppBindings.FilesContainerAddAsync(_appPtr, sourceFile, url, force, updateNrs, dryRun);
+            => AppBindings.FilesContainerAddAsync(_appPtr, sourceFile, url, force, updateNrs, followLinks, dryRun);
 
         /// <summary>
         /// Remove a file from an existing FilesContainer..
@@ -135,29 +147,29 @@ namespace SafeApp.API
             => AppBindings.FilesContainerAddFromRawAsync(_appPtr, data, url, force, updateNrs, dryRun);
 
         /// <summary>
-        /// Put Published ImmutableData to the network.
+        /// Store public immutable data on the network.
         /// </summary>
         /// <param name="data">Raw data in byte[] format.</param>
         /// <param name="mediaType">Content's MIME type.</param>
         /// <param name="dryRun">Flag denoting whether container will be created locally.</param>
         /// <returns>XorUrl for the published data</returns>
-        public Task<string> FilesPutPublishedImmutableAsync(
+        public Task<string> FilesPutPublicImmutableAsync(
             byte[] data,
             string mediaType,
             bool dryRun)
-            => AppBindings.FilesPutPublishedImmutableAsync(_appPtr, data, mediaType, dryRun);
+            => AppBindings.FilesPutPublicImmutableAsync(_appPtr, data, mediaType, dryRun);
 
         /// <summary>
-        /// Get Published ImmutableData from the network.
+        /// Get public immutable data from the network.
         /// </summary>
         /// <param name="url">XorUrl to fetch the content.</param>
         /// <param name="start">Start index to fetch the content.</param>
         /// <param name="end">End index to fetch the content.</param>
         /// <returns>Raw data from the network in byte[] format.</returns>
-        public Task<byte[]> FilesGetPublishedImmutableAsync(
+        public Task<byte[]> FilesGetPublicImmutableAsync(
             string url,
             ulong start = 0,
             ulong end = 0)
-            => AppBindings.FilesGetPublishedImmutableAsync(_appPtr, url, start, end);
+            => AppBindings.FilesGetPublicImmutableAsync(_appPtr, url, start, end);
     }
 }

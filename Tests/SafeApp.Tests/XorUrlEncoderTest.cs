@@ -17,7 +17,7 @@ namespace SafeApp.Tests
             var xorName = TestUtils.GenerateRandomXorName();
             var typeTag = 16000UL;
             var contentType = ContentType.Wallet;
-            var dataType = DataType.UnpublishedImmutableData;
+            var dataType = DataType.PrivateImmutableData;
             var encodedString = await XorEncoder.EncodeAsync(
                 xorName,
                 null,
@@ -84,14 +84,15 @@ namespace SafeApp.Tests
             Assert.IsNotNull(encodedMDataXorUrl);
             await Validate.XorUrlAsync(encodedMDataXorUrl, mDataXorName, ContentType.Raw, typeTag);
 
-            var aDataXorName = TestUtils.GenerateRandomXorName();
-            var encodedADataXorUrl = await XorEncoder.EncodeAppendOnlyDataAsync(
-                aDataXorName,
+            var sDataXorName = TestUtils.GenerateRandomXorName();
+            var encodedSDataXorUrl = await XorEncoder.EncodeSequenceDataAsync(
+                sDataXorName,
                 typeTag,
                 ContentType.FilesContainer,
-                SafeUrlBase.Base32z);
-            Assert.IsNotNull(encodedADataXorUrl);
-            await Validate.XorUrlAsync(encodedADataXorUrl, aDataXorName, ContentType.FilesContainer, typeTag);
+                SafeUrlBase.Base32z,
+                false);
+            Assert.IsNotNull(encodedSDataXorUrl);
+            await Validate.XorUrlAsync(encodedSDataXorUrl, sDataXorName, ContentType.FilesContainer, typeTag);
         }
     }
 }

@@ -364,9 +364,9 @@ namespace SafeApp.Core
     }
 
     /// <summary>
-    /// PublishedImmutableData data type.
+    /// PublicImmutableData data type.
     /// </summary>
-    public struct PublishedImmutableData : ISafeData
+    public struct PublicImmutableData : ISafeData
     {
         /// <summary>
         /// XorUrl
@@ -393,7 +393,7 @@ namespace SafeApp.Core
         /// </summary>
         public string ResolvedFrom;
 
-        internal PublishedImmutableData(PublishedImmutableDataNative native)
+        internal PublicImmutableData(PublicImmutableDataNative native)
         {
             XorUrl = native.XorUrl;
             XorName = native.XorName;
@@ -402,9 +402,9 @@ namespace SafeApp.Core
             ResolvedFrom = native.ResolvedFrom;
         }
 
-        internal PublishedImmutableDataNative ToNative()
+        internal PublicImmutableDataNative ToNative()
         {
-            return new PublishedImmutableDataNative
+            return new PublicImmutableDataNative
             {
                 XorUrl = XorUrl,
                 XorName = XorName,
@@ -416,7 +416,7 @@ namespace SafeApp.Core
         }
     }
 
-    internal struct PublishedImmutableDataNative
+    internal struct PublicImmutableDataNative
     {
         [MarshalAs(UnmanagedType.LPStr)]
         public string XorUrl;
@@ -921,8 +921,8 @@ namespace SafeApp.Core
     public enum DataType
     {
         SafeKey,
-        PublishedImmutableData,
-        UnpublishedImmutableData,
+        PublicImmutableData,
+        PrivateImmutableData,
         SeqMutableData,
         UnseqMutableData,
         PublishedSeqAppendOnlyData,

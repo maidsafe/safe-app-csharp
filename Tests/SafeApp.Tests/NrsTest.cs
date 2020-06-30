@@ -114,6 +114,7 @@ namespace SafeApp.Tests
                 TestUtils.TestDataDir,
                 null,
                 true,
+                false,
                 false);
 
             return xorUrl;

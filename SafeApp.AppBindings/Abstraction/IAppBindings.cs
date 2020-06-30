@@ -90,11 +90,12 @@ namespace SafeApp.AppBindings
             ContentType contentType,
             SafeUrlBase baseEncoding);
 
-        Task<string> EncodeAppendOnlyDataAsync(
+        Task<string> EncodeSequenceDataAsync(
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            SafeUrlBase baseEncoding);
+            SafeUrlBase baseEncoding,
+            bool isPrivate);
 
         #endregion
 
@@ -113,6 +114,7 @@ namespace SafeApp.AppBindings
             string location,
             string dest,
             bool recursive,
+            bool followLinks,
             bool dryRun);
 
         Task<(ulong, FilesMap)> FilesContainerGetAsync(IntPtr app, string url);
@@ -122,6 +124,7 @@ namespace SafeApp.AppBindings
             string location,
             string url,
             bool recursive,
+            bool followLinks,
             bool delete,
             bool updateNrs,
             bool dryRun);
@@ -132,6 +135,7 @@ namespace SafeApp.AppBindings
             string url,
             bool force,
             bool updateNrs,
+            bool followLinks,
             bool dryRun);
 
         Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerAddFromRawAsync(
@@ -142,9 +146,9 @@ namespace SafeApp.AppBindings
             bool updateNrs,
             bool dryRun);
 
-        Task<string> FilesPutPublishedImmutableAsync(IntPtr app, byte[] data, string mediaType, bool dryRun);
+        Task<string> FilesPutPublicImmutableAsync(IntPtr app, byte[] data, string mediaType, bool dryRun);
 
-        Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end);
+        Task<byte[]> FilesGetPublicImmutableAsync(IntPtr app, string url, ulong start, ulong end);
 
         Task<(ulong, ProcessedFiles, FilesMap)> FilesContainerRemovePathAsync(IntPtr app, string url, bool recursive, bool updateNrs, bool dryRun);
 

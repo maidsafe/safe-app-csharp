@@ -108,7 +108,7 @@ namespace SafeApp.AppBindings
               userData,
               start,
               end,
-              DelegateOnFfiResultPublishedImmutableDataCb,
+              DelegateOnFfiResultPublicImmutableDataCb,
               DelegateOnFfiResultWalletCb,
               DelegateOnFfiResultSafeKeyCb,
               DelegateOnFfiResultFilesContainerCb,
@@ -124,7 +124,7 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             ulong start,
             ulong end,
-            FfiResultPublishedImmutableDataCb oPublished,
+            FfiResultPublicImmutableDataCb oPublished,
             FfiResultWalletCb oWallet,
             FfiResultSafeKeyCb oKeys,
             FfiResultFilesContainerCb oContainer,
@@ -145,18 +145,18 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        private delegate void FfiResultPublishedImmutableDataCb(IntPtr userData, IntPtr publishedImmutableData);
+        private delegate void FfiResultPublicImmutableDataCb(IntPtr userData, IntPtr publicImmutableData);
 
 #if __IOS__
-        [MonoPInvokeCallback(typeof(FfiResultPublishedImmutableDataCb))]
+        [MonoPInvokeCallback(typeof(FfiResultPublicImmutableDataCb))]
 #endif
-        private static void OnFfiResultPublishedImmutableDataCb(IntPtr userData, IntPtr publishedImmutableData)
+        private static void OnFfiResultPublicImmutableDataCb(IntPtr userData, IntPtr publicImmutableData)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
-            tcs.SetResult(new PublishedImmutableData(Marshal.PtrToStructure<PublishedImmutableDataNative>(publishedImmutableData)));
+            tcs.SetResult(new PublicImmutableData(Marshal.PtrToStructure<PublicImmutableDataNative>(publicImmutableData)));
         }
 
-        private static readonly FfiResultPublishedImmutableDataCb DelegateOnFfiResultPublishedImmutableDataCb = OnFfiResultPublishedImmutableDataCb;
+        private static readonly FfiResultPublicImmutableDataCb DelegateOnFfiResultPublicImmutableDataCb = OnFfiResultPublicImmutableDataCb;
 
         private delegate void FfiResultWalletCb(IntPtr userData, IntPtr wallet);
 

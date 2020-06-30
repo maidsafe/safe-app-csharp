@@ -412,29 +412,32 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        public Task<string> EncodeAppendOnlyDataAsync(
+        public Task<string> EncodeSequenceDataAsync(
             byte[] name,
             ulong typeTag,
             ContentType contentType,
-            SafeUrlBase baseEncoding)
+            SafeUrlBase baseEncoding,
+            bool isPrivate)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
-            EncodeAppendOnlyDataNative(
+            EncodeSequenceDataNative(
                 name,
                 typeTag,
                 (ushort)contentType,
                 (ushort)baseEncoding,
+                isPrivate,
                 userData,
                 DelegateOnFfiResultStringCb);
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "encode_append_only_data")]
-        private static extern void EncodeAppendOnlyDataNative(
+        [DllImport(DllName, EntryPoint = "encode_sequence_data")]
+        private static extern void EncodeSequenceDataNative(
             [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
             ulong typeTag,
             ushort contentType,
             ushort baseEncoding,
+            [MarshalAs(UnmanagedType.U1)] bool isPrivate,
             IntPtr userData,
             FfiResultStringCb oCb);
 
@@ -750,6 +753,7 @@ namespace SafeApp.AppBindings
             string location,
             string dest,
             bool recursive,
+            bool followLinks,
             bool dryRun)
         {
             var (ret, userData) = BindingUtils.PrepareTask<(string, ProcessedFiles, FilesMap)>();
@@ -758,6 +762,7 @@ namespace SafeApp.AppBindings
                 location,
                 dest,
                 recursive,
+                followLinks,
                 dryRun,
                 userData,
                 DelegateOnFfiResultStringProcessedFilesFilesMapCb);
@@ -770,6 +775,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string location,
             [MarshalAs(UnmanagedType.LPStr)] string dest,
             [MarshalAs(UnmanagedType.U1)] bool recursive,
+            [MarshalAs(UnmanagedType.U1)] bool followLinks,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
             FfiResultStringProcessedFilesFilesMapCb oCb);
@@ -805,6 +811,7 @@ namespace SafeApp.AppBindings
             string location,
             string url,
             bool recursive,
+            bool followLinks,
             bool delete,
             bool updateNrs,
             bool dryRun)
@@ -815,6 +822,7 @@ namespace SafeApp.AppBindings
                 location,
                 url,
                 recursive,
+                followLinks,
                 delete,
                 updateNrs,
                 dryRun,
@@ -829,6 +837,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string location,
             [MarshalAs(UnmanagedType.LPStr)] string url,
             [MarshalAs(UnmanagedType.U1)] bool recursive,
+            [MarshalAs(UnmanagedType.U1)] bool followLinks,
             [MarshalAs(UnmanagedType.U1)] bool delete,
             [MarshalAs(UnmanagedType.U1)] bool updateNrs,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
@@ -841,6 +850,7 @@ namespace SafeApp.AppBindings
             string url,
             bool force,
             bool updateNrs,
+            bool followLinks,
             bool dryRun)
         {
             var (ret, userData) = BindingUtils.PrepareTask<(ulong, ProcessedFiles, FilesMap)>();
@@ -850,6 +860,7 @@ namespace SafeApp.AppBindings
                 url,
                 force,
                 updateNrs,
+                followLinks,
                 dryRun,
                 userData,
                 DelegateOnFfiResultULongProcessedFilesFilesMapCb);
@@ -863,6 +874,7 @@ namespace SafeApp.AppBindings
             [MarshalAs(UnmanagedType.LPStr)] string url,
             [MarshalAs(UnmanagedType.U1)] bool force,
             [MarshalAs(UnmanagedType.U1)] bool updateNrs,
+            [MarshalAs(UnmanagedType.U1)] bool followLinks,
             [MarshalAs(UnmanagedType.U1)] bool dryRun,
             IntPtr userData,
             FfiResultULongProcessedFilesFilesMapCb oCb);
@@ -954,14 +966,14 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultStringProcessedFilesFilesMapCb DelegateOnFfiResultStringProcessedFilesFilesMapCb = OnFfiResultStringProcessedFilesFilesMapCb;
 
-        public Task<string> FilesPutPublishedImmutableAsync(
+        public Task<string> FilesPutPublicImmutableAsync(
             IntPtr app,
             byte[] data,
             string mediaType,
             bool dryRun)
         {
             var (ret, userData) = BindingUtils.PrepareTask<string>();
-            FilesPutPublishedImmutableNative(
+            FilesPutPublicImmutableNative(
                 app,
                 data,
                 (UIntPtr)data.Length,
@@ -972,8 +984,8 @@ namespace SafeApp.AppBindings
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "files_put_published_immutable")]
-        private static extern void FilesPutPublishedImmutableNative(
+        [DllImport(DllName, EntryPoint = "files_put_public_immutable")]
+        private static extern void FilesPutPublicImmutableNative(
             IntPtr app,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] data,
             UIntPtr dataLen,
@@ -982,10 +994,10 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-        public Task<byte[]> FilesGetPublishedImmutableAsync(IntPtr app, string url, ulong start, ulong end)
+        public Task<byte[]> FilesGetPublicImmutableAsync(IntPtr app, string url, ulong start, ulong end)
         {
             var (ret, userData) = BindingUtils.PrepareTask<byte[]>();
-            FilesGetPublishedImmutableNative(
+            FilesGetPublicImmutableNative(
                 app,
                 url,
                 start,
@@ -995,8 +1007,8 @@ namespace SafeApp.AppBindings
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "files_get_published_immutable")]
-        private static extern void FilesGetPublishedImmutableNative(
+        [DllImport(DllName, EntryPoint = "files_get_public_immutable")]
+        private static extern void FilesGetPublicImmutableNative(
             IntPtr app,
             [MarshalAs(UnmanagedType.LPStr)] string url,
             ulong start,

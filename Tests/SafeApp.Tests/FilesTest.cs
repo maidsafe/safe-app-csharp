@@ -20,7 +20,7 @@ namespace SafeApp.Tests
         {
             var session = await TestUtils.CreateTestApp();
             var (xorUrl, processedFiles, filesMap1) = await CreateTestFilesContainerAsync(session);
-            await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.FilesContainer, 1100);
+            await Validate.XorUrlAsync(xorUrl, DataType.PublicSequence, ContentType.FilesContainer, 1100);
             Assert.NotNull(processedFiles.Files.Find(q => q.FileName.Equals("index.html")));
             Assert.NotNull(processedFiles);
             Assert.NotNull(filesMap1);

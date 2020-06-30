@@ -13,13 +13,13 @@ namespace SafeApp.AppBindings
 {
     internal partial class AppBindings : IAppBindings
     {
-#if __IOS__
+        #if __IOS__
         private const string DllName = "__Internal";
-#else
+        #else
         private const string DllName = "safe_api";
-#endif
+        #endif
 
-#region App Level
+        #region App Level
 
         public bool AppIsMock()
         {
@@ -43,9 +43,9 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultCb oCb);
 
-#endregion
+        #endregion
 
-#region IPC
+        #region IPC
 
         public Task<(uint, string)> EncodeAuthReqAsync(ref AuthReq req)
         {
@@ -113,9 +113,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultUIntStringCb(IntPtr userData, IntPtr result, uint reqId, string encoded);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultUIntStringCb))]
-#endif
+        #endif
         private static void OnFfiResultUIntStringCb(IntPtr userData, IntPtr result, uint reqId, string encoded)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (reqId, encoded));
@@ -131,9 +131,9 @@ namespace SafeApp.AppBindings
 
         private delegate void UIntCb(IntPtr userData, uint reqId);
 
-#endregion
+        #endregion
 
-#region Logging
+        #region Logging
 
         public Task AppInitLoggingAsync(string outputFileNameOverride)
         {
@@ -160,9 +160,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultCb))]
-#endif
+        #endif
         private static void OnFfiResultCb(IntPtr userData, IntPtr result)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result));
@@ -172,9 +172,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultStringCb(IntPtr userData, IntPtr result, string logPath);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringCb))]
-#endif
+        #endif
         private static void OnFfiResultStringCb(IntPtr userData, IntPtr result, string logPath)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => logPath);
@@ -182,9 +182,9 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultStringCb DelegateOnFfiResultStringCb = OnFfiResultStringCb;
 
-#endregion
+        #endregion
 
-#region Authenticate
+        #region Authenticate
 
         public Task<string> AuthAppAsync(
             string appId,
@@ -206,9 +206,9 @@ namespace SafeApp.AppBindings
             IntPtr userData,
             FfiResultStringCb oCb);
 
-#endregion
+        #endregion
 
-#region Connect
+        #region Connect
         public void ConnectApp(
             string appId,
             string authCredentials,
@@ -227,9 +227,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultSafeCb(IntPtr userData, IntPtr result, IntPtr app);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultSafeCb))]
-#endif
+        #endif
         private static void OnFfiResultSafeCb(IntPtr userData, IntPtr result, IntPtr app)
         {
             var action = BindingUtils.FromHandlePtr<Action<FfiResult, IntPtr, GCHandle>>(userData, false);
@@ -240,7 +240,7 @@ namespace SafeApp.AppBindings
 
         #endregion
 
-#region SafeUrl
+        #region SafeUrl
         public Task<string> SafeUrlEncodeAsync(
             byte[] name,
             string nrsName,
@@ -443,9 +443,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultSafeUrlCb))]
-#endif
+        #endif
         private static void OnFfiResultSafeUrlCb(IntPtr userData, IntPtr result, IntPtr safeUrl)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => new SafeUrl(Marshal.PtrToStructure<SafeUrlNative>(safeUrl)));
@@ -453,9 +453,9 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultSafeUrlCb DelegateOnFfiResultSafeUrlCb = OnFfiResultSafeUrlCb;
 
-#endregion
+        #endregion
 
-#region Keys
+        #region Keys
 
         public Task<BlsKeyPair> GenerateKeyPairAsync(IntPtr app)
         {
@@ -472,9 +472,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultBlsKeyPairCb(IntPtr userData, IntPtr result, IntPtr safeKey);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultBlsKeyPairCb))]
-#endif
+        #endif
         private static void OnFfiResultBlsKeyPairCb(IntPtr userData, IntPtr result, IntPtr safeKey)
             => BindingUtils.CompleteTask(
                 userData,
@@ -523,9 +523,9 @@ namespace SafeApp.AppBindings
             string xorUrl,
             IntPtr safeKey);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringBlsKeyPairCb))]
-#endif
+        #endif
         private static void OnFfiResultStringBlsKeyPairCb(
             IntPtr userData,
             IntPtr result,
@@ -601,9 +601,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultULongCb(IntPtr userData, IntPtr result, ulong handle);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultULongCb))]
-#endif
+        #endif
         private static void OnFfiResultULongCb(IntPtr userData, IntPtr result, ulong handle)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => handle);
@@ -611,9 +611,9 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultULongCb DelegateOnFfiResultULongCb = OnFfiResultULongCb;
 
-#endregion Keys
+        #endregion Keys
 
-#region Wallet
+        #region Wallet
 
         public Task<string> WalletCreateAsync(IntPtr app)
         {
@@ -679,9 +679,9 @@ namespace SafeApp.AppBindings
            IntPtr spendableWalletBalance,
            ulong version);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultWalletSpendableBalanceULongCb))]
-#endif
+        #endif
         private static void OnFfiResultWalletSpendableBalanceULongCb(
            IntPtr userData,
            IntPtr result,
@@ -730,9 +730,9 @@ namespace SafeApp.AppBindings
            IntPtr result,
            IntPtr spendableWalletBalance);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultWalletSpendableBalancesCb))]
-#endif
+        #endif
         private static void OnFfiResultWalletSpendableBalancesCb(
            IntPtr userData,
            IntPtr result,
@@ -744,9 +744,9 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultWalletSpendableBalancesCb DelegateOnFfiResultWalletSpendableBalancesCb = OnFfiResultWalletSpendableBalancesCb;
 
-#endregion Wallet
+        #endregion Wallet
 
-#region Files
+        #region Files
 
         public Task<(string, ProcessedFiles, FilesMap)> FilesContainerCreateAsync(
             IntPtr app,
@@ -796,9 +796,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultULongFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr filesMap);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultULongFilesMapCb))]
-#endif
+        #endif
         private static void OnFfiResultULongFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr filesMap)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (version, new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
@@ -944,9 +944,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultULongProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr processFiles, IntPtr filesMap);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultULongProcessedFilesFilesMapCb))]
-#endif
+        #endif
         private static void OnFfiResultULongProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, ulong version, IntPtr processFiles, IntPtr filesMap)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (version, new ProcessedFiles(Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
@@ -956,9 +956,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultStringProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, string xorurl, IntPtr processFiles, IntPtr filesMap);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringProcessedFilesFilesMapCb))]
-#endif
+        #endif
         private static void OnFfiResultStringProcessedFilesFilesMapCb(IntPtr userData, IntPtr result, string xorurl, IntPtr processFiles, IntPtr filesMap)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (xorurl, new ProcessedFiles(Marshal.PtrToStructure<ProcessedFilesNative>(processFiles)), new FilesMap(Marshal.PtrToStructure<FilesMapNative>(filesMap))));
@@ -1022,9 +1022,9 @@ namespace SafeApp.AppBindings
             IntPtr imDataPtr,
             UIntPtr imDataLen);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultByteListCb))]
-#endif
+        #endif
         private static void OnFfiResultByteListCb(
             IntPtr userData,
             IntPtr result,
@@ -1040,7 +1040,7 @@ namespace SafeApp.AppBindings
 
         #endregion Files
 
-#region NRS
+        #region NRS
 
         public Task<SafeUrl> ParseUrlAsync(string url)
         {
@@ -1091,9 +1091,9 @@ namespace SafeApp.AppBindings
             IntPtr processedEntries,
             string xorurl);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringProcessedEntriesStringCb))]
-#endif
+        #endif
         private static void OnFfiResultStringProcessedEntriesStringCb(
             IntPtr userData,
             IntPtr result,
@@ -1151,9 +1151,9 @@ namespace SafeApp.AppBindings
             string xorurl,
             ulong version);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringStringULongCb))]
-#endif
+        #endif
         private static void OnFfiResultStringStringULongCb(
             IntPtr userData,
             IntPtr result,
@@ -1215,9 +1215,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultStringULongCb(IntPtr userData, IntPtr result, string nrsMap, ulong version);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultStringULongCb))]
-#endif
+        #endif
         private static void OnFfiResultStringULongCb(IntPtr userData, IntPtr result, string nrsMap, ulong version)
         {
             BindingUtils.CompleteTask(userData, Marshal.PtrToStructure<FfiResult>(result), () => (nrsMap, version));
@@ -1225,6 +1225,94 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultStringULongCb DelegateOnFfiResultStringULongCb = OnFfiResultStringULongCb;
 
-#endregion NRS
+        #endregion NRS
+
+        #region Sequence Data
+
+        public Task<string> CreateSequenceAsync(
+            IntPtr app,
+            byte[] data,
+            byte[] name,
+            ulong typeTag,
+            bool isPrivate)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            CreateSequenceNative(app, data?.ToArray(), (UIntPtr)(data?.Length ?? 0), name, typeTag, isPrivate, userData, DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "create_sequence")]
+        private static extern void CreateSequenceNative(
+            IntPtr app,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] data,
+            UIntPtr dataLen,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)] byte[] name,
+            ulong typeTag,
+            [MarshalAs(UnmanagedType.U1)] bool isPrivate,
+            IntPtr userData,
+            FfiResultStringCb oCb);
+
+        public Task<(ulong, byte[])> GetSequenceAsync(IntPtr app, string url)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<(ulong, byte[])>();
+            GetSequenceNative(app, url, userData, DelegateOnFfiResultULongByteArrayCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "get_sequence")]
+        private static extern void GetSequenceNative(
+            IntPtr app,
+            [MarshalAs(UnmanagedType.LPStr)] string url,
+            IntPtr userData,
+            FfiResultULongByteArrayCb oCb);
+
+        public Task AppendSequenceAsync(IntPtr app, string url, byte[] data)
+        {
+            var (ret, userData) = BindingUtils.PrepareTask();
+            AppendSequenceNative(
+                app,
+                url,
+                data?.ToArray(),
+                (UIntPtr)(data?.Length ?? 0),
+                userData,
+                DelegateOnFfiResultCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "append_sequence")]
+        private static extern void AppendSequenceNative(
+            IntPtr app,
+            [MarshalAs(UnmanagedType.LPStr)] string url,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] data,
+            UIntPtr dataLen,
+            IntPtr userData,
+            FfiResultCb oCb);
+
+        private delegate void FfiResultULongByteArrayCb(
+            IntPtr userData,
+            IntPtr result,
+            ulong version,
+            IntPtr dataPtr,
+            UIntPtr dataLen);
+
+        #if __IOS__
+        [MonoPInvokeCallback(typeof(FfiResultULongByteArrayCb))]
+        #endif
+        private static void OnFfiResultULongByteArrayCb(
+            IntPtr userData,
+            IntPtr result,
+            ulong version,
+            IntPtr dataPtr,
+            UIntPtr dataLen)
+        {
+            BindingUtils.CompleteTask(
+                userData,
+                Marshal.PtrToStructure<FfiResult>(result),
+                () => (version, BindingUtils.CopyToByteArray(dataPtr, (int)dataLen)));
+        }
+
+        private static readonly FfiResultULongByteArrayCb DelegateOnFfiResultULongByteArrayCb = OnFfiResultULongByteArrayCb;
+
+        #endregion
     }
 }

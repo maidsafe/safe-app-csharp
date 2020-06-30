@@ -43,6 +43,11 @@ namespace SafeApp
         public Nrs Nrs { get; private set; }
 
         /// <summary>
+        /// Sequence data API.
+        /// </summary>
+        public API.SequenceData SequenceData { get; private set; }
+
+        /// <summary>
         /// Event triggered if session is disconnected from the network.
         /// </summary>
 #pragma warning disable SA1401 // Fields should be private
@@ -249,6 +254,7 @@ namespace SafeApp
             Wallet = new API.Wallet(_appPtr);
             Files = new Files(_appPtr);
             Nrs = new Nrs(_appPtr);
+            SequenceData = new API.SequenceData(_appPtr);
         }
 
         /// <summary>

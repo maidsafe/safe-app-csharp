@@ -185,7 +185,7 @@ namespace SafeApp.Tests
             var (api2, keysApi2) = await GetKeysAndWalletAPIs();
             var (keyXorUrl, keyPair2) = await keysApi2.KeysCreatePreloadTestCoinsAsync("123.321");
 
-            AssertThrows(-102, () => api2.WalletTransferAsync(account1WalletXORURL, keyXorUrl, "5", 0));
+            AssertThrows(-203, () => api2.WalletTransferAsync(account1WalletXORURL, keyXorUrl, "5", 0));
         }
 
         async Task<(API.Wallet, API.Keys)> GetKeysAndWalletAPIs()

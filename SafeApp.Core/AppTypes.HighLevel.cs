@@ -525,6 +525,91 @@ namespace SafeApp.Core
         public string ResolvedFrom;
     }
 
+    public struct SequenceData : ISafeData
+    {
+        /// <summary>
+        /// Container's XorUrl.
+        /// </summary>
+        public string XorUrl;
+
+        /// <summary>
+        /// Container's XorName.
+        /// </summary>
+        public byte[] XorName;
+
+        /// <summary>
+        /// TypeTag used when storing on the network.
+        /// </summary>
+        public ulong TypeTag;
+
+        /// <summary>
+        /// Current version.
+        /// </summary>
+        public ulong Version;
+
+        /// <summary>
+        /// Raw data in byte[] format
+        /// </summary>
+        public byte[] Data;
+
+        /// <summary>
+        /// Url on the network.
+        /// </summary>
+        public string ResolvedFrom;
+
+        /// <summary>
+        /// Set to true, if data is private.
+        /// </summary>
+        public bool IsPrivate;
+
+        internal SequenceData(SequenceDataNative native)
+        {
+            XorUrl = native.XorUrl;
+            XorName = native.XorName;
+            TypeTag = native.TypeTag;
+            Version = native.Version;
+            Data = BindingUtils.CopyToByteArray(native.DataPtr, (int)native.DataLen);
+            ResolvedFrom = native.ResolvedFrom;
+            IsPrivate = native.IsPrivate;
+        }
+
+        internal SequenceDataNative ToNative()
+        {
+            return new SequenceDataNative
+            {
+                XorUrl = XorUrl,
+                XorName = XorName,
+                TypeTag = TypeTag,
+                Version = Version,
+                DataPtr = BindingUtils.CopyFromByteArray(Data),
+                DataLen = (UIntPtr)(Data?.Length ?? 0),
+                ResolvedFrom = ResolvedFrom,
+                IsPrivate = IsPrivate
+            };
+        }
+    }
+
+    internal struct SequenceDataNative
+    {
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string XorUrl;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
+        public byte[] XorName;
+        public ulong TypeTag;
+        public ulong Version;
+        public IntPtr DataPtr;
+        public UIntPtr DataLen;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ResolvedFrom;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool IsPrivate;
+
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref DataPtr, ref DataLen);
+        }
+    }
+
     /// <summary>
     /// Data type used to indicate fetch failure.
     /// </summary>
@@ -923,12 +1008,10 @@ namespace SafeApp.Core
         SafeKey,
         PublicImmutableData,
         PrivateImmutableData,
+        PublicSequence,
+        PrivateSequence,
         SeqMutableData,
         UnseqMutableData,
-        PublishedSeqAppendOnlyData,
-        PublishedUnseqAppendOnlyData,
-        UnpublishedSeqAppendOnlyData,
-        UnpublishedUnseqAppendOnlyData,
     }
 
     public enum ContentType

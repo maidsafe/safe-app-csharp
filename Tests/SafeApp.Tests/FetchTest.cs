@@ -41,6 +41,13 @@ namespace SafeApp.Tests
                 false,
                 true);
             ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(nrsXorUrl), isFetch: true, expectNrs: true);
+
+            var xorurl = await session.SequenceData.CreateSequenceDataAsync(
+                TestUtils.GetRandomString(5).ToUtfBytes(),
+                null,
+                16000,
+                true);
+            ValidateFetchOrInspectDataTypes(await session.Fetch.FetchAsync(xorurl), isFetch: true, expectNrs: false);
         }
 
         [Test]
@@ -125,6 +132,12 @@ namespace SafeApp.Tests
                         else
                             Assert.Zero(immutableData.Data.Length);
                         Assert.IsNull(immutableData.ResolvedFrom);
+                        break;
+                    case SequenceData sequenceData:
+                        Assert.IsNotNull(sequenceData.Data);
+                        Validate.XorName(sequenceData.XorName);
+                        Assert.Zero(sequenceData.Version);
+                        Assert.True(sequenceData.IsPrivate);
                         break;
                     case SafeDataFetchFailed dataFetchOrInspectFailed:
                         Assert.IsNotNull(dataFetchOrInspectFailed.Description);

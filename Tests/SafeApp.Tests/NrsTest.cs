@@ -55,7 +55,7 @@ namespace SafeApp.Tests
 
             Assert.IsNotNull(processedEntries);
             Validate.RawNrsMap(nrsMapRaw);
-            await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
+            await Validate.XorUrlAsync(xorUrl, DataType.PublicSequence, ContentType.NrsMapContainer, 1500);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace SafeApp.Tests
 
             Assert.AreEqual(1, version);
             Validate.RawNrsMap(nrsMapRaw);
-            await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
+            await Validate.XorUrlAsync(xorUrl, DataType.PublicSequence, ContentType.NrsMapContainer, 1500);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace SafeApp.Tests
 
             Assert.AreEqual(1, version);
             Assert.AreEqual("{\"sub_names_map\":{},\"default\":\"NotSet\"}", nrsMapRaw);
-            await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
+            await Validate.XorUrlAsync(xorUrl, DataType.PublicSequence, ContentType.NrsMapContainer, 1500);
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace SafeApp.Tests
 
             Assert.AreEqual(0, version);
             Validate.RawNrsMap(nrsMapRaw);
-            await Validate.XorUrlAsync(xorUrl, DataType.PublishedSeqAppendOnlyData, ContentType.NrsMapContainer, 1500);
+            await Validate.XorUrlAsync(xorUrl, DataType.PublicSequence, ContentType.NrsMapContainer, 1500);
         }
 
         async Task<string> CreateFilesContainerAsync(Session session)

@@ -28,9 +28,9 @@ namespace SafeApp.AppBindings
             return task;
         }
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(UIntAuthGrantedCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgAuthCb(IntPtr userData, uint reqId, IntPtr authGranted)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcMsg>>(userData);
@@ -39,9 +39,9 @@ namespace SafeApp.AppBindings
 
         private static readonly UIntAuthGrantedCb DelegateOnDecodeIpcMsgAuthCb = OnDecodeIpcMsgAuthCb;
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(UIntByteListCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgUnregisteredCb(IntPtr userData, uint reqId, IntPtr serialisedCfgPtr, UIntPtr serialisedCfgLen)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcMsg>>(userData);
@@ -50,9 +50,9 @@ namespace SafeApp.AppBindings
 
         private static readonly UIntByteListCb DelegateOnDecodeIpcMsgUnregisteredCb = OnDecodeIpcMsgUnregisteredCb;
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(UIntCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgContainersCb(IntPtr userData, uint reqId)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcMsg>>(userData);
@@ -61,9 +61,9 @@ namespace SafeApp.AppBindings
 
         private static readonly UIntCb DelegateOnDecodeIpcMsgContainersCb = OnDecodeIpcMsgContainersCb;
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(UIntCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgShareMdataCb(IntPtr userData, uint reqId)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcMsg>>(userData);
@@ -72,9 +72,9 @@ namespace SafeApp.AppBindings
 
         private static readonly UIntCb DelegateOnDecodeIpcMsgShareMdataCb = OnDecodeIpcMsgShareMdataCb;
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(NoneCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgRevokedCb(IntPtr userData)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcMsg>>(userData);
@@ -83,9 +83,9 @@ namespace SafeApp.AppBindings
 
         private static readonly NoneCb DelegateOnDecodeIpcMsgRevokedCb = OnDecodeIpcMsgRevokedCb;
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultUIntCb))]
-#endif
+        #endif
         private static void OnDecodeIpcMsgErrCb(IntPtr userData, IntPtr result, uint reqId)
         {
             var res = Marshal.PtrToStructure<FfiResult>(result);
@@ -109,6 +109,7 @@ namespace SafeApp.AppBindings
               start,
               end,
               DelegateOnFfiResultPublicImmutableDataCb,
+              DelegateOnFfiResultSequenceDataCb,
               DelegateOnFfiResultWalletCb,
               DelegateOnFfiResultSafeKeyCb,
               DelegateOnFfiResultFilesContainerCb,
@@ -125,6 +126,7 @@ namespace SafeApp.AppBindings
             ulong start,
             ulong end,
             FfiResultPublicImmutableDataCb oPublished,
+            FfiResultSequenceDataCb osequence,
             FfiResultWalletCb oWallet,
             FfiResultSafeKeyCb oKeys,
             FfiResultFilesContainerCb oContainer,
@@ -147,9 +149,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultPublicImmutableDataCb(IntPtr userData, IntPtr publicImmutableData);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultPublicImmutableDataCb))]
-#endif
+        #endif
         private static void OnFfiResultPublicImmutableDataCb(IntPtr userData, IntPtr publicImmutableData)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -158,11 +160,24 @@ namespace SafeApp.AppBindings
 
         private static readonly FfiResultPublicImmutableDataCb DelegateOnFfiResultPublicImmutableDataCb = OnFfiResultPublicImmutableDataCb;
 
+        private delegate void FfiResultSequenceDataCb(IntPtr userData, IntPtr sequenceData);
+
+        #if __IOS__
+        [MonoPInvokeCallback(typeof(FfiResultSequenceDataCb))]
+        #endif
+        private static void OnFfiResultSequenceDataCb(IntPtr userData, IntPtr sequenceData)
+        {
+            var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
+            tcs.SetResult(new SequenceData(Marshal.PtrToStructure<SequenceDataNative>(sequenceData)));
+        }
+
+        private static readonly FfiResultSequenceDataCb DelegateOnFfiResultSequenceDataCb = OnFfiResultSequenceDataCb;
+
         private delegate void FfiResultWalletCb(IntPtr userData, IntPtr wallet);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultWalletCb))]
-#endif
+        #endif
         private static void OnFfiResultWalletCb(IntPtr userData, IntPtr wallet)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -173,9 +188,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultSafeKeyCb(IntPtr userData, IntPtr safeKey);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultSafeKeyCb))]
-#endif
+        #endif
         private static void OnFfiResultSafeKeyCb(IntPtr userData, IntPtr safeKey)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -186,9 +201,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultFilesContainerCb(IntPtr userData, IntPtr filesContainer);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultFilesContainerCb))]
-#endif
+        #endif
         private static void OnFfiResultFilesContainerCb(IntPtr userData, IntPtr filesContainer)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -199,9 +214,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiResultNrsContainerCb(IntPtr userData, IntPtr nrsContainer);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultNrsContainerCb))]
-#endif
+        #endif
         private static void OnFfiResultNrsContainerCb(IntPtr userData, IntPtr nrsContainer)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -212,9 +227,9 @@ namespace SafeApp.AppBindings
 
         private delegate void FfiFetchFailedCb(IntPtr userData, IntPtr result);
 
-#if __IOS__
+        #if __IOS__
         [MonoPInvokeCallback(typeof(FfiFetchFailedCb))]
-#endif
+        #endif
         private static void OnFfiFetchFailedCb(IntPtr userData, IntPtr result)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<ISafeData>>(userData);
@@ -225,6 +240,5 @@ namespace SafeApp.AppBindings
         private static readonly FfiFetchFailedCb DelegateOnFfiFetchFailedCb = OnFfiFetchFailedCb;
 
         #endregion Connect
-
     }
 }

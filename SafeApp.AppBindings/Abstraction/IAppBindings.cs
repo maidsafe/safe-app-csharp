@@ -218,6 +218,21 @@ namespace SafeApp.AppBindings
             string url);
 
         #endregion NRS
+
+        #region SequenceData
+
+        Task<string> CreateSequenceAsync(
+            IntPtr app,
+            byte[] data,
+            byte[] name,
+            ulong typeTag,
+            bool isPrivate);
+
+        Task<(ulong, byte[])> GetSequenceAsync(IntPtr app, string url);
+
+        Task AppendSequenceAsync(IntPtr app, string url, byte[] data);
+
+        #endregion
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

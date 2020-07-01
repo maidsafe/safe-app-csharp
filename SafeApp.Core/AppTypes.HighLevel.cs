@@ -525,6 +525,9 @@ namespace SafeApp.Core
         public string ResolvedFrom;
     }
 
+    /// <summary>
+    /// SequendeData stored on the network and related metadata.
+    /// </summary>
     public struct SequenceData : ISafeData
     {
         /// <summary>

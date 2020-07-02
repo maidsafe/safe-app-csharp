@@ -1,12 +1,22 @@
 # safe_app_csharp Change Log
 
+## [0.4.0]
+
+### Changes
+
+- Added SeqeuenceData APIs.
+- Updated `FilesPutPublishedImmutableAsync`/`FilesGetPublishedImmutableAsync` to `FilesPutPublicImmutableAsync`/`FilesGetPublicImmutableAsync`.
+- Updated Files APIs to use `FilesMap` object instead of JSON strings.
+- Updated Files APIs to support syslinks.
+- Added `EncodeSequenceDataAsync` API for the SafeUrlEndoer and remove `EncodeAppendOnlyDataAsync` API. 
+- Updated the `safe-api` native libs to commit [#1ce77d1](https://github.com/maidsafe/safe-api/commit/1ce77d18a9f2c487ae79817bfd8fae6d593d7138).
+
 ## [0.3.4] - RC 1
 
 ### Changes
 
 - Updated Files APIs to use `FilesMap` object instead of JSON strings.
-- Updated the `safe-api` native libs to v0.14.0, commit [#6dc9ec0
-](https://github.com/maidsafe/safe-api/commit/6dc9ec05634e377fc4fbac2d090ced0bee60cf5c).
+- Updated the `safe-api` native libs to v0.14.0, commit [#6dc9ec0](https://github.com/maidsafe/safe-api/commit/6dc9ec05634e377fc4fbac2d090ced0bee60cf5c).
 
 ## [0.3.3]
 

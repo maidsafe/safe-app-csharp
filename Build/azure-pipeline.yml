@@ -189,6 +189,9 @@ jobs:
         versionSpec: 5.x
     - task: NuGetCommand@2
       displayName: 'NuGet restore'
+      inputs:
+        command: 'restore'
+        restoreSolution: '**/*.sln'
     - powershell: |
         powershell -ExecutionPolicy Bypass -f .\build.ps1 --target=UnZip-Libs
       displayName: 'Download native libs'

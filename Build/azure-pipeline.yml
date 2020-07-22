@@ -236,27 +236,6 @@ jobs:
         ArtifactName: package
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-  - job: publish_docs
-    displayName: 'Publish API docs'
-    pool:
-      vmImage: 'windows-latest'
-    dependsOn: [ nuget_create ]
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-    steps:
-    - powershell: |
-        choco install docfx
-        npm install gh-pages -g
-      displayName: 'Install docfx and gh-page'
-    - powershell: |
-        docfx ./docs/docfx.json
-      displayName: 'Generate API docs'
-    - powershell: |
-        gh-pages-clean
-        gh-pages deploy --silent --message "doc update from CI" --dist "./docs/_site" --repo "https://$env:GITHUB_TOKEN@github.com/maidsafe/safe_app_csharp.git" --user "Ravinder Jangra <ravinderjanrga@live.com>"
-      env:
-        GITHUB_TOKEN: $(GITHUB_PUSH_TOKEN)
-      displayName: 'Upload gh-pages'
-
   - job: releases
     displayName: 'GitHub Release & NuGet Push'
     pool:

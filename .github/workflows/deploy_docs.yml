@@ -1,0 +1,25 @@
+name: Deploy API Docs
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Install docfx and generate docs
+      run: |
+        choco install docfx
+        docfx ./docs/docfx.json
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_site
+        force_orphan: true
+        full_commit_message: ${{ github.event.head_commit.message }}

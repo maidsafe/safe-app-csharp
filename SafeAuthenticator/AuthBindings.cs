@@ -75,7 +75,7 @@ namespace SafeAuthenticator
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "autherise_app")]
+        [DllImport(DllName, EntryPoint = "authorise_app")]
         private static extern void AutheriseAppNative(IntPtr app, [MarshalAs(UnmanagedType.LPStr)] string request, [MarshalAs(UnmanagedType.U1)] bool isGranted, IntPtr userData, FfiResultStringCb oCb);
 
         public Task RevokeAppAsync(IntPtr app, string appId)
@@ -111,7 +111,7 @@ namespace SafeAuthenticator
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "autherise_unregistered_app")]
+        [DllImport(DllName, EntryPoint = "encode_connection_info")]
         private static extern void AutheriseUnregisteredAppNative(uint reqId, [MarshalAs(UnmanagedType.U1)] bool isGranted, IntPtr userData, FfiResultStringCb oCb);
 
         private delegate void FfiResultCb(IntPtr userData, IntPtr result);

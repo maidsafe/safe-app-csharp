@@ -7,6 +7,8 @@ variables:
   ANDROID_EMU_TARGET: 'system-images;android-28;google_apis;x86_64'
   ANDROID_EMU_DEVICE: 'Nexus 6P'
   CAKE_SETTINGS_SKIPVERIFICATION: true
+  NATIVE_LIBS_PATH: $(Build.SourcesDirectory)/SafeApp.AppBindings/NativeLibs
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 trigger:
   branches:
@@ -37,6 +39,18 @@ jobs:
     pool:
       vmImage: $(imageName)
     steps:
+    - task: Cache@2
+      inputs:
+        key: 'native_libs | $(Build.SourcesDirectory)/Build/NativeScriptDownloader.cake'
+        path: $(NATIVE_LIBS_PATH)
+      displayName: Cache native libs
+    - task: Cache@2
+      inputs:
+        key: 'nuget | "$(Agent.OS)"'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: $(NUGET_PACKAGES)
+      displayName: Cache NuGet packages
     - bash: |
         sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
         mono --version
@@ -90,6 +104,18 @@ jobs:
       vmImage: 'macos-10.14'
       demands: xcode
     steps:
+      - task: Cache@2
+        inputs:
+          key: 'native_libs | $(Build.SourcesDirectory)/Build/NativeScriptDownloader.cake'
+          path: $(NATIVE_LIBS_PATH)
+        displayName: Cache native libs
+      - task: Cache@2
+        inputs:
+          key: 'nuget | "$(Agent.OS)"'
+          restoreKeys: |
+            nuget | "$(Agent.OS)"
+          path: $(NUGET_PACKAGES)
+        displayName: Cache NuGet packages
       # Set active mono version
       - bash: |
           sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
@@ -140,6 +166,18 @@ jobs:
     pool:
       vmImage: 'macos-10.14'
     steps:
+    - task: Cache@2
+      inputs:
+        key: 'native_libs | $(Build.SourcesDirectory)/Build/NativeScriptDownloader.cake'
+        path: $(NATIVE_LIBS_PATH)
+      displayName: Cache native libs
+    - task: Cache@2
+      inputs:
+        key: 'nuget | "$(Agent.OS)"'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: $(NUGET_PACKAGES)
+      displayName: Cache NuGet packages
     # Setup and run Android and desktop tests
     - bash: |
         sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(MONO_VERSION)
@@ -183,6 +221,18 @@ jobs:
       - visualstudio
     dependsOn: [ ios_tests, android_tests, desktop_tests ]
     steps:
+    - task: Cache@2
+      inputs:
+        key: 'native_libs | $(Build.SourcesDirectory)/Build/NativeScriptDownloader.cake'
+        path: $(NATIVE_LIBS_PATH)
+      displayName: Cache native libs
+    - task: Cache@2
+      inputs:
+        key: 'nuget | "$(Agent.OS)"'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: $(NUGET_PACKAGES)
+      displayName: Cache NuGet packages
     - task: NuGetToolInstaller@1
       displayName: 'Use NuGet 5.x'
       inputs:
@@ -255,6 +305,10 @@ jobs:
         Contents: '**/*.nupkg'
         TargetFolder: '$(Build.SourcesDirectory)'
         flattenFolders: true
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet 5.x'
+      inputs:
+        versionSpec: 5.x
     - bash: |
         export commitMessage=$(git log --format=%B -n 1)
         

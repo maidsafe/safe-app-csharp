@@ -1,5 +1,11 @@
 # safe_app_csharp Change Log
 
+## [0.5.0] - RC 2
+
+### Changes
+
+- Updated the `safe-api` native libs to commit [#b9dd513](https://github.com/maidsafe/safe-api/commit/b9dd513fb08670bbacab6301aef22157ce9daed9).
+
 ## [0.5.0] - RC 1
 
 ### Changes

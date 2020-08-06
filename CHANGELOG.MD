@@ -1,5 +1,15 @@
 # safe_app_csharp Change Log
 
+## [0.5.0]
+
+### Changes
+
+- Expose Authenticator APIs from the `safe-ffi`.
+- Refactor and simplify the project structure.
+- Add tests for the authenticator APIs.
+- Updated .NET Core test project to run tests against real network.
+- Updated the `safe-api` native libs to commit [#b9dd513](https://github.com/maidsafe/safe-api/commit/b9dd513fb08670bbacab6301aef22157ce9daed9).
+
 ## [0.5.0] - RC 2
 
 ### Changes

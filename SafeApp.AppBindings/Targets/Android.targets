@@ -17,8 +17,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\armeabi-v7a\libsafe_api.so" />
-    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\x86_64\libsafe_api.so" />
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\armeabi-v7a\libsn_api.so" />
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\x86_64\libsn_api.so" />
   </ItemGroup>
   <ItemGroup Condition="$(DefineConstants.Contains(SAFE_AUTH))">
     <Reference Include="SafeAuthenticator">

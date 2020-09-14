@@ -116,8 +116,8 @@
 
     <!--Desktop - NetFramework-->
     <file src="SafeApp.AppBindings\Targets\NetFramework.targets" target="build\net472\MaidSafe.SafeApp.targets" />
-    <file src="SafeApp.AppBindings\NativeLibs\Desktop\mock\safe_api.dll" target="build\net472\lib\mock\safe_api.dll" />
-    <file src="SafeApp.AppBindings\NativeLibs\Desktop\non-mock\safe_api.dll" target="build\net472\lib\non-mock\safe_api.dll" />
+    <file src="SafeApp.AppBindings\NativeLibs\Desktop\mock\sn_api.dll" target="build\net472\lib\mock\sn_api.dll" />
+    <file src="SafeApp.AppBindings\NativeLibs\Desktop\non-mock\sn_api.dll" target="build\net472\lib\non-mock\sn_api.dll" />
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.dll" target="lib\net472\SafeApp.dll" />
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.pdb" target="lib\net472\SafeApp.pdb" />
     <file src="SafeApp\bin\Release\netstandard2.0\SafeApp.xml" target="lib\net472\SafeApp.xml" />

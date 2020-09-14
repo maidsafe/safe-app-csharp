@@ -24,17 +24,17 @@
   <Choose>
     <When Condition=" '$(IsWindows)' == 'true' ">
       <PropertyGroup>
-        <NativeLibFile>safe_api.dll</NativeLibFile>
+        <NativeLibFile>sn_api.dll</NativeLibFile>
       </PropertyGroup>
     </When>
     <When Condition=" $(IsOSX)' == 'true' ">
       <PropertyGroup>
-        <NativeLibFile>libsafe_api.dylib</NativeLibFile>
+        <NativeLibFile>libsn_api.dylib</NativeLibFile>
       </PropertyGroup>
     </When>
     <When Condition="'$(IsLinux)' == 'true' ">
       <PropertyGroup>
-        <NativeLibFile>libsafe_api.so</NativeLibFile>
+        <NativeLibFile>libsn_api.so</NativeLibFile>
       </PropertyGroup>
     </When>
     <Otherwise>

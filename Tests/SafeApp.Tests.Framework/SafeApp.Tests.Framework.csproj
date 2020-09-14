@@ -83,8 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\mock\safe_api.dll">
-      <Link>safe_api.dll</Link>
+    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\mock\sn_api.dll">
+      <Link>sn_api.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

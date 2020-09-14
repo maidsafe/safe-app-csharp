@@ -60,11 +60,11 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="..\..\SafeApp.AppBindings\NativeLibs\Android\mock\armeabi-v7a\libsafe_api.so">
-      <Link>lib\armeabi-v7a\libsafe_api.so</Link>
+    <AndroidNativeLibrary Include="..\..\SafeApp.AppBindings\NativeLibs\Android\mock\armeabi-v7a\libsn_api.so">
+      <Link>lib\armeabi-v7a\libsn_api.so</Link>
     </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="..\..\SafeApp.AppBindings\NativeLibs\Android\mock\x86_64\libsafe_api.so">
-      <Link>lib\x86_64\libsafe_api.so</Link>
+    <AndroidNativeLibrary Include="..\..\SafeApp.AppBindings\NativeLibs\Android\mock\x86_64\libsn_api.so">
+      <Link>lib\x86_64\libsn_api.so</Link>
     </AndroidNativeLibrary>
     <AndroidAsset Include="..\SafeApp.Tests\log.toml">
       <Link>Assets\log.toml</Link>

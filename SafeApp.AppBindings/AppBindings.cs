@@ -16,7 +16,7 @@ namespace SafeApp.AppBindings
         #if __IOS__
         private const string DllName = "__Internal";
         #else
-        private const string DllName = "safe_api";
+        private const string DllName = "sn_api";
         #endif
 
         #region App Level

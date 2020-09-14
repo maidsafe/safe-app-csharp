@@ -1,8 +1,8 @@
 # safe_app_csharp [![NuGet](https://img.shields.io/nuget/v/MaidSafe.SafeApp.svg)](https://www.nuget.org/packages/MaidSafe.SafeApp)
 
-.NET wrapper package for [safe-api](https://github.com/maidsafe/safe-api/).
+.NET wrapper package for [sn_api](https://github.com/maidsafe/sn_api/).
 
-> [safe_app](https://github.com/maidsafe/safe-api/) is a native library which exposes high level API for application development on SAFE Network. It exposes API for authorisation and to manage data on the network.
+> [sn_api](https://github.com/maidsafe/sn_api/) is a native library which exposes high level API for application development on Safe Network. It exposes API for authorisation and to manage data on the network.
 
 **Maintainer:** Ravinder Jangra (ravinder.jangra@maidsafe.net)
 
@@ -14,30 +14,34 @@
 
 ## Table of Contents
 
-1. [Overview](#Overview)
-2. [Supported Platforms](#Supported-Platforms)
-3. [API Usage](#API-Usage)
-4. [Documentation](#Documentation)
-5. [Development](#Development)
-    * [Project Structure](#Project-structure)
-    * [Platform Invoke](#Interoperability-between-C-managed-and-unmanaged-code)
-    * [Interfacing with SCL](#Interfacing-with-Safe-Client-Libs)
-    * [Tests](#Tests)
-    * [Packaging](#Packaging)
-    * [Tools required](#Tools-required)
-6. [Useful resources](#Useful-resources)
-7. [Copyrights](#Copyrights)
-8. [Further Help](#Further-Help)
-9. [License](#License)
-10. [Contributing](#Contributing)
+- [safe_app_csharp ![NuGet](https://www.nuget.org/packages/MaidSafe.SafeApp)](#safe_app_csharp-img-srchttpsimgshieldsionugetvmaidsafesafeappsvg-altnuget)
+  - [Build Status](#build-status)
+  - [Table of Contents](#table-of-contents)
+  - [Supported Platforms](#supported-platforms)
+  - [API Usage](#api-usage)
+    - [Using Mock API](#using-mock-api)
+    - [Authentication](#authentication)
+  - [Documentation](#documentation)
+  - [Development](#development)
+    - [Project structure](#project-structure)
+    - [Interoperability between C# managed and unmanaged code](#interoperability-between-c-managed-and-unmanaged-code)
+    - [Interfacing with Safe Client Libs](#interfacing-with-safe-client-libs)
+    - [Tests](#tests)
+    - [Packaging](#packaging)
+    - [Tools required](#tools-required)
+  - [Useful resources](#useful-resources)
+  - [Copyrights](#copyrights)
+  - [Further Help](#further-help)
+  - [License](#license)
+  - [Contributing](#contributing)
 
-This project contains the C# bindings and API wrappers for the [safe_app](https://github.com/maidsafe/safe-api/) and mock [safe_authenticator](https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator). The native libraries, bindings and API wrapper are built and published as a NuGet package. The latest version can be fetched from the [MaidSafe.SafeApp NuGet package](https://www.nuget.org/packages/MaidSafe.SafeApp/).
+This project contains the C# bindings and API wrappers for the [sn_api](https://github.com/maidsafe/sn_api/) and mock [safe_authenticator](https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator). The native libraries, bindings and API wrapper are built and published as a NuGet package. The latest version can be fetched from the [MaidSafe.SafeApp NuGet package](https://www.nuget.org/packages/MaidSafe.SafeApp/).
 
 At a very high level, this package includes:
 
 * C# API for devs for easy app development.
-* safe-api and mock safe_authenticator bindings. These bindings are one to one mapping to the FFI functions exposed from safe_api and safe_authenicator native libraries.
-* Native libraries generated from [safe-api](https://github.com/maidsafe/safe-api) containing required logic to connect, read and write data on the SAFE Network.
+* sn_api and mock safe_authenticator bindings. These bindings are one to one mapping to the FFI functions exposed from sn_api and safe_authenicator native libraries.
+* Native libraries generated from [sn_api](https://github.com/maidsafe/sn_api) containing required logic to connect, read and write data on the Safe Network.
 
 ## Supported Platforms
 
@@ -49,20 +53,20 @@ At a very high level, this package includes:
 
 ## API Usage
 
-To develop desktop and mobile apps for the SAFE Network install the latest [MaidSafe.SafeApp](https://www.nuget.org/packages/MaidSafe.SafeApp/) package from NuGet.
+To develop desktop and mobile apps for the Safe Network install the latest [MaidSafe.SafeApp](https://www.nuget.org/packages/MaidSafe.SafeApp/) package from NuGet.
 
 This package provides support for mock and non-mock network. By default, non-mock API are used in the package.
 
 ### Using Mock API
 
 * Mock API can be used by adding a `SAFE_APP_MOCK` flag in your project properties at **Properties > Build > conditional compilation symbols**.
-* When the mock feature is used, a local mock vault file is generated which simulates network operations used to store and retrieve data. The app will then interface with this file rather than the live SAFE network.
+* When the mock feature is used, a local mock vault file is generated which simulates network operations used to store and retrieve data. The app will then interface with this file rather than the live Safe network.
 
 ### Authentication
 
-* Applications must be authenticated via the SAFE Authenticator to work with the SAFE Network.
-* The desktop authenticator is packed and shipped with the [SAFE browser](https://github.com/maidsafe/safe_browser/releases/latest).
-* On mobile devices, use the [SAFE Authenticator](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) mobile application.
+* Applications must be authenticated via the Safe Authenticator to work with the Safe Network.
+* The desktop authenticator is packed and shipped with the [Safe browser](https://github.com/maidsafe/safe_browser/releases/latest).
+* On mobile devices, use the [Safe Authenticator](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) mobile application.
 
 ## Documentation
 
@@ -80,10 +84,10 @@ docfx .\docs\docfx.json
 
 ### Project structure
 
-* **SafeApp:** C# API for safe_api
+* **SafeApp:** C# API for sn_api
   * Fetch, Inspect, Files, Keys, Wallet, XorUrl
 * **SafeApp.AppBindings:**
-  * safe_api and safe_app IPC bindings generated from safe_api and safe_client_libs
+  * sn_api and safe_app IPC bindings generated from sn_api and safe_client_libs
   * Contains native libraries for the platform
 * **SafeApp.MockAuthBindings:**
   * Mock Safe authentication C# API
@@ -99,7 +103,7 @@ docfx .\docs\docfx.json
 
 ### Interfacing with Safe Client Libs
 
-The package uses native code written in Rust and compiled into platform specific code. Learn more about the safe_client_libs in [the SAFE client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
+The package uses native code written in Rust and compiled into platform specific code. Learn more about the safe_client_libs in [the Safe client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
 
 Instructions to update the bindings can be found in the [Update Bindings file](./UpdateBindings.md).
 
@@ -131,15 +135,15 @@ https://github.com/maidsafe/safe_app_csharp/blob/master/PackageInstructions.txt)
 
 ## Copyrights
 
-Copyrights in the SAFE Network are retained by their contributors. No copyright assignment is required to contribute to this project.
+Copyrights in the Safe Network are retained by their contributors. No copyright assignment is required to contribute to this project.
 
 ## Further Help
 
-Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any other ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
+Get your developer related questions clarified on [Safe Dev Forum](https://forum.safedev.org/). If you're looking to share any other ideas or thoughts on the Safe Network you can reach out on [Safe Network Forum](https://safenetforum.org/)
 
 ## License
 
-This SAFE Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
+This Safe Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
 
 ## Contributing
 

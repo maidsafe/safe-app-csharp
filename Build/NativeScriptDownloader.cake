@@ -1,6 +1,6 @@
 var TAG = "b9dd513";
 
-var S3_DOWNLOAD_BASE_URL = "https://safe-api.s3.amazonaws.com/";
+var S3_DOWNLOAD_BASE_URL = "https://sn_api.s3.amazonaws.com/";
 var LIB_DIR_NAME = "../SafeApp.AppBindings/NativeLibs/";
 var ANDROID_DIR_NAME = $"{LIB_DIR_NAME}Android";
 var IOS_DIR_NAME = $"{LIB_DIR_NAME}iOS";
@@ -61,7 +61,7 @@ Task("Download-Libs")
         foreach (var varient in varients)
         {
           var targetDirectory = $"{Native_DIR.Path}/{item}/{target}";
-          var zipFileName = varient == "" ? $"safe-ffi-{TAG}-{target}.zip" : $"safe-ffi-{TAG}-{target}-{varient}.zip";
+          var zipFileName = varient == "" ? $"sn_ffi-{TAG}-{target}.zip" : $"sn_ffi-{TAG}-{target}-{varient}.zip";
           var zipFileDownloadUrl = $"{S3_DOWNLOAD_BASE_URL}{zipFileName}";
           var zipSavePath = $"{Native_DIR.Path}/{item}/{target}/{zipFileName}";
 
@@ -149,7 +149,7 @@ Task("UnZip-Libs")
           var unZippedFiles = GetFiles($"{platformOutputDirectory.ToString()}/*.*");
           foreach (var file in unZippedFiles)
           {
-            MoveFile(file.FullPath, file.FullPath.Replace("safe_ffi", "safe_api"));
+            MoveFile(file.FullPath, file.FullPath.Replace("sn_ffi", "sn_api"));
           }
         }
       }

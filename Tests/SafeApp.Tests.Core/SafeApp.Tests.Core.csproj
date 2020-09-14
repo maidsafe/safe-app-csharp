@@ -32,13 +32,13 @@
   </Choose>
 
   <ItemGroup>
-    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\libsafe_api.dylib" Link="libsafe_api.dylib" Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">
+    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\libsn_api.dylib" Link="libsn_api.dylib" Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\libsafe_api.so" Link="libsafe_api.so" Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">
+    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\libsn_api.so" Link="libsn_api.so" Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\safe_api.dll" Link="safe_api.dll" Condition=" $([MSBuild]::IsOsPlatform('Windows')) ">
+    <None Include="..\..\SafeApp.AppBindings\NativeLibs\Desktop\$(NativeLibType)\sn_api.dll" Link="sn_api.dll" Condition=" $([MSBuild]::IsOsPlatform('Windows')) ">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\SafeApp.Tests\log.toml" Link="log.toml">

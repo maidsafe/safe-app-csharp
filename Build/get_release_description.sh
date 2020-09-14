@@ -1,5 +1,5 @@
 read -r -d '' release_description << 'EOF'
-NET wrapper package for [safe-api](https://github.com/maidsafe/safe-api/).
+NET wrapper package for [sn_api](https://github.com/maidsafe/sn_api/).
 
 ## Changelog
 CHANGELOG_CONTENT
@@ -11,10 +11,10 @@ NUGET_PACKAGE_CHECKSUM
 ```
 
 ## Related Links
-* SAFE Browser - [Desktop](https://github.com/maidsafe/safe_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
-* [SAFE Mobile Authenticator](https://github.com/maidsafe/safe-authenticator-mobile/)
-* [SAFE CLI](https://github.com/maidsafe/safe-api/tree/master/safe-cli)
-* [SAFE Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
+* Safe Browser - [Desktop](https://github.com/maidsafe/safe_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
+* [Safe Mobile Authenticator](https://github.com/maidsafe/safe-authenticator-mobile/)
+* [Safe CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
+* [Safe Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
 EOF
 
 commitMessage=$(git log --format=%B -n 1)

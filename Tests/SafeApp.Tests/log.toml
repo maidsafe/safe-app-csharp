@@ -32,8 +32,8 @@ level = "trace"
 [loggers."sn_ffi_utils"]
 level = "trace"
 
-[loggers."safe_api"]
+[loggers."sn_api"]
 level = "debug"
 
-[loggers."safe_ffi"]
+[loggers."sn_ffi"]
 level = "debug"

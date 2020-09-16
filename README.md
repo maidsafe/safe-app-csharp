@@ -66,7 +66,7 @@ This package provides support for mock and non-mock network. By default, non-moc
 
 * Applications must be authenticated via the Safe Authenticator to work with the Safe Network.
 * The desktop authenticator is packed and shipped with the [Safe browser](https://github.com/maidsafe/sn_browser/releases/latest).
-* On mobile devices, use the [Safe Authenticator](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) mobile application.
+* On mobile devices, use the [Safe Authenticator](https://github.com/maidsafe/sn_authenticator_mobile/releases/latest) mobile application.
 
 ## Documentation
 

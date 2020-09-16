@@ -1,4 +1,4 @@
-# safe_app_csharp Change Log
+# sn_csharp Change Log
 
 ## [0.5.0]
 

@@ -49,7 +49,7 @@
     "cleanupCacheHistory": false,
     "disableGitFeatures": false,
     "globalMetadata": {
-      "_appTitle": "Safe Network :: safe_app_csharp API Documentation",
+      "_appTitle": "Safe Network :: sn_csharp API Documentation",
       "_appLogoPath": "./images/logo.svg",
       "_appFaviconPath": "./images/favicon.ico"
     }

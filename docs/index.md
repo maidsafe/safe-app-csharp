@@ -1,8 +1,8 @@
-# safe_app_csharp API Documentation
+# sn_csharp API Documentation
 
 NuGet Package : [![NuGet](https://img.shields.io/nuget/v/MaidSafe.SafeApp.svg)](https://www.nuget.org/packages/MaidSafe.SafeApp)
 
-safe_app_cSharp Library. Currently supports
+sn_cSharp Library. Currently supports
 
 * Xamarin.Android ( >=5.0. ABI: armeabi-v7a, x86_64)
 * Xamarin.iOS ( >= 1.0, ABI: ARM64, x64)

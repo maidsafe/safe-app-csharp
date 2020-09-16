@@ -1,4 +1,4 @@
-# safe_app_csharp [![NuGet](https://img.shields.io/nuget/v/MaidSafe.SafeApp.svg)](https://www.nuget.org/packages/MaidSafe.SafeApp)
+# sn_csharp [![NuGet](https://img.shields.io/nuget/v/MaidSafe.SafeApp.svg)](https://www.nuget.org/packages/MaidSafe.SafeApp)
 
 .NET wrapper package for [sn_api](https://github.com/maidsafe/sn_api/).
 
@@ -14,7 +14,7 @@
 
 ## Table of Contents
 
-- [safe_app_csharp ![NuGet](https://www.nuget.org/packages/MaidSafe.SafeApp)](#safe_app_csharp-img-srchttpsimgshieldsionugetvmaidsafesafeappsvg-altnuget)
+- [sn_csharp ![NuGet](https://www.nuget.org/packages/MaidSafe.SafeApp)](#sn_csharp-img-srchttpsimgshieldsionugetvmaidsafesafeappsvg-altnuget)
   - [Build Status](#build-status)
   - [Table of Contents](#table-of-contents)
   - [Supported Platforms](#supported-platforms)
@@ -70,7 +70,7 @@ This package provides support for mock and non-mock network. By default, non-moc
 
 ## Documentation
 
-The documentation for the latest `safe_app_csharp` API is available at [https://maidsafe.github.io/safe_app_csharp/](https://maidsafe.github.io/safe_app_csharp/).
+The documentation for the latest `sn_csharp` API is available at [https://maidsafe.github.io/sn_csharp/](https://maidsafe.github.io/sn_csharp/).
 
 We use [DocFX](https://github.com/dotnet/docfx) to generate static HTML API documentation pages from XML code comments. The API docs are generated and published automatically during the CI build.
 
@@ -114,7 +114,7 @@ We use shared unit tests for `safe_app` and mock `safe_authenticator` API which 
 ### Packaging
 
 Instructions to generate the NuGet package can be found in the [Package Instructions file](
-https://github.com/maidsafe/safe_app_csharp/blob/master/PackageInstructions.txt).
+https://github.com/maidsafe/sn_csharp/blob/master/PackageInstructions.txt).
 
 ### Tools required
 

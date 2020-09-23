@@ -14,7 +14,7 @@ NUGET_PACKAGE_CHECKSUM
 * Safe Browser - [Desktop](https://github.com/maidsafe/sn_browser/releases/) | [Mobile](https://github.com/maidsafe/sn_mobile_browser/)
 * [Safe Mobile Authenticator](https://github.com/maidsafe/sn_authenticator_mobile/)
 * [Safe CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
-* [Safe Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
+* [Safe Node](https://github.com/maidsafe/sn_node/releases/latest/)
 EOF
 
 commitMessage=$(git log --format=%B -n 1)

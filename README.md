@@ -60,7 +60,7 @@ This package provides support for mock and non-mock network. By default, non-moc
 ### Using Mock API
 
 * Mock API can be used by adding a `SAFE_APP_MOCK` flag in your project properties at **Properties > Build > conditional compilation symbols**.
-* When the mock feature is used, a local mock vault file is generated which simulates network operations used to store and retrieve data. The app will then interface with this file rather than the live Safe network.
+* When the mock feature is used, a local mock node file is generated which simulates network operations used to store and retrieve data. The app will then interface with this file rather than the live Safe network.
 
 ### Authentication
 

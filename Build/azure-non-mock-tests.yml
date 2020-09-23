@@ -53,13 +53,13 @@ jobs:
       workingDirectory: Build
       condition: and(succeeded(), in(variables['imageName'], 'macos-latest'))
     - bash: |
-        git clone https://github.com/lionel1704/vault-deployer.git
-        cd vault-deployer
-        wget https://safe-vault.s3.eu-west-2.amazonaws.com/safe_vault-latest-x86_64-$(target).zip
-        unzip safe_vault-latest-x86_64-$(target).zip
-        chmod +x safe_vault
-        chmod +x run-vaults.bash
-        ./run-vaults.bash
+        git clone https://github.com/lionel1704/node-deployer.git
+        cd node-deployer
+        wget https://sn-node.s3.eu-west-2.amazonaws.com/sn_node-latest-x86_64-$(target).zip
+        unzip sn_node-latest-x86_64-$(target).zip
+        chmod +x sn_node
+        chmod +x run-nodes.bash
+        ./run-nodes.bash
       workingDirectory: Build
       displayName: 'Download and run section'
     - bash: |
@@ -67,7 +67,7 @@ jobs:
         ./build.sh --target=UnZip-Libs
         ./build.sh --target=Run-Desktop-Tests --non_mock=true
       workingDirectory: Build
-      displayName: 'Run tests against vaults'
+      displayName: 'Run tests against nodes'
     - task: PublishTestResults@2
       displayName: 'Publish .NET Core Test Results'
       inputs:
@@ -77,15 +77,14 @@ jobs:
         testRunTitle: '.NET Core Tests'
       condition: succeededOrFailed()
     - task: CopyFiles@2
-      displayName: 'Copy vault_logs to: $(Build.ArtifactStagingDirectory)'
+      displayName: 'Copy node_logs to: $(Build.ArtifactStagingDirectory)'
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
-        Contents: '**/vault.stdout'
+        Contents: '**/node.stdout'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         condition: succeededOrFailed()
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: vault_logs'
+      displayName: 'Publish Artifact: node_logs'
       inputs:
-        ArtifactName: vault_logs
+        ArtifactName: node_logs
         condition: succeededOrFailed()
-    

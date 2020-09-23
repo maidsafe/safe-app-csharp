@@ -115,7 +115,7 @@ namespace SafeApp
         }
 
         /// <summary>
-        /// Creates an unregistered session for the provided app Id using vault_connection_configuration file.
+        /// Creates an unregistered session for the provided app Id using node_connection_configuration file.
         /// </summary>
         /// <param name="appId">Application Id.</param>
         /// <returns></returns>

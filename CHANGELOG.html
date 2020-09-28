@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>sn_csharp Change Log | Safe Network :: sn_csharp API Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="sn_csharp Change Log | Safe Network :: sn_csharp API Documentation ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="./images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="sn_csharp-change-log">sn_csharp Change Log</h1>
+
+<h2 id="050">[0.5.0]</h2>
+<h3 id="changes">Changes</h3>
+<ul>
+<li>Expose Authenticator APIs from the <code>safe-ffi</code>.</li>
+<li>Refactor and simplify the project structure.</li>
+<li>Add tests for the authenticator APIs.</li>
+<li>Updated .NET Core test project to run tests against real network.</li>
+<li>Updated the <code>safe-api</code> native libs to commit <a href="https://github.com/maidsafe/safe-api/commit/b9dd513fb08670bbacab6301aef22157ce9daed9">#b9dd513</a>.</li>
+</ul>
+<h2 id="050---rc-2">[0.5.0] - RC 2</h2>
+<h3 id="changes-1">Changes</h3>
+<ul>
+<li>Updated the <code>safe-api</code> native libs to commit <a href="https://github.com/maidsafe/safe-api/commit/b9dd513fb08670bbacab6301aef22157ce9daed9">#b9dd513</a>.</li>
+</ul>
+<h2 id="050---rc-1">[0.5.0] - RC 1</h2>
+<h3 id="changes-2">Changes</h3>
+<ul>
+<li>Expose Authenticator APIs from the <code>safe-ffi</code>.</li>
+<li>Refactor and simplify the project structure.</li>
+<li>Add tests for the authenticator APIs.</li>
+<li>Updated .NET Core test project to run tests against real network.</li>
+<li>Updated the <code>safe-api</code> native libs to commit <a href="https://github.com/maidsafe/safe-api/commit/8c4bb39308370403e7079e2b8b17329cff32076e">#8c4bb39</a>.</li>
+</ul>
+<h2 id="040">[0.4.0]</h2>
+<h3 id="changes-3">Changes</h3>
+<ul>
+<li>Added SeqeuenceData APIs.</li>
+<li>Updated <code>FilesPutPublishedImmutableAsync</code>/<code>FilesGetPublishedImmutableAsync</code> to <code>FilesPutPublicImmutableAsync</code>/<code>FilesGetPublicImmutableAsync</code>.</li>
+<li>Updated Files APIs to use <code>FilesMap</code> object instead of JSON strings.</li>
+<li>Updated Files APIs to support syslinks.</li>
+<li>Added <code>EncodeSequenceDataAsync</code> API for the SafeUrlEndoer and remove <code>EncodeAppendOnlyDataAsync</code> API.</li>
+<li>Updated the <code>safe-api</code> native libs to commit <a href="https://github.com/maidsafe/safe-api/commit/1ce77d18a9f2c487ae79817bfd8fae6d593d7138">#1ce77d1</a>.</li>
+</ul>
+<h2 id="034---rc-1">[0.3.4] - RC 1</h2>
+<h3 id="changes-4">Changes</h3>
+<ul>
+<li>Updated Files APIs to use <code>FilesMap</code> object instead of JSON strings.</li>
+<li>Updated the <code>safe-api</code> native libs to v0.14.0, commit <a href="https://github.com/maidsafe/safe-api/commit/6dc9ec05634e377fc4fbac2d090ced0bee60cf5c">#6dc9ec0</a>.</li>
+</ul>
+<h2 id="033">[0.3.3]</h2>
+<h3 id="changes-5">Changes</h3>
+<ul>
+<li>Fixed API documentation generation and publish to gh-pages.</li>
+<li>Update Fetch API to support NrsContainer.</li>
+<li>Update Inspect API to return complete resolution chain as JSON string.</li>
+<li>Renames XorUrlEncoder to SafeUrl.</li>
+<li>Added query string and fragment support in the SafeUrl APIs.</li>
+<li>Exposed SafeUrl APIs for keys, mutable data, appendable data and immutable data.</li>
+<li>Added SafeUrlBase encoding enum.</li>
+<li>Removed <code>ParseAndResolveUrlAsync</code> API.</li>
+<li>Updated Unit tests for changes.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/commit/2fa830521dcf54e9f9cfcba44838ac08099233ca">#2fa8305</a>.</li>
+</ul>
+<h2 id="032">[0.3.2]</h2>
+<h3 id="changes-6">Changes</h3>
+<ul>
+<li>Fixed authentication response decode issue in <code>DecodeIpcMessageAsync</code> API.</li>
+<li>Updated <code>XorUrlEncoder</code> to return correct value for SubNames field.</li>
+<li>Update <code>BindingsUtils</code> to support <code>List&lt;string&gt;</code> types from bindgen.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/commit/087c763fc4576fd3458e6123cde8ad83895e0f2e">#087c763</a>.</li>
+</ul>
+<h2 id="031">[0.3.1]</h2>
+<h3 id="changes-7">Changes</h3>
+<ul>
+<li>Added range (start, end) support in fetch and get_immutable_data API.</li>
+<li>Added support to create empty files container.</li>
+<li>Updated native libs to support single section network.</li>
+<li>Removed <code>SimulateNetworkDisconnectAsync</code> function from the mock authenticator APIs.</li>
+<li>Update bindings to use updated FFI setup from safe-api and remove direct safe_app dependency.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/commit/64a5f70ffab4519c81771a6cd61b445d504a061e">#64a5f70</a>.</li>
+</ul>
+<h2 id="031---rc-2">[0.3.1] - RC 2</h2>
+<h3 id="changes-8">Changes</h3>
+<ul>
+<li>Added range (start, end) support in fetch and get_immutable_data API.</li>
+<li>Updated native libs to support baby fleming network.</li>
+<li>Updated the <code>safe-api</code> native libs to baby-fleming-mobile branch commit <a href="https://github.com/maidsafe/safe-api/commit/2d13e1844bb4bbf119035c162046341a769e2de5">#2d13e18</a>.</li>
+</ul>
+<h2 id="031---rc-1">[0.3.1] - RC 1</h2>
+<h3 id="changes-9">Changes</h3>
+<ul>
+<li>Updated native libs to support baby fleming network.</li>
+<li>Updated the <code>safe-api</code> native libs to baby-fleming-mobile branch commit <a href="https://github.com/maidsafe/safe-api/commit/b3862a13efb100de8977da2a87cb28ad5288e2b0">#b3862a1</a>.</li>
+</ul>
+<h2 id="030">[0.3.0]</h2>
+<h3 id="changes-10">Changes</h3>
+<ul>
+<li>Updated minimum supported version for the desktop and mobile platforms.</li>
+<li>Added new simplied APIs for pWeb and test SafeCoins using <code>[safe-api](https://github.com/maidsafe/safe-api/tree/master/safe-ffi)</code>.
+<ul>
+<li>Connect API: add binding and implementation for the connect APIs.</li>
+<li>Fetch API: add binding and implementation for the Fetch and Inspect APIs.</li>
+<li>Files API: add binding and implementation for the Files APIs.</li>
+<li>Keys API: add binding and implementation for the keys APIs.</li>
+<li>NRS API: add binding and implementation for the NRS APIs.</li>
+<li>Wallet API: add binding and implementation for the Wallet APIs.</li>
+<li>XorUrl API: add binding and implementation for the XorUrlEncoder APIs.</li>
+<li>Added <code>SetConfigurationFilePathAsync</code> API to set the config location path for the local vault connection.</li>
+<li>Added <code>AppConfigDirPathAsync</code> API to get the current app configuration directory path.</li>
+<li>Added <code>AuthApp</code> API to use cli service for app authentication on desktop.</li>
+</ul>
+</li>
+<li>Renamed <code>SafeApp.Utilites</code> project to <code>SafeApp.Core</code>.</li>
+<li>Updated <code>MockAuthBindings</code> and mock authenticator bindings to latest <code>safe_authenticator</code>.</li>
+<li>Updated <code>AppKeys</code> bindings to the latest <code>safe_client_libs</code>.</li>
+<li>Updated <code>AppBindings</code> and <code>MockAuthBindings</code> project to use multi-target style project.</li>
+<li>Updated Tests to verify the working of all the new APIs.</li>
+<li>Removed <code>safe_app</code> bindings and wrapper APIs.</li>
+<li>Removed <code>JetBrains.Annotations</code> package and related code.</li>
+<li>Refactored solution to remove <code>Newtonsoft.Json</code> dependency.</li>
+<li>Refactored solution to use solution level pros and code analyzer.</li>
+<li>Updated solution to use C# 7.3.</li>
+<li>Fixed iOS native library loading issue.</li>
+<li>Fixes NuGet package generation issue.</li>
+<li>Moved Azure DevOps CI setup to the repo.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/commit/6cf0aa67879b1398c2365c07d8cc4f1e54cfe2de">#6cf0aa6</a>.</li>
+</ul>
+<h2 id="030---rc-3">[0.3.0] - RC 3</h2>
+<h3 id="changes-11">Changes</h3>
+<ul>
+<li>Updated <code>FilesPutPublishedImmutableAsync</code> API to support <code>DryRun</code> feature.</li>
+<li>Added <code>AppConfigDirPathAsync</code> API to get the current app configuration directoruy path.</li>
+<li>Removed <code>JetBrains.Annotations</code> package and related code.</li>
+<li>Updated <code>AppKeys</code> bindings to the latest <code>safe_client_libs</code>.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/commit/9a41307efb5d8989386f227a9a1e3ec819c12054">#9a41307</a>.</li>
+</ul>
+<h2 id="030---rc-2">[0.3.0] - RC 2</h2>
+<h3 id="changes-12">Changes</h3>
+<ul>
+<li>Added new AuthApp API to use cli service for app authentication on desktop.</li>
+<li>Updated APIs to use FilesMap structure instead of JSON strings.</li>
+<li>Fixed iOS native library loading issue.</li>
+<li>Fixes NuGet package generation issue.</li>
+<li>Refactored solution to remove <code>Newtonsoft.Json</code> dependency.</li>
+<li>Updated the <code>safe-api</code> native libs to master branch commit <a href="https://github.com/maidsafe/safe-api/tree/43c3712712fa2094cedf4078c6cac0e223843fbe">#43c371</a>.</li>
+</ul>
+<h2 id="030---rc-1">[0.3.0] - RC 1</h2>
+<h3 id="changes-13">Changes</h3>
+<ul>
+<li>Added new simplied APIs for pWeb and test SafeCoins from <code>[safe-api](https://github.com/maidsafe/safe-api/tree/master/safe-ffi)</code>.
+<ul>
+<li>Connect API: add binding and implementation for the connect APIs.</li>
+<li>Fetch API: add binding and implementation for the Fetch and Inspect APIs.</li>
+<li>Files API: add binding and implementation for the Files APIs.</li>
+<li>Keys API: add binding and implementation for the keys APIs.</li>
+<li>NRS API: add binding and implementation for the NRS APIs.</li>
+<li>Wallet API: add binding and implementation for the Wallet APIs.</li>
+<li>XorUrl API: add binding and implementation for the XorUrlEncoder APIs.</li>
+<li>Added <code>SetConfigurationFilePathAsync</code> API to set the config location path for the local vault connection.</li>
+</ul>
+</li>
+<li>Removed LL <code>safe_app</code> API.</li>
+<li>Updated <code>MockAuthBindings</code> and mock authenticator bindings to latest <code>safe_authenticator</code>.</li>
+<li>Updated <code>AppBindings</code> and <code>MockAuthBindings</code> project to use multi-target style project.</li>
+<li>Renamed <code>SafeApp.Utilites</code> project to <code>SafeApp.Core</code>.</li>
+<li>Updated Tests to verify the working of all the new APIs.</li>
+</ul>
+<h2 id="023">[0.2.3]</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Updated <code>safe_app</code> bindings to v0.9.1</li>
+<li>Updated mock authenticator bindings to v0.9.1</li>
+</ul>
+<h2 id="022">[0.2.2]</h2>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>Removed IntPtr.Zero check from <code>SafeAppPtr</code> implicit operator function.</li>
+</ul>
+<h2 id="021">[0.2.1]</h2>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li>Update projects to generate and add API documentation.</li>
+<li>Update .NET Core target file to include native libraries in the project.</li>
+<li>Added seperate NativeHandles for and marked Zero NativeHandle obsolete.</li>
+</ul>
+<h2 id="020">[0.2.0]</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Android x86_64 platform support.</li>
+<li>API documentation.</li>
+</ul>
+<h3 id="changed-3">Changed</h3>
+<ul>
+<li>Updated safe_app bindings to v0.9.0 of <a href="https://github.com/maidsafe/safe_client_libs/tree/master/safe_app">safe_app</a>.</li>
+<li>NFS APIs (dir_delete, dir_update) updated to return new file version.</li>
+<li>Updated mock authenticator bindings to v0.9.0 of <a href="https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator">safe_authenticator</a>.</li>
+<li>Update ShareMDataRequest to hold the list of MDataResponse.</li>
+<li>Changed parameter encodedReq to encodedResponse in function DecodeIpcMessageAsync.</li>
+<li>Added new null reference native handles (AnyOne, EmptyMDataEntries, EmptyMDataPermissions) and marked zero native handle obselete.</li>
+<li>Removed SetAdditionalSearchPath call from InitLoggingAsync.</li>
+<li>Renamed SetLogOutputPathAsync to GetLogOutputPathAsync.</li>
+<li>Removed Android x86 platform support.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fixes to use <code>FfiResultULongFromUIntPtrCb</code> instead of <code>FfiResultULongCb</code> in appbindings so <code>usize</code> gets marshalled to <code>uint</code> pointer.</li>
+<li>Fixed Typo in GetAccountInfoAsync.</li>
+<li>Updated GetOutputFilePath to return Task&lt;string&gt;.</li>
+<li>Removed unused _appPtr from MDataInfoActions class.</li>
+<li>Fixed .NET Core target file to make NuGet package work with .NET Core projects.</li>
+</ul>
+<h2 id="011">[0.1.1]</h2>
+<ul>
+<li>Fixed delegate garbage collection issue.</li>
+</ul>
+<h2 id="010">[0.1.0]</h2>
+<ul>
+<li>API scope expanded to cover all the exposed APIs from safe_client_libs (<a href="https://github.com/maidsafe/safe_client_libs/tree/6be5558">#6be5558</a>).</li>
+<li>Support updated to cover:
+<ul>
+<li>DotNet Framework</li>
+<li>DotNet Core</li>
+</ul>
+</li>
+<li>Adds support for using mock/non mock libraries based on configuration.</li>
+<li>Test cases using Nunit3 for the APIs to be able to test in all supported platforms.</li>
+</ul>
+<h2 id="001">[0.0.1]</h2>
+<ul>
+<li>Support for API scope from Messages mobile example</li>
+<li>Targets: Android/iOS</li>
+<li>Nuget Package Setup</li>
+</ul>
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/maidsafe/sn_csharp/blob/master/CHANGELOG.MD/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

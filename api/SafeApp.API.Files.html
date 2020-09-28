@@ -1,0 +1,812 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Files
+   | Safe Network :: sn_csharp API Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Files
+   | Safe Network :: sn_csharp API Documentation ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href=".././images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SafeApp.API.Files">
+  <h1 id="SafeApp_API_Files" data-uid="SafeApp.API.Files">Class Files
+  </h1>
+  <div class="markdown level0 summary"><p>Files API.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Files</span></div>
+  </div>
+  
+  
+  
+  <h6><strong>Namespace</strong>: System.Dynamic.ExpandoObject</h6>
+  <h6><strong>Assembly</strong>: SafeApp.dll</h6>
+  
+  <h5 id="SafeApp_API_Files_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Files : object</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerAddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerAddAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L100" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerAddAsync_" data-uid="SafeApp.API.Files.FilesContainerAddAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerAddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="SafeApp.API.Files.FilesContainerAddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesContainerAddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">FilesContainerAddAsync(String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerAddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Add a file, either a local path or a published file, to an existing FilesContainer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(ulong, ProcessedFiles, FilesMap)&gt; FilesContainerAddAsync(string sourceFile, string url, bool force, bool updateNrs, bool followLinks, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">sourceFile</span>
+        <p><p>Source file location to add to the FilesContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>XorUrl to add the FiledContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">force</span>
+        <p><p>Flag denoting to force update the FilesContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">updateNrs</span>
+        <p><p>Flag denoting if the NRS maps should be updated.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">followLinks</span>
+        <p><p>If True, API will resolve the symlink before uploading,
+and will be stored as a file or directory on the network.
+When false, no path resolution is performed and the file will be stored as a symlink.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt64</span>, <a class="xref" href="SafeApp.Core.ProcessedFiles.html">ProcessedFiles</a>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's version,
+new instance of ProcessedFiles containing the list of processed files,
+FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerAddFromRawAsync_System_Byte___System_String_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerAddFromRawAsync(System.Byte%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L141" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerAddFromRawAsync_" data-uid="SafeApp.API.Files.FilesContainerAddFromRawAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerAddFromRawAsync_System_Byte___System_String_System_Boolean_System_Boolean_System_Boolean_" data-uid="SafeApp.API.Files.FilesContainerAddFromRawAsync(System.Byte[],System.String,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesContainerAddFromRawAsync_System_Byte___System_String_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">FilesContainerAddFromRawAsync(Byte[], String, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerAddFromRawAsync_System_Byte___System_String_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Add a file, from raw bytes, on an existing FilesContainer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(ulong, ProcessedFiles, FilesMap)&gt; FilesContainerAddFromRawAsync(byte[] data, string url, bool force, bool updateNrs, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Byte</span>[]</span>
+        <span class="parametername">data</span>
+        <p><p>Raw data in byte[] format.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>XorUrl to add the FiledContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">force</span>
+        <p><p>Flag denoting to force update the FilesContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">updateNrs</span>
+        <p><p>Flag denoting if the NRS maps should be updated.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt64</span>, <a class="xref" href="SafeApp.Core.ProcessedFiles.html">ProcessedFiles</a>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's version,
+new instance of ProcessedFiles containing the list of processed files,
+FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerCreateAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerCreateAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L40" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerCreateAsync_" data-uid="SafeApp.API.Files.FilesContainerCreateAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerCreateAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_" data-uid="SafeApp.API.Files.FilesContainerCreateAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesContainerCreateAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">FilesContainerCreateAsync(String, String, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerCreateAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Create a FilesContainer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(string, ProcessedFiles, FilesMap)&gt; FilesContainerCreateAsync(string location, string dest, bool recursive, bool followLinks, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">location</span>
+        <p><p>Location of the local data.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">dest</span>
+        <p><p>The XorUrl to put the data on the network.If null, then a random address will be used.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">recursive</span>
+        <p><p>Flag denoting if the sub-folders should be added.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">followLinks</span>
+        <p><p>If True, API will resolve the symlink before uploading,
+and will be stored as a file or directory on the network.
+When false, no path resolution is performed and the file will be stored as a symlink.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="SafeApp.Core.ProcessedFiles.html">ProcessedFiles</a>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's XorUrl,
+new instance of ProcessedFiles containing the list of processed files,
+FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerGetAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerGetAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerGetAsync_" data-uid="SafeApp.API.Files.FilesContainerGetAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerGetAsync_System_String_" data-uid="SafeApp.API.Files.FilesContainerGetAsync(System.String)"><a href="#collapsible-SafeApp_API_Files_FilesContainerGetAsync_System_String_" class="expander" data-toggle="collapse">FilesContainerGetAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerGetAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Fetch an existing FilesContainer from the network.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(ulong, FilesMap)&gt; FilesContainerGetAsync(string url)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>FilesContainer's XorUrl.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt64</span>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's version, FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerRemovePathAsync_System_String_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerRemovePathAsync(System.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerRemovePathAsync_" data-uid="SafeApp.API.Files.FilesContainerRemovePathAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerRemovePathAsync_System_String_System_Boolean_System_Boolean_System_Boolean_" data-uid="SafeApp.API.Files.FilesContainerRemovePathAsync(System.String,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesContainerRemovePathAsync_System_String_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">FilesContainerRemovePathAsync(String, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerRemovePathAsync_System_String_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Remove a file from an existing FilesContainer..</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(ulong, ProcessedFiles, FilesMap)&gt; FilesContainerRemovePathAsync(string url, bool recursive, bool updateNrs, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>XorUrl to remove the FiledContainer.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">recursive</span>
+        <p><p>Flag denoting if the sub-folders should be removed.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">updateNrs</span>
+        <p><p>Flag denoting if the NRS maps should be updated.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt64</span>, <a class="xref" href="SafeApp.Core.ProcessedFiles.html">ProcessedFiles</a>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's version,
+new instance of ProcessedFiles containing the list of processed files,
+FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesContainerSyncAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesContainerSyncAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesContainerSyncAsync_" data-uid="SafeApp.API.Files.FilesContainerSyncAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesContainerSyncAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="SafeApp.API.Files.FilesContainerSyncAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesContainerSyncAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">FilesContainerSyncAsync(String, String, Boolean, Boolean, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesContainerSyncAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Sync up local folder with the content in a FilesContainer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;(ulong, ProcessedFiles, FilesMap)&gt; FilesContainerSyncAsync(string location, string url, bool recursive, bool followLinks, bool delete, bool updateNrs, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">location</span>
+        <p><p>Location of the local data to sync with the network.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>The XorUrl to sync the data on the network.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">recursive</span>
+        <p><p>Flag denoting if the sub-folders should be added.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">followLinks</span>
+        <p><p>If True, API will resolve the symlink before uploading,
+and will be stored as a file or directory on the network.
+When false, no path resolution is performed and the file will be stored as a symlink.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">delete</span>
+        <p><p>Flag denoting if the local files can be deleting during sync operation.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">updateNrs</span>
+        <p><p>Flag denoting if the NRS maps should be updated.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt64</span>, <a class="xref" href="SafeApp.Core.ProcessedFiles.html">ProcessedFiles</a>, <a class="xref" href="SafeApp.Core.FilesMap.html">FilesMap</a>&gt;&gt;
+        <p><p>FilesContainer's version,
+new instance of ProcessedFiles containing the list of processed files,
+FilesMap instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesGetPublicImmutableAsync_System_String_System_UInt64_System_UInt64_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesGetPublicImmutableAsync(System.String%2CSystem.UInt64%2CSystem.UInt64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L169" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesGetPublicImmutableAsync_" data-uid="SafeApp.API.Files.FilesGetPublicImmutableAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesGetPublicImmutableAsync_System_String_System_UInt64_System_UInt64_" data-uid="SafeApp.API.Files.FilesGetPublicImmutableAsync(System.String,System.UInt64,System.UInt64)"><a href="#collapsible-SafeApp_API_Files_FilesGetPublicImmutableAsync_System_String_System_UInt64_System_UInt64_" class="expander" data-toggle="collapse">FilesGetPublicImmutableAsync(String, UInt64, UInt64)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesGetPublicImmutableAsync_System_String_System_UInt64_System_UInt64_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get public immutable data from the network.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;byte[]&gt; FilesGetPublicImmutableAsync(string url, ulong start = null, ulong end = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">url</span>
+        <p><p>XorUrl to fetch the content.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.UInt64</span></span>
+        <span class="parametername">start</span>
+        <p><p>Start index to fetch the content.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.UInt64</span></span>
+        <span class="parametername">end</span>
+        <p><p>End index to fetch the content.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.Byte</span>[]&gt;
+        <p><p>Raw data from the network in byte[] format.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files_FilesPutPublicImmutableAsync_System_Byte___System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.API.Files.FilesPutPublicImmutableAsync(System.Byte%5B%5D%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_API_Files_FilesPutPublicImmutableAsync_" data-uid="SafeApp.API.Files.FilesPutPublicImmutableAsync*"></a>
+  
+  <h4 id="SafeApp_API_Files_FilesPutPublicImmutableAsync_System_Byte___System_String_System_Boolean_" data-uid="SafeApp.API.Files.FilesPutPublicImmutableAsync(System.Byte[],System.String,System.Boolean)"><a href="#collapsible-SafeApp_API_Files_FilesPutPublicImmutableAsync_System_Byte___System_String_System_Boolean_" class="expander" data-toggle="collapse">FilesPutPublicImmutableAsync(Byte[], String, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_API_Files_FilesPutPublicImmutableAsync_System_Byte___System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Store public immutable data on the network.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; FilesPutPublicImmutableAsync(byte[] data, string mediaType, bool dryRun)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Byte</span>[]</span>
+        <span class="parametername">data</span>
+        <p><p>Raw data in byte[] format.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">mediaType</span>
+        <p><p>Content's MIME type.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">dryRun</span>
+        <p><p>Flag denoting whether container will be created locally.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.String</span>&gt;
+        <p><p>XorUrl for the published data</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="SafeApp.Core.Helpers.html#SafeApp_Core_Helpers_ToHandlePtr_System_Object_">Helpers.ToHandlePtr(Object)</a>
+  </div>
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_API_Files.md&amp;value=---%0Auid%3A%20SafeApp.API.Files%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/API/Files.cs/#L10" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

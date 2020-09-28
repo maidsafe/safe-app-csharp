@@ -1,0 +1,749 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Helpers
+   | Safe Network :: sn_csharp API Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Helpers
+   | Safe Network :: sn_csharp API Documentation ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href=".././images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SafeApp.Core.Helpers">
+  <h1 id="SafeApp_Core_Helpers" data-uid="SafeApp.Core.Helpers">Class Helpers
+  </h1>
+  <div class="markdown level0 summary"><p>Containers SafeApp helper functions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Helpers</span></div>
+  </div>
+  
+  
+  
+  <h6><strong>Namespace</strong>: System.Dynamic.ExpandoObject</h6>
+  <h6><strong>Assembly</strong>: SafeApp.Core.dll</h6>
+  
+  <h5 id="SafeApp_Core_Helpers_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Helpers : object</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_HandlePtrToType__1_IntPtr_System_Boolean_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.HandlePtrToType%60%601(IntPtr%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_HandlePtrToType_" data-uid="SafeApp.Core.Helpers.HandlePtrToType*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_HandlePtrToType__1_IntPtr_System_Boolean_" data-uid="SafeApp.Core.Helpers.HandlePtrToType``1(IntPtr,System.Boolean)"><a href="#collapsible-SafeApp_Core_Helpers_HandlePtrToType__1_IntPtr_System_Boolean_" class="expander" data-toggle="collapse">HandlePtrToType&lt;T&gt;(IntPtr, Boolean)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_HandlePtrToType__1_IntPtr_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a GC object handle for a IntPtr.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T HandlePtrToType&lt;T&gt;(this IntPtr ptr, bool freePtr = true)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IntPtr</span></span>
+        <span class="parametername">ptr</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Boolean</span></span>
+        <span class="parametername">freePtr</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">T</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_PrintByteArray_System_Byte___.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.PrintByteArray(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_PrintByteArray_" data-uid="SafeApp.Core.Helpers.PrintByteArray*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_PrintByteArray_System_Byte___" data-uid="SafeApp.Core.Helpers.PrintByteArray(System.Byte[])"><a href="#collapsible-SafeApp_Core_Helpers_PrintByteArray_System_Byte___" class="expander" data-toggle="collapse">PrintByteArray(Byte[])</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_PrintByteArray_System_Byte___" class="collapse in">
+  <div class="markdown level1 summary"><p>Converts byte list into string using StringBuilder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string PrintByteArray(byte[] bytes)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Byte</span>[]</span>
+        <span class="parametername">bytes</span>
+        <p><p>byte list to be converted.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.String</span>
+        <p><p>new String containing byte array.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_StructToPtr__1___0_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.StructToPtr%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_StructToPtr_" data-uid="SafeApp.Core.Helpers.StructToPtr*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_StructToPtr__1___0_" data-uid="SafeApp.Core.Helpers.StructToPtr``1(``0)"><a href="#collapsible-SafeApp_Core_Helpers_StructToPtr__1___0_" class="expander" data-toggle="collapse">StructToPtr&lt;T&gt;(T)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_StructToPtr__1___0_" class="collapse in">
+  <div class="markdown level1 summary"><p>Allocate memory to hold the struct.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IntPtr StructToPtr&lt;T&gt;(T obj)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">T</span></span>
+        <span class="parametername">obj</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">IntPtr</span>
+        <p><p>Pointer to the structure in unmanaged memory.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>Structure to be marshaled.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToHandlePtr_System_Object_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToHandlePtr(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToHandlePtr_" data-uid="SafeApp.Core.Helpers.ToHandlePtr*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToHandlePtr_System_Object_" data-uid="SafeApp.Core.Helpers.ToHandlePtr(System.Object)"><a href="#collapsible-SafeApp_Core_Helpers_ToHandlePtr_System_Object_" class="expander" data-toggle="collapse">ToHandlePtr(Object)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToHandlePtr_System_Object_" class="collapse in">
+  <div class="markdown level1 summary"><p>Allocate the object into unmanaged memory and
+returns the IntPtr object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IntPtr ToHandlePtr(this object obj)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Object</span></span>
+        <span class="parametername">obj</span>
+        <p><p>Object to allocate.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">IntPtr</span>
+        <p><p>An IntPtr object representing a GChandle object.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToHexBytes_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToHexBytes(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L130" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToHexBytes_" data-uid="SafeApp.Core.Helpers.ToHexBytes*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToHexBytes_System_String_" data-uid="SafeApp.Core.Helpers.ToHexBytes(System.String)"><a href="#collapsible-SafeApp_Core_Helpers_ToHexBytes_System_String_" class="expander" data-toggle="collapse">ToHexBytes(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToHexBytes_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Convert string into hexadecimal bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ToHexBytes(this string hex)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">hex</span>
+        <p><p>String to be converted.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.Byte</span>[]
+        <p><p>List of bytes in hexadecimal format.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToHexString_System_Byte___.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToHexString(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L118" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToHexString_" data-uid="SafeApp.Core.Helpers.ToHexString*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToHexString_System_Byte___" data-uid="SafeApp.Core.Helpers.ToHexString(System.Byte[])"><a href="#collapsible-SafeApp_Core_Helpers_ToHexString_System_Byte___" class="expander" data-toggle="collapse">ToHexString(Byte[])</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToHexString_System_Byte___" class="collapse in">
+  <div class="markdown level1 summary"><p>Convert byte list into string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHexString(this byte[] byteList)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Byte</span>[]</span>
+        <span class="parametername">byteList</span>
+        <p><p>byte list.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.String</span>
+        <p><p>new String.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToIntPtr__1_List___0__.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToIntPtr%60%601(List%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToIntPtr_" data-uid="SafeApp.Core.Helpers.ToIntPtr*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToIntPtr__1_List___0__" data-uid="SafeApp.Core.Helpers.ToIntPtr``1(List{``0})"><a href="#collapsible-SafeApp_Core_Helpers_ToIntPtr__1_List___0__" class="expander" data-toggle="collapse">ToIntPtr&lt;T&gt;(List&lt;T&gt;)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToIntPtr__1_List___0__" class="collapse in">
+  <div class="markdown level1 summary"><p>Allocate the object into unmanaged memory and
+returns the IntPtr object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IntPtr ToIntPtr&lt;T&gt;(this List&lt;T&gt; list)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">List</span>&lt;T&gt;</span>
+        <span class="parametername">list</span>
+        <p><p>List of objects to marshal.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">IntPtr</span>
+        <p><p>An IntPtr object representing a GChandle object</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>List type.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToList__1_IntPtr_IntPtr_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToList%60%601(IntPtr%2CIntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToList_" data-uid="SafeApp.Core.Helpers.ToList*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToList__1_IntPtr_IntPtr_" data-uid="SafeApp.Core.Helpers.ToList``1(IntPtr,IntPtr)"><a href="#collapsible-SafeApp_Core_Helpers_ToList__1_IntPtr_IntPtr_" class="expander" data-toggle="collapse">ToList&lt;T&gt;(IntPtr, IntPtr)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToList__1_IntPtr_IntPtr_" class="collapse in">
+  <div class="markdown level1 summary"><p>Fetch an object list from IntPtr object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;T&gt; ToList&lt;T&gt;(this IntPtr ptr, IntPtr length)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IntPtr</span></span>
+        <span class="parametername">ptr</span>
+        <p><p>IntPtr to fetch.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IntPtr</span></span>
+        <span class="parametername">length</span>
+        <p><p>Length</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">List</span>&lt;T&gt;
+        <p><p>list of objects.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>Object type.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToUtfBytes_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToUtfBytes(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToUtfBytes_" data-uid="SafeApp.Core.Helpers.ToUtfBytes*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToUtfBytes_System_String_" data-uid="SafeApp.Core.Helpers.ToUtfBytes(System.String)"><a href="#collapsible-SafeApp_Core_Helpers_ToUtfBytes_System_String_" class="expander" data-toggle="collapse">ToUtfBytes(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToUtfBytes_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Converts a string to utf-8 bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ToUtfBytes(this string input)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">input</span>
+        <p><p>string to be converted.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.Byte</span>[]
+        <p><p>a byte list</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers_ToUtfString_System_Byte___.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers.ToUtfString(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Core_Helpers_ToUtfString_" data-uid="SafeApp.Core.Helpers.ToUtfString*"></a>
+  
+  <h4 id="SafeApp_Core_Helpers_ToUtfString_System_Byte___" data-uid="SafeApp.Core.Helpers.ToUtfString(System.Byte[])"><a href="#collapsible-SafeApp_Core_Helpers_ToUtfString_System_Byte___" class="expander" data-toggle="collapse">ToUtfString(Byte[])</a></h4>
+  
+  <div id="collapsible-SafeApp_Core_Helpers_ToUtfString_System_Byte___" class="collapse in">
+  <div class="markdown level1 summary"><p>Convert byte list into string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToUtfString(this byte[] input)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.Byte</span>[]</span>
+        <span class="parametername">input</span>
+        <p><p>byte list to be converted.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.String</span>
+        <p><p>new utf-8 string.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Core_Helpers.md&amp;value=---%0Auid%3A%20SafeApp.Core.Helpers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp.Core/Helpers.cs/#L12" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

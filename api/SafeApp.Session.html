@@ -1,0 +1,1286 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Session
+   | Safe Network :: sn_csharp API Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Session
+   | Safe Network :: sn_csharp API Documentation ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href=".././images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SafeApp.Session">
+  <h1 id="SafeApp_Session" data-uid="SafeApp.Session">Class Session
+  </h1>
+  <div class="markdown level0 summary"><p>Holds one session with the network and is the primary interface
+to interact with the network.
+As such it also provides all API-Providers connected through this session.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Session</span></div>
+  </div>
+  
+  
+  
+  <h6><strong>Namespace</strong>: System.Dynamic.ExpandoObject</h6>
+  <h6><strong>Assembly</strong>: SafeApp.dll</h6>
+  
+  <h5 id="SafeApp_Session_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Session : IDisposable</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h3 id="fields">Fields
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Disconnected.md&amp;value=---%0Auid%3A%20SafeApp.Session.Disconnected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  
+  <h4 id="SafeApp_Session_Disconnected" data-uid="SafeApp.Session.Disconnected"><a href="#collapsible-SafeApp_Session_Disconnected" class="expander" data-toggle="collapse">Disconnected</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Disconnected" class="collapse in">
+  <div class="markdown level1 summary"><p>Event triggered if session is disconnected from the network.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EventHandler Disconnected</code></pre>
+  </div>
+  
+  
+  
+  
+  <h5 class="fieldValue">Field Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">EventHandler</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Fetch.md&amp;value=---%0Auid%3A%20SafeApp.Session.Fetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Fetch_" data-uid="SafeApp.Session.Fetch*"></a>
+  
+  <h4 id="SafeApp_Session_Fetch" data-uid="SafeApp.Session.Fetch"><a href="#collapsible-SafeApp_Session_Fetch" class="expander" data-toggle="collapse">Fetch</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Fetch" class="collapse in">
+  <div class="markdown level1 summary"><p>Content Fetch API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Fetch Fetch { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.Fetch.html">Fetch</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Files.md&amp;value=---%0Auid%3A%20SafeApp.Session.Files%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Files_" data-uid="SafeApp.Session.Files*"></a>
+  
+  <h4 id="SafeApp_Session_Files" data-uid="SafeApp.Session.Files"><a href="#collapsible-SafeApp_Session_Files" class="expander" data-toggle="collapse">Files</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Files" class="collapse in">
+  <div class="markdown level1 summary"><p>Files API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Files Files { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.Files.html">Files</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_IsDisconnected.md&amp;value=---%0Auid%3A%20SafeApp.Session.IsDisconnected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_IsDisconnected_" data-uid="SafeApp.Session.IsDisconnected*"></a>
+  
+  <h4 id="SafeApp_Session_IsDisconnected" data-uid="SafeApp.Session.IsDisconnected"><a href="#collapsible-SafeApp_Session_IsDisconnected" class="expander" data-toggle="collapse">IsDisconnected</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_IsDisconnected" class="collapse in">
+  <div class="markdown level1 summary"><p>true if current network connection state is DISCONNECTED.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsDisconnected { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.Boolean</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Keys.md&amp;value=---%0Auid%3A%20SafeApp.Session.Keys%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L28" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Keys_" data-uid="SafeApp.Session.Keys*"></a>
+  
+  <h4 id="SafeApp_Session_Keys" data-uid="SafeApp.Session.Keys"><a href="#collapsible-SafeApp_Session_Keys" class="expander" data-toggle="collapse">Keys</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Keys" class="collapse in">
+  <div class="markdown level1 summary"><p>Keys API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Keys Keys { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.Keys.html">Keys</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Nrs.md&amp;value=---%0Auid%3A%20SafeApp.Session.Nrs%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Nrs_" data-uid="SafeApp.Session.Nrs*"></a>
+  
+  <h4 id="SafeApp_Session_Nrs" data-uid="SafeApp.Session.Nrs"><a href="#collapsible-SafeApp_Session_Nrs" class="expander" data-toggle="collapse">Nrs</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Nrs" class="collapse in">
+  <div class="markdown level1 summary"><p>NRS API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Nrs Nrs { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.Nrs.html">Nrs</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_SequenceData.md&amp;value=---%0Auid%3A%20SafeApp.Session.SequenceData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L48" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_SequenceData_" data-uid="SafeApp.Session.SequenceData*"></a>
+  
+  <h4 id="SafeApp_Session_SequenceData" data-uid="SafeApp.Session.SequenceData"><a href="#collapsible-SafeApp_Session_SequenceData" class="expander" data-toggle="collapse">SequenceData</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_SequenceData" class="collapse in">
+  <div class="markdown level1 summary"><p>Sequence data API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SequenceData SequenceData { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.SequenceData.html">SequenceData</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Wallet.md&amp;value=---%0Auid%3A%20SafeApp.Session.Wallet%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L33" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Wallet_" data-uid="SafeApp.Session.Wallet*"></a>
+  
+  <h4 id="SafeApp_Session_Wallet" data-uid="SafeApp.Session.Wallet"><a href="#collapsible-SafeApp_Session_Wallet" class="expander" data-toggle="collapse">Wallet</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Wallet" class="collapse in">
+  <div class="markdown level1 summary"><p>Wallet API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Wallet Wallet { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="SafeApp.API.Wallet.html">Wallet</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_AppConfigurationDirectoryPathAsync.md&amp;value=---%0Auid%3A%20SafeApp.Session.AppConfigurationDirectoryPathAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L217" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_AppConfigurationDirectoryPathAsync_" data-uid="SafeApp.Session.AppConfigurationDirectoryPathAsync*"></a>
+  
+  <h4 id="SafeApp_Session_AppConfigurationDirectoryPathAsync" data-uid="SafeApp.Session.AppConfigurationDirectoryPathAsync"><a href="#collapsible-SafeApp_Session_AppConfigurationDirectoryPathAsync" class="expander" data-toggle="collapse">AppConfigurationDirectoryPathAsync()</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_AppConfigurationDirectoryPathAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Get configuration files path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;string&gt; AppConfigurationDirectoryPathAsync()</code></pre>
+  </div>
+  
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.String</span>&gt;
+        <p><p>Path set for the configuration files.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_AppConnectAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.AppConnectAsync(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_AppConnectAsync_" data-uid="SafeApp.Session.AppConnectAsync*"></a>
+  
+  <h4 id="SafeApp_Session_AppConnectAsync_System_String_System_String_" data-uid="SafeApp.Session.AppConnectAsync(System.String,System.String)"><a href="#collapsible-SafeApp_Session_AppConnectAsync_System_String_System_String_" class="expander" data-toggle="collapse">AppConnectAsync(String, String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_AppConnectAsync_System_String_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Create a new authenticated session using the provided IPC response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Session&gt; AppConnectAsync(string appId, string authResponse)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">appId</span>
+        <p><p>Application Id.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">authResponse</span>
+        <p><p>Authentication response message.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="SafeApp.Session.html">Session</a>&gt;
+        <p><p>New session based on appid and authentication response.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_AppConnectUnregisteredAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.AppConnectUnregisteredAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L122" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_AppConnectUnregisteredAsync_" data-uid="SafeApp.Session.AppConnectUnregisteredAsync*"></a>
+  
+  <h4 id="SafeApp_Session_AppConnectUnregisteredAsync_System_String_" data-uid="SafeApp.Session.AppConnectUnregisteredAsync(System.String)"><a href="#collapsible-SafeApp_Session_AppConnectUnregisteredAsync_System_String_" class="expander" data-toggle="collapse">AppConnectUnregisteredAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_AppConnectUnregisteredAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates an unregistered session for the provided app Id using node_connection_configuration file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Session&gt; AppConnectUnregisteredAsync(string appId)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">appId</span>
+        <p><p>Application Id.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="SafeApp.Session.html">Session</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_AppIsMock.md&amp;value=---%0Auid%3A%20SafeApp.Session.AppIsMock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L283" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_AppIsMock_" data-uid="SafeApp.Session.AppIsMock*"></a>
+  
+  <h4 id="SafeApp_Session_AppIsMock" data-uid="SafeApp.Session.AppIsMock"><a href="#collapsible-SafeApp_Session_AppIsMock" class="expander" data-toggle="collapse">AppIsMock()</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_AppIsMock" class="collapse in">
+  <div class="markdown level1 summary"><p>Check if the native library was compiled with mock-routing feature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AppIsMock()</code></pre>
+  </div>
+  
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">System.Boolean</span>
+        <p><p>True if native library was compiled with mock-routing feature otherwise false.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_AuthenticateAppAsync_SafeApp_Core_AppExchangeInfo_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.AuthenticateAppAsync(SafeApp.Core.AppExchangeInfo%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_AuthenticateAppAsync_" data-uid="SafeApp.Session.AuthenticateAppAsync*"></a>
+  
+  <h4 id="SafeApp_Session_AuthenticateAppAsync_SafeApp_Core_AppExchangeInfo_System_String_" data-uid="SafeApp.Session.AuthenticateAppAsync(SafeApp.Core.AppExchangeInfo,System.String)"><a href="#collapsible-SafeApp_Session_AuthenticateAppAsync_SafeApp_Core_AppExchangeInfo_System_String_" class="expander" data-toggle="collapse">AuthenticateAppAsync(AppExchangeInfo, String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_AuthenticateAppAsync_SafeApp_Core_AppExchangeInfo_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Authenticate app with running auth deamon</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;string&gt; AuthenticateAppAsync(AppExchangeInfo appInfo, string endPoint)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="SafeApp.Core.AppExchangeInfo.html">AppExchangeInfo</a></span>
+        <span class="parametername">appInfo</span>
+        <p><p>App exchange info used for authentication.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">endPoint</span>
+        <p><p>Authentication deamons endpoint.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.String</span>&gt;
+        <p><p>Encoded authentication response.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_DecodeIpcMessageAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.DecodeIpcMessageAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L158" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_DecodeIpcMessageAsync_" data-uid="SafeApp.Session.DecodeIpcMessageAsync*"></a>
+  
+  <h4 id="SafeApp_Session_DecodeIpcMessageAsync_System_String_" data-uid="SafeApp.Session.DecodeIpcMessageAsync(System.String)"><a href="#collapsible-SafeApp_Session_DecodeIpcMessageAsync_System_String_" class="expander" data-toggle="collapse">DecodeIpcMessageAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_DecodeIpcMessageAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Decode the IPC response message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;IpcMsg&gt; DecodeIpcMessageAsync(string encodedResponse)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">encodedResponse</span>
+        <p><p>Encoded response string.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="SafeApp.Core.IpcMsg.html">IpcMsg</a>&gt;
+        <p><p>New decoded IPCMsg instance.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Dispose.md&amp;value=---%0Auid%3A%20SafeApp.Session.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L225" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Dispose_" data-uid="SafeApp.Session.Dispose*"></a>
+  
+  <h4 id="SafeApp_Session_Dispose" data-uid="SafeApp.Session.Dispose"><a href="#collapsible-SafeApp_Session_Dispose" class="expander" data-toggle="collapse">Dispose()</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Dispose" class="collapse in">
+  <div class="markdown level1 summary"><p>Public implementation of Dispose pattern callable by developers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_EncodeAuthReqAsync_SafeApp_Core_AuthReq_.md&amp;value=---%0Auid%3A%20SafeApp.Session.EncodeAuthReqAsync(SafeApp.Core.AuthReq)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L168" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_EncodeAuthReqAsync_" data-uid="SafeApp.Session.EncodeAuthReqAsync*"></a>
+  
+  <h4 id="SafeApp_Session_EncodeAuthReqAsync_SafeApp_Core_AuthReq_" data-uid="SafeApp.Session.EncodeAuthReqAsync(SafeApp.Core.AuthReq)"><a href="#collapsible-SafeApp_Session_EncodeAuthReqAsync_SafeApp_Core_AuthReq_" class="expander" data-toggle="collapse">EncodeAuthReqAsync(AuthReq)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_EncodeAuthReqAsync_SafeApp_Core_AuthReq_" class="collapse in">
+  <div class="markdown level1 summary"><p>Encodes an authentication request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;(uint, string)&gt; EncodeAuthReqAsync(AuthReq authReq)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="SafeApp.Core.AuthReq.html">AuthReq</a></span>
+        <span class="parametername">authReq</span>
+        <p><p>Authentication Request.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt32</span>, <span class="xref">System.String</span>&gt;&gt;
+        <p><p>RequestId, Encoded authentication request.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_EncodeContainerRequestAsync_SafeApp_Core_ContainersReq_.md&amp;value=---%0Auid%3A%20SafeApp.Session.EncodeContainerRequestAsync(SafeApp.Core.ContainersReq)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_EncodeContainerRequestAsync_" data-uid="SafeApp.Session.EncodeContainerRequestAsync*"></a>
+  
+  <h4 id="SafeApp_Session_EncodeContainerRequestAsync_SafeApp_Core_ContainersReq_" data-uid="SafeApp.Session.EncodeContainerRequestAsync(SafeApp.Core.ContainersReq)"><a href="#collapsible-SafeApp_Session_EncodeContainerRequestAsync_SafeApp_Core_ContainersReq_" class="expander" data-toggle="collapse">EncodeContainerRequestAsync(ContainersReq)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_EncodeContainerRequestAsync_SafeApp_Core_ContainersReq_" class="collapse in">
+  <div class="markdown level1 summary"><p>Encodes a container permission request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;(uint, string)&gt; EncodeContainerRequestAsync(ContainersReq containersReq)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="SafeApp.Core.ContainersReq.html">ContainersReq</a></span>
+        <span class="parametername">containersReq</span>
+        <p><p>Container Request</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt32</span>, <span class="xref">System.String</span>&gt;&gt;
+        <p><p>Request Id, Encoded container request.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_EncodeShareMDataRequestAsync_SafeApp_Core_ShareMDataReq_.md&amp;value=---%0Auid%3A%20SafeApp.Session.EncodeShareMDataRequestAsync(SafeApp.Core.ShareMDataReq)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_EncodeShareMDataRequestAsync_" data-uid="SafeApp.Session.EncodeShareMDataRequestAsync*"></a>
+  
+  <h4 id="SafeApp_Session_EncodeShareMDataRequestAsync_SafeApp_Core_ShareMDataReq_" data-uid="SafeApp.Session.EncodeShareMDataRequestAsync(SafeApp.Core.ShareMDataReq)"><a href="#collapsible-SafeApp_Session_EncodeShareMDataRequestAsync_SafeApp_Core_ShareMDataReq_" class="expander" data-toggle="collapse">EncodeShareMDataRequestAsync(ShareMDataReq)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_EncodeShareMDataRequestAsync_SafeApp_Core_ShareMDataReq_" class="collapse in">
+  <div class="markdown level1 summary"><p>Encodes a MDataShareReq.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;(uint, string)&gt; EncodeShareMDataRequestAsync(ShareMDataReq shareMDataReq)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="SafeApp.Core.ShareMDataReq.html">ShareMDataReq</a></span>
+        <span class="parametername">shareMDataReq</span>
+        <p><p>Mutable Data share request.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt32</span>, <span class="xref">System.String</span>&gt;&gt;
+        <p><p>Request Id, Encoded Mutable Data share request.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_EncodeUnregisteredRequestAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.EncodeUnregisteredRequestAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L198" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_EncodeUnregisteredRequestAsync_" data-uid="SafeApp.Session.EncodeUnregisteredRequestAsync*"></a>
+  
+  <h4 id="SafeApp_Session_EncodeUnregisteredRequestAsync_System_String_" data-uid="SafeApp.Session.EncodeUnregisteredRequestAsync(System.String)"><a href="#collapsible-SafeApp_Session_EncodeUnregisteredRequestAsync_System_String_" class="expander" data-toggle="collapse">EncodeUnregisteredRequestAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_EncodeUnregisteredRequestAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Encodes a unregistered access request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;(uint, string)&gt; EncodeUnregisteredRequestAsync(string reqId)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">reqId</span>
+        <p><p>Request Id.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.UInt32</span>, <span class="xref">System.String</span>&gt;&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_Finalize.md&amp;value=---%0Auid%3A%20SafeApp.Session.Finalize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L234" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_Finalize_" data-uid="SafeApp.Session.Finalize*"></a>
+  
+  <h4 id="SafeApp_Session_Finalize" data-uid="SafeApp.Session.Finalize"><a href="#collapsible-SafeApp_Session_Finalize" class="expander" data-toggle="collapse">Finalize()</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_Finalize" class="collapse in">
+  <div class="markdown level1 summary"><p>Class destructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Finalize()</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_InitLoggingAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.InitLoggingAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L274" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_InitLoggingAsync_" data-uid="SafeApp.Session.InitLoggingAsync*"></a>
+  
+  <h4 id="SafeApp_Session_InitLoggingAsync_System_String_" data-uid="SafeApp.Session.InitLoggingAsync(System.String)"><a href="#collapsible-SafeApp_Session_InitLoggingAsync_System_String_" class="expander" data-toggle="collapse">InitLoggingAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_InitLoggingAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Initialise the logging.
+Pass the file name to replace default output file name i.e. client.log.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task InitLoggingAsync(string outputLogFileName)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">outputLogFileName</span>
+        <p><p>Log output file name.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_KeysCreatePreloadTestCoinsAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.KeysCreatePreloadTestCoinsAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L150" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_KeysCreatePreloadTestCoinsAsync_" data-uid="SafeApp.Session.KeysCreatePreloadTestCoinsAsync*"></a>
+  
+  <h4 id="SafeApp_Session_KeysCreatePreloadTestCoinsAsync_System_String_" data-uid="SafeApp.Session.KeysCreatePreloadTestCoinsAsync(System.String)"><a href="#collapsible-SafeApp_Session_KeysCreatePreloadTestCoinsAsync_System_String_" class="expander" data-toggle="collapse">KeysCreatePreloadTestCoinsAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_KeysCreatePreloadTestCoinsAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Create a SafeKey on the network, allocates test coins onto it, and return the SafeKey's XOR-URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;(string, BlsKeyPair)&gt; KeysCreatePreloadTestCoinsAsync(string preloadAmount)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">preloadAmount</span>
+        <p><p>Amount of test coins to add.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="SafeApp.Core.BlsKeyPair.html">BlsKeyPair</a>&gt;&gt;
+        <p><p>XOR url of the balance, and a new key pair.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session_SetAppConfigurationDirectoryPathAsync_System_String_.md&amp;value=---%0Auid%3A%20SafeApp.Session.SetAppConfigurationDirectoryPathAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L208" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="SafeApp_Session_SetAppConfigurationDirectoryPathAsync_" data-uid="SafeApp.Session.SetAppConfigurationDirectoryPathAsync*"></a>
+  
+  <h4 id="SafeApp_Session_SetAppConfigurationDirectoryPathAsync_System_String_" data-uid="SafeApp.Session.SetAppConfigurationDirectoryPathAsync(System.String)"><a href="#collapsible-SafeApp_Session_SetAppConfigurationDirectoryPathAsync_System_String_" class="expander" data-toggle="collapse">SetAppConfigurationDirectoryPathAsync(String)</a></h4>
+  
+  <div id="collapsible-SafeApp_Session_SetAppConfigurationDirectoryPathAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Sets path to search configuration files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task SetAppConfigurationDirectoryPathAsync(string path)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">path</span>
+        <p><p>Configuration file path.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="SafeApp.Core.Helpers.html#SafeApp_Core_Helpers_ToHandlePtr_System_Object_">Helpers.ToHandlePtr(Object)</a>
+  </div>
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/maidsafe/sn_csharp/new/master/apiSpec/new?filename=SafeApp_Session.md&amp;value=---%0Auid%3A%20SafeApp.Session%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/maidsafe/sn_csharp/blob/master/SafeApp/Session.cs/#L16" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

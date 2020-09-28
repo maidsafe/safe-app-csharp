@@ -25,7 +25,7 @@
   - [Development](#development)
     - [Project structure](#project-structure)
     - [Interoperability between C# managed and unmanaged code](#interoperability-between-c-managed-and-unmanaged-code)
-    - [Interfacing with Safe Client Libs](#interfacing-with-safe-client-libs)
+    - [Interfacing with Safe Network Client](#interfacing-with-safe-network-client)
     - [Tests](#tests)
     - [Packaging](#packaging)
     - [Tools required](#tools-required)
@@ -35,7 +35,7 @@
   - [License](#license)
   - [Contributing](#contributing)
 
-This project contains the C# bindings and API wrappers for the [sn_api](https://github.com/maidsafe/sn_api/) and mock [safe_authenticator](https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator). The native libraries, bindings and API wrapper are built and published as a NuGet package. The latest version can be fetched from the [MaidSafe.SafeApp NuGet package](https://www.nuget.org/packages/MaidSafe.SafeApp/).
+This project contains the C# bindings and API wrappers for the [sn_api](https://github.com/maidsafe/sn_api/) and mock [safe_authenticator](https://github.com/maidsafe/sn_client/tree/master/safe_authenticator). The native libraries, bindings and API wrapper are built and published as a NuGet package. The latest version can be fetched from the [MaidSafe.SafeApp NuGet package](https://www.nuget.org/packages/MaidSafe.SafeApp/).
 
 At a very high level, this package includes:
 
@@ -87,11 +87,11 @@ docfx .\docs\docfx.json
 * **SafeApp:** C# API for sn_api
   * Fetch, Inspect, Files, Keys, Wallet, XorUrl
 * **SafeApp.AppBindings:**
-  * sn_api and safe_app IPC bindings generated from sn_api and safe_client_libs
+  * sn_api and safe_app IPC bindings generated from sn_api and sn_client
   * Contains native libraries for the platform
 * **SafeApp.MockAuthBindings:**
   * Mock Safe authentication C# API
-  * mock safe_authenticator bindings generated from safe_client_libs
+  * mock safe_authenticator bindings generated from sn_client
   * Classes required for mock auth functionality
 * **SafeApp.Core:** Contains
   * Constants used in SafeApp
@@ -101,9 +101,9 @@ docfx .\docs\docfx.json
 
 [Platform invoke](https://www.mono-project.com/docs/advanced/pinvoke/) is a service that enables managed code to call unmanaged functions that are implemented in dynamic link libraries or native libraries. It locates and invokes an exported function and marshals its arguments (integers, strings, arrays, structures, and so on) across the interoperation boundary as needed. Check links in [useful resources](#Useful-resources) section to know more about how P/Invoke works in different .NET environments and platforms.
 
-### Interfacing with Safe Client Libs
+### Interfacing with Safe Network Client
 
-The package uses native code written in Rust and compiled into platform specific code. Learn more about the safe_client_libs in [the Safe client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
+The package uses native code written in Rust and compiled into platform specific code. Learn more about the sn_client in [the Safe Network client libraries wiki](https://github.com/maidsafe/sn_client/wiki).
 
 Instructions to update the bindings can be found in the [Update Bindings file](./UpdateBindings.md).
 
